@@ -1,4 +1,4 @@
-import connectDb from "@/lib/db/db"
+import connectDb from "@/lib/db"
 import User from "@/models/User.model"
 
 export default async function Users() {
