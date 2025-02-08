@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function Page() {
 
   return (
     <div className="h-screen w-screen bg-neutral-900 flex items-center justify-center flex-col">
@@ -42,7 +42,7 @@ export default function LoginPage() {
 }
 
 
-export const FormField = ({children}: {children: React.ReactNode}) => {
+const FormField = ({children}: {children: React.ReactNode}) => {
   return (
     <div className="space-y-2 mb-4 w-full">
       {children}
