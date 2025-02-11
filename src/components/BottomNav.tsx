@@ -7,7 +7,7 @@ export const BottomNav = () => {
     const items = [
         {label: 'Home', href: '/', icon: faHome},
         {label: 'Home', href: '/mapa', icon: faMagnifyingGlass},
-        {label: 'Home', href: '/', icon: faCirclePlus},
+        {label: 'Home', href: '/agregar-futbolin', icon: faCirclePlus},
         {label: 'Home', href: '/', icon: faBookmark},
         {label: 'Home', href: '/', icon: faUser},
     ]
