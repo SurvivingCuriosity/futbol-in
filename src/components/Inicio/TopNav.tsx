@@ -1,5 +1,7 @@
+"use client";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 export const TopNav = () => {
@@ -9,6 +11,8 @@ export const TopNav = () => {
         <Link href="/" className="font-extrabold text-white text-2xl">
           Futbol In
         </Link>
+
+        <button onClick={() => signOut()}>Sign out</button>
 
         <Link href="/login">
           <FontAwesomeIcon

@@ -12,7 +12,7 @@ const page = () => {
                 console.log(selected)
             }}
         />
-        <Button label="Agregar" size='sm' />
+        <Button label="Agregar" size='sm' variant='danger'/>
     </div>
   )
 }
