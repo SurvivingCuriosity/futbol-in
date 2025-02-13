@@ -1,10 +1,7 @@
 "use client";
 import AsyncSelect from "react-select/async";
-import { useCallback } from "react";
 
-// Llama la Web Service de autocomplete
-// https://maps.googleapis.com/maps/api/place/autocomplete/json
-// O un endpoint tuyo que la llame
+
 async function fetchPlaces(inputValue: string) {
   if (!inputValue) return [];
   const res = await fetch(
@@ -13,7 +10,7 @@ async function fetchPlaces(inputValue: string) {
   const data = await res.json();
   if (data.status !== "OK") return [];
 
-  return data.predictions.map((p: any) => ({
+  return (data as google.maps.places.AutocompleteResponse).predictions.map((p) => ({
     value: p.place_id,
     label: p.description,
     data: p,
@@ -30,15 +27,15 @@ async function getCoordinates(placeId: string) {
 export default function PalcesAutocompleteInput({
   onSelect,
 }: {
-  onSelect: (val: any) => void;
+  onSelect: (val: string) => void;
 }) {
-  const loadOptions = useCallback(async (inputValue: string) => {
-    // implement debounce
-    if (!inputValue) return [];
+  // const loadOptions = useCallback(async (inputValue: string) => {
+  //   // implement debounce
+  //   if (!inputValue) return [];
 
-    const suggestions = await fetchPlaces(inputValue);
-    return suggestions;
-  }, []);
+  //   const suggestions = await fetchPlaces(inputValue);
+  //   return suggestions;
+  // }, []);
 
   return (
     <AsyncSelect
@@ -46,9 +43,8 @@ export default function PalcesAutocompleteInput({
       loadOptions={fetchPlaces}
       onChange={async (selected) => {
         console.log("Lugar seleccionado:", selected);
-
-        const coords = await getCoordinates(selected.value);
-        console.log("Coordenadas:", coords);
+        const coords = await getCoordinates(selected?.value ?? '');
+        onSelect(coords);
       }}
     />
   );

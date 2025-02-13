@@ -21,8 +21,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-          try{
-
             await connectDb();
             
             const user = await User.findOne({ email: credentials?.email });
@@ -40,9 +38,6 @@ export const authOptions: NextAuthOptions = {
             }
             
             return { id: user._id, email: user.email, name: user.name };
-        } catch (error) {
-            console.error(error)
-        }
       },
     }),
   ],
