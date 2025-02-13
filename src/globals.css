@@ -1,1 +1,15 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+
+@source "../node_modules/futbol-in-ui";
+
+@theme {
+    --animate-border-spin: borde-spin 7s linear infinite;
+
+    @keyframes borde-spin {
+
+        100% {
+            transform: rotate(-360deg);
+        }
+    }
+}

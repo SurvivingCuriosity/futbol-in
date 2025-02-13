@@ -9,7 +9,7 @@ export default async function Home() {
   const session = await getServerSession()
 
   return (
-    <div className="bg-neutral-900 min-h-dvh">
+    <div className="min-h-dvh">
       <TopNav />
       <HeroSection />
       <h2 className="text-lime-300 text-2xl font-bold m-4">Recomendados:</h2>
