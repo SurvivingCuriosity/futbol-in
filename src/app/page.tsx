@@ -1,15 +1,15 @@
-import { BottomNav } from "@/components/BottomNav";
+import { BottomNavLayout } from "@/components/BottomNavLayout/BottomNavLayout";
 import { HeroSection } from "@/components/Inicio/HeroSection";
 import { TarjetaFutbolinInicio } from "@/components/Inicio/TarjetaFutbolinInicio";
 import { TopNav } from "@/components/Inicio/TopNav";
 import { getServerSession } from "next-auth";
 
 export default async function Home() {
-
-  const session = await getServerSession()
+  
+  const session = await getServerSession();
 
   return (
-    <div className="min-h-dvh">
+    <BottomNavLayout loggedIn={!!session}>
       <TopNav />
       <HeroSection />
       <h2 className="text-lime-300 text-2xl font-bold m-4">Recomendados:</h2>
@@ -19,7 +19,6 @@ export default async function Home() {
         <TarjetaFutbolinInicio />
         <TarjetaFutbolinInicio />
       </ul>
-      {session && <BottomNav />}
-    </div>
+    </BottomNavLayout>
   );
 }

@@ -1,20 +1,15 @@
-"use client"
+import { BottomNavLayout } from "@/components/BottomNavLayout/BottomNavLayout";
+import { getServerSession } from "next-auth";
+import AgregarFutbolinPage from "./AgregarFutbolinPage";
 
-import PalcesAutocompleteInput from '@/components/PlacesAutocompleteInput'
-import React from 'react'
-import {Button} from 'futbol-in-ui' 
+const page = async () => {
+  const session = await getServerSession();
 
-const page = () => {
   return (
-    <div>
-        <PalcesAutocompleteInput 
-            onSelect={(selected) => {
-                console.log(selected)
-            }}
-        />
-        <Button label="Agregar" size='sm' variant='danger'/>
-    </div>
-  )
-}
+    <BottomNavLayout loggedIn={!!session}>
+      <AgregarFutbolinPage />
+    </BottomNavLayout>
+  );
+};
 
-export default page
+export default page;

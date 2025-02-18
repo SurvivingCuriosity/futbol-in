@@ -1,16 +1,28 @@
 "use client";
+import { IMarker } from "@/types/Marker/IMarker";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useEffect, useState } from "react";
 
 export default function Page() {
 
-    const markers = [
-        {
-            id: 1,
-            lat: 40.4167,
-            lng: -3.7033,
-            iconUrl: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-        },
-    ]
+  const [markers, setMarkers] = useState<IMarker[]>([]);
+
+  useEffect(() => {
+    fetchFutbolines(40.9629936, -5.661232699999999);
+  }, []);
+
+  async function fetchFutbolines(lat: number, lng: number, maxDistance = 5000) {
+    const res = await fetch(`/api/get-futbolines?lat=${lat}&lng=${lng}&maxDistance=${maxDistance}`);
+    const data = await res.json();
+    setMarkers(
+      data.data.map((f:IMarker, index:number) => ({
+        id: index,
+        lat: f.lat,
+        lng: f.lng,
+        iconUrl: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+      }))
+    );
+  }
 
   return (
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY!}>

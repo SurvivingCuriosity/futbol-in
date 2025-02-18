@@ -1,5 +1,6 @@
 import connectDb from "@/lib/db"
 import User from "@/models/User.model"
+import { getErrorMessage } from "@/utils/getErrorMessage"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(){
@@ -32,10 +33,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, data: newUser }, { status: 201 });
     
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { success: false, error: (error as Error).message },
-      { status: 500 }
-    );
+    const message = getErrorMessage(error);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

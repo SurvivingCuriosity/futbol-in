@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import User from "@/models/User.model";
 import connectDb from "@/lib/db";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 
 export async function POST(req: Request) {
   try {
@@ -24,8 +25,8 @@ export async function POST(req: Request) {
     const newUser = await User.create({ name, email, password: hashedPassword });
     console.log("Nuevo usuario:", newUser);
     return NextResponse.json({ success: true, userId: newUser._id }, { status: 201 });
-  } catch (e:unknown) {
-    console.error(e)
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  } catch (error) {
+    const message = getErrorMessage(error);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
