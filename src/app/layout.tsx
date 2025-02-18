@@ -13,6 +13,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
+      <head>
+      <link rel="icon" href="/futbolin-logo.svg" />
+      </head>
       <body className={`antialiased bg-neutral-950 text-neutral-50`}>
         {children}
       </body>
