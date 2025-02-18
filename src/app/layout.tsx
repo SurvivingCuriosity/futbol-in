@@ -14,7 +14,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-      <link rel="icon" href="/futbolin-logo.svg" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0a0a0a" />
+        <link rel="icon" href="/futbolin-logo.svg" />
       </head>
       <body className={`antialiased bg-neutral-950 text-neutral-50`}>
         {children}
