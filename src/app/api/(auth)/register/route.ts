@@ -1,9 +1,9 @@
 // src/app/api/auth/register/route.ts
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import User from "@/models/User.model";
-import connectDb from "@/lib/db";
-import { getErrorMessage } from "@/utils/getErrorMessage";
+import User from "@/shared/models/User.model";
+import connectDb from "@/shared/lib/db";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export async function POST(req: Request) {
   try {

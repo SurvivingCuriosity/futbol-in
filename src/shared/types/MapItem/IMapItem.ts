@@ -2,6 +2,6 @@ export interface IMapItem {
     nombre: string,
     direccion: string,
     lat: number,
-    lon: number,
+    lng: number,
     googlePlaceId: string,
 }

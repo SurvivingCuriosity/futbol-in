@@ -1,9 +1,16 @@
 @import "tailwindcss";
 
-
 @source "../node_modules/futbol-in-ui";
 
+* {
+    ::selection {
+        background-color: var(--color-primary);
+        color: rgb(36, 36, 36);
+    }
+}
+
 @theme {
+    --color-primary: rgb(110, 213, 89);
     --animate-border-spin: borde-spin 7s linear infinite;
 
     @keyframes borde-spin {

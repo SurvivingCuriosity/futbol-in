@@ -1,8 +1,8 @@
 // src/app/api/futbolines/route.ts
 import { NextResponse } from "next/server";
-import connectDb from "@/lib/db";
-import Futbolin from "@/models/Futbolin.model";
-import { getErrorMessage } from "@/utils/getErrorMessage";
+import connectDb from "@/shared/lib/db";
+import Futbolin from "@/shared/models/Futbolin.model";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export async function POST(req: Request) {
   try {

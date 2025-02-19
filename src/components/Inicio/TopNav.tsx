@@ -1,27 +1,25 @@
 "use client";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
+import { BotonPerfil } from "./BotonPerfil";
 
-export const TopNav = () => {
+export const TopNav = ({loggedIn} : {loggedIn: boolean}) => {
   return (
     <div className="w-full h-16 top-0 flex bg-transparent items-center justify-center z-10">
       <div className="max-w-screen-lg flex items-center justify-between mx-auto w-full p-2 px-4">
         <Link href="/" className="font-extrabold text-white text-2xl">
-          Futbol In
-        </Link>
-
-        <button onClick={() => signOut()}>Sign out</button>
-
-        <Link href="/login">
-          <FontAwesomeIcon
-            icon={faUserCircle}
+          <Image
+            src="/futbolin-logo.svg"
             width={24}
             height={24}
-            className="text-white"
+            alt="Logo de Futbol-In"
           />
         </Link>
+
+        {loggedIn && <button onClick={() => signOut()}>Sign out</button>}
+
+        <BotonPerfil />
 
         {/* <div className="flex items-center gap-2">
           <button>Sign out</button>

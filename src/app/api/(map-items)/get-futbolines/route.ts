@@ -1,9 +1,9 @@
 // src/app/api/futbolines/route.ts
 import { NextResponse } from "next/server";
-import connectDb from "@/lib/db";
-import Futbolin from "@/models/Futbolin.model";
-import { IMapItem } from "@/types/MapItem/IMapItem";
-import { getErrorMessage } from "@/utils/getErrorMessage";
+import connectDb from "@/shared/lib/db";
+import Futbolin from "@/shared/models/Futbolin.model";
+import { IMapItem } from "@/shared/types/MapItem/IMapItem";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export async function GET(req: Request) {
   try {
@@ -34,7 +34,7 @@ export async function GET(req: Request) {
       nombre: f.name,
       direccion: f.address,
       lat: f.location.coordinates[1],
-      lon: f.location.coordinates[0],
+      lng: f.location.coordinates[0],
       googlePlaceId: f.googlePlaceId,
     }));
 

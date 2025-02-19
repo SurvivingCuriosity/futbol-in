@@ -1,39 +1,90 @@
+import { faMap, faTrophy, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "futbol-in-ui";
+import Link from "next/link";
 
-export const HeroSection = () => {
+export const HeroSection = ({ loggedIn }: { loggedIn: boolean }) => {
   return (
-    <div className="bg-neutral-800 relative mb-10">
-      <main className="p-4 max-w-screen-lg mx-auto flex flex-col justify-center gap-4 pb-12 overflow-hidden">
+    <div className="h-screen flex items-center justify-center">
+      <main className="mt-20 lg:mt-0 p-4 max-w-screen-lg mx-auto flex flex-col items-center justify-center gap-4">
+        <div className="max-w-3xl flex gap-4 flex-col items-stretch justify-center w-full">
+          <h1 className="z-2 text-4xl xl:text-6xl mb-4 font-extrabold text-white tracking-tight text-pretty">
+            Encuentra <span className="text-primary">Futbolines Cerca </span>de
+            ti
+          </h1>
+          <p className="text-neutral-400">
+            Usa tu ubicación o introduce una ciudad para encontrar futbolines.
+            Filtra por marca, cercanía etc.
+          </p>
 
-        <h1 className="z-2 text-4xl xl:text-6xl mb-4 font-extrabold text-white tracking-tight text-pretty">
-          ¡Encuentra los mejores futbolines de tu ciudad!
-        </h1>
-        <div className="z-2 relative">
-          <input
-            type="text"
-            className="bg-neutral-700 rounded-3xl h-12 p-2 w-full relative placeholder:text-neutral-500 border border-neutral-600"
-            placeholder="Busca un club..."
-          />
+          {!loggedIn && (
+            <div className="flex items-center gap-2 w-full">
+              <Link href="/login">
+                <Button label="Iniciar sesión" />
+              </Link>
+              <Link href="/register">
+                <Button label="Registrarme" variant="outline" />
+              </Link>
+            </div>
+          )}
 
-          <div className="absolute right-1.5 top-0 h-full flex items-center">
-            <button className="bg-lime-300 rounded-3xl h-9/12 text-black font-bold px-4">Buscar</button>
+          <div className="z-2 relative">
+            <input
+              type="text"
+              className="bg-neutral-700 rounded-3xl w-full h-12 p-2 relative placeholder:text-neutral-500 border border-neutral-600"
+              placeholder="Busca un club..."
+            />
+
+            <div className="absolute right-1.5 top-0 h-full flex items-center">
+              <button className="bg-primary rounded-3xl h-9/12 text-black font-bold px-4">
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row justify-between items-center mt-20 space-y-4 space-x-0 lg:space-x-4">
+          <div className="w-full lg:w-1/3 text-center flex flex-col items-center justify-center">
+            <FontAwesomeIcon
+              icon={faMap}
+              width={24}
+              height={24}
+              className=" p-2 rounded-full size-12 text-primary bg-primary/20"
+            />
+            <p className="font-bold text-lg">Basado en tu ubicación</p>
+            <p className="font-light text-neutral-400">
+              Introduce tu localización o activa la ubicación para encontrar los
+              futbolines más cercanos
+            </p>
+          </div>
+          <div className="w-full lg:w-1/3 text-center flex flex-col items-center justify-center">
+            <FontAwesomeIcon
+              icon={faUsers}
+              width={24}
+              height={24}
+              className=" p-2 rounded-full size-12 text-primary bg-primary/20"
+            />
+            <p className="font-bold text-lg">Impulsado por la comunidad</p>
+            <p className="font-light text-neutral-400">
+              Participa agregando nuevos futbolines y valorando los que otros
+              usuarios añadan
+            </p>
+          </div>
+          <div className="w-full lg:w-1/3 text-center flex flex-col items-center justify-center">
+            <FontAwesomeIcon
+              icon={faTrophy}
+              width={24}
+              height={24}
+              className=" p-2 rounded-full size-12 text-primary bg-primary/20"
+            />
+            <p className="font-bold text-lg">Sistema de logros</p>
+            <p className="font-light text-neutral-400">
+              Agrega futbolines y valoralos para lograr insignias exclusivas y
+              aparecer en el ranking.
+            </p>
           </div>
         </div>
       </main>
-
-      <div className="absolute top-full left-0 w-full">
-        <svg
-          className="h-10 w-full"
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            className="shape-fill fill-neutral-800"
-          ></path>
-        </svg>
-      </div>
     </div>
   );
 };

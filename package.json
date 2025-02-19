@@ -18,7 +18,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
-    "futbol-in-ui": "^0.0.13",
+    "futbol-in-ui": "^0.0.14",
     "mongoose": "^8.9.7",
     "next": "15.1.6",
     "next-auth": "^4.24.11",

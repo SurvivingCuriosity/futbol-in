@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "futbol-in-ui";
 import PlacesAutocompleteInput from "@/components/PlacesAutocompleteInput";
-import { IMapItem } from "@/types/MapItem/IMapItem";
+import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 
 const AgregarFutbolinPage = () => {
   const [selected, setSelected] = useState<IMapItem|null>(null);

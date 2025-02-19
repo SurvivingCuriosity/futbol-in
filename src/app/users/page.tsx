@@ -1,5 +1,5 @@
-import connectDb from "@/lib/db"
-import User from "@/models/User.model"
+import connectDb from "@/shared/lib/db"
+import User from "@/shared/models/User.model"
 
 export default async function Users() {
 

@@ -1,5 +1,5 @@
 "use client";
-import { IMapItem } from "@/types/MapItem/IMapItem";
+import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 import { SingleValue } from "react-select";
 import AsyncSelect from "react-select/async";
 
@@ -42,7 +42,7 @@ export default function PalcesAutocompleteInput({
       nombre: place?.data?.description || 'Desconocido',
       direccion: place?.data?.description || 'Desconocido',
       lat: coords.lat,
-      lon: coords.lng,
+      lng: coords.lng,
       googlePlaceId: place?.value || 'Desconocido',
     }
     onSelect(selected);

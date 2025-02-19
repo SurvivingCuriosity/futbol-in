@@ -1,6 +1,7 @@
 "use client";
 
 import { FormField, FormLabel } from "@/components/FormField";
+import { AppLogo } from "@/shared/components/AppLogo";
 import { Button, TextInput } from "futbol-in-ui";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -21,10 +22,8 @@ export const RegisterForm = () => {
   };
 
   return (
-    <>
-      <h1 className="tracking-tighter font-extrabold text-3xl text-lime-300 mb-4">
-        Bienvenido!
-      </h1>
+    <div className="flex flex-col items-center justify-center">
+      <AppLogo />
       <div className="bg-neutral-950/80 backdrop-blur-xs rounded-lg p-4 sm:w-full max-w-[500px] mx-auto border border-neutral-800">
         <FormField>
           <FormLabel>Correo electrónico</FormLabel>
@@ -108,6 +107,6 @@ export const RegisterForm = () => {
           ¿Ya tienes una cuenta?
         </Link>
       </div>
-    </>
+    </div>
   );
 };

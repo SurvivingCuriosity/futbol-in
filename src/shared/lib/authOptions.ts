@@ -1,4 +1,4 @@
-import User from "@/models/User.model";
+import User from "@/shared/models/User.model";
 import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -21,23 +21,18 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-            await connectDb();
-            
-            const user = await User.findOne({ email: credentials?.email });
-            console.error('====')
-            console.log(credentials?.password)
-            console.log(user?.password)
-            if (
-                !user ||
-                !bcrypt.compareSync(credentials?.password || "", user.password)
-            ) {
-                console.log(credentials?.password)
-                console.log(user?.password)
-                console.error('ha entrado aqui')
-                throw new Error("Invalid email or password");
-            }
-            
-            return { id: user._id, email: user.email, name: user.name };
+        await connectDb();
+
+        const user = await User.findOne({ email: credentials?.email });
+
+        if (
+          !user ||
+          !bcrypt.compareSync(credentials?.password || "", user.password)
+        ) {
+          throw new Error("Invalid email or password");
+        }
+
+        return { id: user._id, email: user.email, name: user.name };
       },
     }),
   ],

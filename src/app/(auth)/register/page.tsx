@@ -16,6 +16,7 @@ const page = async () => {
       >
       <Image alt="Imagen de fondo" src={imagen_fondo} className="h-full absolute object-bottom left-0 object-cover user-select-none"/>
       <div className="z-1 w-full p-4">
+        
         <RegisterForm />
       </div>
     </section>

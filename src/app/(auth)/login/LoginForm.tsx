@@ -1,29 +1,35 @@
 "use client";
 
 import { FormField, FormLabel } from "@/components/FormField";
-import { signIn } from "next-auth/react";
-import React, { useState } from "react";
+import { AppLogo } from "@/shared/components/AppLogo";
 import { Button, TextInput } from "futbol-in-ui";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const LoginForm = () => {
   const [loading, setLoading] = useState(false);
 
-  const handleClickRegister = async () => {
+  const router = useRouter();
+
+  const handleClickLogin = async () => {
     setLoading(true);
-    await signIn("credentials", {
+    const result = await signIn("credentials", {
       email: "john@example.com",
       password: "password123",
       redirect: false,
+      callbackUrl: "/",
     });
     setLoading(false);
+    if (result?.ok) {
+      router.push(result.url || "/");
+    }
   };
 
   return (
-    <>
-      <h1 className="tracking-tighter font-extrabold text-5xl text-lime-300 mb-5">
-        Bienvenido!
-      </h1>
+    <div className="flex flex-col items-center justify-center">
+      <AppLogo />
       <div className="bg-neutral-950/80 backdrop-blur-xs rounded-lg p-4 sm:w-full max-w-[500px] mx-auto border border-neutral-800">
         <FormField>
           <FormLabel>Nombre de usuario</FormLabel>
@@ -36,7 +42,11 @@ export const LoginForm = () => {
         </FormField>
 
         <FormField>
-          <Button label="Iniciar sesión" onClick={handleClickRegister} loading={loading} />
+          <Button
+            label="Iniciar sesión"
+            onClick={handleClickLogin}
+            loading={loading}
+          />
         </FormField>
 
         <p className="my-8 text-center text-xs text-neutral-400">
@@ -102,6 +112,6 @@ export const LoginForm = () => {
           ¿Aún no tienes una cuenta?
         </Link>
       </div>
-    </>
+    </div>
   );
 };
