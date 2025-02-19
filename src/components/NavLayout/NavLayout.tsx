@@ -10,7 +10,6 @@ export function NavLayout({
 }) {
   return (
     <div className="h-screen pb-16">
-
           {/* PC */}
           <div className="hidden md:block">
             {loggedIn && <TopNav />}
@@ -18,8 +17,8 @@ export function NavLayout({
           </div>
 
           {/* MOVIL */}
-          <div className="block md:hidden fixed bottom-0 left-0 w-full">
-            <main className="p-4">{children}</main>
+          <div className="block md:hidden">
+            <main className="p-4 flex flex-col items-start justify-start pb-18">{children}</main>
             {loggedIn && <BottomNav />}
           </div>
     </div>

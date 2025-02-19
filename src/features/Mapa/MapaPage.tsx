@@ -29,7 +29,7 @@ export const MapaPage = () => {
         setMarkers(markers);
       }
       return (
-        <div className="relative">
+        <div className="relative h-full w-full">
             <div className="absolute top-2 right-2 z-1 bg-neutral-800 text-primary p-4 rounded-md border">
                 <span className="flex items-center gap-2">
                     <p className="text-white">Search area</p>

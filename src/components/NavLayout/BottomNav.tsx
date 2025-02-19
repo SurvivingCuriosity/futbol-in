@@ -23,7 +23,7 @@ export const BottomNav = () => {
   };
 
   return (
-    <menu className="w-full h-16 bg-neutral-900 flex justify-around items-center">
+    <menu className="fixed bottom-0 w-full h-16 bg-neutral-900/95 z-1 flex justify-around items-center">
       {items.map((item, index) => (
         <Link
           href={item.href}

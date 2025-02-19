@@ -1,20 +1,52 @@
+import React, { useState, useEffect } from "react";
 import { IMarker } from "@/shared/types/Marker/IMarker";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 export interface MapaProps {
-    markers:IMarker[]
+  markers: IMarker[];
 }
 
-export const Mapa = (props:MapaProps) => {
+const defaultCenter = { lat: 40.4167, lng: -3.7033 };
 
-    const {markers} = props
+export const Mapa = ({ markers }: MapaProps) => {
+  const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      const watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error("Error obteniendo la ubicación del usuario", error);
+        },
+        {
+          enableHighAccuracy: true, // Solicita la mayor precisión posible
+          maximumAge: 10000,        // Permite reutilizar una posición obtenida en los últimos 10 segundos
+          timeout: 5000             // Tiempo máximo de espera para obtener la posición
+        }
+      );
+      return () => {
+        navigator.geolocation.clearWatch(watchId);
+      };
+    } else {
+      console.error("La geolocalización no es soportada en este navegador.");
+    }
+  }, []);
+
+  // Si se obtiene la ubicación del usuario, se centra ahí con mayor zoom
+  const center = userLocation || defaultCenter;
+  const zoom = userLocation ? 14 : 6;
 
   return (
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY!}>
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "100vh" }}
-        center={{ lat: 40.4167, lng: -3.7033 }}
-        zoom={6}
+        center={center}
+        zoom={zoom}
         options={{
           fullscreenControl: false,
           streetViewControl: false,
@@ -42,6 +74,14 @@ export const Mapa = (props:MapaProps) => {
             icon={m.iconUrl}
           />
         ))}
+        {userLocation && (
+          <Marker
+            position={userLocation}
+            icon={{
+              url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+            }}
+          />
+        )}
       </GoogleMap>
     </LoadScript>
   );
