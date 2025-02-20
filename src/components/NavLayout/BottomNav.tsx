@@ -1,8 +1,8 @@
 "use client";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { faCirclePlus, faHome, faMagnifyingGlass, faTrophy, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark, faCirclePlus, faHome, faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const BottomNav = () => {
   const pathname = usePathname();
@@ -11,7 +11,7 @@ export const BottomNav = () => {
     { label: "Home", href: "/", icon: faHome },
     { label: "Buscar", href: "/mapa", icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-futbolin", icon: faCirclePlus },
-    { label: "Favoritos", href: "/favoritos", icon: faBookmark },
+    { label: "Ranking", href: "/ranking", icon: faTrophy },
     { label: "Perfil", href: "/perfil", icon: faUser },
   ];
 

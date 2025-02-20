@@ -13,11 +13,14 @@ export const LoginForm = () => {
 
   const router = useRouter();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
   const handleClickLogin = async () => {
     setLoading(true);
     const result = await signIn("credentials", {
-      email: "john@example.com",
-      password: "password123",
+      email: email,
+      password: password,
       redirect: false,
       callbackUrl: "/",
     });
@@ -33,12 +36,12 @@ export const LoginForm = () => {
       <div className="bg-neutral-950/80 backdrop-blur-xs rounded-lg p-4 sm:w-full max-w-[500px] mx-auto border border-neutral-800">
         <FormField>
           <FormLabel>Nombre de usuario</FormLabel>
-          <TextInput placeholder="John Doe" />
+          <TextInput onChangeText={setEmail} placeholder="John Doe" />
         </FormField>
 
         <FormField>
           <FormLabel>Contraseña</FormLabel>
-          <TextInput placeholder="******" />
+          <TextInput onChangeText={setPassword} placeholder="******" />
         </FormField>
 
         <FormField>

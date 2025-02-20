@@ -2,22 +2,40 @@
 
 import { FormField, FormLabel } from "@/components/FormField";
 import { AppLogo } from "@/shared/components/AppLogo";
+import { IUser } from "@/shared/models/User.model";
 import { Button, TextInput } from "futbol-in-ui";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 
 export const RegisterForm = () => {
+
+  const [user, setUser] = useState<IUser>({
+    email: "",
+    name: "",
+    password: "",
+  })
+
   const handleClickRegister = async () => {
     await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: "John Doe",
-        email: "john@example.com",
-        password: "password123",
-      }),
+      body: JSON.stringify(user),
+    }).then(async (res) => {
+      const data = await res.json()
+      if(data.success){
+        redirect('/')
+      }
+    })
+  };
+
+  const handleInputChange = (value:string, field:string) => {
+    setUser({
+      ...user,
+      [field]: value,
     });
   };
 
@@ -27,12 +45,17 @@ export const RegisterForm = () => {
       <div className="bg-neutral-950/80 backdrop-blur-xs rounded-lg p-4 sm:w-full max-w-[500px] mx-auto border border-neutral-800">
         <FormField>
           <FormLabel>Correo electrónico</FormLabel>
-          <TextInput placeholder="johny@example.com" />
+          <TextInput onChangeText={(text)=>handleInputChange(text, "email")} placeholder="johny@example.com" />
+        </FormField>
+
+        <FormField>
+          <FormLabel>Username</FormLabel>
+          <TextInput onChangeText={(text)=>handleInputChange(text, "name")} placeholder="johny99" />
         </FormField>
 
         <FormField>
           <FormLabel>Contraseña</FormLabel>
-          <TextInput placeholder="******" />
+          <TextInput onChangeText={(text)=>handleInputChange(text, "password")} placeholder="******" />
         </FormField>
 
         <FormField>

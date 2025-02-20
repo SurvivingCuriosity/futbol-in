@@ -9,7 +9,7 @@ export function NavLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen pb-16">
+    <div className="h-screen pb-16 w-full">
           {/* PC */}
           <div className="hidden md:block">
             {loggedIn && <TopNav />}
