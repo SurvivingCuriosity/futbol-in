@@ -1,17 +1,15 @@
 import connectDb from "@/shared/lib/db";
-import User from "@/shared/models/User.model";
 import TarjetaUsuarioRanking from "./TarjetaUsuarioRanking";
+import { User } from "@/shared/models/User/User.model";
 
 export default async function RankingPage() {
   await connectDb();
 
   const users = await User.find({}).lean();
 
-  // Convertir `_id` en string para que Next.js pueda serializarlo
   const serializedUsers = users.map((user) => ({
     ...user,
-    // @ts-expect-error qwe
-    _id: user._id.toString(),
+    _id: user._id?.toString(),
   }));
 
   return (

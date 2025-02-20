@@ -1,30 +1,39 @@
 "use client";
 
 import { Progress } from "@/packages/components/Progress";
-import { faTrophy, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { UserRole } from "@/shared/enum/User/Role";
+import { IUser } from "@/shared/models/User/IUser";
+import {
+  faCheck,
+  faTrophy,
+  faUserCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 export interface PerfilPageProps {
-  user: string;
+  user: IUser;
 }
 
 export const PerfilPage = (props: PerfilPageProps) => {
-  
-  
   const { user } = props;
-  console.log(user);
-  
+
   return (
     <div className="w-full h-full gap-8 justify-between flex flex-col space-y-8 md:space-y-0 md:flex-row border border-neutral-700 rounded-lg p-3 md:p-8">
       <div className="min-w-3xs">
         <span className="flex flex-row items-center gap-2 md:flex-col">
-          <FontAwesomeIcon
-            icon={faUserCircle}
-            className="text-neutral-700 text-7xl"
-          />
+          <span className="relative">
+            {user.role === UserRole.VERIFICADO && (
+              <div className="bg-sky-600 absolute top-0 right-0 size-6 flex items-center justify-center rounded-full border-2 border-white">
+                <FontAwesomeIcon icon={faCheck} width={24} height={24} />
+              </div>
+            )}
+            <FontAwesomeIcon
+              icon={faUserCircle}
+              className="text-neutral-700 text-7xl"
+            />
+          </span>
           <span className="flex flex-col gap-2">
-            <p className="font-bold">Fernando Rodríguez</p>
+            <p className="font-bold">{user.name}</p>
             <p className="text-neutral-400">Miembro desde el 2023</p>
           </span>
         </span>

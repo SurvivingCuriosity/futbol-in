@@ -2,7 +2,6 @@
 
 import { FormField, FormLabel } from "@/components/FormField";
 import { AppLogo } from "@/shared/components/AppLogo";
-import { IUser } from "@/shared/models/User.model";
 import { Button, TextInput } from "futbol-in-ui";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -11,7 +10,7 @@ import { useState } from "react";
 
 export const RegisterForm = () => {
 
-  const [user, setUser] = useState<IUser>({
+  const [user, setUser] = useState({
     email: "",
     name: "",
     password: "",
