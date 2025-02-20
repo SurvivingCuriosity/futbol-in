@@ -7,9 +7,9 @@ import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 export async function POST(req: Request) {
   try {
     await connectDb();
-    const { nombre, direccion, lat, lon, googlePlaceId } = await req.json();
+    const { nombre, direccion, lat, lng, googlePlaceId } = await req.json();
 
-    if (!nombre || !direccion || !lat || !lon || !googlePlaceId) {
+    if (!nombre || !direccion || !lat || !lng || !googlePlaceId) {
       return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
 
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       googlePlaceId,
       location: {
         type: "Point",
-        coordinates: [lon, lat],
+        coordinates: [lng, lat],
       },
     });
 
