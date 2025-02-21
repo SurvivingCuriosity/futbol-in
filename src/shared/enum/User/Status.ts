@@ -1,4 +1,5 @@
 export enum UserStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
+  MUST_CONFIRM_EMAIL = "MUST_CONFIRM_EMAIL",
+  MUST_INIT_ACCOUNT = "MUST_INIT_ACCOUNT",
+  DONE = 'done'
 }

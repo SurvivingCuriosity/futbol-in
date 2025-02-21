@@ -1,26 +1,25 @@
-import imagen_fondo from "@/assets/img/background.jpg";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
+import { RegisterForm } from "@/features/Auth/Register/RegisterForm";
+import { UserStatus } from "@/shared/enum/User/Status";
+import { verifyRegistrationToken } from "@/shared/lib/authToken";
+import { User } from "@/shared/models/User/User.model";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { RegisterForm } from "./RegisterForm";
-const page = async () => {
-  const session = await getServerSession();
 
-  if (session) {
-    redirect("/");
+const RegisterPage = async () => {
+  const cookiesStore = await cookies();
+  const token = cookiesStore.get("registrationToken")?.value;
+  const { userId } = verifyRegistrationToken(token || "");
+  const user = await User.findById(userId);
+
+  if (user.status === UserStatus.MUST_INIT_ACCOUNT) {
+    return redirect("/register/init-account");
   }
 
-  return (
-    <section 
-      className="h-dvh flex items-start justify-center relative overflow-scroll"
-      >
-      <Image alt="Imagen de fondo" src={imagen_fondo} className="h-full absolute object-bottom left-0 object-cover user-select-none"/>
-      <div className="z-1 w-full p-4">
-        
-        <RegisterForm />
-      </div>
-    </section>
-  );
+  if (user.status === UserStatus.MUST_CONFIRM_EMAIL) {
+    return redirect("/register/confirm-email");
+  }
+
+  return <RegisterForm />;
 };
 
-export default page;
+export default RegisterPage;

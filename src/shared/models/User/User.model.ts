@@ -3,27 +3,30 @@ import { UserRole } from "@/shared/enum/User/Role";
 import { UserStatus } from "@/shared/enum/User/Status";
 import { Schema, model, models } from "mongoose";
 
-export interface IUser extends Document{
-  name: string;
+export interface IUser extends Document {
+  name?: string;
   email: string;
-  password: string;
+  password?: string;
   imagen?: string;
   status?: UserStatus;
   role?: UserRole;
   provider: AuthProvider;
   createdAt?: Date;
+
+  verificationCode?: string;
+  verificationCodeExpires?: Date;
 }
 
 const userSchema = new Schema<IUser>(
   {
-    name: { type: String, required: true },
+    name: { type: String },
     email: { type: String, required: true },
-    password: { type: String, required: true },
+    password: { type: String },
     imagen: { type: String },
     status: {
       type: String,
       enum: Object.values(UserStatus),
-      default: UserStatus.ACTIVE,
+      default: UserStatus.MUST_CONFIRM_EMAIL,
     },
     role: {
       type: String,
@@ -35,6 +38,8 @@ const userSchema = new Schema<IUser>(
       enum: Object.values(AuthProvider),
       required: true,
     },
+    verificationCode: { type: String },
+    verificationCodeExpires: { type: Date },
   },
   {
     timestamps: true,

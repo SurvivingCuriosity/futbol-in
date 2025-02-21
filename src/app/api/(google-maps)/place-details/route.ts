@@ -1,12 +1,11 @@
-// src/app/api/place-details/route.ts
-import { NextResponse } from "next/server";
+import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const placeId = searchParams.get("placeId");
 
   if (!placeId) {
-    return NextResponse.json({ error: "placeId es requerido" }, { status: 400 });
+    return errorResponse("placeId es requerido", 400);
   }
 
   const key = process.env.NEXT_PUBLIC_MAPS_API_KEY!;
@@ -14,11 +13,10 @@ export async function GET(request: Request) {
 
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
 
   if (data.status !== "OK") {
-    return NextResponse.json({ error: "No se pudo obtener el lugar" }, { status: 500 });
+    return errorResponse("No se pudo obtener el lugar", 500);
   }
 
-  return NextResponse.json(data.result.geometry.location);
+  return successResponse(data.result.geometry.location);
 }

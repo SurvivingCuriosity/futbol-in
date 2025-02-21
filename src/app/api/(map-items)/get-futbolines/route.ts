@@ -1,9 +1,7 @@
-// src/app/api/futbolines/route.ts
-import { NextResponse } from "next/server";
 import connectDb from "@/shared/lib/db";
+import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
 import Futbolin from "@/shared/models/Futbolin.model";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
-import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export async function GET(req: Request) {
   try {
@@ -13,7 +11,7 @@ export async function GET(req: Request) {
     const maxDistance = parseInt(searchParams.get("maxDistance") || "5000", 10);
 
     if (isNaN(lat) || isNaN(lng)) {
-      return NextResponse.json({ error: "Latitude and longitude are required" }, { status: 400 });
+      return errorResponse("Falta latitud o longitud", 400);
     }
 
     await connectDb();
@@ -38,9 +36,8 @@ export async function GET(req: Request) {
       googlePlaceId: f.googlePlaceId,
     }));
 
-    return NextResponse.json({ success: true, data: futbolinesTipados });
+    return successResponse({ success: true, data: futbolinesTipados });
   } catch (error) {
-    const message = getErrorMessage(error);
-    return NextResponse.json({ error: message }, { status: 500 });
+    return errorResponse(error);
   }
 }
