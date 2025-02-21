@@ -6,17 +6,25 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const RegisterPage = async () => {
-  const cookiesStore = await cookies();
-  const token = cookiesStore.get("registrationToken")?.value;
-  const { userId } = verifyRegistrationToken(token || "");
-  const user = await User.findById(userId);
+  try {
+    const cookiesStore = await cookies();
+    const token = cookiesStore.get("registrationToken")?.value;    
 
-  if (user.status === UserStatus.MUST_INIT_ACCOUNT) {
-    return redirect("/register/init-account");
-  }
+    if (token) {
+      const { userId } = verifyRegistrationToken(token || "");
+      const user = await User.findById(userId);
+      console.log("User:", user);
 
-  if (user.status === UserStatus.MUST_CONFIRM_EMAIL) {
-    return redirect("/register/confirm-email");
+      if (user.status === UserStatus.MUST_INIT_ACCOUNT) {
+        return redirect("/register/init-account");
+      }
+
+      if (user.status === UserStatus.MUST_CONFIRM_EMAIL) {
+        return redirect("/register/confirm-email");
+      }
+    }
+  } catch (error: unknown) {
+    console.error(error);
   }
 
   return <RegisterForm />;

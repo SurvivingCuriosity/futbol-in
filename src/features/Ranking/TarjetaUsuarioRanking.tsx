@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 export default function TarjetaUsuarioRanking({ user }: { user: IUser }) {
   const router = useRouter();
 
+  console.log(user);
+  
+
   const handleNavigateToUser = () => {
     router.push(`/user/${user.name}`);
   };
@@ -24,10 +27,10 @@ export default function TarjetaUsuarioRanking({ user }: { user: IUser }) {
         </div>
       )}
       <div className="bg-neutral-700 size-9 rounded-full flex items-center justify-center">
-        {user.name.charAt(0).toUpperCase()}
+        {user?.name?.charAt(0).toUpperCase()}
       </div>
       <span>
-        <p>{user.name}</p>
+        <p>{user?.name}</p>
         <p className="text-sm text-neutral-400">{user.email}</p>
       </span>
     </li>

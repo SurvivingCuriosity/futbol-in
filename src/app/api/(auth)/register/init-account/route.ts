@@ -46,7 +46,14 @@ export async function POST(request: Request) {
     user.status = UserStatus.DONE;
     await user.save();
 
-    return NextResponse.json({ success: true });
+    const response = NextResponse.json({ success: true });
+    response.cookies.set("registrationToken", "", {
+      maxAge: 0,     // Caduca inmediatamente
+      path: "/",     // Asegura que coincida con el path donde se seteó
+      // secure: true // En producción con HTTPS
+      // httpOnly: true // Si ya estaba en httpOnly
+    });
+    return response;
   } catch (err: unknown) {
     return errorResponse(err);
   }
