@@ -1,6 +1,6 @@
 import { NavLayout } from "@/components/NavLayout/NavLayout";
+import AgregarFutbolinPage from "@/features/AgregarFutbolin/AgregarFutbolinPage";
 import { getServerSession } from "next-auth";
-import AgregarFutbolinPage from "./AgregarFutbolinPage";
 
 const page = async () => {
   const session = await getServerSession();

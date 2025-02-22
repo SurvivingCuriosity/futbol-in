@@ -2,8 +2,8 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IFutbolin extends Document {
-  name: string;
-  address: string;
+  nombre: string;
+  direccion: string;
   googlePlaceId: string;
   location: {
     type: string;
@@ -13,8 +13,8 @@ export interface IFutbolin extends Document {
 
 const FutbolinSchema: Schema<IFutbolin> = new Schema(
   {
-    name: { type: String, required: true },
-    address: { type: String, required: true },
+    nombre: { type: String, required: true },
+    direccion: { type: String, required: true },
     googlePlaceId: { type: String, required: true },
     location: {
       type: { type: String, enum: ['Point'], required: true },
