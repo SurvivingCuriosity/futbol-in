@@ -158,7 +158,11 @@ const Typewriter = ({
     deleteDelay,
   ]);
 
-  return <h1 style={{ fontSize: "clamp(1em, 2vw, 3em)", lineHeight: "1em" }}>{text}</h1>;
+  return (
+    <h1 style={{ fontSize: "clamp(1em, 2vw, 3em)", lineHeight: "1em" }}>
+      {text}
+    </h1>
+  );
 };
 
 export default Typewriter;

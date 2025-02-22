@@ -1,7 +1,6 @@
 import { DefaultUser } from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
 
-// En caso de que uses tus propios enums:
 import { UserRole } from "@/shared/enum/User/Role";
 import { UserStatus } from "@/shared/enum/User/Status";
 import { AuthProvider } from "@/shared/enum/User/AuthProvider";
@@ -20,7 +19,6 @@ declare module "next-auth" {
       role?: UserRole;
       status?: UserStatus;
       provider?: AuthProvider;
-      // Si necesitas meter más campos, ponlos aquí
     };
   }
 

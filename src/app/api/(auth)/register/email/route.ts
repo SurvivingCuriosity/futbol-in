@@ -63,7 +63,7 @@ export async function POST(request: Request) {
 
     sgMail.send(msg)
       .then(() => {
-        console.log("Email sent");
+
       })
       .catch((error) => {
         console.error(error);

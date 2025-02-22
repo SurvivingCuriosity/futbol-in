@@ -1,9 +1,11 @@
 import bcrypt from "bcryptjs";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import connectDb from "./db";
-import { NextAuthOptions } from "next-auth";
+import { AuthProvider } from "../enum/User/AuthProvider";
+import { UserStatus } from "../enum/User/Status";
 import { User } from "../models/User/User.model";
+import connectDb from "./db";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -22,14 +24,14 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         await connectDb();
-    
+
         // Busca el usuario en la base de datos
         const user = await User.findOne({ email: credentials?.email });
-    
+
         if (!user) {
           throw new Error("No existe el usuario");
         }
-    
+
         // Verifica password
         const isPasswordValid = bcrypt.compareSync(
           credentials?.password || "",
@@ -38,7 +40,7 @@ export const authOptions: NextAuthOptions = {
         if (!isPasswordValid) {
           throw new Error("Contraseña inválida");
         }
-    
+
         // Devuelve la información del usuario que quieras incluir en la sesión
         // (OJO: esto es lo que recibirá "user" en la callback 'jwt' inmediatamente después)
         return {
@@ -49,12 +51,33 @@ export const authOptions: NextAuthOptions = {
           status: user.status,
           role: user.role,
           provider: user.provider,
-          // createdAt, si te interesa también
         };
       },
     }),
   ],
   callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
+        await connectDb();
+
+        const email = user.email;
+        let existingUser = await User.findOne({ email });
+
+        if (!existingUser) {
+          existingUser = new User({
+            email,
+            status: UserStatus.MUST_CREATE_USERNAME,
+            provider: AuthProvider.GOOGLE,
+          });
+          await existingUser.save();
+        }
+        user.name = existingUser.name;
+        user.id = existingUser._id.toString();
+        user.status = existingUser.status;
+      }
+      
+      return true;
+    },
     /**
      * 1) La primera vez que el usuario inicia sesión con credenciales o Google, NextAuth recibe
      *    los datos de ese usuario como 'user'.
@@ -62,22 +85,15 @@ export const authOptions: NextAuthOptions = {
      *    'user' será undefined, pero 'token' tendrá los datos anteriores.
      */
     async jwt({ token, user }) {
-      // Si 'user' está presente, quiere decir que es la 1ª vez (login).
-      // Guardamos todo lo que nos interesa en el token.
       if (user) {
-        return {
-          ...token,
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          imagen: user.imagen,
-          role: user.role,
-          status: user.status,
-          provider: user.provider,
-        };
+        // user es la info que devolviste en "signIn" o "authorize"
+        token.id = user.id;
+        token.status = user.status;
+        token.email = user.email;
+        token.name = user.name;
+        token.provider = user.provider;
+        token.imagen = user.image || '';
       }
-
-      // Si no hay 'user', simplemente devolvemos el token actual (ya tiene los datos previos)
       return token;
     },
 
@@ -86,16 +102,34 @@ export const authOptions: NextAuthOptions = {
      * Lo que retornes aquí será la 'session' final en el cliente.
      */
     async session({ session, token }) {
-      // session.user suele tener por defecto { name, email, image }
-      // Vamos a meterle todo lo que guardamos en el token
-      if (token && session.user) {
-        session.user.id = token.id as string;
-        session.user.imagen = token.imagen;
-        session.user.role = token.role;
-        session.user.status = token.status;
-        session.user.provider = token.provider;
-        // etc.
+      // 1) Conectar a la BD
+      await connectDb();
+    
+      // 2) Buscar en la BD el usuario por su ID
+      //    (el ID lo guardaste en token.id durante la callback "jwt")
+      const dbUser = await User.findById(token.id);
+    
+      if (dbUser) {
+        if(session.user){
+
+          // 3) Forzar que "session.user" refleje lo que hay en la BD
+          session.user.id = dbUser._id.toString();
+          session.user.name = dbUser.name;
+          session.user.status = dbUser.status; // si lo cambiaste a DONE, lo verás aquí
+          session.user.imagen = token.imagen;
+        }
+      } else {
+        if(session.user){
+          
+          // 4) Si no hay usuario en la BD, usa lo del token por fallback
+          session.user.id = token.id as string;
+          session.user.status = token.status as UserStatus;
+          session.user.provider = token.provider as AuthProvider;
+          session.user.imagen = token.image as string;
+          // etc.
+        }
       }
+    
       return session;
     },
   },

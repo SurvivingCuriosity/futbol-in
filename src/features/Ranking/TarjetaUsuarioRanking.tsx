@@ -18,7 +18,7 @@ export default function TarjetaUsuarioRanking({ user }: { user: IUser }) {
 
   return (
     <li
-      className="flex flex-row items-center gap-2 p-4 border border-neutral-700 rounded-lg relative"
+      className="flex flex-row items-center gap-2 p-4 border border-neutral-700 rounded-lg relative h-20"
       onClick={handleNavigateToUser}
     >
       {user.role === UserRole.VERIFICADO && (

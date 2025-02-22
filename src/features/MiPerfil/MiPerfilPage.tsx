@@ -3,10 +3,15 @@
 import { Progress } from "@/packages/components/Progress";
 import { UserRole } from "@/shared/enum/User/Role";
 import { IUser } from "@/shared/models/User/IUser";
-import { faCheck, faTrophy, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTrophy,
+  faUserCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 export interface MiPerfilPageProps {
   user: IUser;
@@ -20,19 +25,33 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
       <div className="min-w-3xs">
         <span className="flex flex-row items-center gap-2 md:flex-col">
           <span className="relative">
-            {user.role === UserRole.VERIFICADO && 
-            <div className="bg-sky-600 absolute top-0 right-0 size-6 flex items-center justify-center rounded-full border-2 border-white">
-              <FontAwesomeIcon icon={faCheck} width={24} height={24} />
-              </div>}
-            <FontAwesomeIcon
-              icon={faUserCircle}
-              className="text-neutral-700 text-7xl"
-            />
+            {user.role === UserRole.VERIFICADO && (
+              <div className="bg-sky-600 absolute top-0 right-0 size-6 flex items-center justify-center rounded-full border-2 border-white">
+                <FontAwesomeIcon icon={faCheck} width={24} height={24} />
+              </div>
+            )}
+
+            {user.imagen === "" ? (
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                className="text-neutral-700 size-8"
+              />
+            ) : (
+              <Image
+                src={user.imagen || ''}
+                alt="avatar"
+                width={48}
+                height={48}
+                className="w-full h-full rounded-full size-8"
+              />
+            )}
           </span>
           <span className="flex flex-col gap-1">
             <p className="font-bold">{user.name}</p>
             <p className="text-xs text-neutral-400">{user.email}</p>
-            <p className="text-xs text-neutral-400">{user.createdAt?.toLocaleDateString()}</p>
+            <p className="text-xs text-neutral-400">
+              {user.createdAt?.toLocaleDateString()}
+            </p>
           </span>
         </span>
 

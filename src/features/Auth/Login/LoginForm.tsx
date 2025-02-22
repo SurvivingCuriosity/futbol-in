@@ -67,7 +67,7 @@ export const LoginForm = () => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          signIn("google");
+          signIn("google", { callbackUrl: "/" });
         }}
         className="animate-wiggle border rounded-lg px-5 py-2 bg-white/5 flex justify-center items-center gap-2 w-full text-white border-white"
       >

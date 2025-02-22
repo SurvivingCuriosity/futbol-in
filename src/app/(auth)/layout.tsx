@@ -1,16 +1,9 @@
 import imagen_fondo from "@/assets/img/background.jpg";
 import { AppLogo } from "@/shared/components/AppLogo";
-import { getServerSession } from "next-auth";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import React from "react";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await getServerSession();
-
-  if (session) {
-    redirect("/");
-  }
 
   return (
     <section className="h-dvh flex items-start justify-center relative overflow-scroll">

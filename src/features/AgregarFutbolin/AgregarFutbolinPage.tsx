@@ -45,7 +45,7 @@ const AgregarFutbolinPage = () => {
 
         <label className="flex items-center text-xs text-neutral-400">
           <input type="checkbox" className="mr-2 size-4 accent-primary" checked={noEncuentraElBar} onChange={(e) => setNoEncuentraElBar(e.target.checked)} />
-          No encuentro el bar en el que se encuentra el futbolín
+          No aparece el bar que busco
         </label>
 
         <FormField>
@@ -56,7 +56,7 @@ const AgregarFutbolinPage = () => {
           />
         </FormField>
 
-        <div className="flex flex-row items-center gap-2 w-full">
+        <div className="flex flex-row items-center gap-2 w-full flex-wrap">
           <FormField>
             <FormLabel>Tipo de futbolín *</FormLabel>
             <PlacesAutocompleteInput

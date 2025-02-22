@@ -9,16 +9,11 @@ const RegisterPage = async () => {
   const cookiesStore = await cookies();
   const token = cookiesStore.get("registrationToken")?.value;
 
-  console.log("register: token", token);
-
   try {
     if (token) {
       const { userId } = verifyRegistrationToken(token || "");
-      console.log("register: userId", userId);
       if (userId) {
         const user = await User.findById(userId);
-        console.log("register: user", user);
-        console.log("register: user.status", user.status);
         if (user) {
           if (user.status === UserStatus.MUST_INIT_ACCOUNT) {
             redirect("/register/init-account");
@@ -27,6 +22,11 @@ const RegisterPage = async () => {
 
           if (user.status === UserStatus.MUST_CONFIRM_EMAIL) {
             redirect("/register/confirm-email");
+            return null;
+          }
+
+          if (user.status === UserStatus.DONE) {
+            redirect("/");
             return null;
           }
         }
