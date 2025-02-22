@@ -7,7 +7,7 @@ import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function ConfirmEmailForm() {
+export default function ConfirmEmailForm({email}: {email: string}) {
   const router = useRouter();
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
@@ -31,10 +31,14 @@ export default function ConfirmEmailForm() {
     }
   };
 
+  
+
   return (
     <>
       <h1 className="text-2xl font-extrabold tracking-tight text-primary">Confirmar correo electrónico</h1>
-      <p className="text-neutral-400 text-xs mb-8 mt-2">Te hemos mandado un correo electrónico con un código de verificación. Ingresa el código para continuar.</p>
+      <p className="text-neutral-400 text-xs mb-8 mt-2">
+        {`Hemos mandado un correo electrónico a ${email} con un código de verificación. Ingresa el código para continuar.`}
+        </p>
       <input
         type="text"
         placeholder="Ingresa tu código"

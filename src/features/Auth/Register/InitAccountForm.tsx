@@ -18,6 +18,10 @@ export default function InitAccountForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
+
+  console.log('=========');
+  console.log('username', username);
+
   // Debounce: chequear disponibilidad de username
   useEffect(() => {
     if (!username) {

@@ -13,12 +13,12 @@ export const HeroSection = ({ loggedIn }: { loggedIn: boolean }) => {
       {!loggedIn && (
         <menu className="max-w-screen-xl mx-auto fixed top-0 p-4 flex items-center justify-between w-full">
           <AppLogo />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap justify-end">
             <Link href="/login">
-              <Button label="Iniciar sesión" />
+              <Button size="sm" label="Iniciar sesión" />
             </Link>
             <Link href="/register">
-              <Button label="Registrarme" variant="outline" />
+              <Button size="sm" label="Registrarme" variant="outline" />
             </Link>
           </div>
         </menu>

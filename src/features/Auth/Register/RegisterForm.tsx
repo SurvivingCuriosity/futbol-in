@@ -1,6 +1,7 @@
 "use client";
 
 import { FormField, FormLabel } from "@/components/FormField";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -9,9 +10,13 @@ import { useState } from "react";
 
 export const RegisterForm = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleClickRegister = async () => {
+    setLoading(true);
+    setError("");
     try {
       const res = await fetch("/api/register/email", {
         method: "POST",
@@ -21,13 +26,16 @@ export const RegisterForm = () => {
 
       const data = await res.json();
 
+      setLoading(false);
+
       if (!res.ok) {
         throw new Error(data.error || "Ha ocurrido un error");
       }
 
       router.push("/register/confirm-email");
     } catch (error: unknown) {
-      console.error(error);
+      setLoading(false);
+      setError(getErrorMessage(error));
     }
   };
 
@@ -35,11 +43,22 @@ export const RegisterForm = () => {
     <>
       <FormField>
         <FormLabel>Correo electrónico</FormLabel>
-        <TextInput onChangeText={setEmail} placeholder="johny@example.com" />
+        <TextInput
+          onChangeText={(text) => {
+            setEmail(text);
+            setError("");
+          }}
+          placeholder="johny@example.com"
+          errorText={error}
+        />
       </FormField>
 
       <FormField>
-        <Button label="Registrarme" onClick={handleClickRegister} />
+        <Button
+          label="Registrarme"
+          onClick={handleClickRegister}
+          loading={loading}
+        />
       </FormField>
 
       <p className="my-8 text-center text-xs text-neutral-400">

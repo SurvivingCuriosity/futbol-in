@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const AppLogo = () => {
+export const AppLogo = ({href}: {href?: string}) => {
   return (
     <Link
-      href="/"
+      href={href || "#"}
       className="font-extrabold text-white flex items-center gap-2"
     >
       <span className="text-white font-extrabold flex items-center antialiased text-3xl italic">
