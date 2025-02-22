@@ -29,8 +29,8 @@ export async function GET(req: Request) {
     });
 
     const futbolinesTipados: IMapItem[] = futbolines.map((f) => ({
-      nombre: f.name,
-      direccion: f.address,
+      nombre: f.nombre,
+      direccion: f.direccion,
       lat: f.location.coordinates[1],
       lng: f.location.coordinates[0],
       googlePlaceId: f.googlePlaceId,
