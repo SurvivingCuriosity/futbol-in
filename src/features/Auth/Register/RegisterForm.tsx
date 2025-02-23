@@ -68,7 +68,7 @@ export const RegisterForm = () => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          signIn("google", { callbackUrl: "/" });
+          signIn("google");
         }}
         className="animate-wiggle border rounded-lg px-5 py-2 bg-white/5 flex justify-center items-center gap-2 w-full text-white border-white"
       >
@@ -102,7 +102,7 @@ export const RegisterForm = () => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          signIn("google", { callbackUrl: "/" });
+          signIn("google");
         }}
         className="mt-4 animate-wiggle border bg-[#7289da22] rounded-lg px-5 py-2 flex justify-center items-center gap-2 w-full text-[#7289da] border-[#7289da]"
       >
