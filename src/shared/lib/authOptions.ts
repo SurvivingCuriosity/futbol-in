@@ -75,7 +75,7 @@ export const authOptions: NextAuthOptions = {
         user.id = existingUser._id.toString();
         user.status = existingUser.status;
       }
-      
+
       return true;
     },
     /**
@@ -92,7 +92,7 @@ export const authOptions: NextAuthOptions = {
         token.email = user.email;
         token.name = user.name;
         token.provider = user.provider;
-        token.imagen = user.image || '';
+        token.imagen = user.image || "";
       }
       return token;
     },
@@ -104,14 +104,13 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       // 1) Conectar a la BD
       await connectDb();
-    
+
       // 2) Buscar en la BD el usuario por su ID
       //    (el ID lo guardaste en token.id durante la callback "jwt")
       const dbUser = await User.findById(token.id);
-    
-      if (dbUser) {
-        if(session.user){
 
+      if (dbUser) {
+        if (session.user) {
           // 3) Forzar que "session.user" refleje lo que hay en la BD
           session.user.id = dbUser._id.toString();
           session.user.name = dbUser.name;
@@ -119,8 +118,7 @@ export const authOptions: NextAuthOptions = {
           session.user.imagen = token.imagen;
         }
       } else {
-        if(session.user){
-          
+        if (session.user) {
           // 4) Si no hay usuario en la BD, usa lo del token por fallback
           session.user.id = token.id as string;
           session.user.status = token.status as UserStatus;
@@ -129,8 +127,16 @@ export const authOptions: NextAuthOptions = {
           // etc.
         }
       }
-    
+
       return session;
+    },
+
+    async redirect({ url, baseUrl }) {
+      // Si la URL ya es local (empieza con baseUrl), respétala
+      if (url.startsWith(baseUrl)) return url;
+
+      // Si no, usa tu Home
+      return baseUrl + "/";
     },
   },
 };

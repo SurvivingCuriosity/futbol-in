@@ -1,9 +1,28 @@
 import imagen_fondo from "@/assets/img/background.jpg";
 import { AppLogo } from "@/shared/components/AppLogo";
+import { UserStatus } from "@/shared/enum/User/Status";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
+
+
+  console.log('layout')
+
+  const session = await getSession();
+  const user = session?.user;
+
+  if(user && user?.status === UserStatus.DONE){
+    redirect('/')
+  }
+
+  if(user && user?.status === UserStatus.MUST_CREATE_USERNAME){
+    console.log('MUST_CREATE_USERNAME')
+    redirect('/register/init-username')
+  }
+
 
   return (
     <section className="h-dvh flex items-start justify-center relative overflow-scroll">

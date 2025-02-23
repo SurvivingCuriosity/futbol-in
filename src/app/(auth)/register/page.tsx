@@ -1,13 +1,25 @@
 import { RegisterForm } from "@/features/Auth/Register/RegisterForm";
 import { UserStatus } from "@/shared/enum/User/Status";
+import { authOptions } from "@/shared/lib/authOptions";
 import { verifyRegistrationToken } from "@/shared/lib/authToken";
 import { User } from "@/shared/models/User/User.model";
+import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const RegisterPage = async () => {
   const cookiesStore = await cookies();
   const token = cookiesStore.get("registrationToken")?.value;
+
+  const session = await getServerSession(authOptions);
+  if (session && session.user) {
+    if(session.user.status === UserStatus.DONE){
+      redirect('/')
+    }
+    if(session.user.status === UserStatus.MUST_CREATE_USERNAME){
+      redirect('/register/init-username')
+    }
+  }
 
   try {
     if (token) {
