@@ -8,7 +8,15 @@ export interface MapaProps {
 
 const defaultCenter = { lat: 40.4167, lng: -3.7033 };
 
-export const Mapa = ({ markers }: MapaProps) => {
+export interface MapaProps {
+  markers: IMarker[];
+  onSelectMarker: (marker: IMarker) => void;
+}
+
+export const Mapa = (props: MapaProps) => {
+
+  const { markers, onSelectMarker } = props;
+
   const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
 
   useEffect(() => {
@@ -72,6 +80,7 @@ export const Mapa = ({ markers }: MapaProps) => {
             key={m.id}
             position={{ lat: m.lat, lng: m.lng }}
             icon={m.iconUrl}
+            onClick={() => onSelectMarker(m)}
           />
         ))}
         {userLocation && (

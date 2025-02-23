@@ -1,6 +1,6 @@
 import connectDb from "@/shared/lib/db";
 import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import Futbolin from "@/shared/models/Futbolin.model";
+import Lugar from "@/shared/models/Futbolin.model";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 
 export async function GET(req: Request) {
@@ -16,7 +16,7 @@ export async function GET(req: Request) {
 
     await connectDb();
 
-    const futbolines = await Futbolin.find({
+    const futbolines = await Lugar.find({
       location: {
         $near: {
           $geometry: {
@@ -34,6 +34,9 @@ export async function GET(req: Request) {
       lat: f.location.coordinates[1],
       lng: f.location.coordinates[0],
       googlePlaceId: f.googlePlaceId,
+      tipoFutbolin: f.tipoFutbolin,
+      tipoLugar: f.tipoLugar,
+      comentarios: f.comentarios,
     }));
 
     return successResponse({ success: true, data: futbolinesTipados });

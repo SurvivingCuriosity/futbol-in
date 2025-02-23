@@ -1,17 +1,17 @@
 import connectDb from "@/shared/lib/db";
 import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import Futbolin from "@/shared/models/Futbolin.model";
+import Lugar from '@/shared/models/Futbolin.model';
 
 export async function POST(req: Request) {
   try {
     await connectDb();
-    const { nombre, direccion, lat, lng, googlePlaceId } = await req.json();
+    const { nombre, direccion, lat, lng, googlePlaceId, tipoFutbolin, tipoLugar } = await req.json();
 
     if (!nombre || !direccion || !lat || !lng || !googlePlaceId) {
       return successResponse('Falta algún campo', 400);
     }
 
-    const newFutbolin = await Futbolin.create({
+    const newLugar = await Lugar.create({
       nombre,
       direccion,
       googlePlaceId,
@@ -19,9 +19,11 @@ export async function POST(req: Request) {
         type: "Point",
         coordinates: [lng, lat],
       },
+      tipoLugar,
+      tipoFutbolin,
     });
 
-    return successResponse({ success: true, futbolin: newFutbolin }, 201);
+    return successResponse({ success: true, futbolin: newLugar }, 201);
   } catch (error) {
     return errorResponse(error);
   }

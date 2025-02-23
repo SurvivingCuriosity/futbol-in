@@ -1,7 +1,8 @@
-// src/models/Futbolin.model.ts
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose';
+import { TipoFutbolin } from '../enum/Futbolin/TipoFutbolin';
+import { TipoLugar } from '../enum/Lugares/TipoLugar';
 
-export interface IFutbolin extends Document {
+export interface ILugar extends Document {
   nombre: string;
   direccion: string;
   googlePlaceId: string;
@@ -9,9 +10,12 @@ export interface IFutbolin extends Document {
     type: string;
     coordinates: [number, number];
   };
+  tipoLugar: TipoLugar;
+  tipoFutbolin: TipoFutbolin;
+  comentarios: string;
 }
 
-const FutbolinSchema: Schema<IFutbolin> = new Schema(
+const LugarSchema: Schema<ILugar> = new Schema(
   {
     nombre: { type: String, required: true },
     direccion: { type: String, required: true },
@@ -20,13 +24,16 @@ const FutbolinSchema: Schema<IFutbolin> = new Schema(
       type: { type: String, enum: ['Point'], required: true },
       coordinates: { type: [Number], required: true },
     },
+    tipoLugar: { type: String, enum: Object.values(TipoLugar), required: true },
+    tipoFutbolin: { type: String, enum: Object.values(TipoFutbolin), required: true },
+    comentarios: { type: String },
   },
   { timestamps: true }
 );
 
-FutbolinSchema.index({ location: '2dsphere' });
+LugarSchema.index({ location: '2dsphere' });
 
-const Futbolin: Model<IFutbolin> =
-  mongoose.models.Futbolin || mongoose.model<IFutbolin>('Futbolin', FutbolinSchema);
+const Lugar: Model<ILugar> =
+  mongoose.models.Lugar || mongoose.model<ILugar>('Lugar', LugarSchema);
 
-export default Futbolin;
+export default Lugar;
