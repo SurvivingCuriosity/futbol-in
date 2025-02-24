@@ -1,18 +1,12 @@
-// app/api/register/step2/route.ts
-import { UserStatus } from "@/shared/enum/User/Status";
-import { verifyRegistrationToken } from "@/shared/lib/authToken";
-import connectDb from "@/shared/lib/db";
 import {
   errorResponse,
   successResponse
 } from "@/shared/lib/httpResponse";
-import { User } from "@/shared/models/User/User.model";
+import { RegistrationService } from "@/shared/services/Auth/RegistrationService";
 
 export async function POST(request: Request) {
   try {
-    await connectDb();
 
-    // Leer cookie
     const cookies = request.headers.get("cookie") || "";
     const token = getCookieValue(cookies, "registrationToken");
     if (!token) {
@@ -24,34 +18,7 @@ export async function POST(request: Request) {
       return errorResponse("Falta el código de verificación", 400);
     }
 
-    // Verificar token
-    const payload = verifyRegistrationToken(token);
-
-    // Cargar usuario
-    const user = await User.findById(payload.userId);
-    if (!user) {
-      return errorResponse("Usuario no encontrado", 404);
-    }
-    if (user.status !== UserStatus.MUST_CONFIRM_EMAIL) {
-      return errorResponse(`Estado incorrecto: ${user.status}`, 400);
-    }
-
-    // Verificar code
-    if (user.verificationCode !== code) {
-      return errorResponse("Código de verificación inválido", 400);
-    }
-    if (
-      !user.verificationCodeExpires ||
-      user.verificationCodeExpires < new Date()
-    ) {
-      return errorResponse("El código ha expirado", 400);
-    }
-
-    // Actualizar estado
-    user.status = UserStatus.MUST_INIT_ACCOUNT;
-    user.verificationCode = undefined;
-    user.verificationCodeExpires = undefined;
-    await user.save();
+    await RegistrationService.verifyRegistrationCode(token, code);
 
     return successResponse({ success: true });
   } catch (err: unknown) {

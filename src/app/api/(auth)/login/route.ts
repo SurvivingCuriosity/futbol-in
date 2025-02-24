@@ -1,31 +1,26 @@
 import { UserStatus } from "@/shared/enum/User/Status";
-import connectDb from "@/shared/lib/db";
-import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import { User } from "@/shared/models/User/User.model";
-import { redirect } from "next/navigation";
+import { errorResponse } from "@/shared/lib/httpResponse";
+import { RegistrationService } from "@/shared/services/Auth/RegistrationService";
+import { UserService } from "@/shared/services/User/UserService";
 
 export async function POST(request: Request) {
   try {
-    await connectDb();
-
     const { email } = await request.json();
 
     if (!email) {
       return errorResponse("No se introdujo email", 400);
     }
 
-    // Ver si existe un usuario con ese email
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserService.findByEmail(email);
 
-    if (existingUser && existingUser.status === UserStatus.MUST_CONFIRM_EMAIL) {
-      redirect("/register/confirm-email");
+    if(!existingUser) {
+      return errorResponse("No existe un usuario con ese email", 404);
     }
 
-    if (existingUser && existingUser.status === UserStatus.MUST_INIT_ACCOUNT) {
-      redirect("/register/init-account");
-    }
-
-    return successResponse({ success: true });
+    return RegistrationService.createRegistrationResponse(
+      existingUser._id.toString(),
+      existingUser.status as UserStatus
+    );
   } catch (error: unknown) {
     return errorResponse(error, 500);
   }

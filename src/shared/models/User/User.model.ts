@@ -1,9 +1,10 @@
 import { AuthProvider } from "@/shared/enum/User/AuthProvider";
 import { UserRole } from "@/shared/enum/User/Role";
 import { UserStatus } from "@/shared/enum/User/Status";
-import { Schema, model, models } from "mongoose";
+import { Document, Schema, Types, model, models } from "mongoose";
 
-export interface IUser extends Document {
+export interface IUserDocument extends Document {
+  _id: Types.ObjectId;
   name?: string;
   email: string;
   password?: string;
@@ -17,7 +18,7 @@ export interface IUser extends Document {
   verificationCodeExpires?: Date;
 }
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUserDocument>(
   {
     name: { type: String },
     email: { type: String, required: true },
@@ -46,4 +47,4 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-export const User = models.User || model<IUser>("User", userSchema);
+export const User = models.User || model<IUserDocument>("User", userSchema);

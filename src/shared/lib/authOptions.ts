@@ -1,10 +1,10 @@
-import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { AuthProvider } from "../enum/User/AuthProvider";
 import { UserStatus } from "../enum/User/Status";
 import { User } from "../models/User/User.model";
+import { UserService } from "../services/User/UserService";
 import connectDb from "./db";
 
 export const authOptions: NextAuthOptions = {
@@ -25,52 +25,36 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         await connectDb();
 
-        // Busca el usuario en la base de datos
-        const user = await User.findOne({ email: credentials?.email });
+        const user = await UserService.findByEmail(credentials?.email || "");
 
         if (!user) {
           throw new Error("No existe el usuario");
         }
 
-        // Verifica password
-        const isPasswordValid = bcrypt.compareSync(
-          credentials?.password || "",
-          user.password
+        const isPasswordValid = await UserService.validatePassword(
+          credentials!.password,
+          user.password || ""
         );
+
         if (!isPasswordValid) {
           throw new Error("Contraseña inválida");
         }
 
-        // Devuelve la información del usuario que quieras incluir en la sesión
-        // (OJO: esto es lo que recibirá "user" en la callback 'jwt' inmediatamente después)
-        return {
-          id: user._id.toString(),
-          name: user.name,
-          email: user.email,
-          imagen: user.imagen,
-          status: user.status,
-          role: user.role,
-          provider: user.provider,
-        };
+        // Esto es lo que recibirá "user" en el callback 'jwt' inmediatamente después
+        return UserService.mapToDTO(user);
       },
     }),
   ],
   callbacks: {
+    // Para determinar si un usuario accede o no
     async signIn({ user, account }) {
       if (account?.provider === "google") {
-        await connectDb();
-
-        const email = user.email;
-        let existingUser = await User.findOne({ email });
-
+        let existingUser = await UserService.findByEmail(user.email);
+        
         if (!existingUser) {
-          existingUser = new User({
-            email,
-            status: UserStatus.MUST_CREATE_USERNAME,
-            provider: AuthProvider.GOOGLE,
-          });
-          await existingUser.save();
+          existingUser = await UserService.createGoogleUser(user.email);
         }
+
         user.name = existingUser.name;
         user.id = existingUser._id.toString();
         user.status = existingUser.status;
@@ -98,39 +82,31 @@ export const authOptions: NextAuthOptions = {
     },
 
     /**
-     * Cada vez que corras useSession(), getSession(), getServerSession(), NextAuth llama a 'session'.
-     * Lo que retornes aquí será la 'session' final en el cliente.
+     * Se ejecuta cada vez que se llama a getSession getServerSession etc.
+     * Me permite obtener la última version del usuario.
      */
     async session({ session, token }) {
-      // 1) Conectar a la BD
       await connectDb();
 
-      // 2) Buscar en la BD el usuario por su ID
-      //    (el ID lo guardaste en token.id durante la callback "jwt")
       const dbUser = await User.findById(token.id);
 
-      if (dbUser) {
-        if (session.user) {
-          // 3) Forzar que "session.user" refleje lo que hay en la BD
-          session.user.id = dbUser._id.toString();
-          session.user.name = dbUser.name;
-          session.user.status = dbUser.status; // si lo cambiaste a DONE, lo verás aquí
-          session.user.imagen = token.imagen;
-        }
-      } else {
-        if (session.user) {
-          // 4) Si no hay usuario en la BD, usa lo del token por fallback
-          session.user.id = token.id as string;
-          session.user.status = token.status as UserStatus;
-          session.user.provider = token.provider as AuthProvider;
-          session.user.imagen = token.image as string;
-          // etc.
-        }
+      if (session.user && dbUser) {
+        session.user.id = dbUser._id.toString();
+        session.user.name = dbUser.name;
+        session.user.status = dbUser.status;
+        session.user.imagen = token.imagen;
+      }
+
+      if (session.user && !dbUser) {
+        session.user.id = token.id as string;
+        session.user.status = token.status as UserStatus;
+        session.user.provider = token.provider as AuthProvider;
+        session.user.imagen = token.image as string;
       }
 
       return session;
     },
-
+    // Se ejecuta cada vez que se redirige a un callback de next auth (en signin o singout)
     async redirect({ url, baseUrl }) {
       // Si la URL ya es local (empieza con baseUrl), respétala
       if (url.startsWith(baseUrl)) return url;

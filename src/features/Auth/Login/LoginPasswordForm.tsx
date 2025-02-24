@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Button, TextInput } from "futbol-in-ui";
+import { FormField, FormLabel } from "@/components/FormField";
 
 export default function LoginPasswordForm() {
   const router = useRouter();
@@ -22,8 +23,8 @@ export default function LoginPasswordForm() {
     const result = await signIn("credentials", {
       email,
       password,
-      redirect: false, 
-      callbackUrl: "/" // redirige a donde quieras
+      redirect: false,
+      callbackUrl: "/", // redirige a donde quieras
     });
 
     if (result?.error) {
@@ -37,11 +38,19 @@ export default function LoginPasswordForm() {
 
   return (
     <>
-      <TextInput
-        placeholder="Contraseña"
-        value={password}
-        onChangeText={setPassword}
-      />
+      <FormField>
+        <FormLabel>Correo electrónico</FormLabel>
+        <TextInput onChangeText={()=>{}} value={email} disabled/>
+      </FormField>
+
+      <FormField>
+        <FormLabel>Introduce tu contraseña</FormLabel>
+        <TextInput
+          placeholder="Contraseña"
+          value={password}
+          onChangeText={setPassword}
+        />
+      </FormField>
       <Button onClick={handleSignIn} label="Iniciar sesión" />
       {error && <p style={{ color: "red" }}>{error}</p>}
     </>

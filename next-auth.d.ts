@@ -4,6 +4,7 @@ import { DefaultJWT } from "next-auth/jwt";
 import { UserRole } from "@/shared/enum/User/Role";
 import { UserStatus } from "@/shared/enum/User/Status";
 import { AuthProvider } from "@/shared/enum/User/AuthProvider";
+import { UserDTO } from "@/shared/models/User/UserDTO";
 
 /**
  * Para modificar/añadir campos en la interfaz "User" de NextAuth
@@ -11,15 +12,7 @@ import { AuthProvider } from "@/shared/enum/User/AuthProvider";
 declare module "next-auth" {
   // Añadimos los campos que queremos que existan en "session.user"
   interface Session {
-    user?: {
-      id: string;
-      name: string;
-      email: string;
-      imagen?: string;
-      role?: UserRole;
-      status?: UserStatus;
-      provider?: AuthProvider;
-    };
+    user?: UserDTO;
   }
 
   /**
@@ -29,10 +22,9 @@ declare module "next-auth" {
   interface User extends DefaultUser {
     id: string;
     role: UserRole;
-    status: UserStatus;
     provider: AuthProvider;
+    status?: UserStatus;
     imagen?: string;
-    // Más campos si quieres
   }
 }
 

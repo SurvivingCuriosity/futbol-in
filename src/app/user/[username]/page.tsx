@@ -2,8 +2,8 @@ import { NavLayout } from "@/components/NavLayout/NavLayout";
 import { PerfilPage } from "@/features/Perfil/PerfilPage";
 import { authOptions } from "@/shared/lib/authOptions";
 import connectDb from "@/shared/lib/db";
-import { IUser } from "@/shared/models/User/IUser";
 import { User } from "@/shared/models/User/User.model";
+import { UserDTO } from "@/shared/models/User/UserDTO";
 import { getServerSession } from "next-auth";
 
 interface PageProps {
@@ -38,7 +38,7 @@ export default async function Page({ params }: PageProps) {
   // 4. Renderizamos la página, pasando el usuario como prop
   return (
     <NavLayout loggedIn={!!session}>
-      <PerfilPage user={userDoc as unknown as IUser} />
+      <PerfilPage user={userDoc as unknown as UserDTO} />
     </NavLayout>
   );
 }

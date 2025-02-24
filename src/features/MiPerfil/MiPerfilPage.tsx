@@ -2,7 +2,7 @@
 
 import { Progress } from "@/packages/components/Progress";
 import { UserRole } from "@/shared/enum/User/Role";
-import { IUser } from "@/shared/models/User/IUser";
+import { UserDTO } from "@/shared/models/User/UserDTO";
 import {
   faCheck,
   faTrophy,
@@ -14,7 +14,7 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 
 export interface MiPerfilPageProps {
-  user: IUser;
+  user: UserDTO;
 }
 
 export const MiPerfilPage = (props: MiPerfilPageProps) => {

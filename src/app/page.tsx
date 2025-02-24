@@ -10,8 +10,6 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
 
   const user = session?.user;
-  
-  console.log('El user',user);
 
   if(user?.status === UserStatus.MUST_CREATE_USERNAME){
     redirect("/register/init-username");

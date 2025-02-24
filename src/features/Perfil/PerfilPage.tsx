@@ -2,7 +2,7 @@
 
 import { Progress } from "@/packages/components/Progress";
 import { UserRole } from "@/shared/enum/User/Role";
-import { IUser } from "@/shared/models/User/IUser";
+import { UserDTO } from "@/shared/models/User/UserDTO";
 import {
   faCheck,
   faTrophy,
@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface PerfilPageProps {
-  user: IUser;
+  user: UserDTO;
 }
 
 export const PerfilPage = (props: PerfilPageProps) => {

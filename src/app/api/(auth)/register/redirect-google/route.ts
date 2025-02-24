@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   // 1) Cargar la sesión
-  console.log('redirectGoogle:');
   
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {

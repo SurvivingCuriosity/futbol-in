@@ -7,6 +7,9 @@ interface RegistrationPayload {
 const JWT_SECRET = process.env.JWT_SECRET || "changeme";
 
 export function generateRegistrationToken(userId: string): string {
+  if(!userId) {
+    return ''
+  }
   return jwt.sign({ userId } as RegistrationPayload, JWT_SECRET, {
     expiresIn: "1h",
   });

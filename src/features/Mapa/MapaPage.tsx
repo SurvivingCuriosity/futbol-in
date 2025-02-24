@@ -34,7 +34,6 @@ export const MapaPage = () => {
   }
 
   const handleSelectMarker = (marker: IMarker) => {
-    console.log(marker);
     setSelectedMarker(marker)
   };
 

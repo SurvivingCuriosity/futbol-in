@@ -1,16 +1,14 @@
 "use client";
 
 import { UserRole } from "@/shared/enum/User/Role";
+import { UserDTO } from "@/shared/models/User/UserDTO";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 
-// @ts-expect-error qwe
-export default function TarjetaUsuarioRanking({ user }: { user: IUser }) {
-  const router = useRouter();
 
-  console.log(user);
-  
+export default function TarjetaUsuarioRanking({ user }: { user: UserDTO }) {
+  const router = useRouter();
 
   const handleNavigateToUser = () => {
     router.push(`/user/${user.name}`);

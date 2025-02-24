@@ -8,9 +8,6 @@ import React from "react";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
 
-
-  console.log('layout')
-
   const session = await getSession();
   const user = session?.user;
 
@@ -19,7 +16,6 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
   }
 
   if(user && user?.status === UserStatus.MUST_CREATE_USERNAME){
-    console.log('MUST_CREATE_USERNAME')
     redirect('/register/init-username')
   }
 

@@ -11,7 +11,6 @@ export async function POST(request: Request) {
     await connectDb();
 
     const session = await getServerSession(authOptions);
-    console.log(session);
 
     if (!session?.user) {
       return NextResponse.json({ error: "No hay sesión" }, { status: 401 });

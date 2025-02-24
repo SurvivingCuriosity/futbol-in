@@ -1,7 +1,7 @@
 import { NavLayout } from "@/components/NavLayout/NavLayout";
 import { MiPerfilPage } from "@/features/MiPerfil/MiPerfilPage";
 import { authOptions } from "@/shared/lib/authOptions";
-import { IUser } from "@/shared/models/User/IUser";
+import { UserDTO } from "@/shared/models/User/UserDTO";
 import { getServerSession } from "next-auth";
 
 export default async function page() {
@@ -9,7 +9,7 @@ export default async function page() {
 
   return (
     <NavLayout loggedIn={!!session}>
-      <MiPerfilPage user={session?.user as IUser} />
+      <MiPerfilPage user={session?.user as UserDTO} />
     </NavLayout>
   );
 }
