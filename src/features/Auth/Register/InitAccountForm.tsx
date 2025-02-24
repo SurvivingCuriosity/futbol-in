@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FormField, FormLabel } from "@/components/FormField";
+import { FormField, FormLabel } from "@/shared/components/FormField";
 import { Button, TextInput } from "futbol-in-ui";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 

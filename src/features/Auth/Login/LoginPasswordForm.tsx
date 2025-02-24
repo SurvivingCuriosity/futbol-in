@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Button, TextInput } from "futbol-in-ui";
-import { FormField, FormLabel } from "@/components/FormField";
+import { FormField, FormLabel } from "@/shared/components/FormField";
 
 export default function LoginPasswordForm() {
   const router = useRouter();

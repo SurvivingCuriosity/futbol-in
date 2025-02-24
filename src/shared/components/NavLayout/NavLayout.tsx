@@ -1,4 +1,4 @@
-import { TopNav } from "@/components/NavLayout/TopNav";
+import { TopNav } from "@/shared/components/NavLayout/TopNav";
 import { BottomNav } from "./BottomNav";
 
 export function NavLayout({
@@ -13,12 +13,12 @@ export function NavLayout({
           {/* PC */}
           <div className="hidden md:block">
             {loggedIn && <TopNav />}
-            <main className="p-8 max-w-screen-xl mx-auto">{children}</main>
+            <main className="p-8 relative max-w-screen-xl mx-auto">{children}</main>
           </div>
 
           {/* MOVIL */}
           <div className="block md:hidden">
-            <main className="p-4 flex flex-col items-start justify-start pb-18">{children}</main>
+            <main className="p-4 flex flex-col relative items-start justify-start pb-18">{children}</main>
             {loggedIn && <BottomNav />}
           </div>
     </div>

@@ -1,4 +1,4 @@
-import { NavLayout } from "@/components/NavLayout/NavLayout";
+import { NavLayout } from "@/shared/components/NavLayout/NavLayout";
 import { PerfilPage } from "@/features/Perfil/PerfilPage";
 import { authOptions } from "@/shared/lib/authOptions";
 import connectDb from "@/shared/lib/db";

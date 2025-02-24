@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
 import { IMarker } from "@/shared/types/Marker/IMarker";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useEffect, useState } from "react";
 
 export interface MapaProps {
   markers: IMarker[];
 }
 
-const defaultCenter = { lat: 40.4167, lng: -3.7033 };
+const defaultCenter = { lat: 40.9629936, lng: -5.661232699999999 };
 
 export interface MapaProps {
   markers: IMarker[];
-  onSelectMarker: (marker: IMarker) => void;
+  onSelectMarker: (marker: IMarker|null) => void;
 }
 
 export const Mapa = (props: MapaProps) => {
@@ -52,9 +52,10 @@ export const Mapa = (props: MapaProps) => {
   return (
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY!}>
       <GoogleMap
-        mapContainerStyle={{ width: "100%", height: "100vh" }}
+        mapContainerStyle={{ width: "100%", height: "calc(100vh - 5em)", position: 'absolute', top: 0, left: 0 }}
         center={center}
         zoom={zoom}
+        onClick={()=>onSelectMarker(null)}
         options={{
           fullscreenControl: false,
           streetViewControl: false,
@@ -72,7 +73,9 @@ export const Mapa = (props: MapaProps) => {
             },
             strictBounds: false,
           },
+          center: defaultCenter,
           minZoom: 5,
+          zoom: 14
         }}
       >
         {markers?.map((m) => (

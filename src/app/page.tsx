@@ -1,6 +1,6 @@
-import { HeroSection } from "@/components/Inicio/HeroSection";
-import { NavLayout } from "@/components/NavLayout/NavLayout";
-import AppStatus from "@/features/AppStatus/AppStatus";
+import HomePage from "@/features/Home/HomePage";
+import { LandingPage } from "@/features/Landing/LandingPage";
+import { NavLayout } from "@/shared/components/NavLayout/NavLayout";
 import { UserStatus } from "@/shared/enum/User/Status";
 import { authOptions } from "@/shared/lib/authOptions";
 import { getServerSession } from "next-auth";
@@ -15,10 +15,11 @@ export default async function Home() {
     redirect("/register/init-username");
   }
 
+  const isLoggedIn = !!session;
+
   return (
-    <NavLayout loggedIn={!!session}>
-      <HeroSection loggedIn={!!session} />
-      <AppStatus />
+    <NavLayout loggedIn={isLoggedIn}>
+      {isLoggedIn ? <HomePage /> : <LandingPage />}
     </NavLayout>
   );
 }

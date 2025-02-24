@@ -1,5 +1,5 @@
 "use client";
-import { FormField, FormLabel } from "@/components/FormField";
+import { FormField, FormLabel } from "@/shared/components/FormField";
 import SearchInputBar from "@/shared/components/SearchInputBar";
 import SearchInputDireccion from "@/shared/components/SearchInputDireccion";
 import { SelectorTipoFutbolin } from "@/shared/components/SelectorTipoFutbolin";

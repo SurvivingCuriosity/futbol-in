@@ -1,4 +1,4 @@
-import imagen_fondo from "@/assets/img/background.jpg";
+import imagen_fondo from "@/shared/assets/img/background.jpg";
 import { AppLogo } from "@/shared/components/AppLogo";
 import { UserStatus } from "@/shared/enum/User/Status";
 import { getSession } from "next-auth/react";

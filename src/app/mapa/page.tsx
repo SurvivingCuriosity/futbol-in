@@ -1,4 +1,4 @@
-import { NavLayout } from "@/components/NavLayout/NavLayout";
+import { NavLayout } from "@/shared/components/NavLayout/NavLayout";
 import { MapaPage } from "@/features/Mapa/MapaPage";
 import { getServerSession } from "next-auth";
 

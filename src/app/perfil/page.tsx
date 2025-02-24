@@ -1,4 +1,4 @@
-import { NavLayout } from "@/components/NavLayout/NavLayout";
+import { NavLayout } from "@/shared/components/NavLayout/NavLayout";
 import { MiPerfilPage } from "@/features/MiPerfil/MiPerfilPage";
 import { authOptions } from "@/shared/lib/authOptions";
 import { UserDTO } from "@/shared/models/User/UserDTO";

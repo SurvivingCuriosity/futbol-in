@@ -1,4 +1,4 @@
-import { NavLayout } from "@/components/NavLayout/NavLayout";
+import { NavLayout } from "@/shared/components/NavLayout/NavLayout";
 import AgregarFutbolinPage from "@/features/AgregarFutbolin/AgregarFutbolinPage";
 import { getServerSession } from "next-auth";
 

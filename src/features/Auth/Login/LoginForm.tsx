@@ -1,6 +1,6 @@
 "use client";
 
-import { FormField, FormLabel } from "@/components/FormField";
+import { FormField, FormLabel } from "@/shared/components/FormField";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
 import { signIn } from "next-auth/react";
