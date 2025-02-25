@@ -1,14 +1,14 @@
 import imagen_fondo from "@/shared/assets/img/background.jpg";
 import { AppLogo } from "@/shared/components/AppLogo";
 import { UserStatus } from "@/shared/enum/User/Status";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import React from "react";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
 
-  const session = await getSession();
+  const session = await getServerSession();
   const user = session?.user;
 
   if(user && user?.status === UserStatus.DONE){

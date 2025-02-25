@@ -1,12 +1,9 @@
-import connectDb from "@/shared/lib/db";
 import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import { User } from "@/shared/models/User/User.model";
+import { UserService } from "@/shared/services/User/UserService";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    await connectDb();
-
     const { searchParams } = new URL(request.url);
     const username = searchParams.get("username");
 
@@ -17,7 +14,7 @@ export async function GET(request: Request) {
       );
     }
 
-    const userExists = await User.findOne({ name: username });
+    const userExists = await UserService.findByUsername(username);
     const available = !userExists;
 
     return successResponse({ available });

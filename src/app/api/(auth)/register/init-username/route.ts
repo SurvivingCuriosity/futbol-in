@@ -2,7 +2,7 @@ import { UserStatus } from "@/shared/enum/User/Status";
 import { authOptions } from "@/shared/lib/authOptions";
 import connectDb from "@/shared/lib/db";
 import { errorResponse } from "@/shared/lib/httpResponse";
-import { User } from "@/shared/models/User/User.model";
+import { UserService } from "@/shared/services/User/UserService";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Falta username" }, { status: 400 });
     }
 
-    const user = await User.findById(session.user.id);
+    const user = await UserService.findById(session.user.id);
 
     if (!user) {
       return NextResponse.json(
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     }
 
     // Check si username en uso
-    const existing = await User.findOne({ name: username });
+    const existing = await UserService.findByUsername(username);
     if (existing) {
       return NextResponse.json(
         { error: "Este username ya está en uso" },

@@ -2,7 +2,7 @@ import { RegisterForm } from "@/features/Auth/Register/RegisterForm";
 import { UserStatus } from "@/shared/enum/User/Status";
 import { authOptions } from "@/shared/lib/authOptions";
 import { verifyRegistrationToken } from "@/shared/lib/authToken";
-import { User } from "@/shared/models/User/User.model";
+import { UserService } from "@/shared/services/User/UserService";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -25,7 +25,7 @@ const RegisterPage = async () => {
     if (token) {
       const { userId } = verifyRegistrationToken(token || "");
       if (userId) {
-        const user = await User.findById(userId);
+        const user = await UserService.findById(userId);
         if (user) {
           if (user.status === UserStatus.MUST_INIT_ACCOUNT) {
             redirect("/register/init-account");

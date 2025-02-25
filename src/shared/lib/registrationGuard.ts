@@ -1,10 +1,9 @@
 // shared/lib/registrationGuard.ts
 import { UserStatus } from "@/shared/enum/User/Status";
 import { verifyRegistrationToken } from "@/shared/lib/authToken";
-import connectDb from "@/shared/lib/db";
-import { User } from "@/shared/models/User/User.model";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { UserService } from "../services/User/UserService";
 
 /**
  * requireRegistrationUser:
@@ -23,12 +22,10 @@ export async function requireRegistrationUser() {
     redirect("/register");
   }
 
-  await connectDb();
-
   try {
     // 2) Decodificar token para obtener userId
     const { userId } = verifyRegistrationToken(token);
-    const user = await User.findById(userId);
+    const user = await UserService.findById(userId);
 
     if (!user) {
       redirect("/register");

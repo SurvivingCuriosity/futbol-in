@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { AuthProvider } from "../enum/User/AuthProvider";
 import { UserStatus } from "../enum/User/Status";
-import { User } from "../models/User/User.model";
 import { UserService } from "../services/User/UserService";
 import connectDb from "./db";
 
@@ -23,8 +22,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        await connectDb();
-
         const user = await UserService.findByEmail(credentials?.email || "");
 
         if (!user) {
@@ -88,12 +85,12 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       await connectDb();
 
-      const dbUser = await User.findById(token.id);
+      const dbUser = await UserService.findById(token.id);
 
       if (session.user && dbUser) {
         session.user.id = dbUser._id.toString();
-        session.user.name = dbUser.name;
-        session.user.status = dbUser.status;
+        session.user.name = dbUser.name || '';
+        session.user.status = dbUser.status || UserStatus.MUST_CONFIRM_EMAIL;
         session.user.imagen = token.imagen;
       }
 
