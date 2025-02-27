@@ -14,7 +14,8 @@ export const AppLogo = ({ href='#' }: { href?: string }) => {
           width={22}
           height={22}
           alt="Logo de Futbol-In"
-        />
+          style={{height: 22, width: 22}}
+          />
         lin
       </span>
 
@@ -26,6 +27,7 @@ export const AppLogo = ({ href='#' }: { href?: string }) => {
           width={22}
           height={22}
           alt="Logo de Futbol-In"
+          style={{height: 22, width: 22}}
         />
       </span>
     </Link>

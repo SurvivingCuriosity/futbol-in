@@ -1,9 +1,11 @@
 "use client";
 
-import { CustomAsyncSelect } from "futbol-in-ui";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { SingleValue } from "react-select";
 import { fetchCiudades } from "../services/Places/fetchCiudades";
+import { AsyncSelectProps } from "futbol-in-ui";
+// or whichever the correct type is for your library
 
 export interface OptionType {
   value: string;
@@ -14,19 +16,30 @@ export interface PlaceOption extends OptionType {
   data: google.maps.places.AutocompletePrediction;
 }
 
+// 1) Dynamically import just the component you need from futbol-in-ui
+//    We transform CustomAsyncSelect into a default export for the dynamic import:
+const CustomAsyncSelectNoSSR = dynamic<AsyncSelectProps<PlaceOption>>( 
+  () =>
+    import("futbol-in-ui").then((mod) => ({
+      default: mod.CustomAsyncSelect,
+    })),
+  {
+    ssr: false,
+  }
+);
+
 export default function SearchInputCiudad() {
   const router = useRouter();
 
   const handleSelect = async (place: SingleValue<PlaceOption>) => {
     if (!place) return;
-    // para poder acceder a place Id desde el server
     document.cookie = `selectedPlaceId=${place.value}; path=/; SameSite=Strict;`;
     const urlSlug = place.label.toLowerCase().replaceAll(" ", "-");
     router.push(`/futbolines/${encodeURIComponent(urlSlug)}`);
   };
 
   return (
-    <CustomAsyncSelect<PlaceOption>
+    <CustomAsyncSelectNoSSR
       onSelect={handleSelect}
       loadOptions={fetchCiudades}
       disabled={false}
