@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const LandingPage = async () => {
   return (
     <main className="flex flex-col items-center justify-center gap-4">
-      <menu className="max-w-screen-xl mx-auto fixed top-0 p-4 flex items-center justify-between w-full">
+      
+      <menu className="max-w-screen-xl mx-auto h-16 bg-neutral-950/95 fixed top-0 p-4 flex items-center justify-between w-full z-1">
         <AppLogo />
         <LoginRegister />
       </menu>

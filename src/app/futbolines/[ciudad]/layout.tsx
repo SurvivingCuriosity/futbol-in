@@ -18,7 +18,6 @@ const layout = async (props: CityLayoutProps) => {
 
   return (
     <TopNavSearchLayout>
-      {" "}
       <h1 className="text-2xl font-extrabold text-primary tracking-tight">
         Futbolines en {ciudadLabel}
       </h1>
