@@ -1,25 +1,16 @@
-"use client";
-
 import { AppLogo } from "@/shared/components/AppLogo";
+import { LoginRegister } from "@/shared/components/LandingPage/LoginRegister";
+import Typewriter from "@/shared/components/LandingPage/TypeWriter";
+import SearchInputCiudad from "@/shared/components/SearchInputCiudad";
 import { faMap, faTrophy, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "futbol-in-ui";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 
-export const LandingPage = () => {
+export const LandingPage = async () => {
   return (
     <main className="flex flex-col items-center justify-center gap-4">
       <menu className="max-w-screen-xl mx-auto fixed top-0 p-4 flex items-center justify-between w-full">
         <AppLogo />
-        <div className="flex items-center gap-2 flex-wrap justify-end">
-          <Link href="/login">
-            <Button size="sm" label="Iniciar sesión" />
-          </Link>
-          <Link href="/register">
-            <Button size="sm" label="Registrarme" variant="outline" />
-          </Link>
-        </div>
+        <LoginRegister />
       </menu>
 
       <div className="mt-20 max-w-3xl flex gap-4 flex-col items-stretch justify-center w-full">
@@ -38,7 +29,9 @@ export const LandingPage = () => {
           Filtra por marca, cercanía etc.
         </p>
 
-        <div className="z-2 relative">
+        <SearchInputCiudad />
+
+        {/* <div className="z-2 relative">
           <input
             type="text"
             className="bg-neutral-700 rounded-3xl w-full h-12 p-2 relative placeholder:text-neutral-500 border border-neutral-600"
@@ -50,7 +43,7 @@ export const LandingPage = () => {
               Buscar
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-20 space-y-12 md:space-y-0 space-x-0 md:space-x-4">
@@ -97,70 +90,3 @@ export const LandingPage = () => {
     </main>
   );
 };
-
-const Typewriter = ({
-  words = ["Futbolines", "Dardos", "Billares"],
-  typeSpeed = 150, // Velocidad al escribir (ms)
-  deleteSpeed = 50, // Velocidad al borrar (ms)
-  wordDelay = 3000, // Pausa cuando la palabra se ha escrito (ms)
-  deleteDelay = 10, // Pausa cuando queda 1 letra y se cambia de palabra (ms)
-}) => {
-  const [text, setText] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentWord = words[wordIndex];
-    let timeoutId;
-
-    if (!isDeleting) {
-      // Escribiendo: se añade un carácter cada vez.
-      if (charIndex < currentWord.length) {
-        timeoutId = setTimeout(() => {
-          setText(currentWord.substring(0, charIndex + 1));
-          setCharIndex(charIndex + 1);
-        }, typeSpeed);
-      } else {
-        // Palabra completa, espera un poco antes de borrar.
-        timeoutId = setTimeout(() => {
-          setIsDeleting(true);
-        }, wordDelay);
-      }
-    } else {
-      // Borrando: se elimina un carácter, pero siempre se deja al menos 1.
-      if (charIndex > 1) {
-        timeoutId = setTimeout(() => {
-          setText(currentWord.substring(0, charIndex - 1));
-          setCharIndex(charIndex - 1);
-        }, deleteSpeed);
-      } else {
-        // Cuando queda 1 carácter, espera y cambia a la siguiente palabra.
-        timeoutId = setTimeout(() => {
-          setIsDeleting(false);
-          setWordIndex((wordIndex + 1) % words.length);
-          setCharIndex(0);
-        }, deleteDelay);
-      }
-    }
-
-    return () => clearTimeout(timeoutId);
-  }, [
-    charIndex,
-    isDeleting,
-    wordIndex,
-    words,
-    typeSpeed,
-    deleteSpeed,
-    wordDelay,
-    deleteDelay,
-  ]);
-
-  return (
-    <h1 style={{ fontSize: "clamp(1em, 2vw, 3em)", lineHeight: "1em" }}>
-      {text}
-    </h1>
-  );
-};
-
-export default Typewriter;
