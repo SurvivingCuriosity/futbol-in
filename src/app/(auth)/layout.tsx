@@ -26,6 +26,8 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
         alt="Imagen de fondo"
         src={imagen_fondo}
         className="h-full absolute object-bottom left-0 object-cover user-select-none"
+        placeholder="blur"
+        fill
       />
       <div className="z-1 w-full p-4">
         <div className="flex flex-col items-start justify-center max-w-screen-lg mx-auto">
