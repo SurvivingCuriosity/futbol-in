@@ -1,5 +1,5 @@
 import FutbolinesCiudadPage from "@/features/FutbolinesCiudad/FutbolinesCiudadPage";
-import { TopNavSearch } from "@/shared/components/NavLayout/TopNavSearch";
+import { TopNavSearchLayout } from "@/shared/components/Layouts/TopNavSearchLayout";
 import { getFutbolinesByPlaceId } from "@/shared/services/Places/getLugaresCiudad";
 import { cookies } from "next/headers";
 
@@ -15,15 +15,16 @@ const page = async ({ params }: CityPageProps) => {
 
   const cookiesStore = await cookies();
   const placeId = cookiesStore.get("selectedPlaceId")?.value;
-  console.log('El place id')
-  const futbolines = await getFutbolinesByPlaceId(placeId || '');
+  const futbolines = await getFutbolinesByPlaceId(placeId || "");
 
   return (
     <>
-      <TopNavSearch />
-      <div className="p-8 pt-20">
-        <FutbolinesCiudadPage futbolines={futbolines} ciudad={decodeURIComponent(ciudad)} />
-      </div>
+      <TopNavSearchLayout>
+        <FutbolinesCiudadPage
+          futbolines={futbolines}
+          ciudad={decodeURIComponent(ciudad)}
+        />
+      </TopNavSearchLayout>
     </>
   );
 };

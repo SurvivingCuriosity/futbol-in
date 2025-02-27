@@ -36,8 +36,7 @@ export class GoogleMapsService {
     if (data.status !== "OK") {
       return errorResponse("No se pudo obtener el lugar", 500);
     }
-
-    console.log(data.result.geometry.location)
+    
     return data.result.geometry.location
   }
 

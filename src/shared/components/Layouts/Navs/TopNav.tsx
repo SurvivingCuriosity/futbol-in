@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BotonPerfil } from "../Inicio/BotonPerfil";
+import { BotonPerfil } from "../../Inicio/BotonPerfil";
 
 export const TopNav = () => {
   const pathname = usePathname();

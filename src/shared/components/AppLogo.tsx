@@ -7,15 +7,26 @@ export const AppLogo = ({ href }: { href?: string }) => {
       href={href || "#"}
       className="font-extrabold text-white flex items-center gap-2"
     >
-      <span className="text-white font-extrabold items-center antialiased text-3xl italic flex w-max">
-        Futbol
+      <span className="text-white font-extrabold items-center antialiased text-3xl italic hidden sm:flex w-max">
+        Futb
         <Image
           src="/futbolin-logo.svg"
-          width={28}
-          height={28}
+          width={22}
+          height={22}
           alt="Logo de Futbol-In"
         />
-        n
+        lin
+      </span>
+
+      <span className="text-white font-extrabold items-center antialiased text-3xl italic flex sm:hidden space-x-2">
+        F
+        <Image
+          className="ml-0.5"
+          src="/futbolin-logo.svg"
+          width={22}
+          height={22}
+          alt="Logo de Futbol-In"
+        />
       </span>
     </Link>
   );

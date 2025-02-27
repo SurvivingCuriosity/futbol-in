@@ -12,8 +12,8 @@ const FutbolinesCiudadPage = (props: FutbolinesCiudadPageProps) => {
   const ciudadLabel = ciudad.charAt(0).toUpperCase() + ciudad.slice(1);
 
   return (
-      <div>
-        <h1 className="text-3xl font-extrabold text-primary tracking-tight">
+      <>
+        <h1 className="text-2xl font-extrabold text-primary tracking-tight">
           Futbolines en {ciudadLabel}
         </h1>
         <ul className="flex flex-col gap-2 items-center w-full mt-4">
@@ -26,7 +26,7 @@ const FutbolinesCiudadPage = (props: FutbolinesCiudadPageProps) => {
             <TarjetaFutbolinInicio key={f.nombre} lugar={f} />
           ))}
         </ul>
-      </div>
+      </>
   );
 };
 

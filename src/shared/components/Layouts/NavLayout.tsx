@@ -1,5 +1,5 @@
-import { TopNav } from "@/shared/components/NavLayout/TopNav";
-import { BottomNav } from "./BottomNav";
+import { BottomNav } from "./Navs/BottomNav";
+import { TopNav } from "./Navs/TopNav";
 
 export function NavLayout({
   loggedIn,

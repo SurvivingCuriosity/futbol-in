@@ -1,4 +1,4 @@
-import { NavLayout } from "@/shared/components/NavLayout/NavLayout";
+import { NavLayout } from "@/shared/components/Layouts/NavLayout";
 import { getServerSession } from "next-auth";
 import React from "react";
 

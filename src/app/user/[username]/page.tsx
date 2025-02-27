@@ -1,5 +1,5 @@
 import { PerfilPage } from "@/features/Perfil/PerfilPage";
-import { NavLayout } from "@/shared/components/NavLayout/NavLayout";
+import { NavLayout } from "@/shared/components/Layouts/NavLayout";
 import { authOptions } from "@/shared/lib/authOptions";
 import { UserService } from "@/shared/services/User/UserService";
 import { getServerSession } from "next-auth";

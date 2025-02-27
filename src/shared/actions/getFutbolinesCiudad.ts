@@ -13,8 +13,6 @@ export async function getCityCoordinates(city: string): Promise<[number, number]
   
   const response = await fetch(url);
   const data = await response.json();
-  
-  console.log(data)
 
   if (data.status !== "OK" || !data.results || data.results.length === 0) {
     throw new Error(`No se pudo obtener las coordenadas para la ciudad: ${city}`);
