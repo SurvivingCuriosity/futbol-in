@@ -1,12 +1,11 @@
+import connectDb from "@/shared/lib/db";
 import Lugar, { ILugar } from "@/shared/models/Futbolin.model";
 import { GoogleMapsService } from "../GoogleMaps/GoogleMapsService";
-import connectDb from "@/shared/lib/db";
 
 export async function getFutbolinesByPlaceId(
   placeId: string
 ): Promise<ILugar[]> {
-  console.log("en getfutb");
-
+  
   await connectDb()
 
   const coordinates = await GoogleMapsService.getCoordinatesFromPlaceId(
