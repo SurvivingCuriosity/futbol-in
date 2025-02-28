@@ -23,7 +23,7 @@ export const TarjetaFutbolinInicio = ({ lugar }: { lugar: ILugar }) => {
   }
 
   return (
-    <div className="relative flex items-center rounded overflow-hidden snap-center bg-neutral-800 p-2 min-w-[400px]">
+    <div className="relative flex items-center rounded overflow-hidden snap-center bg-neutral-800 p-2 min-w-[300px] w-full">
       <div className="absolute left-2 z-2 flex flex-col gap-2 bg-neutral-950/95 p-2 rounded-lg w-4/12 min-w-[200px]">
         
         <div className="flex items-baseline gap-1 text-primary">
