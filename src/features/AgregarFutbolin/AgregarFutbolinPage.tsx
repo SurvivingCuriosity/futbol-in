@@ -79,7 +79,10 @@ const AgregarFutbolinPage = () => {
         <FormField>
           <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
           <SearchInputBar
-            onSelect={(sel) => setDireccionOBar(sel)}
+            onSelect={(sel) => {
+              console.log(sel)
+              setDireccionOBar(sel)
+            }}
             disabled={noEncuentraElBar}
           />
         </FormField>

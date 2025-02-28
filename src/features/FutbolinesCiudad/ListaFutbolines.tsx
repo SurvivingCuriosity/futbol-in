@@ -16,8 +16,8 @@ const ListaFutbolines = (props: ListaFutbolinesProps) => {
             Ups... parece que aún no hay futbolines en esta ciudad
           </p>
         )}
-        {futbolines.map((f) => (
-          <TarjetaFutbolinInicio key={f.nombre} lugar={f} />
+        {futbolines.map((f,index) => (
+          <TarjetaFutbolinInicio key={f.nombre+index} lugar={f} />
         ))}
       </ul>
     </>

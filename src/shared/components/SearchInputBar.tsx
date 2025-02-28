@@ -29,12 +29,13 @@ export default function SearchInputBar({
   const handleSelect = async (place: SingleValue<PlaceOption>) => {
     if (!place) return;
     const coords = await getCoordinatesFromPlaceId(place.value);
+    console.log(place)
     const selected: Pick<
       IMapItem,
       "nombre" | "direccion" | "lat" | "lng" | "googlePlaceId"
     > = {
-      nombre: place.data.description || "Desconocido",
-      direccion: place.data.description || "Desconocido",
+      nombre: place.data.terms[0].value || "Desconocido",
+      direccion: (`${place.data.terms[1].value} ${place.data.terms[2].value}`) || "Desconocido",
       lat: coords.lat,
       lng: coords.lng,
       googlePlaceId: place.value || "Desconocido",
