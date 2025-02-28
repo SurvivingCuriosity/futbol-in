@@ -8,9 +8,9 @@ export const revalidate = 3600; // 1 hora
 export async function generateMetadata({
   params,
 }: {
-  params: { ciudad: string; placeId: string };
+  params: Promise<{ ciudad: string; placeId: string }>;
 }) {
-  const { ciudad } = params;
+  const { ciudad } = await params;
   const ciudadCapitalizada = ciudad.charAt(0).toUpperCase() + ciudad.slice(1);
 
   return {
@@ -38,9 +38,9 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: { ciudad: string; placeId: string };
+  params: Promise<{ ciudad: string; placeId: string }>;
 }) {
-  const { placeId } = params;
+  const { placeId } = await params;
 
   // Hacemos la query en el servidor
   const futbolines = await getFutbolinesByPlaceId(placeId);
