@@ -33,9 +33,8 @@ export default function SearchInputCiudad() {
 
   const handleSelect = async (place: SingleValue<PlaceOption>) => {
     if (!place) return;
-    document.cookie = `selectedPlaceId=${place.value}; path=/; SameSite=Strict;`;
-    const urlSlug = place.label.toLowerCase().replaceAll(" ", "-");
-    router.push(`/futbolines/${encodeURIComponent(urlSlug)}`);
+    const ciudad = place.label.toLowerCase().replaceAll(" ", "-");
+    router.push(`/futbolines/${encodeURIComponent(ciudad)}/${place.data.place_id}`);
   };
 
   return (
