@@ -1,69 +1,74 @@
-import { IMarker } from "@/shared/types/Marker/IMarker";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
-import { CustomMarker } from "./CustomMarker";
+import React, { useMemo, useState, useEffect } from "react";
+import { IMarker } from "@/shared/types/Marker/IMarker";
+import { useUserLocation } from "@/shared/services/UserLocation/useUserLocation";
 
-const defaultCenter = { lat: 40.9629936, lng: -5.661232699999999 };
+const defaultCenter = { lat: 40.9629936, lng: -5.6612327 };
 
 export interface MapaProps {
   markers: IMarker[];
   onSelectMarker: (marker: IMarker | null) => void;
+  selectedMarker: IMarker | null;
 }
 
-export const Mapa = (props: MapaProps) => {
-  const { markers, onSelectMarker } = props;
+export function Mapa(props: MapaProps) {
+  const { markers, onSelectMarker, selectedMarker } = props;
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string,
-    id: "google-maps-script", // Mismo id para evitar recargas
+    id: "google-maps-script",
   });
 
-  const [userLocation, setUserLocation] =
-    useState<google.maps.LatLngLiteral | null>(null);
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+
+  const userLocation = useUserLocation();
+
+  const center = useMemo(() => userLocation || defaultCenter, [userLocation]);
+  const zoom = useMemo(() => (userLocation ? 14 : 10), [userLocation]);
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) =>
-          console.error("Error obteniendo la ubicación del usuario", error),
-        { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
-      );
-      return () => navigator.geolocation.clearWatch(watchId);
-    } else {
-      console.error("La geolocalización no es soportada en este navegador.");
+    if (map && selectedMarker) {
+      map.panTo({ lat: selectedMarker.lat - 0.0005, lng: selectedMarker.lng });
+      map.setZoom(18); // Ajusta el nivel de zoom a tu gusto
     }
-  }, []);
+  }, [map, selectedMarker]);
+
+  const handleMapClick = React.useCallback(
+    (e: google.maps.MapMouseEvent) => {
+      onSelectMarker(null); // Selecciona el marker
+      e.stop();
+    },
+    [onSelectMarker]
+  );
 
   if (loadError) return <div>Error al cargar el mapa</div>;
   if (!isLoaded) return <div>Cargando mapa...</div>;
 
-  const center = userLocation || defaultCenter;
-  const zoom = userLocation ? 14 : 6;
-
   return (
     <GoogleMap
+      onLoad={(mapInstance) => setMap(mapInstance)}
       mapContainerStyle={{
         width: "100%",
         height: "calc(100vh - 5em)",
         position: "absolute",
         top: 0,
         left: 0,
+        zIndex: 1,
       }}
       center={center}
       zoom={zoom}
-      onClick={() => onSelectMarker(null)}
+      onClick={handleMapClick}
       options={{
+        disableDefaultUI: true,
+        gestureHandling: "greedy",
+        controlSize: 2,
         fullscreenControl: false,
         streetViewControl: false,
         mapTypeControl: false,
-        rotateControl: false,
         scaleControl: false,
+        rotateControl: true,
+        tilt: 45,
+        heading: 0,
         zoomControl: false,
         mapId: "729d891f5d94366",
         restriction: {
@@ -75,18 +80,20 @@ export const Mapa = (props: MapaProps) => {
           },
           strictBounds: false,
         },
-        center: defaultCenter,
-        minZoom: 5,
-        zoom: 14,
       }}
     >
-      {markers?.map((m) => (
-        <CustomMarker
+      {markers.map((m) => (
+        <Marker
           key={m.id}
-          marker={m}
-          onClick={onSelectMarker}
+          position={{ lat: m.lat, lng: m.lng }}
+          icon={{
+            url: "/map-marker.svg",
+            scaledSize: new window.google.maps.Size(28, 28),
+          }}
+          onClick={() => onSelectMarker(m)}
         />
       ))}
+      
       {userLocation && (
         <Marker
           position={userLocation}
@@ -97,4 +104,4 @@ export const Mapa = (props: MapaProps) => {
       )}
     </GoogleMap>
   );
-};
+}
