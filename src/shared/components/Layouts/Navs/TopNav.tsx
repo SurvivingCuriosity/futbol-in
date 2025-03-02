@@ -15,7 +15,7 @@ export const TopNav = () => {
   const items = [
     { label: "Buscar", href: "/mapa", icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-futbolin", icon: faCirclePlus },
-    { label: "Ranking", href: "/ranking", icon: faTrophy },
+    { label: "Ranking", href: "/logros/ranking", icon: faTrophy },
   ];
 
   const isActive = (href: string) => {
