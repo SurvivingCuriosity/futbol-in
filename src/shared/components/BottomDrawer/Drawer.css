@@ -1,0 +1,125 @@
+/* Drawer.css (o Drawer.module.css) */
+
+/* ----------------------------------
+   1) Drawer contenedor
+------------------------------------- */
+.Drawer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.05);
+  /* Solo para debug, quita o comenta si no lo quieres */
+  /* border: 2px solid red; */
+}
+
+/* ----------------------------------
+   2) Sheet (la hoja deslizable)
+------------------------------------- */
+.Sheet {
+  position: relative;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+
+  /* Máxima altura configurable */
+  max-height: var(--max-height, 80vh);
+
+  /* Posición colapsada: completamente fuera de la pantalla */
+  transform: translate3d(0, calc(100% + var(--transform, 0px)), 0);
+  transition: transform 200ms ease;
+}
+
+.Sheet.dragging {
+  transition: none;
+}
+
+/* Cuando esté expandido, sube hasta 
+   100% - var(--max-height). 
+   Ej: si --max-height=80vh, sube un 20vh desde el bottom */
+.Sheet.expanded {
+  transform: translate3d(
+    0,
+    calc(100% - var(--max-height) + var(--transform, 0px)),
+    0
+  );
+}
+
+/* ----------------------------------
+   3) Contenido interno
+------------------------------------- */
+.Sheet:after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+  background-color: #fefefe;
+}
+
+.Content {
+  display: block;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #fefefe;
+  /* Para debug: border: 2px solid red; */
+}
+
+/* ----------------------------------
+   4) Header (parte superior)
+------------------------------------- */
+.Header {
+  --radius: 25px;
+  --cursor: grab;
+  --color: rgba(0, 0, 0, 0.05);
+
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  height: 40px;
+  font-size: 20px;
+  color: #333;
+  padding: 1rem;
+  touch-action: none;
+  cursor: var(--cursor);
+}
+
+.Header:before {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  top: 10px;
+  border-radius: 10px;
+  background-color: var(--color);
+  transition: background-color 0.2s ease;
+}
+
+.dragging .Header {
+  --cursor: grabbing;
+  --color: rgba(0, 0, 0, 0.12);
+}
+
+/* ----------------------------------
+   5) Regiones "DropRegions"
+------------------------------------- */
+.DropRegions {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: 1.2fr 0.8fr;
+  pointer-events: none;
+}
