@@ -9,6 +9,7 @@ export const LogrosPage = () => {
       descripcion: "Añade nuevos futbolines",
       icon: faPlus,
       steps: [5, 10, 25, 50, 100],
+      stepDescription: (n:number) => `Añade ${n} futbolines`
     },
     {
       id: 2,
@@ -16,6 +17,7 @@ export const LogrosPage = () => {
       descripcion: "Valora futbolines",
       icon: faThumbsUp,
       steps: [5, 10, 25, 50, 100],
+      stepDescription: (n:number) => `Valora ${n} futbolines`
     },
     {
       id: 3,
@@ -23,6 +25,7 @@ export const LogrosPage = () => {
       descripcion: "Tus contribuciones son aprobadas por usuarios verificados",
       icon: faCheck,
       steps: [5, 10, 25, 50, 100],
+      stepDescription: (n:number) => `Consigue ${n} aprobados` 
     },
   ];
 
@@ -37,13 +40,14 @@ export const LogrosPage = () => {
           >
             <h2 className="text-2xl tracking-tight font-extrabold">{logro.nombre}</h2>
             <p className="text-neutral-500 mb-4">{logro.descripcion}</p>
-            <ul className="flex flex-wrap gap-2 w-full items-center justify-between">
-              {logro.steps.map((step) => (
-                <div key={step}>
+            <ul className="flex gap-2 w-full items-center justify-between">
+              {logro.steps.map((step,index) => (
+                <div key={step} className="w-full">
                   <Medalla
-                    level={logro.steps.indexOf(step) + 1}
+                    level={index+1}
                     icon={logro.icon}
-                    text={logro.nombre}
+                    text={logro.stepDescription(step)}
+                    smallText={step.toString()}
                   />
                 </div>
               ))}
