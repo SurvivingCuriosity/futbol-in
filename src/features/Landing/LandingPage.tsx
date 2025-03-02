@@ -32,19 +32,6 @@ export const LandingPage = async () => {
 
         <SearchInputCiudad />
 
-        {/* <div className="z-2 relative">
-          <input
-            type="text"
-            className="bg-neutral-700 rounded-3xl w-full h-12 p-2 relative placeholder:text-neutral-500 border border-neutral-600"
-            placeholder="Busca un club..."
-          />
-
-          <div className="absolute right-1.5 top-0 h-full flex items-center">
-            <button className="bg-primary rounded-3xl h-9/12 text-black font-bold px-4">
-              Buscar
-            </button>
-          </div>
-        </div> */}
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-20 space-y-12 md:space-y-0 space-x-0 md:space-x-4">

@@ -5,6 +5,7 @@ import { UserStatus } from "@/shared/enum/User/Status";
 import { authOptions } from "@/shared/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import '@/shared/components/BottomDrawer/Drawer.css';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
