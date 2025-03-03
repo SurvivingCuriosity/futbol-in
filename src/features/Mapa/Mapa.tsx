@@ -1,7 +1,7 @@
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import React, { useMemo, useState, useEffect } from "react";
-import { IMarker } from "@/shared/types/Marker/IMarker";
 import { useUserLocation } from "@/shared/services/UserLocation/useUserLocation";
+import { IMarker } from "@/shared/types/Marker/IMarker";
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import React, { useEffect, useMemo, useState } from "react";
 
 const defaultCenter = { lat: 40.9629936, lng: -5.6612327 };
 
@@ -23,8 +23,7 @@ export function Mapa(props: MapaProps) {
 
   const userLocation = useUserLocation();
 
-  const center = useMemo(() => userLocation || defaultCenter, [userLocation]);
-  const zoom = useMemo(() => (userLocation ? 14 : 10), [userLocation]);
+  const zoom = useMemo(() => (userLocation ? 14 : 13), [userLocation]);
 
   useEffect(() => {
     if (map && selectedMarker) {
@@ -55,7 +54,7 @@ export function Mapa(props: MapaProps) {
         left: 0,
         zIndex: 1,
       }}
-      center={center}
+      center={defaultCenter}
       zoom={zoom}
       onClick={handleMapClick}
       options={{
