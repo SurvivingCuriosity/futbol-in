@@ -1,11 +1,11 @@
 // /app/register/step3/page.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { FormField, FormLabel } from "@/shared/components/FormField";
-import { Button, TextInput } from "futbol-in-ui";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import { Button, PasswordInput, TextInput } from "futbol-in-ui";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function InitAccountForm() {
   const router = useRouter();
@@ -96,7 +96,7 @@ export default function InitAccountForm() {
 
       <FormField>
         <FormLabel>Contraseña</FormLabel>
-        <TextInput
+        <PasswordInput
           value={password}
           onChangeText={setPassword}
           placeholder="johny99"
@@ -105,7 +105,7 @@ export default function InitAccountForm() {
 
       <FormField>
         <FormLabel>Confirmar contraseña</FormLabel>
-        <TextInput
+        <PasswordInput
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           placeholder="johny99"
