@@ -4,10 +4,17 @@ import connectDb from "@/shared/lib/db";
 import { UserStatus } from "@/shared/enum/User/Status";
 import { AuthProvider } from "@/shared/enum/User/AuthProvider";
 import { UserRole } from "@/shared/enum/User/Role";
-import { IUserDocument } from "@/shared/models/User/User.model"; // Asegúrate de exportar IUserDocument en tu modelo
+import { IUserDocument } from "@/shared/models/User/User.model";
 import { UserDTO } from "@/shared/models/User/UserDTO";
 
 export class UserService {
+
+  static async getAll(): Promise<UserDTO[]> {
+    await connectDb();
+    const users = await User.find({}).lean<IUserDocument[]>();
+    return users.map(user => this.mapToDTO(user));
+  }
+
   static async findById(
     id: string | undefined | null
   ): Promise<IUserDocument | null> {
