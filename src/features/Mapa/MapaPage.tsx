@@ -13,10 +13,6 @@ export const MapaPage = () => {
   const [mostrarTarjeta, setMostrarTarjeta] = useState(false);
 
   useEffect(() => {
-    console.log(selectedMarker);
-  }, [selectedMarker]);
-
-  useEffect(() => {
     fetchFutbolines(40.9629936, -5.661232699999999);
   }, []);
 
