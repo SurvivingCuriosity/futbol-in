@@ -1,4 +1,5 @@
 "use client";
+
 import { FormField, FormLabel } from "@/shared/components/FormField";
 import SearchInputBar from "@/shared/components/SearchInputBar";
 import SearchInputDireccion from "@/shared/components/SearchInputDireccion";
@@ -8,9 +9,13 @@ import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
 import { TipoLugar } from "@/shared/enum/Lugares/TipoLugar";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 import { Button } from "futbol-in-ui";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const AgregarFutbolinPage = () => {
+
+  const router = useRouter();
+
   const [direccionOBar, setDireccionOBar] = useState<Pick<
     IMapItem,
     "direccion" | "nombre" | "lat" | "lng" | "googlePlaceId"
@@ -43,14 +48,13 @@ const AgregarFutbolinPage = () => {
     };
 
     try {
-      const res = await fetch("/api/agregar-futbolin", {
+      await fetch("/api/agregar-futbolin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(lugar),
       });
-      const data = await res.json();
       setLoading(false);
-      console.log("Futbolín agregado:", data);
+      router.push("/");
     } catch (error) {
       console.error("Error al agregar futbolín:", error);
     }
