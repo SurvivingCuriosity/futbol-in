@@ -7,11 +7,11 @@ export function NavLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen pb-16 w-full">
+    <div className="h-screen w-full">
           {/* PC */}
           <div className="hidden md:block">
             {<TopNav />}
-            <main className="p-8 relative max-w-screen-xl mx-auto">{children}</main>
+            <main className="p-4 relative max-w-screen-xl mx-auto">{children}</main>
           </div>
 
           {/* MOVIL */}
