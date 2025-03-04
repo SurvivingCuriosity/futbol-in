@@ -1,14 +1,16 @@
+"use client";
+
+import { LugarDTO } from "@/shared/models/Lugar/LugarDTO";
 import { useUserLocation } from "@/shared/services/UserLocation/useUserLocation";
-import { IMarker } from "@/shared/types/Marker/IMarker";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import React, { useEffect, useMemo, useState } from "react";
 
 const defaultCenter = { lat: 40.9629936, lng: -5.6612327 };
 
 export interface MapaProps {
-  markers: IMarker[];
-  onSelectMarker: (marker: IMarker | null) => void;
-  selectedMarker: IMarker | null;
+  markers: LugarDTO[];
+  onSelectMarker: (marker: LugarDTO | null) => void;
+  selectedMarker: LugarDTO | null;
 }
 
 export function Mapa(props: MapaProps) {
@@ -26,8 +28,11 @@ export function Mapa(props: MapaProps) {
   const zoom = useMemo(() => (userLocation ? 14 : 13), [userLocation]);
 
   useEffect(() => {
-    if (map && selectedMarker) {
-      map.panTo({ lat: selectedMarker.lat - 0.0005, lng: selectedMarker.lng });
+    const lat = selectedMarker?.location.coordinates[1];
+    const lng = selectedMarker?.location.coordinates[0];
+
+    if (map && selectedMarker && lat && lng) {
+      map.panTo({ lat: lat - 0.0005, lng });
       map.setZoom(18); // Ajusta el nivel de zoom a tu gusto
     }
   }, [map, selectedMarker]);
@@ -48,10 +53,7 @@ export function Mapa(props: MapaProps) {
       onLoad={(mapInstance) => setMap(mapInstance)}
       mapContainerStyle={{
         width: "100%",
-        height: "calc(100vh - 5em)",
-        position: "absolute",
-        top: 0,
-        left: 0,
+        height: "100%",
         zIndex: 1,
       }}
       center={defaultCenter}
@@ -81,18 +83,23 @@ export function Mapa(props: MapaProps) {
         },
       }}
     >
-      {markers.map((m) => (
-        <Marker
-          key={m.id}
-          position={{ lat: m.lat, lng: m.lng }}
-          icon={{
-            url: "/futbolin-logo.svg",
-            scaledSize: new window.google.maps.Size(28, 28),
-          }}
-          onClick={() => onSelectMarker(m)}
-        />
-      ))}
-      
+      {markers.map((m, index) => {
+        const lat = m.location.coordinates[1];
+        const lng = m.location.coordinates[0];
+
+        return (
+          <Marker
+            key={m.googlePlaceId + index}
+            position={{ lat, lng }}
+            icon={{
+              url: "/futbolin-logo.svg",
+              scaledSize: new window.google.maps.Size(28, 28),
+            }}
+            onClick={() => onSelectMarker(m)}
+          />
+        );
+      })}
+
       {userLocation && (
         <Marker
           position={userLocation}

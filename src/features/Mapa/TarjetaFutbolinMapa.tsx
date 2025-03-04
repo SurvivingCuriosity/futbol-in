@@ -1,4 +1,4 @@
-import { IMarker } from "@/shared/types/Marker/IMarker";
+import { LugarDTO } from "@/shared/models/Lugar/LugarDTO";
 import {
   faHeart,
   faHeartCrack,
@@ -7,14 +7,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export interface TarjetaFutbolinMapaProps {
-  selectedMarker: IMarker | null;
+  selectedMarker: LugarDTO | null;
 }
 
 export const TarjetaFutbolinMapa = (props: TarjetaFutbolinMapaProps) => {
   const { selectedMarker } = props;
 
   const handleClick = () => {
-    const placeId = selectedMarker?.data.googlePlaceId;
+    const placeId = selectedMarker?.googlePlaceId;
     if (!placeId) return;
   
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -33,18 +33,18 @@ export const TarjetaFutbolinMapa = (props: TarjetaFutbolinMapaProps) => {
     <div className="bg-white text-black">
         <span className="flex flex-col gap-2 max-w-9/12 h-full">
           <p className="font-extrabold text-primary text-xl">
-            {selectedMarker?.data?.tipoFutbolin}
+            {selectedMarker?.tipoFutbolin}
           </p>
           <span className="flex items-center gap-2">
             <FontAwesomeIcon className='w-5' icon={faStore} />
             <p className="text-black truncate">
-              {selectedMarker?.data?.nombre}
+              {selectedMarker?.nombre}
             </p>
           </span>
           <span className="flex items-center gap-2">
             <FontAwesomeIcon className='w-5' icon={faLocationDot} />
             <p className="text-black truncate">
-              {selectedMarker?.data?.direccion}
+              {selectedMarker?.direccion}
             </p>
           </span>
           <span className="flex flex-row gap-4 *:select-none">
