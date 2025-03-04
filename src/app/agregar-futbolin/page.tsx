@@ -1,5 +1,12 @@
-import AgregarFutbolinPage from "@/features/AgregarFutbolin/AgregarFutbolinPage";
+// app/agregar-futbolin/page.tsx
+"use client";
 
-const page = async () => <AgregarFutbolinPage />
+import dynamic from "next/dynamic";
 
-export default page;
+const AgregarFutbolinPageNoSSR = dynamic(
+  () => import("@/features/AgregarFutbolin/AgregarFutbolinPage"),
+  { ssr: false }
+);
+
+const Page = () => <AgregarFutbolinPageNoSSR />;
+export default Page;
