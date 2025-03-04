@@ -1,4 +1,4 @@
-import Lugar, { ILugar } from "../models/Futbolin.model";
+import Lugar, { ILugar } from "../models/Lugar/Lugar.model";
 
 /**
  * Obtiene las coordenadas [longitude, latitude] de una ciudad utilizando la API de Geocoding de Google.
