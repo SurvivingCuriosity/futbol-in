@@ -1,10 +1,8 @@
-import ListaFutbolines from "@/features/FutbolinesCiudad/ListaFutbolines";
-import { getFutbolinesByPlaceId } from "@/shared/services/Places/getFubolinesByPlaceId";
+import { FutbolinesCiudadPage } from "@/features/FutbolinesCiudad/FutbolinesCiudadPage";
+import { LugarService } from "@/shared/services/Lugar/LugarService";
 
-// 1) Decimos a Next que revalide cada X segundos (ISR)
-export const revalidate = 3600; // 1 hora
+export const revalidate = 3600;
 
-// 2) Generar metadatos dinámicos (opcional, para SEO)
 export async function generateMetadata({
   params,
 }: {
@@ -34,7 +32,6 @@ export async function generateMetadata({
   };
 }
 
-// 3) Página principal: capturamos los params sin Promise
 export default async function Page({
   params,
 }: {
@@ -42,12 +39,7 @@ export default async function Page({
 }) {
   const { placeId } = await params;
 
-  // Hacemos la query en el servidor
-  const futbolines = await getFutbolinesByPlaceId(placeId);
+  const futbolines = await LugarService.findNearbyByPlaceId(placeId);
 
-  return (
-    <>
-      <ListaFutbolines futbolines={futbolines} />
-    </>
-  );
+  return <FutbolinesCiudadPage futbolines={futbolines} />;
 }
