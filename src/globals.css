@@ -2,10 +2,33 @@
 
 @source "../node_modules/futbol-in-ui";
 
-* {
-    ::selection {
-        background-color: var(--color-primary);
-        color: rgb(36, 36, 36);
+@layer base {
+    * {
+        ::selection {
+            background-color: var(--color-primary);
+            color: rgb(36, 36, 36);
+        }
+    }
+
+    ::-webkit-scrollbar {
+        width: 13px
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #383838;
+        border-radius: 9px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #929292;
+        border-radius: 9px;
+
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+        body {
+            scrollbar-color: #929292 #383838;
+        }
     }
 }
 
