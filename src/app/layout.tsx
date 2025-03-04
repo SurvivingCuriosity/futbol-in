@@ -1,6 +1,7 @@
 import SessionWrapper from "@/shared/components/SessionWrapper";
 import type { Metadata } from "next";
 import "../globals.css";
+import { NavLayout } from "@/shared/components/Layouts/NavLayout";
 
 export const metadata: Metadata = {
   title: "Futbol-In",
@@ -19,7 +20,9 @@ export default function RootLayout({
           <link rel="icon" href="/futbolin-logo.svg" />
         </head>
         <body className={`antialiased bg-neutral-950 text-neutral-50`}>
-          {children}
+          <NavLayout>
+            {children}
+          </NavLayout>
         </body>
       </html>
     </SessionWrapper>

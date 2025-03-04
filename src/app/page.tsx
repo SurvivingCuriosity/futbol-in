@@ -1,11 +1,10 @@
 import HomePage from "@/features/Home/HomePage";
 import { LandingPage } from "@/features/Landing/LandingPage";
-import { NavLayout } from "@/shared/components/Layouts/NavLayout";
+import '@/shared/components/BottomDrawer/Drawer.css';
 import { UserStatus } from "@/shared/enum/User/Status";
 import { authOptions } from "@/shared/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import '@/shared/components/BottomDrawer/Drawer.css';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -19,8 +18,6 @@ export default async function Home() {
   const isLoggedIn = !!session;
 
   return (
-    <NavLayout loggedIn={isLoggedIn}>
-      {isLoggedIn ? <HomePage /> : <LandingPage />}
-    </NavLayout>
+    isLoggedIn ? <HomePage /> : <LandingPage />
   );
 }

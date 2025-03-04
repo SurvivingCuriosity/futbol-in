@@ -2,24 +2,22 @@ import { BottomNav } from "./Navs/BottomNav";
 import { TopNav } from "./Navs/TopNav";
 
 export function NavLayout({
-  loggedIn,
   children,
 }: {
-  loggedIn: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div className="h-screen pb-16 w-full">
           {/* PC */}
           <div className="hidden md:block">
-            {loggedIn && <TopNav />}
+            {<TopNav />}
             <main className="p-8 relative max-w-screen-xl mx-auto">{children}</main>
           </div>
 
           {/* MOVIL */}
           <div className="block md:hidden">
             <main className="p-4 flex flex-col relative items-start justify-start pb-18">{children}</main>
-            {loggedIn && <BottomNav />}
+            {<BottomNav />}
           </div>
     </div>
   );

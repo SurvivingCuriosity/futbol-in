@@ -1,17 +1,5 @@
-import { LogrosPage } from '@/features/Logros/LogrosPage'
-import { NavLayout } from '@/shared/components/Layouts/NavLayout'
-import { getServerSession } from 'next-auth';
-import React from 'react'
+import { LogrosPage } from '@/features/Logros/LogrosPage';
 
-const page = async () => {
-  
-  const session = await getServerSession();
-
-  return (
-    <NavLayout loggedIn={!!session}>
-      <LogrosPage />
-    </NavLayout>
-  )
-}
+const page = async () => <LogrosPage />
 
 export default page

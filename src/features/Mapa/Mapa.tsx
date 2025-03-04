@@ -86,7 +86,7 @@ export function Mapa(props: MapaProps) {
           key={m.id}
           position={{ lat: m.lat, lng: m.lng }}
           icon={{
-            url: "/map-marker.svg",
+            url: "/futbolin-logo.svg",
             scaledSize: new window.google.maps.Size(28, 28),
           }}
           onClick={() => onSelectMarker(m)}
