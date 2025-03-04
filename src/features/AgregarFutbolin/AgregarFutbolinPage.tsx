@@ -9,12 +9,12 @@ import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
 import { TipoLugar } from "@/shared/enum/Lugares/TipoLugar";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 import { Button } from "futbol-in-ui";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const AgregarFutbolinPage = () => {
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const [direccionOBar, setDireccionOBar] = useState<Pick<
     IMapItem,
@@ -54,7 +54,7 @@ const AgregarFutbolinPage = () => {
         body: JSON.stringify(lugar),
       });
       setLoading(false);
-      router.push("/");
+      // router.push("/");
     } catch (error) {
       console.error("Error al agregar futbolín:", error);
     }
