@@ -1,6 +1,6 @@
 import connectDb from "@/shared/lib/db";
 import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import Lugar from "@/shared/models/Futbolin.model";
+import Lugar from "@/shared/models/Lugar/Lugar.model";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 
 export async function GET(req: Request) {
