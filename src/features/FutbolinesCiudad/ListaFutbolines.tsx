@@ -1,4 +1,4 @@
-import { TarjetaFutbolinInicio } from "@/shared/components/Inicio/TarjetaFutbolinInicio";
+import { TarjetaLugar } from "@/shared/components/TarjetaLugar/TarjetaLugar";
 import { LugarDTO } from "@/shared/models/Lugar/LugarDTO";
 
 export interface ListaFutbolinesProps {
@@ -13,7 +13,7 @@ const ListaFutbolines = (props: ListaFutbolinesProps) => {
   return (
     <>
       <ul
-        className={`space-y-8 gap-2 items-center w-full md:max-w-md h-full overflow-y-auto pr-4`}
+        className={`space-y-4 md:space-y-8 w-full md:max-w-md h-full overflow-hidden md:overflow-y-scroll pr-2`}
       >
         {futbolines.length === 0 && (
           <p className="text-center text-neutral-400">
@@ -21,7 +21,7 @@ const ListaFutbolines = (props: ListaFutbolinesProps) => {
           </p>
         )}
         {futbolines.map((f, index) => (
-          <TarjetaFutbolinInicio
+          <TarjetaLugar
             key={f.nombre + index}
             lugar={f}
             selected={f.googlePlaceId === selectedLugar?.googlePlaceId}

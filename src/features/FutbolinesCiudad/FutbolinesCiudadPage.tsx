@@ -6,7 +6,7 @@ import { InlinePicker } from "futbol-in-ui";
 import { useState } from "react";
 import { Mapa } from "../Mapa/Mapa";
 import ListaFutbolines from "./ListaFutbolines";
-import { TarjetaFutbolinInicio } from "@/shared/components/Inicio/TarjetaFutbolinInicio";
+import { TarjetaLugar } from "@/shared/components/TarjetaLugar/TarjetaLugar";
 
 export const FutbolinesCiudadPage = ({
   futbolines,
@@ -33,7 +33,7 @@ export const FutbolinesCiudadPage = ({
       </div>
 
       {/* Contenedor principal */}
-      <div className="w-full flex flex-col md:flex-row gap-8 h-[calc(100vh-13em)]">
+      <div className="w-full flex flex-col md:flex-row gap-8 h-[calc(100dvh-11em)] md:overflow-hidden overflow-y-auto">
         {/* Lista: se muestra en pantallas pequeñas si view === 'list' y siempre en md y mayores */}
         <div
           className={`${
@@ -58,8 +58,8 @@ export const FutbolinesCiudadPage = ({
             onSelectMarker={setSelectedMarker}
           />
           {selectedMarker !== null && (
-            <div className="absolute bottom-5 z-5 mx-auto backdrop-blur-[2px] w-full p-2 flex items-center justify-center">
-              <TarjetaFutbolinInicio
+            <div className="absolute bottom-0.5 z-5 mx-auto backdrop-blur-[2px] w-full p-1 flex items-center justify-center">
+              <TarjetaLugar
                 lugar={selectedMarker}
                 selected={true}
                 onSelect={() => {}}
