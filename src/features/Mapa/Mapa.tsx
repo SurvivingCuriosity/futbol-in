@@ -94,7 +94,9 @@ export function Mapa(props: MapaProps) {
             icon={{
               url: "/futbolin-logo.svg",
               scaledSize: new window.google.maps.Size(28, 28),
+              scale: selectedMarker === m ? 1.5 : 1,
             }}
+            animation={window.google.maps.Animation.DROP}
             onClick={() => onSelectMarker(m)}
           />
         );

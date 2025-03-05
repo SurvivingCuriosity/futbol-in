@@ -13,7 +13,7 @@ const ListaFutbolines = (props: ListaFutbolinesProps) => {
   return (
     <>
       <ul
-        className={`space-y-4 gap-2 items-center w-full md:max-w-sm h-full overflow-y-auto pr-2`}
+        className={`space-y-8 gap-2 items-center w-full md:max-w-md h-full overflow-y-auto pr-4`}
       >
         {futbolines.length === 0 && (
           <p className="text-center text-neutral-400">

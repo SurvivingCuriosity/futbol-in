@@ -6,6 +6,7 @@ import { InlinePicker } from "futbol-in-ui";
 import { useState } from "react";
 import { Mapa } from "../Mapa/Mapa";
 import ListaFutbolines from "./ListaFutbolines";
+import { TarjetaFutbolinInicio } from "@/shared/components/Inicio/TarjetaFutbolinInicio";
 
 export const FutbolinesCiudadPage = ({
   futbolines,
@@ -18,7 +19,6 @@ export const FutbolinesCiudadPage = ({
 
   return (
     <>
-
       <div className="md:hidden block mb-2 ml-auto">
         <InlinePicker
           options={[
@@ -26,6 +26,7 @@ export const FutbolinesCiudadPage = ({
             { id: 0, icon: faMap, label: "" },
           ]}
           onTabClick={(id) => {
+            setSelectedMarker(null);
             setView(id === 0 ? "map" : "list");
           }}
         />
@@ -35,7 +36,9 @@ export const FutbolinesCiudadPage = ({
       <div className="w-full flex flex-col md:flex-row gap-8 h-[calc(100vh-13em)]">
         {/* Lista: se muestra en pantallas pequeñas si view === 'list' y siempre en md y mayores */}
         <div
-          className={`${view === "map" ? "hidden" : "block"} md:block md:w-1/2`}
+          className={`${
+            view === "map" ? "hidden" : "block"
+          } md:block w-full md:w-1/2`}
         >
           <ListaFutbolines
             futbolines={futbolines}
@@ -47,13 +50,22 @@ export const FutbolinesCiudadPage = ({
         <div
           className={`${
             view === "list" ? "invisible" : "visible"
-          } md:visible w-full rounded-xl overflow-hidden h-full`}
+          } md:visible w-full rounded-xl overflow-hidden h-full relative`}
         >
           <Mapa
             markers={futbolines}
             selectedMarker={selectedMarker}
             onSelectMarker={setSelectedMarker}
           />
+          {selectedMarker !== null && (
+            <div className="absolute bottom-5 z-5 mx-auto backdrop-blur-[2px] w-full p-2 flex items-center justify-center">
+              <TarjetaFutbolinInicio
+                lugar={selectedMarker}
+                selected={true}
+                onSelect={() => {}}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
