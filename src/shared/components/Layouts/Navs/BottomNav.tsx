@@ -23,14 +23,14 @@ export const BottomNav = () => {
   };
 
   return (
-    <menu className="fixed bottom-0 w-full h-16 bg-neutral-900/95 z-1 flex justify-around items-center">
+    <menu className="fixed bottom-0 w-full h-12 bg-neutral-900/95 z-5 flex justify-around items-center">
       {items.map((item, index) => (
         <Link
           href={item.href}
           key={`${item.icon}-${index}`}
           className={`p-2 ${isActive(item.href) ? "text-primary" : "text-white"}`}
         >
-          <FontAwesomeIcon icon={item.icon} width={28} height={28} className="text-2xl" />
+          <FontAwesomeIcon icon={item.icon} width={28} height={28} className="text-xl" />
         </Link>
       ))}
     </menu>
