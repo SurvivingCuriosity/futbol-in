@@ -5,4 +5,5 @@ export enum TipoFutbolin {
     PRESAS_EVO = "Presas Evo",
     GENERICO = "Genérico",
     GENÉRICO_MADERA = "Genérico de madera",
+    CUALQUIERA = "Cualquiera",
 }
