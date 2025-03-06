@@ -5,12 +5,13 @@ export interface SelectorTipoFutbolinProps {
   value: TipoFutbolin;
   onSelect: (selectedOption: TipoFutbolin) => void;
   disabled?: boolean;
+  incluirOpcionTodos?:boolean;
 }
 
 export const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
-  const { value, onSelect, disabled = false } = props;
+  const { value, onSelect, disabled = false, incluirOpcionTodos = false } = props;
 
-  const options = [
+  const futbolinOptions = [
     { value: TipoFutbolin.TSUNAMI, label: "Tsunami" },
     { value: TipoFutbolin.INFINITY, label: "Infinity" },
     { value: TipoFutbolin.PRESAS, label: "Presas" },
@@ -19,8 +20,12 @@ export const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
     { value: TipoFutbolin.GENÉRICO_MADERA, label: "Genérico de madera" },
   ];
 
+  const options = incluirOpcionTodos
+    ? [{value: TipoFutbolin.CUALQUIERA, label: "Cualquiera"}, ...futbolinOptions]
+    : futbolinOptions;
+
   return (
-    <CustomSelect
+    <CustomSelect    
       value={options.find((o) => o.value === value)}
       onSelect={(selectedOption) => {
         onSelect(selectedOption.value);
