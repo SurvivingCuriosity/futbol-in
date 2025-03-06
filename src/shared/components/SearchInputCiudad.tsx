@@ -32,7 +32,7 @@ export default function SearchInputCiudad() {
   const handleSelect = async (place: SingleValue<PlaceOption>) => {
     if (!place) return;
     const ciudad = place.label.toLowerCase().replaceAll(" ", "-");
-    LStorage.setItem(LStorageKeys.ULTIMA_UBICACION, ciudad);
+    LStorage.setItem(LStorageKeys.ULTIMA_UBICACION, {ciudad, placeId: place.value});
     router.push(`/futbolines/${encodeURIComponent(ciudad)}/${place.data.place_id}`);
   };
 
