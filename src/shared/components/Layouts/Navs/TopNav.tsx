@@ -13,7 +13,7 @@ export const TopNav = () => {
   const pathname = usePathname();
 
   const items = [
-    { label: "Buscar", href: "/mapa", icon: faMagnifyingGlass },
+    { label: "Buscar", href: "/futbolines", icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-futbolin", icon: faCirclePlus },
     { label: "Ranking", href: "/logros/ranking", icon: faTrophy },
   ];
