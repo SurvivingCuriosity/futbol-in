@@ -13,19 +13,19 @@ import { BotonesLikeDislike } from "./components/BotonesLikeDislike";
 import { Comentarios } from "./components/Comentarios";
 import { IndicadorCobertura } from "./components/IndicadorCobertura";
 import { MainInfo } from "./components/MainInfo";
-import { MensajeUltimaValoracion } from "./components/MensajeUltimaValoracion";
 import { MarcaVerificado } from "./components/MarcaVerificado";
+import { MensajeUltimaValoracion } from "./components/MensajeUltimaValoracion";
 
 export interface TarjetaLugarProps {
   lugar: LugarDTO;
-  selected: boolean;
-  onSelect: (l: LugarDTO) => void;
+  selected?: boolean;
+  onSelect?: (l: LugarDTO) => void;
 }
 
 export const TarjetaLugar = (props: TarjetaLugarProps) => {
   const { lugar, selected, onSelect } = props;
 
-  const imageMap: Record<TipoFutbolin, StaticImageData> = {
+  const imageMap: Record<Exclude<TipoFutbolin, TipoFutbolin.CUALQUIERA>, StaticImageData> = {
     [TipoFutbolin.TSUNAMI]: tsunami_zoom,
     [TipoFutbolin.PRESAS]: presas,
     [TipoFutbolin.PRESAS_EVO]: presasevo,
@@ -34,9 +34,11 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
     [TipoFutbolin.INFINITY]: infinty,
   };
 
+  const imagen = imageMap[lugar.tipoFutbolin as Exclude<TipoFutbolin, TipoFutbolin.CUALQUIERA>];
+
   return (
     <div
-      onClick={() => onSelect(lugar)}
+      onClick={() => onSelect && onSelect(lugar)}
       className={`bg-neutral-950/95 relative transition-all duration-300 *:select-none overflow-hidden ${
         selected
           ? "border-neutral-700 md:border-primary h-72 bg-neutral-700/20"
@@ -62,7 +64,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
         width={200}
         height={200}
         alt="Imagen futbolin"
-        src={imageMap[lugar.tipoFutbolin]}
+        src={imagen}
         className="z-1 absolute right-0 top-0 h-24 w-auto"
       />
     </div>
