@@ -91,11 +91,11 @@ export const Filtros = (props: FiltrosPageProps) => {
       />
       <div className="flex items-center gap-2 justify-between mt-8">
         <Button
-          onClick={()=>onFiltrosChange(filtros)}
+          onClick={()=>onFiltrosChange(null)}
           variant="outline"
           label="Resetear filtros"
         />
-        <Button onClick={()=>onFiltrosChange(null)} label="Aplicar filtros" />
+        <Button onClick={()=>onFiltrosChange(filtros)} label="Aplicar filtros" />
       </div>
     </div>
   );

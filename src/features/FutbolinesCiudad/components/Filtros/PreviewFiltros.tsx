@@ -12,6 +12,8 @@ export interface PreviewFiltrosProps {
 export const PreviewFiltros = (props: PreviewFiltrosProps) => {
   const { filtros, onFiltrosChange } = props;
 
+  console.log('preview', filtros);
+
   if (!filtros) return null;
 
   return (
@@ -44,9 +46,9 @@ export const ItemPreviewFiltro = ({
   onDelete: () => void;
 }) => {
   return (
-    <div className="p-1 px-3 rounded-xl bg-neutral-800 text-neutral-300 flex items-center gap-2 text-sm">
+    <div className="p-1 px-2 pl-3 rounded-xl bg-neutral-800 text-neutral-300 flex items-center gap-2 text-sm">
       <p>{label}</p>
-      <button onClick={onDelete}>
+      <button onClick={onDelete} className="hover:bg-neutral-700 size-5 flex rounded-full items-center justify-center">
         <FontAwesomeIcon icon={faXmark} />
       </button>
     </div>

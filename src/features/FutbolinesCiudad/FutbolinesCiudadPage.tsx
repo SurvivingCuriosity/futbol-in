@@ -38,7 +38,7 @@ export const FutbolinesCiudadPage = ({
 
   return (
     <>
-      <header className="flex justify-between items-center w-full mb-2">
+      <header className="flex justify-start items-center w-full mb-2">
         <ButtonFiltros onFiltrosChange={setFiltros} filtros={filtros}/>
         <PreviewFiltros filtros={filtros} onFiltrosChange={setFiltros} />
         <div className="md:hidden block mb-2 ml-auto">
