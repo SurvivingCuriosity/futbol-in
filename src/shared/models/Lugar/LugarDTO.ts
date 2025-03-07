@@ -2,14 +2,20 @@ import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
 import { TipoLugar } from "@/shared/enum/Lugares/TipoLugar";
 
 export interface LugarDTO {
+  id: string;
   nombre: string;
   direccion: string;
   googlePlaceId: string;
-  location: {
-    type: string;
-    coordinates: [number, number];
-  };
+  coordinates: [number, number];
   tipoLugar: TipoLugar;
   tipoFutbolin: TipoFutbolin;
   comentarios: string;
+  verificado: null | {
+    idUser: string;
+    fechaVerificacion: Date;
+  }
+  votes: {
+    up: string[];
+    down: string[];
+  }
 }
