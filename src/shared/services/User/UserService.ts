@@ -1,18 +1,16 @@
-import bcrypt from "bcryptjs";
-import { User } from "@/shared/models/User/User.model";
-import connectDb from "@/shared/lib/db";
-import { UserStatus } from "@/shared/enum/User/Status";
 import { AuthProvider } from "@/shared/enum/User/AuthProvider";
 import { UserRole } from "@/shared/enum/User/Role";
-import { IUserDocument } from "@/shared/models/User/User.model";
+import { UserStatus } from "@/shared/enum/User/Status";
+import connectDb from "@/shared/lib/db";
+import { IUserDocument, User } from "@/shared/models/User/User.model";
 import { UserDTO } from "@/shared/models/User/UserDTO";
+import bcrypt from "bcryptjs";
 
 export class UserService {
-
   static async getAll(): Promise<UserDTO[]> {
     await connectDb();
     const users = await User.find({}).lean<IUserDocument[]>();
-    return users.map(user => this.mapToDTO(user));
+    return users.map((user) => this.mapToDTO(user));
   }
 
   static async findById(
@@ -64,6 +62,28 @@ export class UserService {
     return bcrypt.compareSync(inputPassword, userPassword);
   }
 
+  static async incrementUserStat(
+    userId: string,
+    statKey: keyof IUserDocument["stats"]
+  ) {
+    await connectDb();
+    await User.updateOne(
+      { _id: userId },
+      { $inc: { [`stats.${statKey}`]: 1 } }
+    );
+  }
+
+  static async decrementUserStat(
+    userId: string,
+    statKey: keyof IUserDocument["stats"]
+  ) {
+    await connectDb();
+    await User.updateOne(
+      { _id: userId },
+      { $inc: { [`stats.${statKey}`]: 1 } }
+    );
+  }
+
   static mapToDTO(user: IUserDocument): UserDTO {
     return {
       id: user._id.toString(),
@@ -74,6 +94,11 @@ export class UserService {
       role: user.role || UserRole.USER,
       provider: user.provider,
       createdAt: user.createdAt,
+      stats: {
+        lugaresAgregados: user.stats.addedFutbolines,
+        lugaresRevisados: user.stats.votedFutbolines,
+        lugaresVerificados: user.stats.verifiedFutbolines,
+      },
     };
   }
 }
