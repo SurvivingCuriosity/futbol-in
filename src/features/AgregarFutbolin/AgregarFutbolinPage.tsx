@@ -7,14 +7,18 @@ import { SelectorTipoFutbolin } from "@/shared/components/SelectorTipoFutbolin";
 import { SelectorTipoLugar } from "@/shared/components/SelectorTipoLugar";
 import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
 import { TipoLugar } from "@/shared/enum/Lugares/TipoLugar";
+import { UserRole } from "@/shared/enum/User/Role";
+import { useGetLoggedInUserClient } from "@/shared/hooks/useGetLoggedInUserClient";
+import { LugarDTO } from "@/shared/models/Lugar/LugarDTO";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 import { Button } from "futbol-in-ui";
 // import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const AgregarFutbolinPage = () => {
-
   // const router = useRouter();
+
+  const user = useGetLoggedInUserClient();
 
   const [direccionOBar, setDireccionOBar] = useState<Pick<
     IMapItem,
@@ -36,15 +40,25 @@ const AgregarFutbolinPage = () => {
   const handleAgregarFutbolin = async () => {
     setLoading(true);
 
-    const lugar: IMapItem = {
+    const lugar: Omit<LugarDTO, "id"> = {
       nombre: direccionOBar?.nombre || "Desconocido",
       direccion: direccionOBar?.direccion || "Desconocido",
-      lat: direccionOBar?.lat || 0,
-      lng: direccionOBar?.lng || 0,
+      coordinates: [direccionOBar?.lng || 0, direccionOBar?.lat || 0],
       googlePlaceId: direccionOBar?.googlePlaceId || "Desconocido",
       tipoLugar,
       tipoFutbolin,
       comentarios,
+      verificado:
+        user?.role === UserRole.VERIFICADO
+          ? {
+              fechaVerificacion: new Date(),
+              idUser: user?.id,
+            }
+          : null,
+      votes: {
+        up: [],
+        down: [],
+      },
     };
 
     try {
@@ -84,8 +98,8 @@ const AgregarFutbolinPage = () => {
           <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
           <SearchInputBar
             onSelect={(sel) => {
-              console.log(sel)
-              setDireccionOBar(sel)
+              console.log(sel);
+              setDireccionOBar(sel);
             }}
             disabled={noEncuentraElBar}
           />
