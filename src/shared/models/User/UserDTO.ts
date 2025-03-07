@@ -11,4 +11,10 @@ export interface UserDTO {
   role: UserRole;
   provider: AuthProvider;
   createdAt?: Date;
+
+  stats: {
+    lugaresAgregados: number;
+    lugaresRevisados: number;
+    lugaresVerificados: number;
+  }
 }

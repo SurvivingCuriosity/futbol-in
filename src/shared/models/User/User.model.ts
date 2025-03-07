@@ -16,6 +16,12 @@ export interface IUserDocument extends Document {
 
   verificationCode?: string;
   verificationCodeExpires?: Date;
+
+  stats: {
+    addedFutbolines: number;
+    votedFutbolines: number;
+    verifiedFutbolines: number;
+  };
 }
 
 const userSchema = new Schema<IUserDocument>(
@@ -41,6 +47,12 @@ const userSchema = new Schema<IUserDocument>(
     },
     verificationCode: { type: String },
     verificationCodeExpires: { type: Date },
+
+    stats: {
+      addedFutbolines: { type: Number, default: 0 },
+      votedFutbolines: { type: Number, default: 0 },
+      verifiedFutbolines: { type: Number, default: 0 },
+    },
   },
   {
     timestamps: true,
