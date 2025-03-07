@@ -5,6 +5,7 @@ import { AuthProvider } from "../enum/User/AuthProvider";
 import { UserStatus } from "../enum/User/Status";
 import { UserService } from "../services/User/UserService";
 import connectDb from "./db";
+import { UserRole } from "../enum/User/Role";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -55,6 +56,7 @@ export const authOptions: NextAuthOptions = {
         user.name = existingUser.name;
         user.id = existingUser._id.toString();
         user.status = existingUser.status;
+        user.role = existingUser.role || UserRole.USER;
       }
 
       return true;
@@ -70,6 +72,7 @@ export const authOptions: NextAuthOptions = {
         // user es la info que devolviste en "signIn" o "authorize"
         token.id = user.id;
         token.status = user.status;
+        token.role = user.role;
         token.email = user.email;
         token.name = user.name;
         token.provider = user.provider;
@@ -92,12 +95,14 @@ export const authOptions: NextAuthOptions = {
         session.user.name = dbUser.name || '';
         session.user.status = dbUser.status || UserStatus.MUST_CONFIRM_EMAIL;
         session.user.imagen = token.imagen;
+        session.user.role = token.role || UserRole.USER;
       }
-
+      
       if (session.user && !dbUser) {
         session.user.id = token.id as string;
         session.user.status = token.status as UserStatus;
         session.user.provider = token.provider as AuthProvider;
+        session.user.role = token.role || UserRole.USER;
         session.user.imagen = token.image as string;
       }
 
