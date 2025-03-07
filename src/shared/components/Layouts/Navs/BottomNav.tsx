@@ -18,12 +18,15 @@ import { usePathname } from "next/navigation";
 export const BottomNav = () => {
   const pathname = usePathname();
 
-  const ultimaUbicacion = typeof window !== 'undefined' && LStorage.getItem(LStorageKeys.ULTIMA_UBICACION);
+  const ultimaUbicacion =
+    typeof window !== "undefined" &&
+    LStorage.getItem(LStorageKeys.ULTIMA_UBICACION);
 
-  const rutaFutbolines = ultimaUbicacion
-    ? `/futbolines/${encodeURIComponent(ultimaUbicacion.ciudad)}/${
-        ultimaUbicacion.placeId
-      }`
+  const ciudad = encodeURIComponent(ultimaUbicacion.ciudad);
+  const placeId = ultimaUbicacion.placeId;
+
+  const rutaFutbolines = (ciudad && placeId)
+    ? `/futbolines/${ciudad}/${placeId}`
     : "/futbolines";
 
   const items = [
