@@ -13,7 +13,9 @@ export class LugarService {
   static async findNearbyByPlaceId(placeId: string): Promise<LugarDTO[]> {
     await connectDb();
 
-    const coordinates = await GoogleMapsService.getCoordinatesFromPlaceId(placeId);
+    const coordinates = await GoogleMapsService.getCoordinatesFromPlaceId(
+      placeId
+    );
     const searchRadiusMeters = 10000; // 10km
 
     const lugares = await Lugar.find({
@@ -33,16 +35,24 @@ export class LugarService {
 
   static mapToDTO(lugar: ILugar): LugarDTO {
     return {
+      id: lugar._id.toString(),
       nombre: lugar.nombre,
       direccion: lugar.direccion,
       googlePlaceId: lugar.googlePlaceId,
-      location: {
-        type: lugar.location.type,
-        coordinates: [...lugar.location.coordinates],
-      },
+      coordinates: [...lugar.location.coordinates],
       tipoLugar: lugar.tipoLugar as TipoLugar,
       tipoFutbolin: lugar.tipoFutbolin as TipoFutbolin,
       comentarios: lugar.comentarios,
+      verificado: lugar.verificado
+        ? {
+            idUser: String(lugar.verificado?.idUser),
+            fechaVerificacion: lugar.verificado?.fechaVerificacion,
+          }
+        : null,
+      votes: {
+        up: lugar.votes.up.map(vote => vote.toString()),
+        down: lugar.votes.down.map(vote => vote.toString()),
+      },
     };
   }
 }
