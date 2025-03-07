@@ -1,7 +1,7 @@
 import connectDb from "@/shared/lib/db";
 import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
 import Lugar from "@/shared/models/Lugar/Lugar.model";
-import { IMapItem } from "@/shared/types/MapItem/IMapItem";
+import { LugarDTO } from "@/shared/models/Lugar/LugarDTO";
 
 export async function GET(req: Request) {
   try {
@@ -28,15 +28,25 @@ export async function GET(req: Request) {
       },
     });
 
-    const futbolinesTipados: IMapItem[] = futbolines.map((f) => ({
+    const futbolinesTipados: LugarDTO[] = futbolines.map((f) => ({
+      id: f._id.toString(),
       nombre: f.nombre,
       direccion: f.direccion,
-      lat: f.location.coordinates[1],
-      lng: f.location.coordinates[0],
+      coordinates: [f.location.coordinates[0], f.location.coordinates[1]],
       googlePlaceId: f.googlePlaceId,
       tipoFutbolin: f.tipoFutbolin,
       tipoLugar: f.tipoLugar,
       comentarios: f.comentarios,
+      verificado: f.verificado
+        ? {
+            idUser: String(f.verificado.idUser),
+            fechaVerificacion: f.verificado.fechaVerificacion,
+          }
+        : null,
+      votes: {
+        up: f.votes.up.map((vote) => vote.toString()),
+        down: f.votes.down.map((vote) => vote.toString()),
+      },
     }));
 
     return successResponse({ success: true, data: futbolinesTipados });
