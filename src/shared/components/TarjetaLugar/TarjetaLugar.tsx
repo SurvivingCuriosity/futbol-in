@@ -14,7 +14,6 @@ import { Comentarios } from "./components/Comentarios";
 import { IndicadorCobertura } from "./components/IndicadorCobertura";
 import { MainInfo } from "./components/MainInfo";
 import { MarcaVerificado } from "./components/MarcaVerificado";
-import { MensajeUltimaValoracion } from "./components/MensajeUltimaValoracion";
 
 export interface TarjetaLugarProps {
   lugar: LugarDTO;
@@ -35,17 +34,17 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
   };
 
   const imagen = imageMap[lugar.tipoFutbolin as Exclude<TipoFutbolin, TipoFutbolin.CUALQUIERA>];
-
+  
   return (
     <div
       onClick={() => onSelect && onSelect(lugar)}
-      className={`bg-neutral-950/95 relative transition-all duration-300 *:select-none overflow-hidden ${
+      className={`bg-neutral-950/95 relative transition-all duration-300 *:select-none overflow-visible ${
         selected
           ? "border-neutral-700 md:border-primary h-72 bg-neutral-700/20"
           : "border-neutral-800 h-24"
       } border w-full z-2 flex flex-col gap-2 p-2 rounded-lg min-w-[200px] overflow-invisible`}
     >
-      {Math.random() > 0.5 ? <MarcaVerificado /> : <IndicadorCobertura />}
+      {lugar.verificado!==null ? <MarcaVerificado fecha={lugar.verificado.fechaVerificacion} /> : <IndicadorCobertura />}
 
       <MainInfo lugar={lugar} />
 
@@ -54,10 +53,10 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
           selected ? "opacity-100" : "opacity-0"
         } transition-opacity duration-300`}
       >
-        <BotoneraCompartir />
-        <Comentarios />
-        <MensajeUltimaValoracion />
-        <BotonesLikeDislike />
+        <BotoneraCompartir googlePlaceId={lugar.googlePlaceId}/>
+        <Comentarios comentarios={lugar.comentarios} />
+        {/* <MensajeUltimaValoracion /> */}
+        <BotonesLikeDislike lugar={lugar} />
       </div>
 
       <Image

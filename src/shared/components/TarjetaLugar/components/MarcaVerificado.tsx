@@ -1,7 +1,11 @@
+import { dateToTimeAgo } from "@/shared/utils/dateToTimeAgo";
 import { faCertificate, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const MarcaVerificado = () => {
+export const MarcaVerificado = ({fecha}: {fecha: Date}) => {
+
+  const mensaje = dateToTimeAgo(fecha);
+
   return (
     <div className="absolute -top-1 left-0 z-5 flex items-center gap-1">
       <div className="relative text-2xl size-6">
@@ -14,7 +18,7 @@ export const MarcaVerificado = () => {
           className="absolute top-0 left-0 text-white scale-50 ml-0.5"
         />
       </div>
-      <p className="text-xs text-sky-500">Verificado hace 7 días</p>
+      <p className="text-xs text-sky-500">Verificado {mensaje}</p>
     </div>
   );
 };
