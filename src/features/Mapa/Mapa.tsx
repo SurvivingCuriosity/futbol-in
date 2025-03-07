@@ -28,8 +28,8 @@ export function Mapa(props: MapaProps) {
   const zoom = useMemo(() => (userLocation ? 14 : 13), [userLocation]);
 
   useEffect(() => {
-    const lat = selectedMarker?.location.coordinates[1];
-    const lng = selectedMarker?.location.coordinates[0];
+    const lat = selectedMarker?.coordinates[1];
+    const lng = selectedMarker?.coordinates[0];
 
     if (map && selectedMarker && lat && lng) {
       map.panTo({ lat: lat - 0.0005, lng });
@@ -84,8 +84,8 @@ export function Mapa(props: MapaProps) {
       }}
     >
       {markers.map((m, index) => {
-        const lat = m.location.coordinates[1];
-        const lng = m.location.coordinates[0];
+        const lat = m.coordinates[1];
+        const lng = m.coordinates[0];
 
         return (
           <Marker
