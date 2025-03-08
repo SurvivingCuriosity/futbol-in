@@ -26,13 +26,13 @@ export const BottomNav = () => {
   const placeId = ultimaUbicacion.placeId;
 
   const rutaFutbolines = (ciudad && placeId)
-    ? `/futbolines/${ciudad}/${placeId}`
-    : "/futbolines";
+    ? `/spots/${ciudad}/${placeId}`
+    : "/spots";
 
   const items = [
     { label: "Home", href: "/", icon: faHome },
     { label: "Buscar", href: rutaFutbolines, icon: faMagnifyingGlass },
-    { label: "Agregar", href: "/agregar-futbolin", icon: faCirclePlus },
+    { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
     { label: "Ranking", href: "/logros/ranking", icon: faTrophy },
     { label: "Perfil", href: "/perfil", icon: faUser },
   ];

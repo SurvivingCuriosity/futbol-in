@@ -1,6 +1,7 @@
 // /app/register/step3/page.tsx
 "use client";
 
+import { AuthClient } from "@/shared/client/AuthClient";
 import { FormField, FormLabel } from "@/shared/components/FormField";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 import { Button, PasswordInput, TextInput } from "futbol-in-ui";
@@ -28,19 +29,11 @@ export default function InitAccountForm() {
 
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch(
-          `/api/register/check-username?username=${username}`
+        const res = await AuthClient.checkUsername(username);
+        setIsUsernameAvailable(res.available);
+        setUsernameError(
+          res.available ? "" : "Este username no está disponible"
         );
-        const data = await res.json();
-        if (!res.ok) {
-          setIsUsernameAvailable(false);
-          setUsernameError(data.error || "Error verificando username");
-        } else {
-          setIsUsernameAvailable(data.available);
-          setUsernameError(
-            data.available ? "" : "Este username no está disponible"
-          );
-        }
       } catch (err: unknown) {
         setIsUsernameAvailable(false);
         setUsernameError(getErrorMessage(err));
@@ -58,18 +51,10 @@ export default function InitAccountForm() {
     }
 
     try {
-      const res = await fetch("/api/register/init-account", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Error creando tu cuenta");
+      const res = await AuthClient.initAccount({ username, password });
+      if (res) {
+        router.push("/");
       }
-
-      // Si todo OK, redirigir a la home o donde quieras
-      router.push("/");
     } catch (error: unknown) {
       setError(getErrorMessage(error));
     }

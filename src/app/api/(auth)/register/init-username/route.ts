@@ -16,7 +16,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No hay sesión" }, { status: 401 });
     }
 
-    const { username } = await request.json();
+    const username = await request.json();
     if (!username) {
       return NextResponse.json({ error: "Falta username" }, { status: 400 });
     }

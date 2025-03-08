@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { AuthClient } from "@/shared/client/AuthClient";
 import { FormField, FormLabel } from "@/shared/components/FormField";
-import { Button, TextInput } from "futbol-in-ui";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import { Button, TextInput } from "futbol-in-ui";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function InitUsernameForm() {
   const router = useRouter();
@@ -24,19 +25,11 @@ export default function InitUsernameForm() {
 
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch(
-          `/api/register/check-username?username=${username}`
+        const res = await AuthClient.checkUsername(username);
+        setIsUsernameAvailable(res.available);
+        setUsernameError(
+          res.available ? "" : "Este username no está disponible"
         );
-        const data = await res.json();
-        if (!res.ok) {
-          setIsUsernameAvailable(false);
-          setUsernameError(data.error || "Error verificando username");
-        } else {
-          setIsUsernameAvailable(data.available);
-          setUsernameError(
-            data.available ? "" : "Este username no está disponible"
-          );
-        }
       } catch (err: unknown) {
         setIsUsernameAvailable(false);
         setUsernameError(getErrorMessage(err));
@@ -55,17 +48,10 @@ export default function InitUsernameForm() {
     }
 
     try {
-      const res = await fetch("/api/register/init-username", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Error creando tu cuenta");
+      const res = await AuthClient.initUsername({username});
+      if (res) {
+        router.push("/");
       }
-
-      router.push("/");
     } catch (error: unknown) {
       setError(getErrorMessage(error));
     }
@@ -77,7 +63,9 @@ export default function InitUsernameForm() {
         Bienvenido!
       </h1>
 
-      <p className="bg-neutral-800 text-xs text-neutral-400 rounded-lg p-2 my-2">Parece que es tu primera vez aquí... Debes crear un nombre de usuario</p>
+      <p className="bg-neutral-800 text-xs text-neutral-400 rounded-lg p-2 my-2">
+        Parece que es tu primera vez aquí... Debes crear un nombre de usuario
+      </p>
 
       <FormField>
         <FormLabel>Username</FormLabel>

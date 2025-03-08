@@ -33,7 +33,7 @@ export default function SearchInputCiudad() {
     if (!place) return;
     const ciudad = place.label.toLowerCase().replaceAll(" ", "-");
     LStorage.setItem(LStorageKeys.ULTIMA_UBICACION, {ciudad, placeId: place.value});
-    router.push(`/futbolines/${encodeURIComponent(ciudad)}/${place.data.place_id}`);
+    router.push(`/spots/${encodeURIComponent(ciudad)}/${place.data.place_id}`);
   };
 
   return (

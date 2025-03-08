@@ -1,4 +1,4 @@
-import { LugarDTO } from "@/shared/models/Lugar/LugarDTO";
+import { SpotDTO } from "@/shared/models/Spot/SpotDTO";
 import {
   faHeart,
   faHeartCrack,
@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export interface TarjetaFutbolinMapaProps {
-  selectedMarker: LugarDTO | null;
+  selectedMarker: SpotDTO | null;
 }
 
 export const TarjetaFutbolinMapa = (props: TarjetaFutbolinMapaProps) => {

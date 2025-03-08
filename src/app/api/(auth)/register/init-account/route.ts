@@ -12,7 +12,8 @@ export async function POST(request: Request) {
     }
 
     // Extraer username y password del body
-    const { username, password } = await request.json() as { username?: string, password?: string };
+    const { username, password } = await request.json()
+    
     if (!username || !password) {
       return errorResponse("Faltan username o password", 400);
     }

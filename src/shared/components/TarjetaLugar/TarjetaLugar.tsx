@@ -6,7 +6,7 @@ import presasevo from "@/shared/assets/img/presasevo.jpg";
 import tsunami_zoom from "@/shared/assets/img/tsunami_zoompng.png";
 
 import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
-import { LugarDTO } from "@/shared/models/Lugar/LugarDTO";
+import { SpotDTO } from "@/shared/models/Spot/SpotDTO";
 import Image, { StaticImageData } from "next/image";
 import { BotoneraCompartir } from "./components/BotoneraCompartir";
 import { BotonesLikeDislike } from "./components/BotonesLikeDislike";
@@ -14,15 +14,22 @@ import { Comentarios } from "./components/Comentarios";
 import { IndicadorCobertura } from "./components/IndicadorCobertura";
 import { MainInfo } from "./components/MainInfo";
 import { MarcaVerificado } from "./components/MarcaVerificado";
+import { useState } from "react";
 
 export interface TarjetaLugarProps {
-  lugar: LugarDTO;
+  spot: SpotDTO;
   selected?: boolean;
-  onSelect?: (l: LugarDTO) => void;
+  onSelect?: (l: SpotDTO) => void;
 }
 
 export const TarjetaLugar = (props: TarjetaLugarProps) => {
-  const { lugar, selected, onSelect } = props;
+  const { spot:spotProp, selected, onSelect } = props;
+
+  const [spot, setSpot] = useState<SpotDTO>(spotProp);
+
+  const onChangeSpotCallback = (newSpot: SpotDTO) => {
+    setSpot(newSpot);
+  };
 
   const imageMap: Record<Exclude<TipoFutbolin, TipoFutbolin.CUALQUIERA>, StaticImageData> = {
     [TipoFutbolin.TSUNAMI]: tsunami_zoom,
@@ -33,30 +40,30 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
     [TipoFutbolin.INFINITY]: infinty,
   };
 
-  const imagen = imageMap[lugar.tipoFutbolin as Exclude<TipoFutbolin, TipoFutbolin.CUALQUIERA>];
+  const imagen = imageMap[spot.tipoFutbolin as Exclude<TipoFutbolin, TipoFutbolin.CUALQUIERA>];
   
   return (
     <div
-      onClick={() => onSelect && onSelect(lugar)}
+      onClick={() => onSelect && onSelect(spot)}
       className={`bg-neutral-950/95 relative transition-all duration-300 *:select-none overflow-visible ${
         selected
           ? "border-neutral-700 md:border-primary h-72 bg-neutral-700/20"
           : "border-neutral-800 h-24"
       } border w-full z-2 flex flex-col gap-2 p-2 rounded-lg min-w-[200px] overflow-invisible`}
     >
-      {lugar.verificado!==null ? <MarcaVerificado fecha={lugar.verificado.fechaVerificacion} /> : <IndicadorCobertura />}
+      {spot.verificado!==null ? <MarcaVerificado fecha={spot.verificado.fechaVerificacion} /> : <IndicadorCobertura />}
 
-      <MainInfo lugar={lugar} />
+      <MainInfo spot={spot} />
 
       <div
         className={`flex flex-col justify-between w-full h-full ${
           selected ? "opacity-100" : "opacity-0"
         } transition-opacity duration-300`}
       >
-        <BotoneraCompartir googlePlaceId={lugar.googlePlaceId}/>
-        <Comentarios comentarios={lugar.comentarios} />
+        <BotoneraCompartir googlePlaceId={spot.googlePlaceId} />
+        <Comentarios comentarios={spot.comentarios} />
         {/* <MensajeUltimaValoracion /> */}
-        <BotonesLikeDislike lugar={lugar} />
+        <BotonesLikeDislike spot={spot} onChangeSpotCallback={onChangeSpotCallback} />
       </div>
 
       <Image

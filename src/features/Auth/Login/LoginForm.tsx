@@ -1,5 +1,6 @@
 "use client";
 
+import { AuthClient } from "@/shared/client/AuthClient";
 import { FormField, FormLabel } from "@/shared/components/FormField";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
@@ -19,23 +20,10 @@ export const LoginForm = () => {
     setError("");
     setLoading(true);
     try {
-      const res = await fetch("/api/login/check-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      setLoading(false);
-      const data = await res.json();
+      const data = await AuthClient.checkEmail({email});
 
-      if (!res.ok) {
-        throw new Error(data.error || "Ha ocurrido un error");
-      }
-
-      // Si el endpoint nos devuelve { redirect: "/algo" }, hacemos router.push
       if (data.redirect) {
         router.push(data.redirect);
-      } else {
-        // Manejo extra si es necesario
       }
     } catch (err: unknown) {
       setLoading(false);
@@ -67,7 +55,7 @@ export const LoginForm = () => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          signIn("google", {callbackUrl:'/'});
+          signIn("google", { callbackUrl: "/" });
         }}
         className="animate-wiggle border rounded-lg px-5 py-2 bg-white/5 flex justify-center items-center gap-2 w-full text-white border-white"
       >
@@ -101,7 +89,7 @@ export const LoginForm = () => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          signIn("google", {callbackUrl:'/'});
+          signIn("google", { callbackUrl: "/" });
         }}
         className="mt-4 animate-wiggle border bg-[#7289da22] rounded-lg px-5 py-2 flex justify-center items-center gap-2 w-full text-[#7289da] border-[#7289da]"
       >

@@ -1,6 +1,6 @@
 "use client";
 
-import { LugarDTO } from "@/shared/models/Lugar/LugarDTO";
+import { SpotDTO } from "@/shared/models/Spot/SpotDTO";
 import { useUserLocation } from "@/shared/services/UserLocation/useUserLocation";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import React, { useEffect, useMemo, useState } from "react";
@@ -8,9 +8,9 @@ import React, { useEffect, useMemo, useState } from "react";
 const defaultCenter = { lat: 40.9629936, lng: -5.6612327 };
 
 export interface MapaProps {
-  markers: LugarDTO[];
-  onSelectMarker: (marker: LugarDTO | null) => void;
-  selectedMarker: LugarDTO | null;
+  markers: SpotDTO[];
+  onSelectMarker: (marker: SpotDTO | null) => void;
+  selectedMarker: SpotDTO | null;
 }
 
 export function Mapa(props: MapaProps) {

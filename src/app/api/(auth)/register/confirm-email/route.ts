@@ -13,7 +13,8 @@ export async function POST(request: Request) {
       return errorResponse("No token found", 401);
     }
 
-    const { code } = await request.json();
+    const code  = await request.json();
+    
     if (!code) {
       return errorResponse("Falta el código de verificación", 400);
     }

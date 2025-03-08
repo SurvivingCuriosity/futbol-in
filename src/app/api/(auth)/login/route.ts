@@ -5,8 +5,9 @@ import { UserService } from "@/shared/services/User/UserService";
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json();
-
+    console.log("entro");
+    const email = await request.json();
+    console.log(email);
     if (!email) {
       return errorResponse("No se introdujo email", 400);
     }

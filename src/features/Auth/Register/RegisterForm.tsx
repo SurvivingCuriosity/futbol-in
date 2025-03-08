@@ -1,5 +1,6 @@
 "use client";
 
+import { AuthClient } from "@/shared/client/AuthClient";
 import { FormField, FormLabel } from "@/shared/components/FormField";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
@@ -18,21 +19,12 @@ export const RegisterForm = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("/api/register/email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await res.json();
-
+      const res = await AuthClient.registerEmail(email);
       setLoading(false);
 
-      if (!res.ok) {
-        throw new Error(data.error || "Ha ocurrido un error");
+      if (res) {
+        router.push("/register/confirm-email");
       }
-
-      router.push("/register/confirm-email");
     } catch (error: unknown) {
       setLoading(false);
       setError(getErrorMessage(error));
