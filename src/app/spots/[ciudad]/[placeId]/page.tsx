@@ -9,7 +9,7 @@ export async function generateMetadata({
   params: Promise<{ ciudad: string; placeId: string }>;
 }) {
   const { ciudad } = await params;
-  const ciudadCapitalizada = ciudad.charAt(0).toUpperCase() + ciudad.slice(1);
+  const ciudadCapitalizada = decodeURIComponent(ciudad.charAt(0).toUpperCase() + ciudad.slice(1));
 
   return {
     title: `Futbolines en ${ciudadCapitalizada}`,
@@ -37,9 +37,10 @@ export default async function Page({
 }: {
   params: Promise<{ ciudad: string; placeId: string }>;
 }) {
-  const { placeId } = await params;
+  const { placeId, ciudad } = await params;
 
-  const futbolines = await SpotService.findNearbyByPlaceId(placeId);
+  const spots = await SpotService.findNearbyByPlaceId(placeId);
+  const nombreCiudad = decodeURIComponent(ciudad.charAt(0).toUpperCase() + ciudad.slice(1));
 
-  return <SpotsCiudadPage futbolines={futbolines} />;
+  return <SpotsCiudadPage spots={spots}  nombreCiudad={nombreCiudad}/>;
 }
