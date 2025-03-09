@@ -1,21 +1,17 @@
 "use client";
 
+import { TarjetaLugar } from "@/shared/components/TarjetaLugar/TarjetaLugar";
+import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
 import { SpotDTO } from "@/shared/models/Spot/SpotDTO";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
 import { InlinePicker } from "futbol-in-ui";
 import { useEffect, useState } from "react";
 import { Mapa } from "../Mapa/Mapa";
-import ListaFutbolines from "./ListaSpots";
-import { TarjetaLugar } from "@/shared/components/TarjetaLugar/TarjetaLugar";
 import { ButtonFiltros, Filtros } from "./components/Filtros/Filtros";
 import { PreviewFiltros } from "./components/Filtros/PreviewFiltros";
-import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
+import ListaFutbolines from "./ListaSpots";
 
-export const SpotsCiudadPage = ({
-  futbolines,
-}: {
-  futbolines: SpotDTO[];
-}) => {
+export const SpotsCiudadPage = ({ futbolines }: { futbolines: SpotDTO[] }) => {
   const [futbolinesFiltrados, setFutbolinesFiltrados] =
     useState<SpotDTO[]>(futbolines);
 
@@ -38,10 +34,10 @@ export const SpotsCiudadPage = ({
 
   return (
     <>
-      <header className="flex justify-start items-center w-full mb-2">
-        <ButtonFiltros onFiltrosChange={setFiltros} filtros={filtros}/>
+      <header className="flex justify-start items-center w-full">
+        <ButtonFiltros onFiltrosChange={setFiltros} filtros={filtros} />
         <PreviewFiltros filtros={filtros} onFiltrosChange={setFiltros} />
-        <div className="md:hidden block mb-2 ml-auto">
+        <div className="md:hidden block ml-auto">
           <InlinePicker
             options={[
               { id: 1, icon: faList, label: "" },
@@ -73,7 +69,7 @@ export const SpotsCiudadPage = ({
         <div
           className={`${
             view === "list" ? "invisible" : "visible"
-          } md:visible w-full rounded-xl overflow-hidden h-full relative`}
+          } md:visible w-full rounded-xl overflow-hidden mt-2 h-full relative`}
         >
           <Mapa
             markers={futbolinesFiltrados}

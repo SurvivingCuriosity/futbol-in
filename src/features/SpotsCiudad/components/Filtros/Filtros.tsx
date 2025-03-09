@@ -33,13 +33,12 @@ export const ButtonFiltros = (props: ButtonFiltrosProps) => {
       )}
       <button
         onClick={() => setOpenFiltros(true)}
-        className="flex items-center gap-2 text-primary p-2 rounded-lg hover:bg-neutral-900"
+        className="flex items-center size-8 gap-2 text-primary p-1 rounded-lg hover:bg-neutral-900"
       >
         <FontAwesomeIcon
           icon={faFilter}
-          width={28}
-          height={28}
-          className="text-xl"
+          width={24}
+          height={24}
         />
         <span className="hidden md:block">Filtros</span>
       </button>
