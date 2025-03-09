@@ -1,6 +1,6 @@
 "use client";
 
-import { Progress } from "@/packages/components/Progress";
+import { LOGROS_DISPONIBLES } from "@/shared/constants/LogrosDisponibles";
 import { UserRole } from "@/shared/enum/User/Role";
 import { UserDTO } from "@/shared/models/User/UserDTO";
 import {
@@ -12,6 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
+import { ProgresoLogro } from "./components/ProgresoLogro";
 
 export interface MiPerfilPageProps {
   user: UserDTO;
@@ -81,48 +83,13 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
       </div>
 
       <div className="grow">
-        <p className="my-4">Logros</p>
         <div className="space-y-4">
-          <div className="flex flex-row border border-neutral-600 rounded-lg p-4 items-center gap-4">
-            <FontAwesomeIcon
-              icon={faTrophy}
-              className="text-primary bg-primary/20 p-2 rounded-full"
-            />
-            <div className="flex flex-col w-full">
-              <p className="font-bold">Explorador</p>
-              <p className="text-sm font-light text-neutral-400">
-                Añade futbolines
-              </p>
-              <Progress value={10} />
-            </div>
-          </div>
-          <div className="flex flex-row border border-neutral-600 rounded-lg p-4 items-center gap-4">
-            <FontAwesomeIcon
-              icon={faTrophy}
-              className="text-primary bg-primary/20 p-2 rounded-full"
-            />
-            <div className="flex flex-col w-full">
-              <p className="font-bold">Explorador</p>
-              <p className="text-sm font-light text-neutral-400">
-                Añade futbolines
-              </p>
-              <Progress value={60} />
-            </div>
-          </div>
-          <div className="flex flex-row border border-neutral-600 rounded-lg p-4 items-center gap-4">
-            <FontAwesomeIcon
-              icon={faTrophy}
-              className="text-primary bg-primary/20 p-2 rounded-full"
-            />
-            <div className="flex flex-col w-full">
-              <p className="font-bold">Explorador</p>
-              <p className="text-sm font-light text-neutral-400">
-                Añade futbolines
-              </p>
-              <Progress value={25} />
-            </div>
-          </div>
+          <ProgresoLogro 
+            logro={LOGROS_DISPONIBLES[0]}
+            value={futbolinesAgregados}
+          />
         </div>
+        <Link href={'/logros'} className="text-right block text-sm text-neutral-500 mt-2 underline underline-offset-2">Ver todos los logros disponibles</Link> 
       </div>
 
       <Button
