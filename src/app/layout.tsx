@@ -1,7 +1,9 @@
+import { NavLayout } from "@/shared/components/Layouts/NavLayout";
 import SessionWrapper from "@/shared/components/SessionWrapper";
 import type { Metadata } from "next";
+import { Slide, ToastContainer } from "react-toastify";
+import "@/shared/assets/styles/toast.css";
 import "../globals.css";
-import { NavLayout } from "@/shared/components/Layouts/NavLayout";
 
 export const metadata: Metadata = {
   title: "Futbol-In",
@@ -20,10 +22,14 @@ export default function RootLayout({
           <link rel="icon" href="/futbolin-logo.svg" />
         </head>
         <body className={`antialiased bg-neutral-950 text-neutral-50`}>
-          <NavLayout>
-            {children}
-          </NavLayout>
+          <NavLayout>{children}</NavLayout>
         </body>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          draggable
+          transition={Slide}
+        />
       </html>
     </SessionWrapper>
   );

@@ -10,9 +10,14 @@ import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
 import { TipoLugar } from "@/shared/enum/Lugares/TipoLugar";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 import { Button } from "futbol-in-ui";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AgregarSpotPage = () => {
+
+  const router = useRouter();
+
   const [direccionOBar, setDireccionOBar] = useState<Pick<
     IMapItem,
     "direccion" | "nombre" | "lat" | "lng" | "googlePlaceId"
@@ -44,7 +49,10 @@ const AgregarSpotPage = () => {
         comentarios,
       });
       setLoading(false);
+      toast.success("¡Agregado correctamente!");
+      router.push("/");
     } catch (error) {
+      toast.error("Ups... Algo salió mal");
       setLoading(false);
       console.error("Error al agregar spot:", error);
     }

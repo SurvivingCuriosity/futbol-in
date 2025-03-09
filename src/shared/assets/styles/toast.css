@@ -1,0 +1,102 @@
+/** Used to define container behavior: width, position: fixed etc... **/
+.Toastify__toast-container {
+    user-select: none;
+    padding: 1em;
+}
+
+/** Used to define the position of the ToastContainer **/
+.Toastify__toast-container--top-left {
+}
+.Toastify__toast-container--top-center {
+}
+.Toastify__toast-container--top-right {
+}
+.Toastify__toast-container--bottom-left {
+}
+.Toastify__toast-container--bottom-center {
+}
+.Toastify__toast-container--bottom-right {
+}
+
+/** Icon **/
+.Toastify__toast-icon{
+    display: block;
+    width: 1.25em;
+}
+
+/** Classes for the displayed toast **/
+.Toastify__toast {
+    border-radius: 5px;
+    padding: 0.7em 1em; 
+    min-height: auto;
+    background-color: var(--color-neutral-950);
+    border: 1px solid var(--color-neutral-600);
+    color: var(--color-neutral-400);
+    font-size: 12px;
+    margin-bottom: 0.5em;
+}
+.Toastify__toast--rtl {
+}
+.Toastify__toast--dark {
+}
+.Toastify__toast--default {
+}
+.Toastify__toast--info {
+    border: 1px solid var(--color-sky-700);
+    color: var(--color-sky-600);
+}
+.Toastify__toast--success {
+    border: 1px solid var(--color-green-700);
+    color: var(--color-green-600);
+}
+.Toastify__toast--warning {
+    border: 1px solid var(--color-yellow-600);
+    color: var(--color-yellow-500);
+}
+.Toastify__toast--error {
+    border: 1px solid var(--color-red-600);
+    color: var(--color-red-500);
+}
+.Toastify__toast-body {
+}
+
+.Toastify__close-button {
+    padding-left: 2px;
+}
+/** Classes for the close button. Better use your own closeButton **/
+.Toastify__toast--info .Toastify__close-button {
+    background-color: var(--color-sky-600);
+    border-radius: 5px;
+}
+.Toastify__toast--success .Toastify__close-button {
+    background-color: var(--color-green-600);
+    border-radius: 5px;
+}
+.Toastify__toast--warning .Toastify__close-button {
+    background-color: var(--color-yellow-600);
+    border-radius: 5px;
+}
+.Toastify__toast--error .Toastify__close-button {
+    background-color: var(--color-red-600);
+    border-radius: 5px;
+}
+.Toastify__close-button--default {
+}
+.Toastify__close-button > svg {
+}
+.Toastify__close-button:hover, .Toastify__close-button:focus {
+}
+
+/** Classes for the progress bar **/
+.Toastify__progress-bar {
+}
+.Toastify__progress-bar--animated {
+}
+.Toastify__progress-bar--controlled {
+}
+.Toastify__progress-bar--rtl {
+}
+.Toastify__progress-bar--default {
+}
+.Toastify__progress-bar--dark {
+}
