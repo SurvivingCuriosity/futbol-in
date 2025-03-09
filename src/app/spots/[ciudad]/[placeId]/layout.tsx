@@ -17,7 +17,7 @@ const layout = async (props: CityLayoutProps) => {
 
   return (
     <>
-      <h1 className="text-3xl mb-4 font-extrabold text-primary tracking-tight">
+      <h1 className="text-3xl mb-2 font-extrabold text-primary tracking-tight">
         Futbolines en {ciudadLabel}
       </h1>
       {children}
