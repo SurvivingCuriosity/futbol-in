@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const page = () => {
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center gap-4 p-20">
+    <div className="h-full w-full flex flex-col items-center justify-center gap-4 p-2 pt-10 lg:p-10">
       <h1 className="text-3xl font-black">Ups...</h1>
       <p className="text-sm text-neutral-500">
         Necesitas tener una cuenta para acceder a esta página.
