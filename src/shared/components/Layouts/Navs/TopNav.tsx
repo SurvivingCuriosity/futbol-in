@@ -3,18 +3,22 @@ import { AppLogo } from "@/shared/components/AppLogo";
 import {
   faCirclePlus,
   faMagnifyingGlass,
-  faTrophy
+  faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BotonPerfil } from "../../Inicio/BotonPerfil";
+import { useSession } from "next-auth/react";
+import { LoginRegister } from "../../LandingPage/LoginRegister";
 
 export const TopNav = () => {
   const pathname = usePathname();
 
+  const session = useSession();
+  console.log(session);
   const items = [
-    { label: "Buscar", href: "/futbolines", icon: faMagnifyingGlass },
-    { label: "Agregar", href: "/agregar-futbolin", icon: faCirclePlus },
+    { label: "Buscar", href: "/spots", icon: faMagnifyingGlass },
+    { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
     { label: "Ranking", href: "/logros/ranking", icon: faTrophy },
   ];
 
@@ -29,7 +33,7 @@ export const TopNav = () => {
     <menu className="w-full h-16 bg-neutral-900">
       <div className="flex items-center h-full mx-auto justify-between gap-8 max-w-screen-xl px-4">
         <div className="flex items-center gap-8">
-          <AppLogo href="/"/>
+          <AppLogo href="/" />
           <div className="flex items-center gap-2 text-lg">
             {items.map((item, index) => (
               <Link
@@ -45,7 +49,7 @@ export const TopNav = () => {
           </div>
         </div>
 
-        <BotonPerfil />
+        {session.status === 'authenticated' ? <BotonPerfil /> : <LoginRegister />}
       </div>
     </menu>
   );
