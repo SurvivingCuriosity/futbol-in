@@ -5,6 +5,7 @@ export interface ListaSpotsProps {
   futbolines: SpotDTO[];
   selectedLugar: SpotDTO | null;
   onSelect: (lugar: SpotDTO) => void;
+  nombreCiudad: string;
 }
 
 const ListaSpots = (props: ListaSpotsProps) => {
@@ -13,13 +14,8 @@ const ListaSpots = (props: ListaSpotsProps) => {
   return (
     <>
       <ul
-        className={`space-y-4 pt-2 md:space-y-8 w-full md:max-w-md h-full overflow-hidden md:overflow-y-scroll`}
+        className={`space-y-4 pt-2 md:space-y-8 w-full md:max-w-md h-full overflow-hidden md:overflow-y-scroll mx-auto`}
       >
-        {futbolines.length === 0 && (
-          <p className="text-center text-neutral-400">
-            Ups... parece que aún no hay futbolines en esta ciudad
-          </p>
-        )}
         {futbolines.map((f, index) => (
           <TarjetaLugar
             key={f.nombre + index}
