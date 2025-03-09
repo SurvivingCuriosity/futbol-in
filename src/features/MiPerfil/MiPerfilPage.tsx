@@ -21,9 +21,10 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
   const { user } = props;
 
   const futbolinesAgregados = user.stats.lugaresAgregados;
+  const futbolinesRevisados = user.stats.lugaresRevisados;
 
   return (
-    <div className="w-full h-full gap-8 justify-between flex flex-col space-y-8 md:space-y-0 md:flex-row border border-neutral-700 rounded-lg p-3 md:p-8">
+    <div className="w-full h-full md:gap-8 justify-between flex flex-col space-y-8 md:space-y-0 md:flex-row md:border border-neutral-700 rounded-lg md:p-8">
       <div className="min-w-3xs">
         <span className="flex flex-row items-center gap-2 md:flex-col">
           <span className="relative">
@@ -67,42 +68,19 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
               icon={faTrophy}
               className="text-blue-500 rounded-full"
             />
-            <p className="text-sm">{futbolinesAgregados} futbolines</p>
+            <p className="text-xs">{futbolinesAgregados} futbolines agregados</p>
           </div>
-          {/* <div className="rounded-2xl flex w-min whitespace-nowrap items-center gap-1 bg-purple-500/20 px-2 p-1 text-neutral-400">
+          <div className="rounded-2xl flex w-min whitespace-nowrap items-center gap-1 bg-purple-500/20 px-2 p-1 text-neutral-400">
             <FontAwesomeIcon
               icon={faTrophy}
               className="text-purple-500 rounded-full"
             />
-            <p className="text-sm">10 Futbolín</p>
+            <p className="text-xs">{futbolinesRevisados} futbolines revisados</p>
           </div>
-          <div className="rounded-2xl flex w-min whitespace-nowrap items-center gap-1 bg-amber-500/20 px-2 p-1 text-neutral-400">
-            <FontAwesomeIcon
-              icon={faTrophy}
-              className="text-amber-500 rounded-full"
-            />
-            <p className="text-sm">10 Futbolín</p>
-          </div> */}
         </div>
       </div>
+
       <div className="grow">
-        <div className="flex flex-col md:flex-row items-start gap-4 w-full">
-          <div className="p-4 w-full md:w-1/3 border border-neutral-500 rounded-lg flex flex-col items-center">
-            <FontAwesomeIcon icon={faTrophy} className="text-primary" />
-            <p>{futbolinesAgregados}</p>
-            <p>Añadidos</p>
-          </div>
-          {/* <div className="p-4 w-full md:w-1/3 border border-neutral-500 rounded-lg flex flex-col items-center">
-            <FontAwesomeIcon icon={faTrophy} className="text-primary" />
-            <p>15</p>
-            <p>Añadidos</p>
-          </div>
-          <div className="p-4 w-full md:w-1/3 border border-neutral-500 rounded-lg flex flex-col items-center">
-            <FontAwesomeIcon icon={faTrophy} className="text-primary" />
-            <p>15</p>
-            <p>Añadidos</p>
-          </div> */}
-        </div>
         <p className="my-4">Logros</p>
         <div className="space-y-4">
           <div className="flex flex-row border border-neutral-600 rounded-lg p-4 items-center gap-4">
@@ -146,8 +124,9 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
           </div>
         </div>
       </div>
+
       <Button
-        variant="danger"
+        variant="danger-outline"
         onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
         label="Cerrar sesión"
       />
