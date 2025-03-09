@@ -10,13 +10,17 @@ import {
   faMagnifyingGlass,
   faTrophy,
   faUser,
+  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const BottomNav = () => {
   const pathname = usePathname();
+
+  const session = useSession();
 
   const ultimaUbicacion =
     typeof window !== "undefined" &&
@@ -25,16 +29,19 @@ export const BottomNav = () => {
   const ciudad = encodeURIComponent(ultimaUbicacion.ciudad);
   const placeId = ultimaUbicacion.placeId;
 
-  const rutaFutbolines = (ciudad && placeId)
-    ? `/spots/${ciudad}/${placeId}`
-    : "/spots";
+  const rutaFutbolines =
+    ciudad && placeId ? `/spots/${ciudad}/${placeId}` : "/spots";
 
   const items = [
     { label: "Home", href: "/", icon: faHome },
     { label: "Buscar", href: rutaFutbolines, icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
     { label: "Ranking", href: "/logros/ranking", icon: faTrophy },
-    { label: "Perfil", href: "/perfil", icon: faUser },
+    {
+      label: "Perfil",
+      href: "/perfil",
+      icon: session.status === "authenticated" ? faUserCircle : faUser,
+    },
   ];
 
   const isActive = (href: string) => {
