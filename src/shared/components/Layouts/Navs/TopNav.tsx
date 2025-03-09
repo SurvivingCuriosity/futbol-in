@@ -15,11 +15,10 @@ export const TopNav = () => {
   const pathname = usePathname();
 
   const session = useSession();
-  console.log(session);
   const items = [
     { label: "Buscar", href: "/spots", icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
-    { label: "Ranking", href: "/logros/ranking", icon: faTrophy },
+    { label: "Ranking", href: "/ranking", icon: faTrophy },
   ];
 
   const isActive = (href: string) => {
