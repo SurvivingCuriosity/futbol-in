@@ -1,5 +1,3 @@
-import { AppLogo } from "@/shared/components/AppLogo";
-import { LoginRegister } from "@/shared/components/LandingPage/LoginRegister";
 import Typewriter from "@/shared/components/LandingPage/TypeWriter";
 import SearchInputCiudad from "@/shared/components/SearchInputCiudad";
 import { faMap, faTrophy, faUsers } from "@fortawesome/free-solid-svg-icons";
@@ -8,11 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const LandingPage = async () => {
   return (
     <main className="flex flex-col items-center justify-center gap-4">
-      
-      <menu className="max-w-screen-xl mx-auto h-16 bg-neutral-950/95 fixed top-0 p-4 flex items-center justify-between w-full z-1">
-        <AppLogo />
-        <LoginRegister />
-      </menu>
+    
 
       <div className="mt-20 max-w-3xl flex gap-4 flex-col items-stretch justify-center w-full">
         <h1
