@@ -13,7 +13,7 @@ const layout = async (props: CityLayoutProps) => {
 
   const { ciudad } = await params;
 
-  const ciudadLabel = ciudad.charAt(0).toUpperCase() + ciudad.slice(1);
+  const ciudadLabel = decodeURIComponent(ciudad.charAt(0).toUpperCase() + ciudad.slice(1));
 
   return (
     <>
