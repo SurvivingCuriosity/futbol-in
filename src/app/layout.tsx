@@ -23,13 +23,13 @@ export default function RootLayout({
         </head>
         <body className={`antialiased bg-neutral-950 text-neutral-50`}>
           <NavLayout>{children}</NavLayout>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            draggable
+            transition={Slide}
+          />
         </body>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          draggable
-          transition={Slide}
-        />
       </html>
     </SessionWrapper>
   );
