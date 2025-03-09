@@ -9,7 +9,7 @@ import React from "react";
 
 export const MainInfo = ({ spot }: { spot: SpotDTO }) => {
   return (
-    <div className="bg-neutral-950/90 w-fit p-2 z-2 rounded-lg">
+    <div className="bg-neutral-950/90 w-fit p-2 z-2 pt-0 rounded-lg">
       <div className="flex items-baseline gap-1 text-primary">
         <FontAwesomeIcon className="w-4" icon={faFutbol} />
         <p className="text-lg font-bold">{spot.tipoFutbolin}</p>

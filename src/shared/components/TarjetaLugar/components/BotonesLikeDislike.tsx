@@ -79,7 +79,7 @@ export const BotonesLikeDislike = ({ spot, onChangeSpotCallback }: { spot: SpotD
       </button>
       <button
         onClick={() => handleClickVotar("down")}
-        className="cursor-pointer border w-full rounded-lg p-2 hover:bg-red-500/20 bg-red-500/5 border-red-500 text-red-500"
+        className="cursor-pointer border w-full rounded-lg p-2 hover:bg-neutral-500/20 bg-neutral-500/5 border-neutral-400 text-neutral-400"
       >
         <FontAwesomeIcon icon={faFaceFrown} className="mr-2" />
         {`Ya no está (${spot.votes.down.length})`}
