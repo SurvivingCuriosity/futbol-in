@@ -4,8 +4,7 @@ import { GoogleMapsService } from "@/shared/services/GoogleMaps/GoogleMapsServic
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const placeId = searchParams.get("placeId");
-  
-  console.log('placeid: ',placeId);
+
 
   if (!placeId) {
     return errorResponse("placeId es requerido", 400);

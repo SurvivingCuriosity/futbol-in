@@ -29,7 +29,7 @@ export default function SearchInputBar({
   const handleSelect = async (place: SingleValue<PlaceOption>) => {
     if (!place) return;
     const coords = await getCoordinatesFromPlaceId(place.value);
-    console.log('El place', place)
+
     const selected: Pick<
       IMapItem,
       "nombre" | "direccion" | "lat" | "lng" | "googlePlaceId"

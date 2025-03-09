@@ -12,8 +12,6 @@ export interface PreviewFiltrosProps {
 export const PreviewFiltros = (props: PreviewFiltrosProps) => {
   const { filtros, onFiltrosChange } = props;
 
-  console.log('preview', filtros);
-
   if (!filtros) return null;
 
   return (

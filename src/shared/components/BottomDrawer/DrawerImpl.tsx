@@ -32,7 +32,6 @@ export function DrawerImpl({
   onChange,
   maxHeight,
 }: Props) {
-  console.log("Drawer render (client)");
 
   const tracked = useRef({
     distance: 0,

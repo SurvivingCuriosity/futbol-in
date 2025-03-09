@@ -11,7 +11,7 @@ export async function POST(req: Request) {
   try {
     await connectDb();
     const spot: AgregarSpotRequest = await req.json();
-    console.log('spot: ',spot);
+
     const {
       nombre,
       direccion,
