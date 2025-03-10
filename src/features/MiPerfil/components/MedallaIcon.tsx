@@ -11,10 +11,25 @@ export interface MedallaIconProps {
   level: number;
   conseguida: boolean;
   showConseguidaIcon?: boolean;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export const MedallaIcon = (props: MedallaIconProps) => {
-  const { conseguida, icon, level, showConseguidaIcon = true } = props;
+  const { size = 'md', conseguida, icon, level, showConseguidaIcon = true } = props;
+
+  const sizeClass:Record<string, string> = {
+    sm: 'size-6',
+    md: 'size-8',
+    lg: 'size-10',
+    xl: 'size-16',
+  }
+  const iconSizeClass:Record<string, string> = {
+    sm: 'text-xs',
+    md: 'text-xs',
+    lg: 'text-lg',
+    xl: 'text-2xl',
+  }
+
 
   return (
     <div
@@ -32,9 +47,9 @@ export const MedallaIcon = (props: MedallaIconProps) => {
       )}
 
       <div
-        className={`${levelClass[level]} ${level === 0 ? 'border-dashed' : 'border'} border aspect-square size-8 flex items-center justify-center rounded-full z-2`}
+        className={`${sizeClass[size]} ${levelClass[level]} ${level === 0 ? 'border-dashed' : 'border'} border aspect-square size-8 flex items-center justify-center rounded-full z-2`}
       >
-        {level > 0 && <FontAwesomeIcon icon={icon} className="text-xs" />}
+        {level > 0 && <FontAwesomeIcon icon={icon} className={`${iconSizeClass[size]}`} />}
       </div>
     </div>
   );
