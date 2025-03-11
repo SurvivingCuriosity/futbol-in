@@ -34,12 +34,30 @@
 
 @theme {
     --color-primary: rgb(110, 213, 89);
-    --animate-border-spin: borde-spin 7s linear infinite;
 
-    @keyframes borde-spin {
+    --animate-fade-in: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    --animate-puff-in: puff-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        },
         100% {
-            transform: rotate(-360deg);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes puff-in {
+
+        0% {
+            transform: scale(2)translateY(-200px);
+            filter: blur(2px);
+            opacity: 0;
+        },
+        to: {
+            transform: scale(1)translateY(0px);
+            filter: blur(0);
+            opacity: 1;
         }
     }
 }
