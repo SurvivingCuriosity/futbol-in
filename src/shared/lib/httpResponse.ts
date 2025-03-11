@@ -1,6 +1,6 @@
 // shared/lib/httpResponse.ts
 import { NextResponse } from "next/server";
-import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 
 export function errorResponse(err: unknown, status = 500) {
   return NextResponse.json({ error: getErrorMessage(err) }, { status });

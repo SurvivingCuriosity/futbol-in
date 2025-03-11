@@ -7,9 +7,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BotonPerfil } from "../../Inicio/BotonPerfil";
+import { BotonPerfil } from "./components/BotonPerfil";
 import { useSession } from "next-auth/react";
-import { LoginRegister } from "../../LandingPage/LoginRegister";
+import { LoginRegister } from "./components/LoginRegister";
 
 export const TopNav = () => {
   const pathname = usePathname();

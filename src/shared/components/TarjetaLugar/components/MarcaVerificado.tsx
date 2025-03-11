@@ -1,4 +1,4 @@
-import { dateToTimeAgo } from "@/shared/utils/dateToTimeAgo";
+import { dateToTimeAgo } from "@/packages/utils/dateToTimeAgo";
 import { faCertificate, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

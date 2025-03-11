@@ -1,5 +1,6 @@
-import { BottomNav } from "./Navs/BottomNav";
-import { TopNav } from "./Navs/TopNav";
+import { BottomNav } from "@/shared/components/Nav/BottomNav";
+import { TopNav } from "@/shared/components/Nav/TopNav";
+
 
 export function NavLayout({ children }: { children: React.ReactNode }) {
   return (

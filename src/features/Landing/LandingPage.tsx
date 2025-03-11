@@ -1,4 +1,4 @@
-import Typewriter from "@/shared/components/LandingPage/TypeWriter";
+import Typewriter from "@/features/Landing/components/TypeWriter";
 import SearchInputCiudad from "@/shared/components/SearchInputCiudad";
 import { faMap, faTrophy, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

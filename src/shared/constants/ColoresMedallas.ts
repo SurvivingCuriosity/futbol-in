@@ -6,8 +6,6 @@ export const textColorClass: Record<number, string> = {
   5: "text-purple-500",
 };
 
-
-
 export const darkBgClass: Record<number, string> = {
   1: "bg-orange-600/10",
   2: "bg-neutral-400/10",

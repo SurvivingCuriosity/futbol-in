@@ -1,4 +1,4 @@
-import { FormLabel } from "@/shared/components/FormField";
+import { FormLabel } from "@/packages/components/FormField";
 
 export interface SwitchProps {
   label?: string;

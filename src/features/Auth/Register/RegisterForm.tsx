@@ -1,8 +1,8 @@
 "use client";
 
 import { AuthClient } from "@/shared/client/AuthClient";
-import { FormField, FormLabel } from "@/shared/components/FormField";
-import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import { FormField, FormLabel } from "@/packages/components/FormField";
+import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
 import { signIn } from "next-auth/react";
 import Link from "next/link";

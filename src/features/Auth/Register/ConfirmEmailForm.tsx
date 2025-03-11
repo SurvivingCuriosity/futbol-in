@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthClient } from "@/shared/client/AuthClient";
-import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

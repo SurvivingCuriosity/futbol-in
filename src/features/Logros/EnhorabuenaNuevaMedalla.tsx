@@ -1,4 +1,4 @@
-import { Window } from "@/shared/components/Window/Window";
+import { Window } from "@/packages/components/Window";
 import { ILogro } from "@/shared/types/Logros/Logro";
 import Link from "next/link";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { SpotsClient } from "@/shared/client/SpotsClient";
-import { FormField, FormLabel } from "@/shared/components/FormField";
+import { FormField, FormLabel } from "@/packages/components/FormField";
 import SearchInputBar from "@/shared/components/SearchInputBar";
 import SearchInputDireccion from "@/shared/components/SearchInputDireccion";
 import { SelectorTipoFutbolin } from "@/shared/components/SelectorTipoFutbolin";
@@ -11,7 +11,7 @@ import { TipoLogroEnum } from "@/shared/enum/Logros/TipoLogroEnum";
 import { TipoLugar } from "@/shared/enum/Lugares/TipoLugar";
 import { useComprobarSiObtieneLogro } from "@/shared/hooks/useComprobarSiObtieneLogro";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
-import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button } from "futbol-in-ui";
 import { useSession } from "next-auth/react";
 import { useState } from "react";

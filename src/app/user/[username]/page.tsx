@@ -1,5 +1,5 @@
 import { PerfilPage } from "@/features/Perfil/PerfilPage";
-import { NavLayout } from "@/shared/components/Layouts/NavLayout";
+import { NavLayout } from "@/shared/layouts/NavLayout";
 import { UserService } from "@/shared/services/User/UserService";
 
 interface PageProps {

@@ -1,7 +1,7 @@
 import { Switch } from "@/packages/components/Switch";
-import { FormField, FormLabel } from "@/shared/components/FormField";
+import { FormField, FormLabel } from "@/packages/components/FormField";
 import { SelectorTipoFutbolin } from "@/shared/components/SelectorTipoFutbolin";
-import { Window } from "@/shared/components/Window/Window";
+import { Window } from "@/packages/components/Window";
 import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
