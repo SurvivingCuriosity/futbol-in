@@ -1,4 +1,7 @@
-import { AgregarSpotRequest } from "@/shared/client/types/Spots/AgregarSpot";
+import {
+  AgregarSpotRequest,
+  AgregarSpotResponse,
+} from "@/shared/client/types/Spots/AgregarSpot";
 import { UserRole } from "@/shared/enum/User/Role";
 import { authOptions } from "@/shared/lib/authOptions";
 import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
@@ -35,25 +38,43 @@ export async function POST(req: Request) {
     // Obtención del usuario que realiza la petición
     const session = await getServerSession(authOptions);
     const user = session?.user;
-    const userId = session?.user?.id || null;
-    const userDb = await UserService.findById(userId);
+
+    if (!user) {
+      return errorResponse("Debes volver a iniciar sesión", 401);
+    }
+
+    const userDb = await UserService.findById(user.id);
+
+    if (!userDb) {
+      return errorResponse("No se encontró al usuario en la base de datos", 401);
+    }
+
     // Estado de verificado
-    const verificado = userId && user?.role === UserRole.VERIFICADO ? {
-      idUser: userId,
-      fechaVerificacion: new Date(),
-    } : null
+    const verificado =
+      user.id && user?.role === UserRole.VERIFICADO
+        ? {
+            idUser: user.id,
+            fechaVerificacion: new Date(),
+          }
+        : null;
 
     // Creación del spot
-    const spotDTO = { ...spot, userId, verificado }
-    const createdSpot = await SpotService.createSpot(spotDTO, userDb?.id);
+    const spotDTO = { ...spot, addedByUserId: user.id, verificado };
+    const createdSpot = await SpotService.createSpot(spotDTO);
 
     // Actualizar los spots añadidos por el usuario
     if (user) {
       await UserService.incrementUserStat(user.id, "addedFutbolines");
     }
 
+    const response: AgregarSpotResponse = {
+      success: true,
+      spot: createdSpot,
+      spotsCreados: userDb?.stats?.addedFutbolines + 1,
+    };
+
     // Respuesta
-    return successResponse({ success: true, futbolin: createdSpot }, 201);
+    return successResponse(response, 201);
   } catch (error) {
     return errorResponse(error);
   }

@@ -7,18 +7,24 @@ import SearchInputDireccion from "@/shared/components/SearchInputDireccion";
 import { SelectorTipoFutbolin } from "@/shared/components/SelectorTipoFutbolin";
 import { SelectorTipoLugar } from "@/shared/components/SelectorTipoLugar";
 import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
+import { TipoLogroEnum } from "@/shared/enum/Logros/TipoLogroEnum";
 import { TipoLugar } from "@/shared/enum/Lugares/TipoLugar";
+import { useComprobarSiObtieneLogro } from "@/shared/hooks/useComprobarSiObtieneLogro";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 import { Button } from "futbol-in-ui";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { EnhorabuenaNuevaMedalla } from "../Logros/EnhorabuenaNuevaMedalla";
 
 const AgregarSpotPage = () => {
-  const router = useRouter();
 
   const session = useSession();
+
+  const { nuevoLogro, comprobarSiGanaMedalla } = useComprobarSiObtieneLogro(
+    TipoLogroEnum.AGREGAR_SPOTS
+  );
 
   const [direccionOBar, setDireccionOBar] = useState<Pick<
     IMapItem,
@@ -41,10 +47,10 @@ const AgregarSpotPage = () => {
     setLoading(true);
 
     try {
-      if(!session.data?.user?.id){
+      if (!session.data?.user?.id) {
         throw new Error("Error al obtener sesión de usuario");
       }
-      await SpotsClient.agregarSpot({
+      const res = await SpotsClient.agregarSpot({
         nombre: direccionOBar?.nombre || "Desconocido",
         direccion: direccionOBar?.direccion || "Desconocido",
         coordinates: [direccionOBar?.lng || 0, direccionOBar?.lat || 0],
@@ -54,11 +60,11 @@ const AgregarSpotPage = () => {
         comentarios,
         addedByUserId: session.data?.user?.id,
       });
-      setLoading(false);
       toast.success("¡Agregado correctamente!");
-      router.push("/");
+      comprobarSiGanaMedalla(res.spotsCreados);
+      setLoading(false);
     } catch (error) {
-      toast.error("Ups... Algo salió mal");
+      toast.error(`Ups... ${getErrorMessage(error)}`);
       setLoading(false);
       console.error("Error al agregar spot:", error);
     }
@@ -66,6 +72,11 @@ const AgregarSpotPage = () => {
 
   return (
     <>
+      {nuevoLogro && (
+        <EnhorabuenaNuevaMedalla
+        nuevoLogro={nuevoLogro}
+        />
+      )}
       <div className="max-w-xl mx-auto w-full p-4 border border-neutral-700 rounded-lg flex flex-col gap-2">
         <h1 className="text-2xl font-extrabold tracking-tight text-primary">
           Agregar un nuevo futbolín

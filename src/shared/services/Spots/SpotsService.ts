@@ -8,7 +8,7 @@ import { ObjectId, Types } from "mongoose";
 
 export class SpotService {
   // Creación
-  static async createSpot(spot: Omit<SpotDTO, 'id'|'votes'>, idUser:Types.ObjectId): Promise<SpotDTO> {
+  static async createSpot(spot: Omit<SpotDTO, 'id'|'votes'>): Promise<SpotDTO> {
     await connectDb();
 
     // Validaciones de dominio:
@@ -19,17 +19,11 @@ export class SpotService {
 
     // Crear el documento
     const created = await Spot.create({
-      nombre: spot.nombre,
-      direccion: spot.direccion,
+      ...spot,
       location: {
         type: "Point",
         coordinates: spot.coordinates,
       },
-      addedByUserId: idUser,
-      googlePlaceId: spot.googlePlaceId,
-      tipoLugar: spot.tipoLugar,
-      tipoFutbolin: spot.tipoFutbolin,
-      verificado: spot.verificado,
     });
 
     return this.mapToDTO(created);

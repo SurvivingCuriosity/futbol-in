@@ -3,6 +3,7 @@ import { Medalla } from "./Medalla";
 
 export const LogrosPage = () => {
 
+  const LOGROS = Object.values(LOGROS_DISPONIBLES);
 
   return (
     <div className="w-full">
@@ -13,7 +14,7 @@ export const LogrosPage = () => {
         En esta página puedes ver todos los logros que puedes conseguir.
       </p>
       <ul className="w-full space-y-2 mt-2 gap-2 lg:gap-4 flex flex-col">
-        {LOGROS_DISPONIBLES.map((logro) => (
+        {LOGROS.map((logro) => (
           <li
             key={logro.id}
             className="bg-neutral-900 rounded-xl p-2 lg:p-4 flex flex-col border border-neutral-600 w-full"
