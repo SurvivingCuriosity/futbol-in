@@ -10,13 +10,15 @@ import { TipoFutbolin } from "@/shared/enum/Futbolin/TipoFutbolin";
 import { TipoLugar } from "@/shared/enum/Lugares/TipoLugar";
 import { IMapItem } from "@/shared/types/MapItem/IMapItem";
 import { Button } from "futbol-in-ui";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 const AgregarSpotPage = () => {
-
   const router = useRouter();
+
+  const session = useSession();
 
   const [direccionOBar, setDireccionOBar] = useState<Pick<
     IMapItem,
@@ -39,6 +41,9 @@ const AgregarSpotPage = () => {
     setLoading(true);
 
     try {
+      if(!session.data?.user?.id){
+        throw new Error("Error al obtener sesión de usuario");
+      }
       await SpotsClient.agregarSpot({
         nombre: direccionOBar?.nombre || "Desconocido",
         direccion: direccionOBar?.direccion || "Desconocido",
@@ -47,6 +52,7 @@ const AgregarSpotPage = () => {
         tipoLugar,
         tipoFutbolin,
         comentarios,
+        addedByUserId: session.data?.user?.id,
       });
       setLoading(false);
       toast.success("¡Agregado correctamente!");

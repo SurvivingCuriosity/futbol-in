@@ -14,6 +14,7 @@ export interface ISpot extends Document {
   tipoLugar: TipoLugar;
   tipoFutbolin: TipoFutbolin;
   comentarios: string;
+  addedByUserId: Types.ObjectId;
 
   verificado: null | {
     correcto: boolean;
@@ -43,6 +44,7 @@ const SpotSchema: Schema<ISpot> = new Schema(
       required: true,
     },
     comentarios: { type: String },
+    addedByUserId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     verificado: {
       type: {
         idUser: {

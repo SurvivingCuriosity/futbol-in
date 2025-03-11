@@ -22,11 +22,11 @@ const HomePage = () => {
             height={window.innerHeight}
           />
           <div className="p-8 z-20 bg-neutral-950 rounded-2xl">
-            <h1 className="text-5xl font-black">Enhorabuena!</h1>
-            <h2 className="mt-4 text-lg text-neutral-500">
+            <h1 className="text-3xl lg:text-5xl font-black">Enhorabuena!</h1>
+            <h2 className="mt-4 lg:text-lg text-neutral-500">
               Has conseguido un nuevo logro!
             </h2>
-            <div className="scale-125 m-20 mx-auto flex flex-col gap-2 items-center justify-center border w-fit p-4 rounded-xl border-neutral-700 z-20 bg-neutral-900/50">
+            <div className="scale-125 m-10 mx-auto flex flex-col gap-2 items-center justify-center border w-fit p-4 rounded-xl border-neutral-700 z-20 bg-neutral-900/50">
               <MedallaIcon
                 conseguida={true}
                 icon={faTrophy}

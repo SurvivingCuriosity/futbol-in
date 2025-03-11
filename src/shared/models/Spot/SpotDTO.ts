@@ -10,6 +10,7 @@ export interface SpotDTO {
   tipoLugar: TipoLugar;
   tipoFutbolin: TipoFutbolin;
   comentarios: string;
+  addedByUserId: string;
   verificado: null | {
     idUser: string;
     fechaVerificacion: Date;
