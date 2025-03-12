@@ -2,8 +2,12 @@ import { UserDTO } from "@/shared/models/User/UserDTO";
 import { Button } from "futbol-in-ui";
 import { ImagenPerfil } from "./ImagenPerfil";
 import { MarcaVerificado } from "./MarcaVerificado";
+import { useRouter } from "next/navigation";
+
 
 export const MainInfo = ({ user }: { user: UserDTO }) => {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col md:flex-row mx-auto items-center md:gap-4 w-full md:w-fit">
       <ImagenPerfil user={user} />
@@ -19,8 +23,8 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
         </span>
       </span>
       <span className="flex items-center gap-2 w-full mt-4">
-        <Button label="Editar perfil" size="sm" />
-        <Button label="Ajustes" size="sm" variant="neutral-outline" />
+        <Button label="Editar perfil" size="sm" onClick={() => router.push("/perfil/editar?from=perfil")} />
+        <Button label="Ajustes" size="sm" variant="neutral-outline" onClick={() => router.push("/ajustes?from=perfil")} />
       </span>
     </div>
   );

@@ -12,7 +12,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 const menuItems = [
   { label: "Perfil", href: "/perfil", icon: faUser },
-  { label: "Ajustes", href: "/settings", icon: faCog },
+  { label: "Ajustes", href: "/ajustes", icon: faCog },
   { label: "Cerrar sesión", onClick: () => signOut(), icon: faSignOutAlt },
 ];
 
