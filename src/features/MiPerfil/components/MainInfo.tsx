@@ -9,7 +9,7 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col md:flex-row mx-auto items-center md:gap-4 w-full md:w-fit">
+    <div className="flex flex-col mx-auto items-center md:gap-4 w-full md:w-fit min-w-xs">
       <ImagenPerfil user={user} />
 
       <span className="flex flex-row items-start md:flex-col">
@@ -22,7 +22,7 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
           </p>
         </span>
       </span>
-      <span className="flex items-center gap-2 w-full mt-4">
+      <span className="flex items-center gap-2 w-full mt-4 max-w-xs">
         <Button label="Editar perfil" size="sm" onClick={() => router.push("/perfil/editar?from=perfil")} />
         <Button label="Ajustes" size="sm" variant="neutral-outline" onClick={() => router.push("/ajustes?from=perfil")} />
       </span>
