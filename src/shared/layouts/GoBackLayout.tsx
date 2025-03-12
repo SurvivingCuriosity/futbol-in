@@ -14,7 +14,10 @@ export const GoBackLayout = (props: GoBackLayoutProps) => {
 
   return (
     <>
-      <Link href={href} className="bg-neutral-900 p-1 px-2 text-neutral-400 rounded">
+      <Link
+        href={href}
+        className="bg-neutral-900 p-1 px-2 text-neutral-400 rounded"
+      >
         <FontAwesomeIcon icon={faArrowLeft} width={24} height={24} />
         {label}
       </Link>

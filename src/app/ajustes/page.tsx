@@ -1,4 +1,5 @@
 "use client";
+
 import { GoBackLayout } from "@/shared/layouts/GoBackLayout";
 import { useSearchParams } from "next/navigation";
 
