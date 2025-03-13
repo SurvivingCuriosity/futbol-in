@@ -9,7 +9,7 @@ export class BaseClient {
     url: string,
     config: RequestConfig = {}
   ): Promise<BaseClientResponse<T>> {
-    const { method = "GET", headers, body } = config;
+    const { method = "POST", headers, body } = config;
 
     const mergedHeaders = {
       ...this.defaultHeaders,
