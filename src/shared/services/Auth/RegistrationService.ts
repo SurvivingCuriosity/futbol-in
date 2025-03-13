@@ -113,8 +113,9 @@ export class RegistrationService {
       throw new Error("El código ha expirado");
     }
 
+    
     // Actualizar estado del usuario y limpiar datos de verificación
-    user.status = UserStatus.MUST_INIT_ACCOUNT;
+    user.status = user.name ? UserStatus.DONE : UserStatus.MUST_INIT_ACCOUNT;
     user.verificationCode = undefined;
     user.verificationCodeExpires = undefined;
     await user.save();

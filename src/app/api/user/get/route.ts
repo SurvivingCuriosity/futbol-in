@@ -1,12 +1,10 @@
 import { authOptions } from "@/shared/lib/authOptions";
-import connectDb from "@/shared/lib/db";
 import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
 import { UserService } from "@/shared/services/User/UserService";
 import { getServerSession } from "next-auth";
 
 export async function POST(req: Request) {
   try {
-    await connectDb();
     const { idUser } = await req.json();
 
     // Obtención del usuario que realiza la petición

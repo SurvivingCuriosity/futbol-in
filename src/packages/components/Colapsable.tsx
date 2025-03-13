@@ -12,7 +12,7 @@ export const Colapsable = (props: ColapsableProps) => {
       <div
         style={{
           gridTemplateRows: open ? "1fr" : "0fr",
-          transition: "grid-template-rows 0.2s ease-out",
+          transition: "grid-template-rows 0.5s ease-out",
         }}
         className="wrapper grid"
       >

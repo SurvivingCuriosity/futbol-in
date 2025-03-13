@@ -1,9 +1,11 @@
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { UserClient } from "@/shared/client/UserClient";
+import SearchInputCiudad from "@/shared/components/SearchInputCiudad";
 import { useGetLoggedInUserClient } from "@/shared/hooks/useGetLoggedInUserClient";
 import { UserDTO } from "@/shared/models/User/UserDTO";
 import { TextInput } from "futbol-in-ui";
 import { useEffect, useState } from "react";
+import { DatosDeAcceso } from "./components/DatosDeAcceso";
 
 export const EditarPerfilPage = () => {
   const sessionUser = useGetLoggedInUserClient();
@@ -34,19 +36,33 @@ export const EditarPerfilPage = () => {
           Guardar
         </button>
       )}
-      <FormField>
-        <FormLabel>Nombre de usuario</FormLabel>
-        <TextInput
-          value={updatedUser?.name}
-          onChangeText={(text) =>
-            setUpdatedUser((prev) => ({ ...(prev as UserDTO), name: text }))
-          }
-        />
-      </FormField>
-      <FormField>
-        <FormLabel>Email</FormLabel>
-        <TextInput value={updatedUser?.email} onChangeText={() => {}} />
-      </FormField>
+      <div className="mb-4 w-full">
+        <p className="text-primary text-lg border-b w-full">Datos de acceso</p>
+        <DatosDeAcceso user={user}/>
+      </div>
+
+      <div className="mb-4 w-full">
+        <p className="text-primary text-lg border-b w-full">Público</p>
+        <div className="p-4">
+          <FormField>
+            <FormLabel>Nombre de usuario</FormLabel>
+            <TextInput
+              value={updatedUser?.name}
+              onChangeText={(text) =>
+                setUpdatedUser((prev) => ({ ...(prev as UserDTO), name: text }))
+              }
+            />
+          </FormField>
+          <FormField>
+            <FormLabel>Bio</FormLabel>
+            <TextInput value={""} onChangeText={() => {}} />
+          </FormField>
+          <FormField>
+            <FormLabel>Ciudad</FormLabel>
+            <SearchInputCiudad />
+          </FormField>
+        </div>
+      </div>
     </div>
   );
 };

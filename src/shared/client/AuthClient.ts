@@ -60,7 +60,10 @@ export class AuthClient {
 
   static async checkUsername(username:string): Promise<CheckUsernameResponse> {
     const response = await BaseClient.request<CheckUsernameResponse>(
-      `/api/register/check-username?username=${username}`
+      `/api/register/check-username?username=${username}`,
+      {
+        method: "GET",
+      }
     );
 
     if (!response.ok) {
