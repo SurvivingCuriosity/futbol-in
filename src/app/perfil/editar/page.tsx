@@ -1,15 +1,16 @@
 "use client";
 
+import { EditarPerfilPage } from "@/features/Perfil/Editar/EditarPerfilPage";
 import { GoBackLayout } from "@/shared/layouts/GoBackLayout";
 import { useSearchParams } from "next/navigation";
 
 const Page = () => {
   const searchParams = useSearchParams();
   const fromParam = searchParams.get("from") || "/";
-  
+
   return (
-    <GoBackLayout href={`/${fromParam}`}>
-      <div>Editar perfil</div>
+    <GoBackLayout href={`/${fromParam}`} className="max-w-lg mx-auto">
+      <EditarPerfilPage />
     </GoBackLayout>
   );
 };
