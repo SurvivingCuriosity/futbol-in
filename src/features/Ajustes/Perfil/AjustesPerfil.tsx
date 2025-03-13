@@ -1,8 +1,8 @@
-import React from 'react'
-import { ContainerAjustes } from '../components/ContainerAjustes'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { Ajuste } from '../components/Ajuste'
 import { Switch } from '@/packages/components/Switch'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { Button } from 'futbol-in-ui'
+import { Ajuste } from '../components/Ajuste'
+import { ContainerAjustes } from '../components/ContainerAjustes'
 
 export const AjustesPerfil = () => {
   return (
@@ -22,6 +22,7 @@ export const AjustesPerfil = () => {
         >
             <Switch label='' checked={true} onChange={() => {}} />
         </Ajuste>
+        <Button label="Eliminar mi cuenta" variant="danger-outline" size='sm'/>
     </ContainerAjustes>
   )
 }
