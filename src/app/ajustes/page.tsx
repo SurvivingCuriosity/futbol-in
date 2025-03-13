@@ -1,5 +1,6 @@
 "use client";
 
+import { AjustesPage } from "@/features/Ajustes/AjustesPage";
 import { GoBackLayout } from "@/shared/layouts/GoBackLayout";
 import { useSearchParams } from "next/navigation";
 
@@ -8,8 +9,8 @@ const Page = () => {
   const fromParam = searchParams.get("from") || "/";
   
   return (
-    <GoBackLayout href={`/${fromParam}`}>
-      <div>Ajustes</div>
+    <GoBackLayout href={`/${fromParam}`} className="max-w-lg mx-auto">
+      <AjustesPage />
     </GoBackLayout>
   );
 };
