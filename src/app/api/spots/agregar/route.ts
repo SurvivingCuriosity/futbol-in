@@ -1,12 +1,12 @@
 import {
   AgregarSpotRequest,
   AgregarSpotResponse,
-} from "@/shared/client/types/Spots/AgregarSpot";
-import { UserRole } from "@/shared/enum/User/Role";
-import { authOptions } from "@/shared/lib/authOptions";
-import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import { SpotService } from "@/shared/services/Spots/SpotsService";
-import { UserService } from "@/shared/services/User/UserService";
+} from "@/client/shared/client/types/Spots/AgregarSpot";
+import { UserRole } from "@/core/enum/User/Role";
+import { authOptions } from "@/server/lib/authOptions";
+import { errorResponse, successResponse } from "@/server/lib/httpResponse";
+import { SpotService } from "@/server/services/Spots/SpotsService";
+import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";
 
 export async function POST(req: Request) {

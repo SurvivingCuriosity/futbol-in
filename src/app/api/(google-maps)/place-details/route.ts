@@ -1,5 +1,5 @@
-import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import { GoogleMapsService } from "@/shared/services/GoogleMaps/GoogleMapsService";
+import { errorResponse, successResponse } from "@/server/lib/httpResponse";
+import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

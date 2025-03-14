@@ -1,5 +1,5 @@
-import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import { UserService } from "@/shared/services/User/UserService";
+import { errorResponse, successResponse } from "@/server/lib/httpResponse";
+import { UserService } from "@/server/services/User/UserService";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {

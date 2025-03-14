@@ -1,4 +1,4 @@
-import LoginPasswordForm from "@/features/Auth/Login/LoginPasswordForm";
+import LoginPasswordForm from "@/client/features/Auth/Login/LoginPasswordForm";
 
 const LoginPasswordPage = () => <LoginPasswordForm />
 

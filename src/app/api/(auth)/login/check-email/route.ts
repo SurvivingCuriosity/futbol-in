@@ -1,7 +1,7 @@
 // /api/login/route.ts
-import { errorResponse } from "@/shared/lib/httpResponse";
-import { RegistrationService } from "@/shared/services/Auth/RegistrationService";
-import { UserService } from "@/shared/services/User/UserService";
+import { errorResponse } from "@/server/lib/httpResponse";
+import { RegistrationService } from "@/server/services/Auth/RegistrationService";
+import { UserService } from "@/server/services/User/UserService";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

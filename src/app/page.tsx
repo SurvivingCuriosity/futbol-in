@@ -1,7 +1,7 @@
-import HomePage from "@/features/Home/HomePage";
-import { LandingPage } from "@/features/Landing/LandingPage";
-import { UserStatus } from "@/shared/enum/User/Status";
-import { authOptions } from "@/shared/lib/authOptions";
+import HomePage from "@/client/features/Home/HomePage";
+import { LandingPage } from "@/client/features/Landing/LandingPage";
+import { UserStatus } from "@/core/enum/User/Status";
+import { authOptions } from "@/server/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

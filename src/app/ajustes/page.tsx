@@ -1,7 +1,7 @@
 "use client";
 
-import { AjustesPage } from "@/features/Ajustes/AjustesPage";
-import { GoBackLayout } from "@/shared/layouts/GoBackLayout";
+import { AjustesPage } from "@/client/features/Ajustes/AjustesPage";
+import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { useSearchParams } from "next/navigation";
 
 const Page = () => {

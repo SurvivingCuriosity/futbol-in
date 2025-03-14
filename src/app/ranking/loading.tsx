@@ -1,4 +1,4 @@
-import RankingPageLoader from '@/features/Ranking/RankingPageLoader'
+import RankingPageLoader from '@/client/features/Ranking/RankingPageLoader'
 import React from 'react'
 
 const loading = () => {

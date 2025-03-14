@@ -1,8 +1,8 @@
-import { authOptions } from "@/shared/lib/authOptions";
-import connectDb from "@/shared/lib/db";
-import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import { SpotService } from "@/shared/services/Spots/SpotsService";
-import { UserService } from "@/shared/services/User/UserService";
+import { authOptions } from "@/server/lib/authOptions";
+import connectDb from "@/server/lib/db";
+import { errorResponse, successResponse } from "@/server/lib/httpResponse";
+import { SpotService } from "@/server/services/Spots/SpotsService";
+import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 

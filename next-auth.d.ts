@@ -1,10 +1,10 @@
 import { DefaultUser } from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
 
-import { UserRole } from "@/shared/enum/User/Role";
-import { UserStatus } from "@/shared/enum/User/Status";
-import { AuthProvider } from "@/shared/enum/User/AuthProvider";
-import { UserDTO } from "@/shared/models/User/UserDTO";
+import { UserRole } from "@/core/enum/User/Role";
+import { UserStatus } from "@/core/enum/User/Status";
+import { AuthProvider } from "@/core/enum/User/AuthProvider";
+import { UserDTO } from "@/server/models/User/UserDTO";
 
 /**
  * Para modificar/añadir campos en la interfaz "User" de NextAuth

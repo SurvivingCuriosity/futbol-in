@@ -1,8 +1,8 @@
 import {
   errorResponse,
   successResponse
-} from "@/shared/lib/httpResponse";
-import { RegistrationService } from "@/shared/services/Auth/RegistrationService";
+} from "@/server/lib/httpResponse";
+import { RegistrationService } from "@/server/services/Auth/RegistrationService";
 
 export async function POST(request: Request) {
   try {

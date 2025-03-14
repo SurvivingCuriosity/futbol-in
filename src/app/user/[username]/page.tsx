@@ -1,6 +1,6 @@
-import { PerfilPage } from "@/features/Perfil/PerfilPage";
-import { NavLayout } from "@/shared/layouts/NavLayout";
-import { UserService } from "@/shared/services/User/UserService";
+import { PerfilPage } from "@/client/features/Perfil/PerfilPage";
+import { NavLayout } from "@/client/shared/layouts/NavLayout";
+import { UserService } from "@/server/services/User/UserService";
 
 interface PageProps {
   params: Promise<{

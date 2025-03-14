@@ -1,4 +1,4 @@
-import { LogrosPage } from '@/features/Logros/LogrosPage';
+import { LogrosPage } from "@/client/features/Logros/LogrosPage"
 
 const page = async () => <LogrosPage />
 

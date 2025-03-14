@@ -1,4 +1,4 @@
-import { bgClass, darkBgClass } from "@/shared/constants/ColoresMedallas";
+import { bgClass, darkBgClass } from "@/core/constants/ColoresMedallas";
 
 export interface ProgressProps {
   value: number;

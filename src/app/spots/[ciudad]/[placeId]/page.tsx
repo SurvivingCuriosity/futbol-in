@@ -1,5 +1,5 @@
-import { SpotsCiudadPage } from "@/features/SpotsCiudad/SpotsCiudadPage";
-import { SpotService } from "@/shared/services/Spots/SpotsService";
+import { SpotsCiudadPage } from "@/client/features/SpotsCiudad/SpotsCiudadPage";
+import { SpotService } from "@/server/services/Spots/SpotsService";
 
 export const revalidate = 3600;
 

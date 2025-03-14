@@ -1,8 +1,8 @@
-import { UserStatus } from "@/shared/enum/User/Status";
-import { authOptions } from "@/shared/lib/authOptions";
-import connectDb from "@/shared/lib/db";
-import { errorResponse } from "@/shared/lib/httpResponse";
-import { UserService } from "@/shared/services/User/UserService";
+import { UserStatus } from "@/core/enum/User/Status";
+import { authOptions } from "@/server/lib/authOptions";
+import connectDb from "@/server/lib/db";
+import { errorResponse } from "@/server/lib/httpResponse";
+import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 

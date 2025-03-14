@@ -1,4 +1,4 @@
-import { LoginForm } from "@/features/Auth/Login/LoginForm";
+import { LoginForm } from "@/client/features/Auth/Login/LoginForm";
 
 const LoginPage = async () => <LoginForm />
 

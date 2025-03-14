@@ -1,8 +1,8 @@
-import { RegisterForm } from "@/features/Auth/Register/RegisterForm";
-import { UserStatus } from "@/shared/enum/User/Status";
-import { authOptions } from "@/shared/lib/authOptions";
-import { verifyRegistrationToken } from "@/shared/lib/authToken";
-import { UserService } from "@/shared/services/User/UserService";
+import { RegisterForm } from "@/client/features/Auth/Register/RegisterForm";
+import { UserStatus } from "@/core/enum/User/Status";
+import { authOptions } from "@/server/lib/authOptions";
+import { verifyRegistrationToken } from "@/server/lib/authToken";
+import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

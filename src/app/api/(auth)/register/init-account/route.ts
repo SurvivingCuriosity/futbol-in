@@ -1,6 +1,6 @@
-import { UserStatus } from "@/shared/enum/User/Status";
-import { errorResponse } from "@/shared/lib/httpResponse";
-import { RegistrationService } from "@/shared/services/Auth/RegistrationService";
+import { UserStatus } from "@/core/enum/User/Status";
+import { errorResponse } from "@/server/lib/httpResponse";
+import { RegistrationService } from "@/server/services/Auth/RegistrationService";
 
 export async function POST(request: Request) {
   try {

@@ -1,7 +1,7 @@
-import { MiPerfilPage } from "@/features/MiPerfil/MiPerfilPage";
-import { authOptions } from "@/shared/lib/authOptions";
-import { IUserDocument } from "@/shared/models/User/User.model";
-import { UserService } from "@/shared/services/User/UserService";
+import { MiPerfilPage } from "@/client/features/MiPerfil/MiPerfilPage";
+import { authOptions } from "@/server/lib/authOptions";
+import { IUserDocument } from "@/server/models/User/User.model";
+import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

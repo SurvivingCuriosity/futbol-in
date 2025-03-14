@@ -1,7 +1,7 @@
 "use client";
 
-import { EditarPerfilPage } from "@/features/Perfil/Editar/EditarPerfilPage";
-import { GoBackLayout } from "@/shared/layouts/GoBackLayout";
+import { EditarPerfilPage } from "@/client/features/Perfil/Editar/EditarPerfilPage";
+import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { useSearchParams } from "next/navigation";
 
 const Page = () => {

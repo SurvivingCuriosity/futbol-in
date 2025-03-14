@@ -1,6 +1,6 @@
-import InitAccountForm from "@/features/Auth/Register/InitAccountForm";
-import { UserStatus } from "@/shared/enum/User/Status";
-import { requireRegistrationStep } from "@/shared/lib/registrationGuard";
+import InitAccountForm from "@/client/features/Auth/Register/InitAccountForm";
+import { UserStatus } from "@/core/enum/User/Status";
+import { requireRegistrationStep } from "@/server/lib/registrationGuard";
 
 const InitAccountPage = async () => {
   await requireRegistrationStep(UserStatus.MUST_INIT_ACCOUNT);

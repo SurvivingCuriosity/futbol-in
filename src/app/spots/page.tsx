@@ -1,4 +1,4 @@
-import SearchInputCiudad from "@/shared/components/SearchInputCiudad";
+import SearchInputCiudad from "@/client/shared/components/SearchInputCiudad";
 
 const page = async () => {
 

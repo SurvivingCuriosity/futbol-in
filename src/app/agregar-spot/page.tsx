@@ -1,5 +1,5 @@
-import AgregarSpotPage from "@/features/AgregarSpot/AgregarSpotPage";
-import { authOptions } from "@/shared/lib/authOptions";
+import AgregarSpotPage from "@/client/features/AgregarSpot/AgregarSpotPage";
+import { authOptions } from "@/server/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

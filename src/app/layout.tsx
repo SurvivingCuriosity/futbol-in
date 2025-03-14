@@ -1,8 +1,8 @@
-import { NavLayout } from "@/shared/layouts/NavLayout";
-import SessionWrapper from "@/shared/components/Providers/SessionWrapper";
+import { NavLayout } from "@/client/shared/layouts/NavLayout";
+import SessionWrapper from "@/client/shared/components/Providers/SessionWrapper";
 import type { Metadata } from "next";
 import { Slide, ToastContainer } from "react-toastify";
-import "@/shared/assets/styles/toast.css";
+import "@/client/shared/assets/styles/toast.css";
 import "../globals.css";
 
 export const metadata: Metadata = {

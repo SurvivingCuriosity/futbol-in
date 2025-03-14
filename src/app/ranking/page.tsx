@@ -1,4 +1,4 @@
-import RankingPage from "@/features/Ranking/RankingPage";
+import RankingPage from "@/client/features/Ranking/RankingPage";
 
 export const revalidate = 60
 

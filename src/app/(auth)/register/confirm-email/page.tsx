@@ -1,8 +1,8 @@
-import ConfirmEmailForm from "@/features/Auth/Register/ConfirmEmailForm";
-import { UserStatus } from "@/shared/enum/User/Status";
-import { verifyRegistrationToken } from "@/shared/lib/authToken";
-import { requireRegistrationStep } from "@/shared/lib/registrationGuard";
-import { UserService } from "@/shared/services/User/UserService";
+import ConfirmEmailForm from "@/client/features/Auth/Register/ConfirmEmailForm";
+import { UserStatus } from "@/core/enum/User/Status";
+import { verifyRegistrationToken } from "@/server/lib/authToken";
+import { requireRegistrationStep } from "@/server/lib/registrationGuard";
+import { UserService } from "@/server/services/User/UserService";
 import { cookies } from "next/headers";
 
 const ConfirmEmailPage = async () => {

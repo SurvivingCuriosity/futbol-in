@@ -1,12 +1,12 @@
 import {
   CambiarEmailResponse
-} from "@/shared/client/types/User/CambiarEmail";
-import { UserStatus } from "@/shared/enum/User/Status";
-import { authOptions } from "@/shared/lib/authOptions";
-import connectDb from "@/shared/lib/db";
-import { errorResponse, successResponse } from "@/shared/lib/httpResponse";
-import { MailService } from "@/shared/services/Mail/MailService";
-import { UserService } from "@/shared/services/User/UserService";
+} from "@/client/shared/client/types/User/CambiarEmail";
+import { UserStatus } from "@/core/enum/User/Status";
+import { authOptions } from "@/server/lib/authOptions";
+import connectDb from "@/server/lib/db";
+import { errorResponse, successResponse } from "@/server/lib/httpResponse";
+import { MailService } from "@/server/services/Mail/MailService";
+import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";
 
 export async function PUT(req: Request) {
