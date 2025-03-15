@@ -27,6 +27,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
   const [spot, setSpot] = useState<SpotDTO>(spotProp);
 
   const onChangeSpotCallback = (newSpot: SpotDTO) => {
+    console.log(newSpot)
     setSpot(newSpot);
   };
 
@@ -56,7 +57,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
         visibleContent={
           <div onClick={() => onSelect && onSelect(spot)}>
             {spot.verificado !== null ? (
-              <MarcaVerificado fecha={spot.verificado.fechaVerificacion} />
+              <MarcaVerificado fecha={new Date(spot.verificado.fechaVerificacion)} />
             ) : (
               <IndicadorCobertura />
             )}

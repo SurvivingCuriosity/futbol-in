@@ -14,19 +14,20 @@ export const BotonesLikeDislike = ({ spot, onChangeSpotCallback }: { spot: SpotD
   const user = useGetLoggedInUserClient();
 
   const handleClickVotar = async (type: "up" | "down") => {
-    const updatedSpot = await SpotsClient.votarSpot({
+    const votarSpotResponse = await SpotsClient.votarSpot({
       spotId: spot.id,
       vote: type,
     })
-    onChangeSpotCallback(updatedSpot.spot);
+    console.log(votarSpotResponse)
+    onChangeSpotCallback(votarSpotResponse.spot);
   };
 
   const handleClickVerificar = async (type: "up" | "down") => {
-    const updatedSpot = await SpotsClient.verificarSpot({
+    const verificarSpotResponse = await SpotsClient.verificarSpot({
       spotId: spot.id,
       vote: type,
     })
-    onChangeSpotCallback(updatedSpot.spot);
+    onChangeSpotCallback(verificarSpotResponse.spot);
   };
 
   if (user?.role === UserRole.VERIFICADO) {

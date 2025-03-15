@@ -51,14 +51,13 @@ const AgregarSpotPage = () => {
         throw new Error("Error al obtener sesión de usuario");
       }
       const res = await SpotsClient.agregarSpot({
-        nombre: direccionOBar?.nombre || "Desconocido",
-        direccion: direccionOBar?.direccion || "Desconocido",
+        nombre: direccionOBar?.nombre || "",
+        direccion: direccionOBar?.direccion || "",
         coordinates: [direccionOBar?.lng || 0, direccionOBar?.lat || 0],
-        googlePlaceId: direccionOBar?.googlePlaceId || "Desconocido",
+        googlePlaceId: direccionOBar?.googlePlaceId || "",
         tipoLugar,
         tipoFutbolin,
         comentarios,
-        addedByUserId: session.data?.user?.id,
       });
       toast.success("¡Agregado correctamente!");
       comprobarSiGanaMedalla(res.spotsCreados);
