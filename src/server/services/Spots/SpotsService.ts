@@ -30,7 +30,7 @@ export class SpotService {
   }
 
   // Votar y verificar
-  static async votarSpot(
+  static async verificarSpot(
     idSpot: string,
     vote: "up" | "down",
     idUser: ObjectId
@@ -52,7 +52,7 @@ export class SpotService {
     return this.mapToDTO(spot);
   }
 
-  static async verificarSpot(
+  static async votarSpot(
     idSpot: string,
     vote: "up" | "down",
     idUser: Types.ObjectId
@@ -71,11 +71,7 @@ export class SpotService {
       throw new Error("Ya has votado este spot");
     }
 
-    if (vote === "up") {
-      spot.votes.up.push(idUser);
-    } else {
-      spot.votes.down.push(idUser);
-    }
+    spot.votes[vote].push(idUser);
 
     const updated = await spot.save();
     return this.mapToDTO(updated);
