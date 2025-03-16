@@ -1,12 +1,22 @@
 import { ImagenFutbolinMap } from "@/client/shared/constants/FutbolinesImageMap";
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { faLocationDot, faStore } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationCrosshairs,
+  faLocationDot,
+  faStore,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { MarcaVerificado } from "./MarcaVerificado";
 
-export const MainInfo = ({ spot }: { spot: SpotDTO }) => {
+export const MainInfo = ({
+  spot,
+  distanciaMessage,
+}: {
+  spot: SpotDTO;
+  distanciaMessage: string | null;
+}) => {
   const imagen = ImagenFutbolinMap[spot.tipoFutbolin];
   const logo = ImagenFutbolinLogoMap[spot.tipoFutbolin];
 
@@ -37,14 +47,22 @@ export const MainInfo = ({ spot }: { spot: SpotDTO }) => {
           )}
         </div>
       </div>
-      <div className="rounded-lg overflow-hidden w-5/12">
-        <Image
-          src={imagen}
-          alt="Logo"
-          width={200}
-          height={200}
-          className="w-full h-auto max-h-[90%] object-cover rounded-lg"
-        />
+      <div className="flex flex-col h-full w-5/12">
+        <div className="rounded-lg overflow-hidden">
+          <Image
+            src={imagen}
+            alt="Logo"
+            width={200}
+            height={200}
+            className="w-full h-auto max-h-[90%] object-cover rounded-lg"
+          />
+        </div>
+        {distanciaMessage && (
+          <span className="flex items-center gap-1 mt-2 ml-auto text-neutral-400">
+            <FontAwesomeIcon icon={faLocationCrosshairs} />
+            <p>{distanciaMessage}</p>
+          </span>
+        )}
       </div>
     </div>
   );

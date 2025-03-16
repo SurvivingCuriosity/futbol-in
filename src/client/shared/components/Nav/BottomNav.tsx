@@ -3,7 +3,7 @@
 import {
   LStorage,
   LStorageKeys,
-} from "@/server/services/LocalStorage/LStorage";
+} from "@/client/shared/services/LocalStorage/LStorage";
 import {
   faCirclePlus,
   faHome,
@@ -24,10 +24,10 @@ export const BottomNav = () => {
 
   const ultimaUbicacion =
     typeof window !== "undefined" &&
-    LStorage.getItem(LStorageKeys.ULTIMA_UBICACION);
+    LStorage.getItem(LStorageKeys.ULTIMAS_UBICACIONES)?.[0];
 
-  const ciudad = encodeURIComponent(ultimaUbicacion.ciudad);
-  const placeId = ultimaUbicacion.placeId;
+  const ciudad = encodeURIComponent(ultimaUbicacion?.ciudad);
+  const placeId = ultimaUbicacion?.placeId;
 
   const rutaFutbolines =
     ciudad && placeId ? `/spots/${ciudad}/${placeId}` : "/spots";

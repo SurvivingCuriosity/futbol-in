@@ -1,4 +1,5 @@
 import { SpotsCiudadPage } from "@/client/features/SpotsCiudad/SpotsCiudadPage";
+import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { SpotService } from "@/server/services/Spots/SpotsService";
 
 export const revalidate = 3600;
@@ -41,6 +42,20 @@ export default async function Page({
 
   const spots = await SpotService.findNearbyByPlaceId(placeId);
   const nombreCiudad = decodeURIComponent(ciudad.charAt(0).toUpperCase() + ciudad.slice(1));
+  const coords = await GoogleMapsService.getCoordinatesFromPlaceId(placeId)
 
-  return <SpotsCiudadPage spots={spots}  nombreCiudad={nombreCiudad}/>;
+  const fullPlace:FullPlace = {
+    ciudad: nombreCiudad,
+    coords,
+    placeId,
+  }
+
+  return <SpotsCiudadPage spots={spots} place={fullPlace}/>;
+}
+
+
+export interface FullPlace {
+  ciudad: string;
+  coords: google.maps.LatLngLiteral;
+  placeId: string;
 }

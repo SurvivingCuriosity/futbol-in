@@ -1,3 +1,4 @@
+import SearchInputCiudad from "@/client/shared/components/SearchInputCiudad";
 import React from "react";
 
 interface CityLayoutProps {
@@ -20,6 +21,9 @@ const layout = async (props: CityLayoutProps) => {
       <h1 className="text-3xl mb-2 font-extrabold text-primary tracking-tight">
         Futbolines en {ciudadLabel}
       </h1>
+      <span className="w-full my-2 z-5">
+        <SearchInputCiudad palceholder="Busca en otra ciudad..."/>
+      </span>
       {children}
     </>
   );

@@ -10,7 +10,7 @@
  */
 export function dateToTimeAgo(date: Date): string {
     const now = new Date();
-    console.log(date)
+    
     const diffMs = now.getTime() - date.getTime();
     if (diffMs < 0) {
       return "En el futuro";

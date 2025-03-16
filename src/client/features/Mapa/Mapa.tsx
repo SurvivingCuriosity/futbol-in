@@ -1,20 +1,19 @@
 "use client";
 
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { useUserLocation } from "@/server/services/UserLocation/useUserLocation";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import React, { useEffect, useMemo, useState } from "react";
-
-const defaultCenter = { lat: 40.9629936, lng: -5.6612327 };
+import React, { useEffect, useState } from "react";
 
 export interface MapaProps {
   markers: SpotDTO[];
   onSelectMarker: (marker: SpotDTO | null) => void;
   selectedMarker: SpotDTO | null;
+  userLocation: google.maps.LatLngLiteral | null;
+  initialCenter: google.maps.LatLngLiteral | null;
 }
 
 export function Mapa(props: MapaProps) {
-  const { markers, onSelectMarker, selectedMarker } = props;
+  const { markers, onSelectMarker, selectedMarker, userLocation, initialCenter } = props;
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string,
@@ -22,10 +21,6 @@ export function Mapa(props: MapaProps) {
   });
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
-
-  const userLocation = useUserLocation();
-
-  const zoom = useMemo(() => (userLocation ? 14 : 13), [userLocation]);
 
   useEffect(() => {
     const lat = selectedMarker?.coordinates[1];
@@ -47,6 +42,7 @@ export function Mapa(props: MapaProps) {
 
   if (loadError) return <div>Error al cargar el mapa</div>;
   if (!isLoaded) return <div>Cargando mapa...</div>;
+  if (!initialCenter) return <div>Navegando...</div>;
 
   return (
     <GoogleMap
@@ -56,8 +52,7 @@ export function Mapa(props: MapaProps) {
         height: "100%",
         zIndex: 1,
       }}
-      center={defaultCenter}
-      zoom={zoom}
+      center={initialCenter}
       onClick={handleMapClick}
       options={{
         disableDefaultUI: true,
@@ -70,6 +65,7 @@ export function Mapa(props: MapaProps) {
         rotateControl: true,
         tilt: 45,
         heading: 0,
+        zoom: 14,
         zoomControl: false,
         mapId: "729d891f5d94366",
         restriction: {

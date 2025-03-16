@@ -11,11 +11,12 @@ import { MainInfo } from "./components/MainInfo";
 export interface TarjetaLugarProps {
   spot: SpotDTO;
   selected?: boolean;
-  onSelect?: (l: SpotDTO|null) => void;
+  onSelect?: (l: SpotDTO | null) => void;
+  distanciaMessage: string | null;
 }
 
 export const TarjetaLugar = (props: TarjetaLugarProps) => {
-  const { spot: spotProp, selected, onSelect } = props;
+  const { spot: spotProp, selected, onSelect, distanciaMessage } = props;
 
   const user = useGetLoggedInUserClient();
 
@@ -27,6 +28,11 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
 
   const agregadoPorUsuario = spot.addedByUserId === user?.id;
 
+  const handleClickSpot = () => {
+    if (!onSelect) return;
+    onSelect(selected ? null : spot);
+  };
+
   return (
     <>
       <Colapsable
@@ -35,14 +41,14 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
         } relative p-3 border bg-neutral-900/90 rounded-lg select-none min-w-[400px]`}
         open={!!selected}
         visibleContent={
-          <div onClick={() => onSelect && onSelect(selected ? null : spot)} className="relative">
+          <div onClick={handleClickSpot} className="relative">
             {spot.verificado === null && (
               <IndicadorCobertura
                 downVotes={spot.votes.down.length}
                 upVotes={spot.votes.up.length}
               />
             )}
-            <MainInfo spot={spot} />
+            <MainInfo spot={spot} distanciaMessage={distanciaMessage} />
           </div>
         }
         extraContent={

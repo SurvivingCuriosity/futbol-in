@@ -10,13 +10,25 @@ import { usePathname } from "next/navigation";
 import { BotonPerfil } from "./components/BotonPerfil";
 import { useSession } from "next-auth/react";
 import { LoginRegister } from "./components/LoginRegister";
+import { LStorage, LStorageKeys } from "../../services/LocalStorage/LStorage";
 
 export const TopNav = () => {
   const pathname = usePathname();
 
   const session = useSession();
+
+  const ultimaUbicacion =
+    typeof window !== "undefined" &&
+    LStorage.getItem(LStorageKeys.ULTIMAS_UBICACIONES)?.[0];
+
+  const ciudad = encodeURIComponent(ultimaUbicacion?.ciudad);
+  const placeId = ultimaUbicacion?.placeId;
+
+  const rutaFutbolines =
+    ciudad && placeId ? `/spots/${ciudad}/${placeId}` : "/spots";
+
   const items = [
-    { label: "Buscar", href: "/spots", icon: faMagnifyingGlass },
+    { label: "Buscar", href: rutaFutbolines, icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
     { label: "Ranking", href: "/ranking", icon: faTrophy },
   ];
@@ -48,7 +60,11 @@ export const TopNav = () => {
           </div>
         </div>
 
-        {session.status === 'authenticated' ? <BotonPerfil /> : <LoginRegister />}
+        {session.status === "authenticated" ? (
+          <BotonPerfil />
+        ) : (
+          <LoginRegister />
+        )}
       </div>
     </menu>
   );

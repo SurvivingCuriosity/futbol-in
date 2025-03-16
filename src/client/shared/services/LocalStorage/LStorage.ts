@@ -1,5 +1,6 @@
 export const LStorageKeys = {
-    ULTIMA_UBICACION: 'ULTIMA_UBICACION'
+    ULTIMAS_UBICACIONES: 'ULTIMAS_UBICACIONES',
+    ULTIMOS_SPOTS_VISTOS: 'ULTIMOS_SPOTS_VISTOS',
 }
 
 export class LStorage {
@@ -8,7 +9,7 @@ export class LStorage {
     }
 
     static getItem(key: string) {
-        return JSON.parse(localStorage.getItem(key) || '{}');
+        return JSON.parse(localStorage.getItem(key) || 'null');
     }
 
     static removeItem(key: string) {

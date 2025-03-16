@@ -11,18 +11,27 @@ import { useEffect, useState } from "react";
 import { Mapa } from "../Mapa/Mapa";
 import { ButtonFiltros, Filtros } from "./components/Filtros/Filtros";
 import { PreviewFiltros } from "./components/Filtros/PreviewFiltros";
-import ListaSpots from "./ListaSpots";
+import ListaSpots, { getDistanciaEntre } from "./ListaSpots";
+import { useUserLocation } from "@/client/shared/services/UserLocation/useUserLocation";
+import { FullPlace } from "@/app/spots/[ciudad]/[placeId]/page";
+import {
+  LStorage,
+  LStorageKeys,
+} from "@/client/shared/services/LocalStorage/LStorage";
 
 export interface SpotsCiudadPageProps {
   spots: SpotDTO[];
-  nombreCiudad: string;
+  place: FullPlace;
 }
 
 export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
-  const { spots, nombreCiudad } = props;
+  const { spots, place } = props;
+
+  const userLocation = useUserLocation();
+
+  const currentCoords = userLocation;
 
   const [spotsFiltrados, setSpotsFiltrados] = useState<SpotDTO[]>(spots);
-
   const [selectedMarker, setSelectedMarker] = useState<SpotDTO | null>(null);
   const [view, setView] = useState<"list" | "map">("list");
   const [filtros, setFiltros] = useState<Filtros | null>(null);
@@ -39,6 +48,27 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
       setSpotsFiltrados(porTipoDeFutbolin);
     }
   }, [filtros, spots]);
+
+  const handleSelectSpot = (spot: SpotDTO | null) => {
+    setSelectedMarker(spot);
+
+    if (!spot) return;
+
+    let ultimosSpotsVistos =
+      (LStorage.getItem(LStorageKeys.ULTIMOS_SPOTS_VISTOS) as SpotDTO[]) || [];
+
+    ultimosSpotsVistos = ultimosSpotsVistos.filter(
+      (s) => s.googlePlaceId !== spot.googlePlaceId
+    );
+
+    ultimosSpotsVistos.unshift(spot);
+
+    if (ultimosSpotsVistos.length > 3) {
+      ultimosSpotsVistos.pop();
+    }
+
+    LStorage.setItem(LStorageKeys.ULTIMOS_SPOTS_VISTOS, ultimosSpotsVistos);
+  };
 
   if (spotsFiltrados.length === 0) {
     return (
@@ -83,7 +113,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
       )}
 
       {/* Contenedor principal */}
-      <div className="w-full flex flex-col md:flex-row gap-8 h-[calc(100dvh-11em)] md:overflow-hidden overflow-y-auto">
+      <div className="w-full flex flex-col md:flex-row gap-4 h-[calc(100dvh-13em)] md:h-[calc(100dvh-15em)] md:overflow-hidden overflow-y-auto">
         {/* Lista: se muestra en pantallas pequeñas si view === 'list' y siempre en md y mayores */}
         <div
           className={`${
@@ -93,20 +123,24 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
           <ListaSpots
             futbolines={spotsFiltrados}
             selectedLugar={selectedMarker}
-            onSelect={setSelectedMarker}
-            nombreCiudad={nombreCiudad}
+            onSelect={handleSelectSpot}
+            userCoords={
+              currentCoords ? [currentCoords.lng, currentCoords.lat] : null
+            }
           />
         </div>
         {/* Mapa: se muestra en pantallas pequeñas si view === 'map' y siempre en md y mayores */}
         <div
           className={`${
             view === "list" ? "invisible" : "visible"
-          } md:visible w-full rounded-xl overflow-hidden mt-2 h-full relative`}
+          } md:visible w-full rounded-xl overflow-hidden mt-2 h-[99%] relative`}
         >
           <Mapa
             markers={spotsFiltrados}
             selectedMarker={selectedMarker}
             onSelectMarker={setSelectedMarker}
+            userLocation={currentCoords}
+            initialCenter={place.coords}
           />
           {selectedMarker !== null && (
             <div className="absolute bottom-2 z-5 mx-auto backdrop-blur-[2px] w-full p-1 flex items-center justify-center">
@@ -114,6 +148,14 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
                 spot={selectedMarker}
                 selected={true}
                 onSelect={() => {}}
+                distanciaMessage={
+                  currentCoords
+                    ? getDistanciaEntre(
+                        [currentCoords.lng, currentCoords.lat],
+                        selectedMarker.coordinates
+                      )
+                    : null
+                }
               />
             </div>
           )}

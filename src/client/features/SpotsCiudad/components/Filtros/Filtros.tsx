@@ -33,7 +33,7 @@ export const ButtonFiltros = (props: ButtonFiltrosProps) => {
       )}
       <button
         onClick={() => setOpenFiltros(true)}
-        className="flex items-center size-8 gap-2 text-primary p-1 rounded-lg hover:bg-neutral-900"
+        className="flex items-center gap-2 text-primary p-1 px-2 rounded-lg hover:bg-neutral-900"
       >
         <FontAwesomeIcon
           icon={faFilter}
@@ -69,8 +69,8 @@ export const Filtros = (props: FiltrosPageProps) => {
   );
 
   return (
-    <div className="h-full">
-      <p className="text-sm text-neutral-700 mb-4">Filtros</p>
+    <div className="h-full w-full max-w-md p-8">
+      <p className="text-primary text-4xl font-black mb-4">Filtros</p>
       <FormField>
         <FormLabel>Tipo de futbolin</FormLabel>
         <SelectorTipoFutbolin
