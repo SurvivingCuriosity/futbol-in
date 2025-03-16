@@ -1,4 +1,4 @@
-import { SpotsCiudadPage } from "@/client/features/SpotsCiudad/SpotsCiudadPage";
+import { SpotsCiudadPage } from "@/client/features/Spots/SpotsCiudadPage";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { SpotService } from "@/server/services/Spots/SpotsService";
 

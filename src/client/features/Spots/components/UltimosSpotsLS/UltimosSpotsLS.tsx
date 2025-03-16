@@ -1,17 +1,23 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { TarjetaLugar } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
 import {
   LStorage,
   LStorageKeys,
 } from "@/client/shared/services/LocalStorage/LStorage";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import React from "react";
 
 export const UltimosSpotsLS = () => {
-  const ultimosSpotsVistos = LStorage.getItem(
-    LStorageKeys.ULTIMOS_SPOTS_VISTOS
-  ) as SpotDTO[];
+  const [ultimosSpotsVistos, setUltimosSpotsVistos] = useState<SpotDTO[]>([]);
+
+  useEffect(() => {
+    // Solo se ejecuta en el cliente
+    const spots = LStorage.getItem(LStorageKeys.ULTIMOS_SPOTS_VISTOS) as SpotDTO[] | null;
+    if (spots) {
+      setUltimosSpotsVistos(spots);
+    }
+  }, []);
 
   return (
     <>
@@ -19,9 +25,13 @@ export const UltimosSpotsLS = () => {
       <div className="rounded-lg flex items-center justify-center p-4 bg-neutral-900">
         {ultimosSpotsVistos && ultimosSpotsVistos.length > 0 ? (
           <ul className="mx-auto flex flex-col lg:grid lg:grid-cols-3 gap-2">
-            {ultimosSpotsVistos?.map((e) =>
-              e === null ? null : (
-                <TarjetaLugar spot={e} key={e.id} distanciaMessage={null} />
+            {ultimosSpotsVistos.map((spot) =>
+              spot === null ? null : (
+                <TarjetaLugar
+                  spot={spot}
+                  key={spot.id}
+                  distanciaMessage={null}
+                />
               )
             )}
           </ul>
