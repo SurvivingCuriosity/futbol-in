@@ -1,11 +1,35 @@
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown,
+  faArrowUp,
+  faEquals,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const IndicadorCobertura = () => {
+export const IndicadorCobertura = ({
+  upVotes,
+  downVotes,
+}: {
+  upVotes: number;
+  downVotes: number;
+}) => {
+  const diferencia = upVotes - downVotes;
+
+  const textColor =
+    diferencia === 0
+      ? "text-amber-400"
+      : diferencia > 0
+      ? "text-green-300"
+      : "text-red-400";
+
+  const icon =
+    diferencia === 0 ? faEquals : diferencia > 0 ? faArrowUp : faArrowDown;
+
   return (
-    <div className="absolute top-0.5 right-0.5 z-3 bg-black rounded text-xs flex gap-1 items-center text-green-300 p-1">
-      <p>23</p>
-      <FontAwesomeIcon icon={faArrowUp} />
+    <div
+      className={`absolute top-1 right-1 z-3 bg-black rounded text-xs flex gap-1 items-center ${textColor} p-1`}
+    >
+      <p>{diferencia}</p>
+      <FontAwesomeIcon icon={icon} />
     </div>
   );
 };

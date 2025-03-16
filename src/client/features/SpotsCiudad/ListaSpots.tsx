@@ -4,7 +4,7 @@ import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 export interface ListaSpotsProps {
   futbolines: SpotDTO[];
   selectedLugar: SpotDTO | null;
-  onSelect: (lugar: SpotDTO) => void;
+  onSelect: (lugar: SpotDTO|null) => void;
   nombreCiudad: string;
 }
 
@@ -14,7 +14,7 @@ const ListaSpots = (props: ListaSpotsProps) => {
   return (
     <>
       <ul
-        className={`space-y-4 pt-2 md:space-y-8 w-full md:max-w-md h-full overflow-hidden md:overflow-y-scroll mx-auto`}
+        className={`space-y-2 pt-2 md:space-y-4 w-full md:max-w-md h-full overflow-hidden md:overflow-y-scroll mx-auto pr-2`}
       >
         {futbolines.map((f, index) => (
           <TarjetaLugar

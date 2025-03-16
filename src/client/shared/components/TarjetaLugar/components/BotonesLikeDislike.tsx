@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const BotonesLikeDislike = ({ spot, onChangeSpotCallback }: { spot: SpotDTO, onChangeSpotCallback: (newSpot: SpotDTO) => void }) => {
+export const BotonesLikeDislike = ({ spot, onChangeSpotCallback, agregadoPorUsuario }: { spot: SpotDTO, onChangeSpotCallback: (newSpot: SpotDTO) => void, agregadoPorUsuario: boolean }) => {
   const user = useGetLoggedInUserClient();
 
   const handleClickVotar = async (type: "up" | "down") => {
@@ -29,6 +29,14 @@ export const BotonesLikeDislike = ({ spot, onChangeSpotCallback }: { spot: SpotD
     })
     onChangeSpotCallback(verificarSpotResponse.spot);
   };
+
+  if(!user){
+    return <p className="text-xs text-neutral-600">Inicia sesión para valorar este lugar</p>
+  }
+
+  if(agregadoPorUsuario){
+    return <p className="text-xs text-neutral-600">Spot agregado por ti</p>
+  }
 
   if (user?.role === UserRole.VERIFICADO) {
     if (!spot.verificado) {

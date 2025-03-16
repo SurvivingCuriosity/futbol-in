@@ -109,7 +109,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
             onSelectMarker={setSelectedMarker}
           />
           {selectedMarker !== null && (
-            <div className="absolute bottom-0.5 z-5 mx-auto backdrop-blur-[2px] w-full p-1 flex items-center justify-center">
+            <div className="absolute bottom-2 z-5 mx-auto backdrop-blur-[2px] w-full p-1 flex items-center justify-center">
               <TarjetaLugar
                 spot={selectedMarker}
                 selected={true}

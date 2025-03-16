@@ -12,6 +12,7 @@ export interface SpotDTO {
   comentarios: string;
   addedByUserId: string;
   verificado: null | {
+    correcto: boolean;
     idUser: string;
     fechaVerificacion: Date;
   }

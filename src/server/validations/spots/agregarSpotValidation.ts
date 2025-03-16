@@ -10,4 +10,5 @@ export const agregarSpotSchema = z.object({
   googlePlaceId: z.string().nonempty("El campo 'googlePlaceId' es requerido."),
   tipoLugar: z.string().nonempty("El campo 'tipoLugar' es requerido."),
   tipoFutbolin: z.string().nonempty("El campo 'tipoFutbolin' es requerido."),
+  comentarios: z.string()
 });

@@ -1,67 +1,47 @@
-// import generico from "@/shared/assets/img/generico.webp";
-// import genericomadera from "@/shared/assets/img/genericomadera.jpg";
-// import infinty from "@/shared/assets/img/infinity.jpg";
-// import presas from "@/shared/assets/img/presas.jpg";
-// import presasevo from "@/shared/assets/img/presasevo.jpg";
-// import tsunami_zoom from "@/shared/assets/img/tsunami_zoompng.png";
-
 import { Colapsable } from "@/packages/components/Colapsable";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { useState } from "react";
+import { useGetLoggedInUserClient } from "../../hooks/useGetLoggedInUserClient";
 import { BotoneraCompartir } from "./components/BotoneraCompartir";
 import { BotonesLikeDislike } from "./components/BotonesLikeDislike";
 import { Comentarios } from "./components/Comentarios";
 import { IndicadorCobertura } from "./components/IndicadorCobertura";
 import { MainInfo } from "./components/MainInfo";
-import { MarcaVerificado } from "./components/MarcaVerificado";
 
 export interface TarjetaLugarProps {
   spot: SpotDTO;
   selected?: boolean;
-  onSelect?: (l: SpotDTO) => void;
+  onSelect?: (l: SpotDTO|null) => void;
 }
 
 export const TarjetaLugar = (props: TarjetaLugarProps) => {
   const { spot: spotProp, selected, onSelect } = props;
 
+  const user = useGetLoggedInUserClient();
+
   const [spot, setSpot] = useState<SpotDTO>(spotProp);
 
   const onChangeSpotCallback = (newSpot: SpotDTO) => {
-    console.log(newSpot)
     setSpot(newSpot);
   };
 
-  // const imageMap: Record<
-  //   Exclude<TipoFutbolin, TipoFutbolin.CUALQUIERA>,
-  //   StaticImageData
-  // > = {
-  //   [TipoFutbolin.TSUNAMI]: tsunami_zoom,
-  //   [TipoFutbolin.PRESAS]: presas,
-  //   [TipoFutbolin.PRESAS_EVO]: presasevo,
-  //   [TipoFutbolin.GENERICO]: generico,
-  //   [TipoFutbolin.GENÉRICO_MADERA]: genericomadera,
-  //   [TipoFutbolin.INFINITY]: infinty,
-  // };
-
-  // const imagen =
-  //   imageMap[
-  //     spot.tipoFutbolin as Exclude<TipoFutbolin, TipoFutbolin.CUALQUIERA>
-  //   ];
+  const agregadoPorUsuario = spot.addedByUserId === user?.id;
 
   return (
     <>
-      {" "}
       <Colapsable
-        containerClassName="relative p-2 border border-neutral-700 rounded-lg select-none"
+        containerClassName={`${
+          selected ? "border-primary" : "border-neutral-700"
+        } relative p-3 border bg-neutral-900/90 rounded-lg select-none min-w-[400px]`}
         open={!!selected}
         visibleContent={
-          <div onClick={() => onSelect && onSelect(spot)}>
-            {spot.verificado !== null ? (
-              <MarcaVerificado fecha={new Date(spot.verificado.fechaVerificacion)} />
-            ) : (
-              <IndicadorCobertura />
+          <div onClick={() => onSelect && onSelect(selected ? null : spot)} className="relative">
+            {spot.verificado === null && (
+              <IndicadorCobertura
+                downVotes={spot.votes.down.length}
+                upVotes={spot.votes.up.length}
+              />
             )}
-
             <MainInfo spot={spot} />
           </div>
         }
@@ -77,6 +57,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
             <BotonesLikeDislike
               spot={spot}
               onChangeSpotCallback={onChangeSpotCallback}
+              agregadoPorUsuario={agregadoPorUsuario}
             />
           </div>
         }
