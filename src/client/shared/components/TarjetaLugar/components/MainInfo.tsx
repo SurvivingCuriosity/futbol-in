@@ -13,9 +13,11 @@ import { MarcaVerificado } from "./MarcaVerificado";
 export const MainInfo = ({
   spot,
   distanciaMessage,
+  isOpen
 }: {
   spot: SpotDTO;
   distanciaMessage: string | null;
+  isOpen: boolean;
 }) => {
   const imagen = ImagenFutbolinMap[spot.tipoFutbolin];
   const logo = ImagenFutbolinLogoMap[spot.tipoFutbolin];
@@ -28,16 +30,16 @@ export const MainInfo = ({
           <p className="text-lg font-bold">{spot.tipoFutbolin}</p>
         </div>
 
-        <div className="mt-2 ml-1">
+        <div className="mt-2 ml-1 space-y-1">
           <div className="flex items-center gap-1 text-neutral-400 text-sm">
-            <FontAwesomeIcon className="w-4" icon={faStore} />
-            <p className="whitespace-nowrap truncate max-w-10/12">
+            <FontAwesomeIcon className="w-6" icon={faStore} />
+            <p className={`${isOpen ? '' : 'truncate' }`}>
               {spot.nombre}
             </p>
           </div>
           <div className="flex items-center gap-1 text-neutral-400 text-sm">
-            <FontAwesomeIcon className="w-4" icon={faLocationDot} />
-            <p className="">{spot.direccion}</p>
+            <FontAwesomeIcon className="w-6" icon={faLocationDot} />
+            <p className={`${isOpen ? '' : 'truncate'}`}>{spot.direccion}</p>
           </div>
           {spot.verificado && (
             <MarcaVerificado

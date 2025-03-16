@@ -1,6 +1,6 @@
 "use client";
 
-import { EditarPerfilPage } from "@/client/features/Perfil/Editar/EditarPerfilPage";
+import { EditarPerfilPage } from "@/client/features/MiPerfil/Editar/EditarPerfilPage";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { useSearchParams } from "next/navigation";
 

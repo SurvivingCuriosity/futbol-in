@@ -38,7 +38,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
       <Colapsable
         containerClassName={`${
           selected ? "border-primary" : "border-neutral-700"
-        } relative p-3 border bg-neutral-900/90 rounded-lg select-none min-w-[400px]`}
+        } relative p-2 md:p-3 border bg-neutral-900/90 rounded-lg select-none md:min-w-[400px]`}
         open={!!selected}
         visibleContent={
           <div onClick={handleClickSpot} className="relative">
@@ -48,7 +48,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
                 upVotes={spot.votes.up.length}
               />
             )}
-            <MainInfo spot={spot} distanciaMessage={distanciaMessage} />
+            <MainInfo spot={spot} distanciaMessage={distanciaMessage} isOpen={!!selected}/>
           </div>
         }
         extraContent={
