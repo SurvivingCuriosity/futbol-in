@@ -25,6 +25,7 @@ export async function agregarSpotController(
     verificado:
       userDb?.role === UserRole.VERIFICADO
         ? {
+            correcto: true,
             idUser: userDb.id,
             fechaVerificacion: new Date(),
           }
