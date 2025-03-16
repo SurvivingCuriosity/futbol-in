@@ -54,7 +54,7 @@ export const TablonMensajes = () => {
   const [mensaje, setMensaje] = useState("");
   
   return (
-    <div className="p-2 md:p-4">
+    <>
       <div className="flex items-center justify-between gap-2">
         <p className="text-primary text-lg font-bold">Tablón de anuncios</p>
         <button>
@@ -67,11 +67,11 @@ export const TablonMensajes = () => {
           <Button label="Enviar" disabled={!mensaje} />
         </span>
       </div>
-      <ul className="flex flex-col gap-4 p-2 overflow-y-scroll h-full max-h-[300px]">
+      <ul className="flex flex-col gap-4 overflow-y-scroll h-full max-h-[300px]">
         {mockMensajes.map((mensaje) => (
           <Mensaje key={mensaje.id} mensaje={mensaje} />
         ))}
       </ul>
-    </div>
+    </>
   );
 };

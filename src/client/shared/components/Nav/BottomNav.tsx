@@ -36,7 +36,7 @@ export const BottomNav = () => {
     { label: "Home", href: "/", icon: faHome },
     { label: "Buscar", href: rutaFutbolines, icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
-    { label: "Ranking", href: "/ranking", icon: faTrophy },
+    { label: "Ranking", href: "/competicion", icon: faTrophy },
     {
       label: "Perfil",
       href: "/perfil",

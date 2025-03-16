@@ -7,7 +7,7 @@ export const Matchmaking = () => {
   const [searching, setSearching] = useState(false);
 
   return (
-    <div className="w-full h-full p-2 md:p-4">
+    <div className="">
       <p className="text-primary text-lg mb-2 font-bold">Matchmaking</p>
       <div className="p-4 flex items-center justify-center w-full">
         {searching ? (

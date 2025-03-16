@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 
 
-export default function TarjetaUsuarioRanking({ user }: { user: UserDTO }) {
+export default function TarjetaUsuarioTopRanking({ user, posicion, puntuacion }: { user: UserDTO, posicion: number, puntuacion: number }) {
   const router = useRouter();
 
   const handleNavigateToUser = () => {
@@ -16,7 +16,7 @@ export default function TarjetaUsuarioRanking({ user }: { user: UserDTO }) {
 
   return (
     <li
-      className="flex flex-row items-center gap-2 p-4 border border-neutral-700 rounded-lg relative h-20"
+      className={`flex flex-row items-center h-24 gap-2 p-4 border rounded-lg relative border-primary/50 bg-primary/5`}
       onClick={handleNavigateToUser}
     >
       {user.role === UserRole.VERIFICADO && (
@@ -24,12 +24,13 @@ export default function TarjetaUsuarioRanking({ user }: { user: UserDTO }) {
           <FontAwesomeIcon icon={faCheck} width={24} height={24} className="text-blue-200"/>
         </div>
       )}
-      <div className="bg-neutral-700 size-9 rounded-full flex items-center justify-center">
+      <div className="bg-neutral-700 size-14 rounded-full flex items-center justify-center relative">
+        <div className="absolute -top-2 -left-2 text-sm font-bold text-black bg-primary rounded-full size-7 flex items-center justify-center">{`#${posicion}`}</div>
         {user?.name?.charAt(0).toUpperCase()}
       </div>
       <span>
-        <p>{user?.name}</p>
-        <p className="text-sm text-neutral-400">{user.email}</p>
+        <p className="">{user?.name}</p>
+        <p className="text-xl text-neutral-400 font-bold">{puntuacion} pts</p>
       </span>
     </li>
   );
