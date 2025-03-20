@@ -21,7 +21,7 @@ export const BotoneraCompartir = ({
 
     let url;
     if (isMobile) {
-      url = `comgooglemaps://?q=place_id:${googlePlaceId}`;
+      url = `https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${googlePlaceId}`;
     } else {
       url = `https://www.google.com/maps/place/?q=place_id:${googlePlaceId}`;
     }
