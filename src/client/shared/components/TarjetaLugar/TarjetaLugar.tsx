@@ -1,6 +1,6 @@
 import { Colapsable } from "@/packages/components/Colapsable";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetLoggedInUserClient } from "../../hooks/useGetLoggedInUserClient";
 import { BotoneraCompartir } from "./components/BotoneraCompartir";
 import { BotonesLikeDislike } from "./components/BotonesLikeDislike";
@@ -21,6 +21,10 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
   const user = useGetLoggedInUserClient();
 
   const [spot, setSpot] = useState<SpotDTO>(spotProp);
+
+  useEffect(()=>{
+    setSpot(spotProp)
+  },[spotProp])
 
   const onChangeSpotCallback = (newSpot: SpotDTO) => {
     setSpot(newSpot);

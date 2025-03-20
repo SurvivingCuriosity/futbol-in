@@ -34,7 +34,7 @@ export function Mapa(props: MapaProps) {
 
   const handleMapClick = React.useCallback(
     (e: google.maps.MapMouseEvent) => {
-      onSelectMarker(null); // Selecciona el marker
+      onSelectMarker(null);
       e.stop();
     },
     [onSelectMarker]

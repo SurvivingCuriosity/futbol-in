@@ -138,7 +138,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
           <Mapa
             markers={spotsFiltrados}
             selectedMarker={selectedMarker}
-            onSelectMarker={setSelectedMarker}
+            onSelectMarker={handleSelectSpot}
             userLocation={currentCoords}
             initialCenter={place.coords}
           />
