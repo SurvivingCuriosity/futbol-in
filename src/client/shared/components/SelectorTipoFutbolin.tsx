@@ -16,8 +16,8 @@ export const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
     { value: TipoFutbolin.INFINITY, label: "Infinity" },
     { value: TipoFutbolin.PRESAS, label: "Presas" },
     { value: TipoFutbolin.PRESAS_EVO, label: "Presas Evo" },
-    { value: TipoFutbolin.GENERICO, label: "Genérico" },
-    { value: TipoFutbolin.GENÉRICO_MADERA, label: "Genérico de madera" },
+    { value: TipoFutbolin.DESCONOCIDO, label: "Desconocido" },
+    { value: TipoFutbolin.MADERA, label: "De madera" },
   ];
 
   const options = incluirOpcionTodos

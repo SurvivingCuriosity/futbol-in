@@ -3,7 +3,7 @@ export enum TipoFutbolin {
     INFINITY = "Infinity",
     PRESAS = "Presas",
     PRESAS_EVO = "Presas Evo",
-    GENERICO = "Genérico",
-    GENÉRICO_MADERA = "Genérico de madera",
+    DESCONOCIDO = "Desconocido",
+    MADERA = "De madera",
     CUALQUIERA = "Cualquiera",
 }

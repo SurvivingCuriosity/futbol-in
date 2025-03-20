@@ -56,7 +56,7 @@ export const MainInfo = ({
             alt="Logo"
             width={200}
             height={200}
-            className="w-full h-auto max-h-[90%] object-cover rounded-lg"
+            className="w-full h-auto max-h-[90%] object-cover rounded-lg aspect-video"
           />
         </div>
         {distanciaMessage && (

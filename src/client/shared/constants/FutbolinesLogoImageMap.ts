@@ -10,8 +10,8 @@ export const ImagenFutbolinLogoMap: Record<TipoFutbolin, StaticImageData> = {
   [TipoFutbolin.TSUNAMI]: logo_tsunami,
   [TipoFutbolin.PRESAS]: logo_tsunami,
   [TipoFutbolin.PRESAS_EVO]: logo_tsunami,
-  [TipoFutbolin.GENERICO]: generico,
-  [TipoFutbolin.GENÉRICO_MADERA]: madera,
+  [TipoFutbolin.DESCONOCIDO]: generico,
+  [TipoFutbolin.MADERA]: madera,
   [TipoFutbolin.INFINITY]: logo_infinity,
   [TipoFutbolin.CUALQUIERA]: logo_tsunami,
 };
