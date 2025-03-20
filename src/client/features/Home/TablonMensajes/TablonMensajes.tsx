@@ -56,7 +56,7 @@ export const TablonMensajes = () => {
   return (
     <>
       <div className="flex items-center justify-between gap-2">
-        <p className="text-primary text-lg font-bold">Tablón de anuncios</p>
+        <p className="text-primary md:text-lg text-2xl font-black">Tablón de anuncios</p>
         <button>
           <FontAwesomeIcon icon={faArrowRotateRight} className="w-6 h-6" />
         </button>
