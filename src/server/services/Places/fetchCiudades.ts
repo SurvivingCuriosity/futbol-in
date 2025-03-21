@@ -1,6 +1,6 @@
 import { PlaceOption } from "@/client/shared/components/SearchInputBar";
 
-export async function fetchCiudades(inputValue: string): Promise<PlaceOption[]> {
+export async function fetchCiudades(inputValue: string|number): Promise<PlaceOption[]> {
   if (!inputValue) return [];
   const res = await fetch(
     `/api/ciudades-autocomplete?input=${encodeURIComponent(inputValue)}`

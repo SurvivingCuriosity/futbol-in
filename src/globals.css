@@ -4,6 +4,8 @@
 
 @layer base {
     * {
+        user-select: none !important;
+
         ::selection {
             background-color: var(--color-primary);
             color: rgb(36, 36, 36);
@@ -41,19 +43,23 @@
     @keyframes fade-in {
         0% {
             opacity: 0;
-        },
+        }
+
+        ,
         100% {
             opacity: 1;
         }
     }
-    
+
     @keyframes puff-in {
 
         0% {
             transform: scale(2)translateY(-200px);
             filter: blur(2px);
             opacity: 0;
-        },
+        }
+
+        ,
         to: {
             transform: scale(1)translateY(0px);
             filter: blur(0);

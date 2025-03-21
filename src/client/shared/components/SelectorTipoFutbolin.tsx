@@ -1,3 +1,4 @@
+"use client";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { CustomSelect } from "futbol-in-ui";
 
@@ -5,11 +6,16 @@ export interface SelectorTipoFutbolinProps {
   value: TipoFutbolin;
   onSelect: (selectedOption: TipoFutbolin) => void;
   disabled?: boolean;
-  incluirOpcionTodos?:boolean;
+  incluirOpcionTodos?: boolean;
 }
 
-export const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
-  const { value, onSelect, disabled = false, incluirOpcionTodos = false } = props;
+const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
+  const {
+    value,
+    onSelect,
+    disabled = false,
+    incluirOpcionTodos = false,
+  } = props;
 
   const futbolinOptions = [
     { value: TipoFutbolin.TSUNAMI, label: "Tsunami" },
@@ -21,11 +27,14 @@ export const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
   ];
 
   const options = incluirOpcionTodos
-    ? [{value: TipoFutbolin.CUALQUIERA, label: "Cualquiera"}, ...futbolinOptions]
+    ? [
+        { value: TipoFutbolin.CUALQUIERA, label: "Cualquiera" },
+        ...futbolinOptions,
+      ]
     : futbolinOptions;
 
   return (
-    <CustomSelect    
+    <CustomSelect
       value={options.find((o) => o.value === value)}
       onSelect={(selectedOption) => {
         onSelect(selectedOption.value);
@@ -35,3 +44,5 @@ export const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
     />
   );
 };
+
+export default SelectorTipoFutbolin;

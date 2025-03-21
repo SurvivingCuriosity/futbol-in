@@ -4,7 +4,7 @@ import { SpotsClient } from "@/client/shared/client/SpotsClient";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import SearchInputBar from "@/client/shared/components/SearchInputBar";
 import SearchInputDireccion from "@/client/shared/components/SearchInputDireccion";
-import { SelectorTipoFutbolin } from "@/client/shared/components/SelectorTipoFutbolin";
+import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
 import { SelectorTipoLugar } from "@/client/shared/components/SelectorTipoLugar";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { TipoLogroEnum } from "@/core/enum/Logros/TipoLogroEnum";

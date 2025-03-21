@@ -1,6 +1,6 @@
 import { Switch } from "@/packages/components/Switch";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { SelectorTipoFutbolin } from "@/client/shared/components/SelectorTipoFutbolin";
+import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
 import { Window } from "@/packages/components/Window";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
