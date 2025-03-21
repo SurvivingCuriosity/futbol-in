@@ -1,6 +1,6 @@
 "use client";
 
-import { UserRole } from "@/core/enum/User/Role";
+import { esUsuarioVerificado } from "@/core/helpers/esUsuarioVerificado";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +19,7 @@ export default function TarjetaUsuarioRanking({ user }: { user: UserDTO }) {
       className="flex flex-row items-center gap-2 p-4 border border-neutral-700 rounded-lg relative h-20"
       onClick={handleNavigateToUser}
     >
-      {user.role === UserRole.VERIFICADO && (
+      {esUsuarioVerificado(user) && (
         <div className="bg-sky-600 absolute -top-1 -left-1 size-6 flex items-center justify-center rounded-full border-2 border-blue-300">
           <FontAwesomeIcon icon={faCheck} width={24} height={24} className="text-blue-200"/>
         </div>

@@ -91,7 +91,7 @@ export class UserService {
       email: user.email,
       imagen: user.imagen,
       status: user.status || UserStatus.MUST_CONFIRM_EMAIL,
-      role: user.role || UserRole.USER,
+      role: user.role || [UserRole.USER],
       provider: user.provider,
       createdAt: user.createdAt,
       stats: {

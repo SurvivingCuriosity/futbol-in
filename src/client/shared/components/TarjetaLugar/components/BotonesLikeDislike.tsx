@@ -1,6 +1,6 @@
 import { SpotsClient } from "@/client/shared/client/SpotsClient";
-import { UserRole } from "@/core/enum/User/Role";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
+import { esUsuarioVerificado } from "@/core/helpers/esUsuarioVerificado";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import {
@@ -38,7 +38,7 @@ export const BotonesLikeDislike = ({ spot, onChangeSpotCallback, agregadoPorUsua
     return <p className="text-xs text-neutral-600">Spot agregado por ti</p>
   }
 
-  if (user?.role === UserRole.VERIFICADO) {
+  if (esUsuarioVerificado(user)) {
     if (!spot.verificado) {
       return (
         <div className="flex items-center gap-2 text-sm">

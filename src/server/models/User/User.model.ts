@@ -10,7 +10,7 @@ export interface IUserDocument extends Document {
   password?: string;
   imagen?: string;
   status?: UserStatus;
-  role?: UserRole;
+  role?: UserRole[];
   provider: AuthProvider;
   createdAt?: Date;
 
@@ -36,9 +36,9 @@ const userSchema = new Schema<IUserDocument>(
       default: UserStatus.MUST_CONFIRM_EMAIL,
     },
     role: {
-      type: String,
+      type: [String],
       enum: Object.values(UserRole),
-      default: UserRole.USER,
+      default: [UserRole.USER],
     },
     provider: {
       type: String,

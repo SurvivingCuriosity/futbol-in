@@ -8,7 +8,7 @@ export interface UserDTO {
   email: string;
   imagen?: string;
   status: UserStatus;
-  role: UserRole;
+  role: UserRole[];
   provider: AuthProvider;
   createdAt?: Date;
 

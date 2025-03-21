@@ -23,7 +23,7 @@ export async function agregarSpotController(
     ...spot,
     addedByUserId: userDb.id,
     verificado:
-      userDb?.role === UserRole.VERIFICADO
+      userDb?.role?.includes(UserRole.VERIFICADO)
         ? {
             correcto: true,
             idUser: userDb.id,
