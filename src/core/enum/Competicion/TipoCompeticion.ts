@@ -1,4 +1,5 @@
 export enum TipoCompeticion {
-    TORNEO,
-    LIGA
+    LIGA = 'Liga',
+    TORNEO = 'Torneo',
+    TORNEO_CON_CLASIFICATORIA = 'Torneo clasificatoria',
 }

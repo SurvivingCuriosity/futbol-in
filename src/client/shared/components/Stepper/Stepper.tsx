@@ -32,8 +32,8 @@ export const Stepper = (
   return (
     <div className='flex h-full flex-col gap-2 z-3'>
 
-      <p className='block text-3xl font-bold tracking-tighter text-primary md:hidden'>{steps[activeInner]?.t || ''}</p>
-      <div className='relative mb-2 h-2 w-full bg-neutral-400 sm:mb-0 md:my-8 2xl:my-12'>
+      <p className='block text-3xl font-bold tracking-tighter text-primary'>{steps[activeInner]?.t || ''}</p>
+      <div className='relative mb-2 h-2 w-full bg-neutral-400'>
         <StepperBar progress={progress} />
         <div className='absolute left-0 flex h-full w-full flex-row items-center justify-between bg-transparent'>
           {steps.map((s, i) => (
@@ -42,7 +42,6 @@ export const Stepper = (
               index={i}
               isFirst={i === 0}
               isLast={i === steps.length - 1}
-              label={s.t}
               done={activeInner > i}
               active={activeInner === i}
               onClick={() => handleBallClick(i)}
@@ -55,7 +54,7 @@ export const Stepper = (
       <ul className='flex w-full flex-col flex-wrap overflow-hidden sm:mt-4'>
         {steps.map((s, i) => (
           <li key={s.t} className='h-full w-full transition-all duration-700' style={{ transform: `translateX(-${activeStep * 100}%)` }}>
-            <div className='flex flex-col gap-4 p-3 md:px-4 md:mt-4 lg:mt-8 bg-neutral-950/90 rounded-lg max-w-lg mx-auto w-[98%]'>
+            <div className='flex flex-col gap-4 p-2 md:px-4 md:mt-4 lg:mt-8 bg-neutral-950/90 rounded-lg max-w-xl mx-auto w-full'>
               {steps[i].component}
             </div>
           </li>

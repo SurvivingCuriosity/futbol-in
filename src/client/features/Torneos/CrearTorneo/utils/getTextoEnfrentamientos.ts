@@ -1,12 +1,12 @@
-import { ConfigCompeticion } from "../FormSteps/Enfrentamientos/Enfrentamientos";
+import { ConfigEnfrentamientos } from "../FormSteps/Enfrentamientos/FormEnfrentamientos";
 
-  export const getTextoEnfrentamientos = (configuracion:ConfigCompeticion) => {
+  export const getTextoEnfrentamientos = (configuracion:ConfigEnfrentamientos) => {
     const { cantidadPartidos, golesParaGanar } = configuracion;
     const partido = cantidadPartidos === 1 ? "partido" : "partidos";
     return `Al mejor de ${cantidadPartidos} ${partido}. El partido se gana al llegar a ${golesParaGanar} goles`;
   };
 
-  export const getTextoEnfrentamientosSemifinal = (excepcionSemiFinales:boolean, configuracion:ConfigCompeticion) => {
+  export const getTextoEnfrentamientosSemifinal = (excepcionSemiFinales:boolean, configuracion:ConfigEnfrentamientos) => {
     if (!excepcionSemiFinales || !configuracion.excepcionSemiFinales) {
       return "";
     }
@@ -16,7 +16,7 @@ import { ConfigCompeticion } from "../FormSteps/Enfrentamientos/Enfrentamientos"
     return `Semifinales: Al mejor de ${cantidadPartidos} ${partido}. El partido se gana al llegar a ${golesParaGanar} goles`;
   };
 
-  export const getTextoEnfrentamientosFinal = (excepcionFinal:boolean, configuracion:ConfigCompeticion) => {
+  export const getTextoEnfrentamientosFinal = (excepcionFinal:boolean, configuracion:ConfigEnfrentamientos) => {
     if (!excepcionFinal || !configuracion.excepcionFinal) {
       return "";
     }

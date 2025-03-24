@@ -2,12 +2,16 @@
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { Button, TextInput } from "futbol-in-ui";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { use, useState } from "react";
+import { CrearTorneoContext } from "../context/CrearTorneoContext";
 export const DatosBasicos = ({
   onCompleted,
 }: {
   onCompleted: (datos: unknown) => void;
 }) => {
+
+  const {tipoDeCompeticion, tipoDeFutbolin} = use(CrearTorneoContext)
+
   const [datosBasicos, setDatosBasicos] = useState({
     nombre: "",
     descripcion: "",
@@ -37,7 +41,7 @@ export const DatosBasicos = ({
           <TextInput
             value={datosBasicos.nombre}
             onChangeText={(t) => updateField("nombre", t)}
-            placeholder="Torneo 1ª div Tsunami - Salamanca 2024"
+            placeholder={`${tipoDeCompeticion} ${tipoDeFutbolin}`}
           />
         </FormField>
         <FormField>
