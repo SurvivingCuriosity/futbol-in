@@ -1,5 +1,10 @@
 import { Button } from "futbol-in-ui";
 import { useState } from "react";
+import {
+  getTextoEnfrentamientos,
+  getTextoEnfrentamientosFinal,
+  getTextoEnfrentamientosSemifinal,
+} from "../../utils/getTextoEnfrentamientos";
 import { InputGolesParaGanar } from "./InputGolesParaGanar";
 import { InputPartidosPorEnfrentamiento } from "./InputPartidosPorEnfrentamiento";
 
@@ -42,95 +47,39 @@ export const Enfrentamientos = ({
     onCompleted(configuracion);
   };
 
-  const getTextoEnfrentamientos = () => {
-    const { cantidadPartidos, golesParaGanar } = configuracion;
-    const jugara = cantidadPartidos === 1 ? "jugará" : "jugarán";
-    const partido = cantidadPartidos === 1 ? "partido" : "partidos";
-    return `Se ${jugara} ${cantidadPartidos} ${partido} en cada enfrentamiento. El partido se gana al llegar a ${golesParaGanar} goles`;
-  };
-
-  const getTextoEnfrentamientosSemifinal = () => {
-    if (!excepcionSemiFinales || !configuracion.excepcionSemiFinales) {
-      return "";
-    }
-    const { cantidadPartidos, golesParaGanar } =
-      configuracion.excepcionSemiFinales;
-    const jugara = cantidadPartidos === 1 ? "jugará" : "jugarán";
-    const partido = cantidadPartidos === 1 ? "partido" : "partidos";
-    return `En semifinales se ${jugara} ${cantidadPartidos} ${partido} en cada enfrentamiento. El partido se gana al llegar a ${golesParaGanar} goles`;
-  };
-
-  const getTextoEnfrentamientosFinal = () => {
-    if (!excepcionFinal || !configuracion.excepcionFinal) {
-      return "";
-    }
-    const { cantidadPartidos, golesParaGanar } = configuracion.excepcionFinal;
-    const jugara = cantidadPartidos === 1 ? "jugará" : "jugarán";
-    const partido = cantidadPartidos === 1 ? "partido" : "partidos";
-    return `En la final se ${jugara} ${cantidadPartidos} ${partido}. El partido se gana al llegar a ${golesParaGanar} goles`;
-  };
-
   return (
     <div className="px-1 md:px-4 md:mt-4 lg:mt-8 overflow-y-auto h-[500px] pr-2">
+      <p className="text-primary">Enfrentamientos por ronda:</p>
       <InputPartidosPorEnfrentamiento
         value={configuracion.cantidadPartidos}
         onUpdateValue={(v) => updateField("cantidadPartidos", v)}
       />
-
-      {excepcionSemiFinales && (
-        <div className="">
-          <InputPartidosPorEnfrentamiento
-            label="Semifinal:"
-            value={configuracion.cantidadPartidos}
-            onUpdateValue={(v) =>
-              setConfiguracion((prev) => ({
-                ...prev,
-                excepcionSemiFinales: {
-                  cantidadPartidos: v,
-                  golesParaGanar:
-                    prev.excepcionSemiFinales?.cantidadPartidos ||
-                    DEFAULT_GOLES_PARA_GANAR,
-                },
-              }))
-            }
-            inline
-          />
-        </div>
-      )}
-
-      {excepcionFinal && (
-        <div className="">
-          <InputPartidosPorEnfrentamiento
-            label="Final:"
-            value={configuracion.cantidadPartidos}
-            onUpdateValue={(v) =>
-              setConfiguracion((prev) => ({
-                ...prev,
-                excepcionFinal: {
-                  cantidadPartidos: v,
-                  golesParaGanar:
-                    prev.excepcionFinal?.cantidadPartidos ||
-                    DEFAULT_GOLES_PARA_GANAR,
-                },
-              }))
-            }
-            inline
-          />
-        </div>
-      )}
-
-      <hr className="my-4 border-neutral-700" />
-
       <InputGolesParaGanar
         value={configuracion.golesParaGanar}
         onUpdateValue={(v) => updateField("golesParaGanar", v)}
       />
-
       {excepcionSemiFinales && (
         <div className="">
+          <hr className="my-4 border-neutral-700" />
+          <p className="text-primary">En semifinales:</p>
+          <InputPartidosPorEnfrentamiento
+            value={configuracion.excepcionSemiFinales?.cantidadPartidos || 1}
+            onUpdateValue={(v) =>
+              setConfiguracion((prev) => ({
+                ...prev,
+                excepcionSemiFinales: {
+                  ...prev.excepcionSemiFinales,
+                  cantidadPartidos: v,
+                  // Mantener el golesParaGanar que ya tenía antes
+                  golesParaGanar:
+                    prev.excepcionSemiFinales?.golesParaGanar ||
+                    DEFAULT_GOLES_PARA_GANAR,
+                },
+              }))
+            }
+          />
           <InputGolesParaGanar
-            label="Semifinal:"
-            value={configuracion.golesParaGanar}
+            value={configuracion.excepcionSemiFinales?.golesParaGanar || 1}
             onUpdateValue={(v) =>
               setConfiguracion((prev) => ({
                 ...prev,
@@ -142,28 +91,43 @@ export const Enfrentamientos = ({
                 },
               }))
             }
-            inline
           />
         </div>
       )}
-
       {excepcionFinal && (
         <div className="">
-          <InputGolesParaGanar
-            label="Final:"
-            value={configuracion.golesParaGanar}
+          <hr className="my-4 border-neutral-700" />
+          <p className="text-primary">En la final:</p>
+          <InputPartidosPorEnfrentamiento
+            value={configuracion.excepcionFinal?.cantidadPartidos || 1}
             onUpdateValue={(v) =>
               setConfiguracion((prev) => ({
                 ...prev,
                 excepcionFinal: {
+                  ...prev.excepcionFinal,
+                  cantidadPartidos: v,
+                  // Mantener el golesParaGanar que ya tenía antes
+                  golesParaGanar:
+                    prev.excepcionFinal?.golesParaGanar ||
+                    DEFAULT_GOLES_PARA_GANAR,
+                },
+              }))
+            }
+          />
+          <InputGolesParaGanar
+            value={configuracion.excepcionFinal?.golesParaGanar || 1}
+            onUpdateValue={(v) =>
+              setConfiguracion((prev) => ({
+                ...prev,
+                excepcionFinal: {
+                  ...prev.excepcionFinal,
                   golesParaGanar: v,
                   cantidadPartidos:
-                    prev.excepcionSemiFinales?.cantidadPartidos ||
+                    prev.excepcionFinal?.cantidadPartidos ||
                     DEFAULT_PARTIDOS_POR_ENFRENTAMIENTO,
                 },
               }))
             }
-            inline
           />
         </div>
       )}
@@ -215,13 +179,13 @@ export const Enfrentamientos = ({
       </div>
 
       <p className="mb-4 text-xs text-neutral-600">
-        {getTextoEnfrentamientos()}
+        {getTextoEnfrentamientos(configuracion)}
       </p>
       <p className="mb-4 text-xs text-neutral-600">
-        {getTextoEnfrentamientosSemifinal()}
+        {getTextoEnfrentamientosSemifinal(excepcionSemiFinales, configuracion)}
       </p>
       <p className="mb-4 text-xs text-neutral-600">
-        {getTextoEnfrentamientosFinal()}
+        {getTextoEnfrentamientosFinal(excepcionFinal, configuracion)}
       </p>
 
       <Button label="Siguiente" onClick={handleSiguiente} />
