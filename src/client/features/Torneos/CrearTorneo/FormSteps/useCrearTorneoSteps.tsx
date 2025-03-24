@@ -13,7 +13,12 @@ export const useCrearTorneoSteps = () => {
   const {
     handleCompletarModalidadDeJuego,
     handleCompletarTipoDeCompeticion,
+    handleCompletarConfigurarLiga,
+    handleCompletarConfigurarTorneo,
+    handleCompletarConfigurarTorneoClasificatoria,
+    handleCompletarDatosBasicos,
     tipoDeCompeticion,
+    competicionEnCreacion,
   } = use(CrearTorneoContext);
 
   const steps = [
@@ -33,20 +38,29 @@ export const useCrearTorneoSteps = () => {
       t: `Configurar ${tipoDeCompeticion}`,
       component:
         tipoDeCompeticion === TipoCompeticion.LIGA ? (
-          <ConfigurarLiga />
+          <ConfigurarLiga onCompleted={handleCompletarConfigurarLiga}/>
         ) : tipoDeCompeticion === TipoCompeticion.TORNEO ? (
-          <ConfigurarTorneo />
+          <ConfigurarTorneo onCompleted={handleCompletarConfigurarTorneo}/>
         ) : (
-          <ConfigurarTorneoClasificatoria />
+          <ConfigurarTorneoClasificatoria onCompleted={handleCompletarConfigurarTorneoClasificatoria}/>
         ),
     },
     {
       t: "Datos básicos",
       component: (
-        <DatosBasicos onCompleted={()=>{}} />
+        <DatosBasicos onCompleted={handleCompletarDatosBasicos} />
       ),
     },
-    { t: "Inscripciones", component: <div>2</div> },
+    {
+      t: "Confirmar datos",
+      component: (
+        <div>
+          <pre>
+            {JSON.stringify(competicionEnCreacion, null, 2)}
+          </pre>
+        </div>
+      ),
+    }
   ];
 
 

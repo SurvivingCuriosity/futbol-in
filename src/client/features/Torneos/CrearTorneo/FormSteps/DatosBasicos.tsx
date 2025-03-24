@@ -4,17 +4,19 @@ import { Button, TextInput } from "futbol-in-ui";
 import dynamic from "next/dynamic";
 import { use, useState } from "react";
 import { CrearTorneoContext } from "../context/CrearTorneoContext";
+import { ConfiguracionBasica } from "../types/ConfiguracionBasica";
 export const DatosBasicos = ({
   onCompleted,
 }: {
-  onCompleted: (datos: unknown) => void;
+  onCompleted: (datos: ConfiguracionBasica) => void;
 }) => {
 
-  const {tipoDeCompeticion, tipoDeFutbolin} = use(CrearTorneoContext)
+  const {tipoDeCompeticion, tipoDeFutbolin, handleCrearTorneo} = use(CrearTorneoContext)
 
-  const [datosBasicos, setDatosBasicos] = useState({
+  const [datosBasicos, setDatosBasicos] = useState<ConfiguracionBasica>({
     nombre: "",
     descripcion: "",
+    googlePlaceId: ""
   });
 
   const updateField = (field: keyof typeof datosBasicos, value: string) => {
@@ -23,6 +25,7 @@ export const DatosBasicos = ({
 
   const handleSiguiente = () => {
     onCompleted(datosBasicos);
+    handleCrearTorneo()
   };
 
   const SearchInputBar = dynamic(
@@ -56,7 +59,7 @@ export const DatosBasicos = ({
           <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
           <SearchInputBar
             onSelect={(sel) => {
-              console.log(sel)
+              setDatosBasicos((prev) => ({...prev, googlePlaceId: sel.googlePlaceId}))
             }}
           />
         </FormField>

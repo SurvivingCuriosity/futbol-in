@@ -1,7 +1,7 @@
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { TipoEnfrentamiento } from "@/core/enum/Competicion/TipoEnfrentamiento";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { InlinePicker } from "futbol-in-ui";
+import { Button, InlinePicker } from "futbol-in-ui";
 import { useState } from "react";
 import { FormCantidadParejas } from "../../components/FormCantidadParejas";
 import {
@@ -10,8 +10,13 @@ import {
 } from "../Enfrentamientos/FormEnfrentamientos";
 import { InputGolesParaGanar } from "../Enfrentamientos/InputGolesParaGanar";
 import { InputPartidosPorEnfrentamiento } from "../Enfrentamientos/InputPartidosPorEnfrentamiento";
+import { ConfiguracionTorneoClasificatoria } from "../../types/ConfiguracionTorneoClasificatoria";
 
-export const ConfigurarTorneoClasificatoria = () => {
+export const ConfigurarTorneoClasificatoria = ({
+  onCompleted,
+}: {
+  onCompleted: (c:ConfiguracionTorneoClasificatoria) => void;
+}) => {
   const [cantidadParejas, setCantidadParejas] = useState<number>(16);
 
   const [tipoEnfrentamiento, setTipoEnfrentamiento] =
@@ -29,6 +34,21 @@ export const ConfigurarTorneoClasificatoria = () => {
 
   const textoAlMejorDe = `Se juega al mejor de ${enfrentamientos.cantidadPartidos} partidos. No hay posibilidad de empate. 3 puntos por ganar el enfrentamiento. El perdedor recibe 1 punto si gana un partido.`;
   const textoJugarUnTotalDe = `Se juega un total de ${enfrentamientos.cantidadPartidos} partidos. Se gana un punto por partido ganado.`;
+
+  const handleSubmit = () => {
+    const configTorneoClasificatoria: ConfiguracionTorneoClasificatoria = {
+      cantidadParejas,
+      configEnfrentamientosFaseDeGrupos: enfrentamientos,
+      configEnfrentamientosTorneo: {
+        cantidadPartidos: enfrentamientos.cantidadPartidos,
+        golesParaGanar: enfrentamientos.golesParaGanar,
+        excepcionSemiFinales: null,
+        excepcionFinal: null,
+      }
+    };
+
+    onCompleted(configTorneoClasificatoria);
+  }
 
   return (
     <>
@@ -80,6 +100,7 @@ export const ConfigurarTorneoClasificatoria = () => {
       />
       <p className="text-primary font-bold text-lg underline">Torneo</p>
       <FormEnfrentamientos esTorneo={true} onUpdate={() => {}} />
+        <Button label="Siguiente" onClick={handleSubmit} />
     </>
   );
 };

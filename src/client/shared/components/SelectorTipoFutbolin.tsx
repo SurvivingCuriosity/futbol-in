@@ -1,6 +1,7 @@
 "use client";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { CustomSelect } from "futbol-in-ui";
+import { memo } from "react";
 
 export interface SelectorTipoFutbolinProps {
   value: TipoFutbolin;
@@ -9,7 +10,7 @@ export interface SelectorTipoFutbolinProps {
   incluirOpcionTodos?: boolean;
 }
 
-const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
+const SelectorTipoFutbolin = memo((props: SelectorTipoFutbolinProps) => {
   const {
     value,
     onSelect,
@@ -43,6 +44,8 @@ const SelectorTipoFutbolin = (props: SelectorTipoFutbolinProps) => {
       disabled={disabled}
     />
   );
-};
+});
+
+SelectorTipoFutbolin.displayName = "SelectorTipoFutbolin";
 
 export default SelectorTipoFutbolin;
