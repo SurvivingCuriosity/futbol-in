@@ -74,7 +74,7 @@ const CrearTorneoProvider = ({ children }: { children: React.ReactNode }) => {
     setNombre(c.nombre);
     setDescripcion(c.descripcion);
     setGooglePlaceId(c.googlePlaceId);
-    
+    setActiveStep(activeStep + 1);
   };
 
   const handleCrearTorneo = () => {

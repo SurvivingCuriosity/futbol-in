@@ -5,16 +5,16 @@ import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 
 const ConfigEnfrentamientoSchema = new Schema(
   {
-    cantidadPartidos: { type: Number, required: true },
-    golesParaGanar: { type: Number, required: true },
+    cantidadPartidos: { type: Number, required: false },
+    golesParaGanar: { type: Number, required: false },
   },
   { _id: false }
 );
 
 const ConfigEnfrentamientosSchema = new Schema(
   {
-    cantidadPartidos: { type: Number, required: true },
-    golesParaGanar: { type: Number, required: true },
+    cantidadPartidos: { type: Number, required: false },
+    golesParaGanar: { type: Number, required: false },
     excepcionSemiFinales: { type: ConfigEnfrentamientoSchema, default: null },
     excepcionFinal: { type: ConfigEnfrentamientoSchema, default: null },
   },
@@ -43,35 +43,35 @@ export interface ICompeticion extends Document {
 
 const CompeticionSchema: Schema<ICompeticion> = new Schema(
   {
-    nombre: { type: String, required: true },
+    nombre: { type: String, required: false },
     descripcion: { type: String },
-    googlePlaceId: { type: String, required: true },
+    googlePlaceId: { type: String, required: false },
     tipoDeCompeticion: {
       type: String,
       enum: Object.values(TipoCompeticion),
-      required: true,
+      required: false,
     },
     tipoDeFutbolin: {
       type: String,
       enum: Object.values(TipoFutbolin),
-      required: true,
+      required: false,
     },
     modalidadDeJuego: {
       type: String,
       enum: Object.values(ModalidadJuego),
-      required: true,
+      required: false,
     },
     cantidadParejas: { type: Number, required: false, default: null },
     enfrentamientos: [{ type: Schema.Types.ObjectId, ref: "Enfrentamiento" }],
     equipos: [{ type: Schema.Types.ObjectId, ref: "Equipo" }],
     configuracionEnfrentamientos: {
       type: ConfigEnfrentamientosSchema,
-      required: true,
+      required: false,
     },
     createdByUserId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
   },
   { timestamps: true }

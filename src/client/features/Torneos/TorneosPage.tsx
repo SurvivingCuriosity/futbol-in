@@ -3,6 +3,7 @@ import { puedeCrearTorneos } from "@/core/helpers/puedeCrearTorneos";
 import { authOptions } from "@/server/lib/authOptions";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import ListaTorneos from "./ListaTorneos/ListaTorneos";
 
 export const TorneosPage = async () => {
   const session = await getServerSession(authOptions);
@@ -17,6 +18,7 @@ export const TorneosPage = async () => {
           jugadores
         </p>
       </div>
+      <ListaTorneos />
       {user && puedeCrearTorneos(user) && <Link href={'/competicion/torneos/nuevo'} className="bg-neutral-800 text-neutral-400 p-2 rounded-lg px-4 mx-auto block w-fit">Crear una competición</Link>}
     </GoBackLayout>
   );

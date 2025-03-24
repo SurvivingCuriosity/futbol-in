@@ -7,6 +7,7 @@ import { ConfigurarTorneo } from "./ConfigurarTorneo/ConfigurarTorneo";
 import { ConfigurarTorneoClasificatoria } from "./ConfigurarTorneoClasificatoria/ConfigurarTorneoClasificatoria";
 import { DatosBasicos } from "./DatosBasicos";
 import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { ConfirmarDatos } from "./ConfirmarDatos/ConfirmarDatos";
 
 export const useCrearTorneoSteps = () => {
   
@@ -18,7 +19,6 @@ export const useCrearTorneoSteps = () => {
     handleCompletarConfigurarTorneoClasificatoria,
     handleCompletarDatosBasicos,
     tipoDeCompeticion,
-    competicionEnCreacion,
   } = use(CrearTorneoContext);
 
   const steps = [
@@ -53,13 +53,7 @@ export const useCrearTorneoSteps = () => {
     },
     {
       t: "Confirmar datos",
-      component: (
-        <div>
-          <pre>
-            {JSON.stringify(competicionEnCreacion, null, 2)}
-          </pre>
-        </div>
-      ),
+      component: (<ConfirmarDatos />),
     }
   ];
 
