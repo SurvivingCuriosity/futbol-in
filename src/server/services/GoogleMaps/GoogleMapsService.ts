@@ -42,6 +42,26 @@ export class GoogleMapsService {
 
     return data.result.geometry.location;
   }
+  
+  static async getPlaceDetailsFromPlaceId(placeId: string):Promise<google.maps.places.PlaceResult> {
+    if (!placeId) {
+      return errorResponse("placeId es requerido", 400);
+    }
+
+    const url =
+      `https://maps.googleapis.com/maps/api/place/details/json` +
+      `?place_id=${placeId}` +
+      `&key=${this.key}`
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.status !== "OK") {
+      return errorResponse("No se pudo obtener el lugar", 500);
+    }
+
+    return data.result;
+  }
 
   static async getNombreLocalidadFromPlaceId(placeId: string) {
     if (!placeId) {
