@@ -25,6 +25,18 @@ export class CompeticionesService {
     return competiciones.map((c) => this.mapToDTO(c));
   }
 
+  static async getById(id: string): Promise<CompeticionDTO> {
+    await connectDb();
+
+    const competicion = await Competicion.findById(id);
+
+    if (!competicion) {
+      throw new Error("No se encontró la competición");
+    }
+
+    return this.mapToDTO(competicion);
+  }
+
   static mapToDTO(c: ICompeticion): CompeticionDTO {
     return {
       id: c._id.toString(),
