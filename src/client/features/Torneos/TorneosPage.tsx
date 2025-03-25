@@ -11,15 +11,9 @@ export const TorneosPage = async () => {
 
   return (
     <GoBackLayout href="/competicion">
-      <div className="w-full h-full flex flex-col items-center justify-center p-20 text-center">
-        <p className="text-lg">Ups... esta parte aún no está terminada</p>
-        <p className="text-xs text-neutral-500">
-          Podrás apuntarte a torneos, ver tus resultados y los de otros
-          jugadores
-        </p>
-      </div>
+      <h1 className="text-2xl font-extrabold text-primary mb-2">Torneos cerca de ti</h1>
       <ListaTorneos />
-      {user && puedeCrearTorneos(user) && <Link href={'/competicion/torneos/nuevo'} className="bg-neutral-800 text-neutral-400 p-2 rounded-lg px-4 mx-auto block w-fit">Crear una competición</Link>}
+      {user && puedeCrearTorneos(user) && <Link href={'/competicion/torneos/nuevo'} className="bg-neutral-800 border border-neutral-600 text-neutral-400 p-2 rounded-lg px-4 mx-auto block w-full text-center">Crear una competición</Link>}
     </GoBackLayout>
   );
 };
