@@ -93,7 +93,7 @@ export function DataTable<T extends object>({
             return (
               <th
                 key={col.key}
-                className="p-3 font-semibold text-sm border-b border-neutral-800"
+                className="p-2 font-semibold text-sm border-b border-neutral-800"
               >
                 {isSortable ? (
                   <button
