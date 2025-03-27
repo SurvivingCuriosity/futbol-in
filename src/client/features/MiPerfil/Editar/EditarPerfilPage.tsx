@@ -1,16 +1,18 @@
-import { FormField, FormLabel } from "@/packages/components/FormField";
 import { UserClient } from "@/client/shared/client/UserClient";
 import SearchInputCiudad from "@/client/shared/components/SearchInputCiudad";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
+import { FormField, FormLabel } from "@/packages/components/FormField";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { TextInput } from "futbol-in-ui";
 import { useEffect, useState } from "react";
+import { CambiarImagenPerfil } from "./components/CambiarImagenPerfil";
 import { DatosDeAcceso } from "./components/DatosDeAcceso";
 
 export const EditarPerfilPage = () => {
   const sessionUser = useGetLoggedInUserClient();
 
   const [user, setUser] = useState<UserDTO>();
+  const [userImage, setUserImage] = useState<string>();
   const [updatedUser, setUpdatedUser] = useState<UserDTO>();
   const [hayCambios, setHayCambios] = useState(false);
 
@@ -20,8 +22,13 @@ export const EditarPerfilPage = () => {
       setUser(res.user);
       setUpdatedUser(res.user);
     };
+    const getUserImage = async () => {
+      const url = await UserClient.getUserImageUrl(sessionUser?.imagen ?? "");
+      setUserImage(url);
+    };
     getUser();
-  }, [sessionUser?.id]);
+    getUserImage();
+  }, [sessionUser?.id, sessionUser?.imagen]);
 
   useEffect(() => {
     setHayCambios(JSON.stringify(user) !== JSON.stringify(updatedUser));
@@ -36,10 +43,8 @@ export const EditarPerfilPage = () => {
           Guardar
         </button>
       )}
-      <div className="mb-4 w-full">
-        <p className="text-primary text-lg border-b w-full">Datos de acceso</p>
-        <DatosDeAcceso user={user}/>
-      </div>
+
+      <CambiarImagenPerfil url={userImage || ''}/>
 
       <div className="mb-4 w-full">
         <p className="text-primary text-lg border-b w-full">Público</p>
@@ -62,6 +67,10 @@ export const EditarPerfilPage = () => {
             <SearchInputCiudad />
           </FormField>
         </div>
+      </div>
+      <div className="w-full">
+        <p className="text-primary text-lg border-b w-full">Datos de acceso</p>
+        <DatosDeAcceso user={user}/>
       </div>
     </div>
   );

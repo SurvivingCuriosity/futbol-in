@@ -1,12 +1,26 @@
-import mongoose, { Schema } from "mongoose";
+import { Document, Schema, Types, model, models } from "mongoose";
 
-const JugadorSchema = new Schema({
+interface IJugador {
+  usuario: Types.ObjectId | null;
+  nombre: string;
+}
+
+export interface IEquipoDocument extends Document {
+  _id: Types.ObjectId;
+  nombreEquipo: string;
+  imagenEquipo: string;
+  jugadores: IJugador[];
+  createdByUserId: Types.ObjectId;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const JugadorSchema = new Schema<IJugador>({
   usuario: {
     type: Schema.Types.ObjectId,
     ref: "Usuario",
     default: null,
   },
-  // Nombre del jugador en caso de que no sea un usuario registrado
   nombre: {
     type: String,
     required: false,
@@ -14,7 +28,7 @@ const JugadorSchema = new Schema({
   },
 });
 
-const EquipoSchema = new Schema(
+const EquipoSchema = new Schema<IEquipoDocument>(
   {
     nombreEquipo: {
       type: String,
@@ -30,10 +44,15 @@ const EquipoSchema = new Schema(
       type: [JugadorSchema],
       default: [],
     },
+    createdByUserId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("Equipo", EquipoSchema);
+export const Equipo = models.Equipo || model<IEquipoDocument>("Equipo", EquipoSchema);

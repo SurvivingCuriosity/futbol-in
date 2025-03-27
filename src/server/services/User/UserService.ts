@@ -5,6 +5,7 @@ import connectDb from "@/server/lib/db";
 import { IUserDocument, User } from "@/server/models/User/User.model";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import bcrypt from "bcryptjs";
+import { Types } from "mongoose";
 
 export class UserService {
   static async getAll(): Promise<UserDTO[]> {
@@ -30,6 +31,21 @@ export class UserService {
   static async findByUsername(username: string): Promise<IUserDocument | null> {
     await connectDb();
     return User.findOne({ name: username });
+  }
+
+  static async searchByName(name: string): Promise<UserDTO[]> {
+    await connectDb();
+  
+    const regex = new RegExp(name, "i");
+  
+    const users = await User.find({
+      $or: [
+        { name: { $regex: regex } },
+        { email: { $regex: regex } },
+      ],
+    }).lean<IUserDocument[]>();
+  
+    return users.map((u) => this.mapToDTO(u));
   }
 
   static async createGoogleUser(
@@ -60,6 +76,16 @@ export class UserService {
     userPassword: string
   ): Promise<boolean> {
     return bcrypt.compareSync(inputPassword, userPassword);
+  }
+
+  static async agregarEquipo(
+    idEquipo: Types.ObjectId,
+    idUser: string
+  ): Promise<IUserDocument | undefined> {
+    await connectDb();
+    const user = await this.findById(idUser);
+    user?.equipos.push(idEquipo);
+    return await user?.save();
   }
 
   static async incrementUserStat(
@@ -99,6 +125,7 @@ export class UserService {
         lugaresRevisados: user.stats.votedFutbolines,
         lugaresVerificados: user.stats.verifiedFutbolines,
       },
+      equipos: user.equipos?.map((e) => e.toString()),
     };
   }
 }

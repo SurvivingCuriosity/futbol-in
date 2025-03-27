@@ -6,7 +6,7 @@ export interface UserDTO {
   id: string;
   name: string;
   email: string;
-  imagen?: string;
+  imagen: string;
   status: UserStatus;
   role: UserRole[];
   provider: AuthProvider;
@@ -17,4 +17,6 @@ export interface UserDTO {
     lugaresRevisados: number;
     lugaresVerificados: number;
   }
+
+  equipos: string[]
 }

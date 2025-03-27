@@ -3,6 +3,7 @@ import { TopNav } from "@/client/shared/components/Nav/TopNav";
 
 
 export function NavLayout({ children }: { children: React.ReactNode }) {
+
   return (
     <div className="h-dvh w-full">
       <TopNav />

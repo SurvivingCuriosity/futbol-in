@@ -8,7 +8,7 @@ export interface IUserDocument extends Document {
   name?: string;
   email: string;
   password?: string;
-  imagen?: string;
+  imagen: string;
   status?: UserStatus;
   role?: UserRole[];
   provider: AuthProvider;
@@ -22,6 +22,8 @@ export interface IUserDocument extends Document {
     votedFutbolines: number;
     verifiedFutbolines: number;
   };
+
+  equipos: Types.ObjectId[];
 }
 
 const userSchema = new Schema<IUserDocument>(
@@ -29,7 +31,7 @@ const userSchema = new Schema<IUserDocument>(
     name: { type: String },
     email: { type: String, required: true },
     password: { type: String },
-    imagen: { type: String },
+    imagen: { type: String, default: "" },
     status: {
       type: String,
       enum: Object.values(UserStatus),
@@ -53,6 +55,8 @@ const userSchema = new Schema<IUserDocument>(
       votedFutbolines: { type: Number, default: 0 },
       verifiedFutbolines: { type: Number, default: 0 },
     },
+
+    equipos: [{ type: Schema.Types.ObjectId, ref: "Equipo", default: [] }],
   },
   {
     timestamps: true,

@@ -94,7 +94,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = dbUser._id.toString();
         session.user.name = dbUser.name || '';
         session.user.status = dbUser.status || UserStatus.MUST_CONFIRM_EMAIL;
-        session.user.imagen = token.imagen;
+        session.user.imagen = dbUser.imagen;
         session.user.role = token.role || [UserRole.USER];
       }
       

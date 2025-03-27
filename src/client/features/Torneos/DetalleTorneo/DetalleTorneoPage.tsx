@@ -77,10 +77,11 @@ export const DetalleCompeticionPage = ({
           </ul>
         )}
 
-        <div className="flex items-center gap-2 mt-4">
+        <div className="flex items-center gap-2 my-4 mb-2">
             <Link href={`/competicion/torneos/${competicion.id}/clasificacion`} className="bg-neutral-800 border border-neutral-600 text-neutral-400 p-2 rounded-lg px-4 mx-auto block w-full text-center">Ver clasificacion</Link>
             {isOwner && <Link href={`#`} className="bg-neutral-800 border border-neutral-600 text-neutral-400 p-2 rounded-lg px-4 mx-auto block w-full text-center">Editar</Link>}
         </div>
+            <Link href={`/competicion/torneos/${competicion.id}/clasificacion`} className="bg-primary border border-neutral-600 text-neutral-800 p-2 rounded-lg px-4 mx-auto block w-full text-center">Inscribirme</Link>
       </div>
     </GoBackLayout>
   );

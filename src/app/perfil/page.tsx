@@ -1,6 +1,7 @@
 import { MiPerfilPage } from "@/client/features/MiPerfil/MiPerfilPage";
 import { authOptions } from "@/server/lib/authOptions";
 import { IUserDocument } from "@/server/models/User/User.model";
+import { EquipoService } from "@/server/services/Equipo/EquipoController";
 import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -13,6 +14,12 @@ export default async function page() {
   }
   
   const fullUser = await UserService.findById(session.user.id);
+
+  if(!fullUser){
+    redirect("/not-allowed");
+  }
   
-  return <MiPerfilPage user={UserService.mapToDTO(fullUser as IUserDocument)} />;
+  const equipos = await EquipoService.findManyById(fullUser?.equipos)
+
+  return <MiPerfilPage user={UserService.mapToDTO(fullUser as IUserDocument)} equipos={equipos} />;
 }
