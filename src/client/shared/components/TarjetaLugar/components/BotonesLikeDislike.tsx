@@ -18,7 +18,6 @@ export const BotonesLikeDislike = ({ spot, onChangeSpotCallback, agregadoPorUsua
       spotId: spot.id,
       vote: type,
     })
-    console.log(votarSpotResponse)
     onChangeSpotCallback(votarSpotResponse.spot);
   };
 

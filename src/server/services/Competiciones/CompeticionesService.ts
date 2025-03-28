@@ -9,8 +9,6 @@ export class CompeticionesService {
   ): Promise<CompeticionDTO> {
     await connectDb();
 
-    console.log('En el servicio:', competicion)
-
     // Crear el documento
     const competicionCreada = await Competicion.create(competicion);
 

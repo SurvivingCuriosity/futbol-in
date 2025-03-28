@@ -10,8 +10,7 @@ export const ConfirmarDatos = () => {
 
   const handleCrearCompeticion = async () => {
     if(competicionEnCreacion === undefined) return;
-    const res = await CompeticionesClient.crearCompeticion(competicionEnCreacion);
-    console.log(res)
+    await CompeticionesClient.crearCompeticion(competicionEnCreacion);
   }
 
   return (

@@ -1,8 +1,10 @@
+import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 import { Document, Schema, Types, model, models } from "mongoose";
 
 interface IJugador {
   usuario: Types.ObjectId | null;
   nombre: string;
+  estado: EstadoJugador;
 }
 
 export interface IEquipoDocument extends Document {
@@ -25,6 +27,12 @@ const JugadorSchema = new Schema<IJugador>({
     type: String,
     required: false,
     default: null,
+  },
+  estado: {
+    type: String,
+    enum: Object.values(EstadoJugador),
+    required: false,
+    default: EstadoJugador.PENDIENTE,
   },
 });
 
@@ -55,4 +63,5 @@ const EquipoSchema = new Schema<IEquipoDocument>(
   }
 );
 
-export const Equipo = models.Equipo || model<IEquipoDocument>("Equipo", EquipoSchema);
+export const Equipo =
+  models.Equipo || model<IEquipoDocument>("Equipo", EquipoSchema);

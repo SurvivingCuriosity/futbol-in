@@ -5,6 +5,7 @@ import { ImagenEditable } from "@/client/shared/components/ImagenEditable";
 import { UserOption } from "@/client/shared/components/SearchInputUser";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
+import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
@@ -37,10 +38,12 @@ export const CrearEquipoPage = () => {
   const handleCrearEquipo = async () => {
     subirImagenEquipo().then((newUrl) => {
       setUploadedFile(undefined);
+      // Si tiene una cuenta, ponemos al compañero como pendiente, si no como aceptado directamente 
+      // (UN USUARIO SIN CUENTA NO PUEDE ACEPTAR UNIRSE LOL)
       EquiposClient.crearEquipo({
         imagenEquipo: newUrl,
         nombreEquipo: nombreEquipo,
-        jugadores: [companero],
+        jugadores: [{...companero, estado: companero.usuario === null ? EstadoJugador.ACEPTADO : EstadoJugador.PENDIENTE}]
       })
         .then((res) => {
           if (res.success) {

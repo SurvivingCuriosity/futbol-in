@@ -10,8 +10,6 @@ export async function crearCompeticionController(
   // Validar usuario que realiza la peticion
   const userDb = await validateLoggedInUser();
 
-  console.log('Antes de validar:', data)
-
   // Validar request
   const spot = crearCompeticionSchema.parse(data) as CompeticionDTO;
 

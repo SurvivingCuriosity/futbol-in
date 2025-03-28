@@ -42,7 +42,6 @@ export const getDistanciaEntre = (
   const [lat2, lng2] = coordenadas2;
 
   if (lat1 === null || lng1 === null) {
-    console.log("lat1 o lng1 es null");
     return null;
   }
 

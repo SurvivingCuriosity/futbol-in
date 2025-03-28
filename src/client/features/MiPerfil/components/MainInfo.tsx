@@ -1,7 +1,7 @@
+import { ChipPosicionJugador } from "@/client/shared/components/ChipPosicionJugador";
 import { useUser } from "@/client/shared/context/UserContext";
+import { Posicion } from "@/core/enum/Posicion/Posicion";
 import { UserDTO } from "@/server/models/User/UserDTO";
-import { faGun, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { ImagenPerfil } from "./ImagenPerfil";
@@ -22,14 +22,8 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
           <p className="font-bold text-3xl text-primary">{user.name}</p>
           <p className="text-sm text-neutral-500">Fernando Rodríguez</p>
           <div className="flex items-center gap-2 my-2 mb-4">
-            <div className="text-xs text-blue-400 bg-blue-500/20 w-fit p-1 flex items-center gap-1 px-2 rounded-2xl">
-              <FontAwesomeIcon icon={faShieldHalved} />
-              Portero
-            </div>
-            <div className="text-xs text-red-400 bg-red-500/20 w-fit p-1 flex items-center gap-1 px-2 rounded-2xl">
-              <FontAwesomeIcon icon={faGun} />
-              Delantero
-            </div>
+            <ChipPosicionJugador posicion={Posicion.POLIVALENTE} />
+            <ChipPosicionJugador posicion={Posicion.PORTERO} />
           </div>
           <p className="text-xs text-neutral-400">
             Miembro desde {user.createdAt?.toLocaleDateString()}

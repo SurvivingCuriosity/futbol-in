@@ -1,4 +1,4 @@
-import HomePage from "@/client/features/Home/HomePage";
+import HomePageContainer from "@/client/features/Home/HomePageContainer";
 import { LandingPage } from "@/client/features/Landing/LandingPage";
 import { UserStatus } from "@/core/enum/User/Status";
 import { authOptions } from "@/server/lib/authOptions";
@@ -17,6 +17,6 @@ export default async function Home() {
   const isLoggedIn = !!session;
 
   return (
-    isLoggedIn ? <HomePage /> : <LandingPage />
+    isLoggedIn ? <HomePageContainer user={user} /> : <LandingPage />
   );
 }

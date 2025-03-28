@@ -20,7 +20,9 @@ export function CambiarImagenPerfil({
     try {
       setLoading(true);
       // Borramos la actual
-      await StorageClient.delete(nombreImagen);
+      if(nombreImagen){
+        await StorageClient.delete(nombreImagen);
+      }
 
       // Subimos la nueva
       const path = await StorageClient.upload(file, "user");

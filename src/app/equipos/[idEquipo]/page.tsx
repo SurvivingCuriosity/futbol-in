@@ -1,6 +1,7 @@
 import { DetalleEquipoPage } from "@/client/features/Equipos/DetalleEquipoPage";
+import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 import { UserDTO } from "@/server/models/User/UserDTO";
-import { EquipoService } from "@/server/services/Equipo/EquipoController";
+import { EquipoService } from "@/server/services/Equipo/EquipoService";
 import { UserService } from "@/server/services/User/UserService";
 
 interface PageProps {
@@ -16,29 +17,29 @@ export default async function Page({ params }: PageProps) {
 
   const creador = await UserService.findById(equipo.createdByUserId);
 
-  if (!creador) {
-    return <div>Error al encontrar al creador del torneo</div>;
-  }
+  const jugadoresRegistrados: Array<UserDTO&{estado:EstadoJugador}> = [];
+  const jugadoresNoRegistrados: Array<{nombre:string, estado:EstadoJugador}> = [];
 
-  let companero: UserDTO | null = null;
-
-  if (equipo.jugadores) {
-    if (equipo.jugadores[0].usuario) {
-      console.log(equipo.jugadores[0]);
-      const companeroDocument = await UserService.findById(
-        equipo.jugadores[0].usuario
-      );
-      if (companeroDocument) {
-        companero = UserService.mapToDTO(companeroDocument);
+  for (const jugadorEquipo of equipo.jugadores) {
+    if (jugadorEquipo.usuario) {
+      const jugadorDocument = await UserService.findById(jugadorEquipo.usuario);
+      if (jugadorDocument) {
+        const jugadorDTO = UserService.mapToDTO(jugadorDocument);
+        jugadoresRegistrados.push({...jugadorDTO, estado:jugadorEquipo.estado});
+      } else {
+        jugadoresNoRegistrados.push({nombre:"Desconocido", estado:jugadorEquipo.estado});
       }
+    } else {
+      jugadoresNoRegistrados.push({nombre:jugadorEquipo.nombre, estado:jugadorEquipo.estado});
     }
   }
 
   return (
     <DetalleEquipoPage
       equipo={equipo}
-      creador={UserService.mapToDTO(creador)}
-      companero={companero}
+      creador={creador ? UserService.mapToDTO(creador) : null}
+      jugadoresRegistrados={jugadoresRegistrados}
+      jugadoresNoRegistrados={jugadoresNoRegistrados}
     />
   );
 }

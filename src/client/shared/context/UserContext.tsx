@@ -39,9 +39,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   }, [user?.imagen]);
 
   useEffect(() => {
-    console.log('akkkii')
     if(!user) return
-    console.log('akkkii 2')
     getImagenesEquipos(user).then((imagenes) => setImagenesEquipos(imagenes));
   }, [user]);
 
@@ -62,9 +60,7 @@ export function useUser() {
 
 
 async function getImagenesEquipos(user:UserDTO):Promise<Record<string, string>>{
-  console.log('getImagenesEquipos')
   const equipos = await EquiposClient.getEquiposDeUsuario(user?.id || "");
-  console.log('Los equipos: ', equipos)
   if (!equipos) return {};
   const imagesMap: Record<string, string> = {};
 
@@ -72,7 +68,6 @@ async function getImagenesEquipos(user:UserDTO):Promise<Record<string, string>>{
     if (eq.imagenEquipo) {
       try {
         const url = await StorageClient.getImageUrl(eq.imagenEquipo);
-        console.log('ala url',url)
         imagesMap[eq.id] = url;
       } catch (err) {
         console.error("Error obteniendo URL equipo", eq.id, err);

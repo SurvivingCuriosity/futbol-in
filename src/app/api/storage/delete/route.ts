@@ -5,8 +5,6 @@ export async function DELETE(request: Request) {
   try {
     const { path } = await request.json();
 
-    console.log('path en endpoint:', path)
-
     if (!path) {
       return NextResponse.json({ error: 'No path provided' }, { status: 400 });
     }

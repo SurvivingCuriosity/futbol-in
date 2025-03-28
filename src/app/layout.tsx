@@ -5,6 +5,7 @@ import { Slide, ToastContainer } from "react-toastify";
 import "@/client/shared/assets/styles/toast.css";
 import "../globals.css";
 import { UserProvider } from "@/client/shared/context/UserContext";
+import { Poppins } from 'next/font/google'
 
 export const metadata: Metadata = {
   title: "Futbol-In",
@@ -12,6 +13,11 @@ export const metadata: Metadata = {
   creator: "Fernando Rodríguez Esteban",
   manifest: "/manifest.json",
 };
+ 
+const roboto = Poppins({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+})
 
 export default function RootLayout({
   children,
@@ -25,7 +31,7 @@ export default function RootLayout({
             <meta name="theme-color" content="#0a0a0a" />
             <link rel="icon" href="/futbolin-logo.svg" />
           </head>
-          <body className={`antialiased bg-neutral-950 text-neutral-50`}>
+          <body className={`antialiased bg-neutral-950 text-neutral-50 ${roboto.className}`}>
             <NavLayout>{children}</NavLayout>
             <ToastContainer
               position="top-right"

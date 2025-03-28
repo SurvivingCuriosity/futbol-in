@@ -1,5 +1,5 @@
 import { errorResponse, successResponse } from "@/server/lib/httpResponse";
-import { EquipoService } from "@/server/services/Equipo/EquipoController";
+import { EquipoService } from "@/server/services/Equipo/EquipoService";
 import { UserService } from "@/server/services/User/UserService";
 
 export async function POST(req: Request) {

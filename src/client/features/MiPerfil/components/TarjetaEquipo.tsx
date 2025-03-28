@@ -1,4 +1,5 @@
 import { useUser } from "@/client/shared/context/UserContext";
+import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,14 +8,16 @@ import Link from "next/link";
 
 export const TarjetaEquipo = ({ equipo }: { equipo: EquipoDTO }) => {
 
-
+  const user = useGetLoggedInUserClient()
   const {imagenesEquipos} = useUser()
+
+  const companero = equipo.jugadores.find(j => j.usuario !== user?.id)
 
   return (
     <Link
       href={`/equipos/${equipo.id}`}
       key={equipo.id}
-      className="w-30 flex flex-col items-center justify-center p-2 border rounded-lg bg-neutral-900 border-neutral-700"
+      className="w-40 flex flex-row items-center gap-2 justify-center p-2 border rounded-lg bg-neutral-900 border-neutral-700"
     >
       <Image
         src={imagenesEquipos[equipo.id] || "/default_user.svg"}
@@ -28,7 +31,7 @@ export const TarjetaEquipo = ({ equipo }: { equipo: EquipoDTO }) => {
         {equipo.jugadores && (
           <div className="flex items-center gap-1 text-sm text-neutral-300">
             <FontAwesomeIcon icon={faUser} />
-            <p className="">{equipo.jugadores[0].nombre}</p>
+            <p className="">{companero?.nombre || 'Desconocido'}</p>
           </div>
         )}
       </div>

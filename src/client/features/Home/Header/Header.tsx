@@ -2,8 +2,10 @@ import { useUser } from "@/client/shared/context/UserContext";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import Image from "next/image";
 import React from "react";
+import { BotonNotificaciones } from "../Notificaciones/BotonNotificaciones";
+import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
 
-export const Header = () => {
+export const Header = ({tieneNotificaciones, notificaciones}:{tieneNotificaciones:boolean, notificaciones:INotificaciones}) => {
   const user = useGetLoggedInUserClient();
 
   const { imageUrl } = useUser();
@@ -30,6 +32,7 @@ export const Header = () => {
           </p>
         </div>
       </div>
+      <BotonNotificaciones tieneNotificaciones={tieneNotificaciones} notificaciones={notificaciones} />
     </header>
   );
 };

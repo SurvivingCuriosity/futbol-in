@@ -1,6 +1,7 @@
 import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
 import { BaseClient } from "./BaseClient";
 import { CrearEquipoRequest, CrearEquipoResponse } from "./types/Equipos/CrearEquipo";
+import { ResponderInvitacionRequest, ResponderInvitacionResponse } from "./types/Equipos/ResponderInvitacion";
 
 export class EquiposClient {
 
@@ -17,7 +18,6 @@ export class EquiposClient {
       throw new Error(response.error || "Error al crear el equipo");
     }
 
-    console.log('vamos a devolver: ', response.data)
     return response.data;
   }
 
@@ -32,6 +32,38 @@ export class EquiposClient {
     
     if (!response.ok) {
       throw new Error(response.error || "Error al crear el equipo");
+    }
+
+    return response.data;
+  }
+
+  static async eliminarEquipo(idEquipo: string): Promise<{success:boolean}> {
+    const response = await BaseClient.request<{success:boolean}>(
+      "/api/equipos/eliminar",
+      {
+        method: "POST",
+        body: idEquipo,
+      }
+    );
+    
+    if (!response.ok) {
+      throw new Error(response.error || "Error al crear el equipo");
+    }
+
+    return response.data;
+  }
+
+  static async responderInvitacion(data: ResponderInvitacionRequest): Promise<ResponderInvitacionResponse> {
+    const response = await BaseClient.request<ResponderInvitacionResponse>(
+      "/api/equipos/responder-invitacion",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    
+    if (!response.ok) {
+      throw new Error(response.error || "Error al responder la invitacion");
     }
 
     return response.data;

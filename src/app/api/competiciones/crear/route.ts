@@ -4,10 +4,8 @@ import { errorResponse, successResponse } from "@/server/lib/httpResponse";
 
 export async function POST(req: Request) {
   try {
-    console.log('Creando competicion')
     const competicion: CrearCompeticionRequest = await req.json();
 
-    console.log(competicion)
     const response = await crearCompeticionController(competicion);
 
     return successResponse(response, 201);

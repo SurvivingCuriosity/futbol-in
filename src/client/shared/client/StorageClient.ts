@@ -3,6 +3,7 @@ import { BaseClient } from "./BaseClient";
 export class StorageClient {
 
     static async getImageUrl(imageName: string): Promise<string> {
+      if(!imageName) return ""
       const response = await BaseClient.request<{ url: string }>(
         `/api/storage/files?path=${encodeURIComponent(imageName)}`,
         {
@@ -50,8 +51,6 @@ export class StorageClient {
       },
       body: JSON.stringify({ path })
     });
-
-    console.log(response)
 
     if (!response.ok) {
       throw new Error("StorageClient: Error al eliminar imagen");
