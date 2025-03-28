@@ -1,4 +1,6 @@
+import { getErrorMessage } from '@/packages/utils/getErrorMessage'
 import { bucket } from '@/server/lib/googleStorage'
+import { errorResponse } from '@/server/lib/httpResponse'
 import { NextResponse } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -35,8 +37,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ path: filePath })
     
   } catch (error) {
-    console.error('EL ERRRORRR=====')
-    console.error(error)
-    return NextResponse.json({ error: 'Error uploading file' }, { status: 500 })
+    return errorResponse(getErrorMessage(error))
   }
 }

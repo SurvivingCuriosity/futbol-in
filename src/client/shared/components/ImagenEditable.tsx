@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +18,10 @@ export const ImagenEditable = (props: ImagenEditableProps) => {
 
   const [innerUrl, setInnerUrl] = useState(url);
 
+  useEffect(()=>{
+    setInnerUrl(url)
+  },[url])
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
@@ -27,7 +31,6 @@ export const ImagenEditable = (props: ImagenEditableProps) => {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setInnerUrl(URL.createObjectURL(file));
       onNewImage(file);
     }
   };
@@ -40,7 +43,7 @@ export const ImagenEditable = (props: ImagenEditableProps) => {
         width={width}
         height={height}
         style={{ width, height }}
-        className="border-2 border-primary rounded-full aspect-square"
+        className="border-2 border-primary rounded-full aspect-square object-center object-cover"
       />
 
       <button

@@ -1,30 +1,20 @@
+import { useUser } from "@/client/shared/context/UserContext";
 import { UserDTO } from "@/server/models/User/UserDTO";
+import { faGun, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";
+import { useRouter } from "next/navigation";
 import { ImagenPerfil } from "./ImagenPerfil";
 import { MarcaVerificado } from "./MarcaVerificado";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { UserClient } from "@/client/shared/client/UserClient";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGun, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 
 export const MainInfo = ({ user }: { user: UserDTO }) => {
   const router = useRouter();
 
-  const [imagenUrl, setImagenUrl] = useState("");
-
-  useEffect(() => {
-    getImageUrl().then((url) => setImagenUrl(url));
-  }, []);
-
-  const getImageUrl = async () => {
-    if (!user.imagen) return "";
-    return await UserClient.getUserImageUrl(user.imagen);
-  };
+  const {imageUrl} = useUser()
 
   return (
     <div className="flex flex-col mx-auto items-center md:gap-4 w-full md:w-fit min-w-xs">
-      <ImagenPerfil imagenUrl={imagenUrl} />
+      <ImagenPerfil imagenUrl={imageUrl} />
 
       <span className="flex flex-row items-start md:flex-col">
         <MarcaVerificado user={user} />

@@ -7,12 +7,14 @@ import { TextInput } from "futbol-in-ui";
 import { useEffect, useState } from "react";
 import { CambiarImagenPerfil } from "./components/CambiarImagenPerfil";
 import { DatosDeAcceso } from "./components/DatosDeAcceso";
+import { useUser } from "@/client/shared/context/UserContext";
 
 export const EditarPerfilPage = () => {
   const sessionUser = useGetLoggedInUserClient();
 
+  const {imageUrl} = useUser()
+
   const [user, setUser] = useState<UserDTO>();
-  const [userImage, setUserImage] = useState<string>();
   const [updatedUser, setUpdatedUser] = useState<UserDTO>();
   const [hayCambios, setHayCambios] = useState(false);
 
@@ -22,12 +24,7 @@ export const EditarPerfilPage = () => {
       setUser(res.user);
       setUpdatedUser(res.user);
     };
-    const getUserImage = async () => {
-      const url = await UserClient.getUserImageUrl(sessionUser?.imagen ?? "");
-      setUserImage(url);
-    };
     getUser();
-    getUserImage();
   }, [sessionUser?.id, sessionUser?.imagen]);
 
   useEffect(() => {
@@ -44,7 +41,7 @@ export const EditarPerfilPage = () => {
         </button>
       )}
 
-      <CambiarImagenPerfil url={userImage || ''}/>
+      <CambiarImagenPerfil url={imageUrl || ''} nombreImagen={user.imagen} />
 
       <div className="mb-4 w-full">
         <p className="text-primary text-lg border-b w-full">Público</p>

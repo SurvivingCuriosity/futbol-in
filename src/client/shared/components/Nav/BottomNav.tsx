@@ -9,16 +9,19 @@ import {
   faHome,
   faMagnifyingGlass,
   faTrophy,
-  faUser,
-  faUserCircle,
+  faUser
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useUser } from "../../context/UserContext";
 
 export const BottomNav = () => {
   const pathname = usePathname();
+
+  const { imageUrl } = useUser();
 
   const session = useSession();
 
@@ -37,11 +40,6 @@ export const BottomNav = () => {
     { label: "Buscar", href: rutaFutbolines, icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
     { label: "Ranking", href: "/competicion", icon: faTrophy },
-    {
-      label: "Perfil",
-      href: "/perfil",
-      icon: session.status === "authenticated" ? faUserCircle : faUser,
-    },
   ];
 
   const isActive = (href: string) => {
@@ -69,6 +67,27 @@ export const BottomNav = () => {
           />
         </Link>
       ))}
+      <Link
+        href={"/perfil"}
+        className={`p-2`}
+      >
+        {session.status === "authenticated" ? (
+          <Image
+            src={imageUrl || '/default_user.svg'}
+            width={28}
+            height={28}
+            className={`text-xl size-6 rounded-full border-2  ${isActive("/perfil") ? "border-primary" : "border-transparent"} object-center object-cover`}
+            alt="Imagen de perfil"
+          />
+        ) : (
+          <FontAwesomeIcon
+            icon={faUser}
+            width={28}
+            height={28}
+            className="text-xl"
+          />
+        )}
+      </Link>
     </menu>
   );
 };
