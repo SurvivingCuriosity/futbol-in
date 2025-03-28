@@ -21,5 +21,5 @@ export default async function page() {
   
   const equipos = await EquipoService.findManyById(fullUser?.equipos)
 
-  return <MiPerfilPage user={UserService.mapToDTO(fullUser as IUserDocument)} equipos={equipos} />;
+  return (<MiPerfilPage user={UserService.mapToDTO(fullUser as IUserDocument)} equipos={equipos} />);
 }

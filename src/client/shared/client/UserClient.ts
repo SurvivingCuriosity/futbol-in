@@ -24,24 +24,6 @@ export class UserClient {
     return response.data;
   }
 
-  static async getUserImageUrl(imagen: string): Promise<string> {
-    const response = await BaseClient.request<{ url: string }>(
-      `/api/storage/files?path=${encodeURIComponent(imagen)}`,
-      {
-        method: "GET",
-      }
-    );
-    if (!imagen) {
-      throw new Error("Intentando buscar imagen sin url");
-    }
-    if (!response.ok) {
-      throw new Error(response.error || "Error al obtener el usuario");
-    }
-    const { url } = response.data;
-
-    return url;
-  }
-
   static async cambiarEmail(
     req: CambiarEmailRequest
   ): Promise<CambiarEmailResponse> {

@@ -17,6 +17,7 @@ export class EquiposClient {
       throw new Error(response.error || "Error al crear el equipo");
     }
 
+    console.log('vamos a devolver: ', response.data)
     return response.data;
   }
 

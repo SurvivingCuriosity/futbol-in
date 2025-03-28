@@ -27,7 +27,7 @@ export function CambiarImagenPerfil({
 
       if (path) {
         await UserClient.cambiarImagenPerfil(path);
-        const newImageUrl = await UserClient.getUserImageUrl(path)
+        const newImageUrl = await StorageClient.getImageUrl(path)
         setImageUrl(newImageUrl)
         setLoading(false);
       }

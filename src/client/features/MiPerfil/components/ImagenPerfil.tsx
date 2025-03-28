@@ -10,6 +10,6 @@ export const ImagenPerfil = ({ imagenUrl }: { imagenUrl:string }) => {
         width: 100,
         height: 100,
       }}
-      className="w-full h-full rounded-full border-2 border-primary"
+      className="w-full h-full rounded-full border-2 border-primary object-center object-cover"
     />
 };

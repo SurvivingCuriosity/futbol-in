@@ -1,39 +1,52 @@
 "use client";
 
+import { UserDTO } from "@/server/models/User/UserDTO";
 import React, {
   createContext,
   ReactNode,
   use,
-  useCallback,
   useEffect,
-  useState,
+  useState
 } from "react";
+import { EquiposClient } from "../client/EquiposClient";
+import { StorageClient } from "../client/StorageClient";
 import { useGetLoggedInUserClient } from "../hooks/useGetLoggedInUserClient";
-import { UserClient } from "../client/UserClient";
 
 type UserContextType = {
   imageUrl: string;
   setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+
+  imagenesEquipos: Record<string, string>;
+  setImagenesEquipos: React.Dispatch<
+    React.SetStateAction<Record<string, string>>
+  >;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  const [imageUrl, setImageUrl] = useState<string>("");
-
   const user = useGetLoggedInUserClient();
 
-  const getImageUrl = useCallback(async () => {
-    if (!user) return "";
-    return await UserClient.getUserImageUrl(user.imagen);
-  }, [user]);
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [imagenesEquipos, setImagenesEquipos] = useState<
+    Record<string, string>
+  >({});
 
   useEffect(() => {
-    getImageUrl().then((url) => setImageUrl(url || ""));
-  }, [getImageUrl]);
+    StorageClient.getImageUrl(user?.imagen || "").then((url) =>
+      setImageUrl(url || "")
+    );
+  }, [user?.imagen]);
+
+  useEffect(() => {
+    console.log('akkkii')
+    if(!user) return
+    console.log('akkkii 2')
+    getImagenesEquipos(user).then((imagenes) => setImagenesEquipos(imagenes));
+  }, [user]);
 
   return (
-    <UserContext.Provider value={{ imageUrl, setImageUrl }}>
+    <UserContext.Provider value={{ imageUrl, setImageUrl, imagenesEquipos, setImagenesEquipos }}>
       {children}
     </UserContext.Provider>
   );
@@ -45,4 +58,26 @@ export function useUser() {
     throw new Error("useUser must be used within a UserProvider");
   }
   return context;
+}
+
+
+async function getImagenesEquipos(user:UserDTO):Promise<Record<string, string>>{
+  console.log('getImagenesEquipos')
+  const equipos = await EquiposClient.getEquiposDeUsuario(user?.id || "");
+  console.log('Los equipos: ', equipos)
+  if (!equipos) return {};
+  const imagesMap: Record<string, string> = {};
+
+  for (const eq of equipos) {
+    if (eq.imagenEquipo) {
+      try {
+        const url = await StorageClient.getImageUrl(eq.imagenEquipo);
+        console.log('ala url',url)
+        imagesMap[eq.id] = url;
+      } catch (err) {
+        console.error("Error obteniendo URL equipo", eq.id, err);
+      }
+    }
+  }
+  return imagesMap
 }

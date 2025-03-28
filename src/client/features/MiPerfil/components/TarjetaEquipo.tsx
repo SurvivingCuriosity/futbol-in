@@ -1,25 +1,15 @@
+import { useUser } from "@/client/shared/context/UserContext";
 import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export const TarjetaEquipo = ({ equipo }: { equipo: EquipoDTO }) => {
-  const [imagenEquipo, setImagenEquipo] = useState("");
 
-  useEffect(() => {
-    getImageUrl().then((url) => setImagenEquipo(url));
-  }, []);
 
-  const getImageUrl = async () => {
-    const res = await fetch(
-      `/api/storage/files?path=${encodeURIComponent(equipo.imagenEquipo)}`
-    );
-    const { url } = await res.json();
+  const {imagenesEquipos} = useUser()
 
-    return url;
-  };
   return (
     <Link
       href={`/equipos/${equipo.id}`}
@@ -27,7 +17,7 @@ export const TarjetaEquipo = ({ equipo }: { equipo: EquipoDTO }) => {
       className="w-30 flex flex-col items-center justify-center p-2 border rounded-lg bg-neutral-900 border-neutral-700"
     >
       <Image
-        src={imagenEquipo || "/default_user.svg"}
+        src={imagenesEquipos[equipo.id] || "/default_user.svg"}
         alt="Imagen de equipo"
         width={100}
         height={100}

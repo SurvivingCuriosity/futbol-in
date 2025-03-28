@@ -1,5 +1,25 @@
+import { BaseClient } from "./BaseClient";
 
 export class StorageClient {
+
+    static async getImageUrl(imageName: string): Promise<string> {
+      const response = await BaseClient.request<{ url: string }>(
+        `/api/storage/files?path=${encodeURIComponent(imageName)}`,
+        {
+          method: "GET",
+        }
+      );
+      if (!imageName) {
+        throw new Error("Intentando buscar imagen sin url");
+      }
+      if (!response.ok) {
+        throw new Error(response.error || "Error al obtener el usuario");
+      }
+      const { url } = response.data;
+  
+      return url;
+    }
+
   static async upload(
     file: File,
     type: 'user'|'equipo'
