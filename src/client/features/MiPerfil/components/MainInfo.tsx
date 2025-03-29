@@ -1,6 +1,5 @@
 import { ChipPosicionJugador } from "@/client/shared/components/ChipPosicionJugador";
 import { useUser } from "@/client/shared/context/UserContext";
-import { Posicion } from "@/core/enum/Posicion/Posicion";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
@@ -20,11 +19,12 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
         <MarcaVerificado user={user} />
         <span className="flex flex-col gap-1 items-center">
           <p className="font-bold text-3xl text-primary">{user.name}</p>
-          <p className="text-sm text-neutral-500">Fernando Rodríguez</p>
+          {user.nombre && <p className="text-sm text-neutral-500">{user.nombre}</p>}
+          {user.posicion && 
           <div className="flex items-center gap-2 my-2 mb-4">
-            <ChipPosicionJugador posicion={Posicion.POLIVALENTE} />
-            <ChipPosicionJugador posicion={Posicion.PORTERO} />
+            <ChipPosicionJugador posicion={user.posicion} />
           </div>
+          }
           <p className="text-xs text-neutral-400">
             Miembro desde {user.createdAt?.toLocaleDateString()}
           </p>

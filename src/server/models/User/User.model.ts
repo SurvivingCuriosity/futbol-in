@@ -1,3 +1,4 @@
+import { Posicion } from "@/core/enum/Posicion/Posicion";
 import { AuthProvider } from "@/core/enum/User/AuthProvider";
 import { UserRole } from "@/core/enum/User/Role";
 import { UserStatus } from "@/core/enum/User/Status";
@@ -24,6 +25,10 @@ export interface IUserDocument extends Document {
   };
 
   equipos: Types.ObjectId[];
+
+  nombre: string|undefined|null;
+  telefono: string|undefined|null;
+  posicion: Posicion|undefined|null;
 }
 
 const userSchema = new Schema<IUserDocument>(
@@ -57,6 +62,9 @@ const userSchema = new Schema<IUserDocument>(
     },
 
     equipos: [{ type: Schema.Types.ObjectId, ref: "Equipo", default: [] }],
+    nombre: { type: String, default: null },
+    telefono: { type: String, default: null },
+    posicion: { type: String, enum: Object.values(Posicion), default: null },
   },
   {
     timestamps: true,

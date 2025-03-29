@@ -45,12 +45,12 @@ export const TopNav = () => {
       <div className="flex items-center h-full mx-auto justify-between gap-8 max-w-screen-xl px-4">
         <div className="flex items-center gap-8">
           <AppLogo href="/" />
-          <div className="flex items-center gap-2 text-lg">
+          <div className="flex items-center gap-2">
             {items.map((item, index) => (
               <Link
                 href={item.href}
                 key={`${item.icon}-${index}`}
-                className={`p-2 hover:bg-primary/20 rounded-lg ${
+                className={`p-1 px-2 hover:bg-primary/20 rounded-lg ${
                   isActive(item.href) ? "text-primary" : "text-white"
                 }`}
               >

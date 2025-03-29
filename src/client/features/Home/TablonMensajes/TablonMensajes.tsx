@@ -21,28 +21,28 @@ export const TablonMensajes = () => {
         "¡Hola! ¡Bienvenido a Futbol-In! Aquí encontrarás los mejores futbolines en la ciudad de Tumba, Colombia. ¡Disfruta de la actividad reciente y de las últimas noticias de la comunidad!",
     },
     {
-      id: 1,
+      id: 2,
       fecha: new Date(),
       usuario: "@juanperez",
       mensaje:
         "¡Hola! ¡Bienvenido a Futbol-In! Aquí encontrarás los mejores futbolines en la ciudad de Tumba, Colombia. ¡Disfruta de la actividad reciente y de las últimas noticias de la comunidad!",
     },
     {
-      id: 1,
+      id: 3,
       fecha: new Date(),
       usuario: "@juanperez",
       mensaje:
         "¡Hola! ¡Bienvenido a Futbol-In! Aquí encontrarás los mejores futbolines en la ciudad de Tumba, Colombia. ¡Disfruta de la actividad reciente y de las últimas noticias de la comunidad!",
     },
     {
-      id: 1,
+      id: 4,
       fecha: new Date(),
       usuario: "@juanperez",
       mensaje:
         "¡Hola! ¡Bienvenido a Futbol-In! Aquí encontrarás los mejores futbolines en la ciudad de Tumba, Colombia. ¡Disfruta de la actividad reciente y de las últimas noticias de la comunidad!",
     },
     {
-      id: 1,
+      id: 5,
       fecha: new Date(),
       usuario: "@juanperez",
       mensaje:

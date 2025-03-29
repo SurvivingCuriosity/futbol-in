@@ -35,16 +35,13 @@ export class UserService {
 
   static async searchByName(name: string): Promise<UserDTO[]> {
     await connectDb();
-  
+
     const regex = new RegExp(name, "i");
-  
+
     const users = await User.find({
-      $or: [
-        { name: { $regex: regex } },
-        { email: { $regex: regex } },
-      ],
+      $or: [{ name: { $regex: regex } }, { email: { $regex: regex } }],
     }).lean<IUserDocument[]>();
-  
+
     return users.map((u) => this.mapToDTO(u));
   }
 
@@ -69,6 +66,19 @@ export class UserService {
     await connectDb();
     const user = new User(userData);
     return user.save();
+  }
+
+  static async updateUser(
+    userId: string,
+    updateData: Partial<UserDTO>
+  ): Promise<IUserDocument | null> {
+    await connectDb();
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
+      runValidators: true,
+    });
+    console.log('Updated user: ', updatedUser);
+    return updatedUser;
   }
 
   static async validatePassword(
@@ -126,6 +136,9 @@ export class UserService {
         lugaresVerificados: user.stats.verifiedFutbolines,
       },
       equipos: user.equipos?.map((e) => e.toString()),
+      nombre: user.nombre,
+      telefono: user.telefono,
+      posicion: user.posicion,
     };
   }
 }

@@ -18,7 +18,7 @@ export const Header = ({tieneNotificaciones, notificaciones}:{tieneNotificacione
     <header className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-2">
         <Image
-          src={imageUrl}
+          src={imageUrl || '/default_user.svg'}
           width={50}
           height={50}
           alt="Imagen de perfil"

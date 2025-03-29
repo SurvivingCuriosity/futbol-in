@@ -4,8 +4,10 @@ import {
   CambiarEmailRequest,
   CambiarEmailResponse,
 } from "./types/User/CambiarEmail";
+import { UpdateUserRequest, UpdateUserResponse } from "./types/User/UpdateUser";
 
 export class UserClient {
+  
   static async getUserById(
     idUser: string
   ): Promise<{ success: boolean; user: UserDTO }> {
@@ -37,6 +39,24 @@ export class UserClient {
 
     if (!response.ok) {
       throw new Error(response.error || "Error al obtener el usuario");
+    }
+
+    return response.data;
+  }
+  
+  static async updateUser(
+    req: UpdateUserRequest
+  ): Promise<UpdateUserResponse> {
+    const response = await BaseClient.request<UpdateUserResponse>(
+      `/api/user/update`,
+      {
+        method: "POST",
+        body: req,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.error || "Error al actualizar el usuario");
     }
 
     return response.data;

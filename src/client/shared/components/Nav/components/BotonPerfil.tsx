@@ -1,12 +1,13 @@
 "use client";
+import { useUser } from "@/client/shared/context/UserContext";
 import {
   faCog,
   faSignOutAlt,
   faUser,
-  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -19,6 +20,8 @@ const menuItems = [
 export const BotonPerfil: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const { imageUrl } = useUser();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -39,11 +42,12 @@ export const BotonPerfil: React.FC = () => {
         onClick={() => setIsOpen((prev) => !prev)}
         className="p-2 focus:outline-none z-1"
       >
-        <FontAwesomeIcon
-          icon={faUserCircle}
-          width={24}
-          height={24}
-          className="text-white"
+        <Image
+          src={imageUrl || "/default_user.svg"}
+          width={50}
+          height={50}
+          alt="Imagen de perfil"
+          className={`rounded-full size-8 object-cover border-2 ${isOpen ? "border-primary" : "border-transparent"}`}
         />
       </button>
       {isOpen && (

@@ -7,14 +7,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const ChipPosicionJugador = ({ posicion }: { posicion: Posicion }) => {
-  const colorMap: Record<Posicion, string> = {
+type PosicionConValue = Exclude<Posicion, Posicion.NOT_SET>;
+
+export const ChipPosicionJugador = ({ posicion }: { posicion: PosicionConValue }) => {
+  const colorMap: Record<PosicionConValue, string> = {
     [Posicion.DELANTERO]: "text-red-400 bg-red-500/20",
     [Posicion.PORTERO]: "text-blue-400 bg-blue-500/20",
     [Posicion.POLIVALENTE]: "text-green-400 bg-green-500/20",
   };
 
-  const iconMap: Record<Posicion, IconDefinition> = {
+  const iconMap: Record<PosicionConValue, IconDefinition> = {
     [Posicion.DELANTERO]: faGun,
     [Posicion.PORTERO]: faShieldHalved,
     [Posicion.POLIVALENTE]: faHandPeace,

@@ -1,3 +1,4 @@
+import { Posicion } from "@/core/enum/Posicion/Posicion";
 import { AuthProvider } from "@/core/enum/User/AuthProvider";
 import { UserRole } from "@/core/enum/User/Role";
 import { UserStatus } from "@/core/enum/User/Status";
@@ -18,5 +19,9 @@ export interface UserDTO {
     lugaresVerificados: number;
   }
 
-  equipos: string[]
+  equipos: string[];
+
+  nombre: string|undefined|null;
+  telefono: string|undefined|null;
+  posicion: Posicion|undefined|null;
 }

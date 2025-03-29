@@ -8,7 +8,7 @@ export function NavLayout({ children }: { children: React.ReactNode }) {
     <div className="h-dvh w-full">
       <TopNav />
       <main
-        className="p-2 md:p-4 relative flex flex-col items-start justify-start pb-18
+        className="p-3 md:p-4 relative flex flex-col items-start justify-start pb-18
           md:pb-0
           md:max-w-screen-xl 
           md:mx-auto
