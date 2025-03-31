@@ -6,7 +6,7 @@ export class MailService {
   static async sendVerificationEmail(email: string, verificationCode: string): Promise<void> {
     const msg = {
       to: email,
-      from: "ferrodest1999@gmail.com",
+      from: "contacto@futbolin.app",
       subject: "Verificación de Email",
       text: `Tu código de verificación es: ${verificationCode}`,
       html: `<p>Tu código de verificación es: <strong>${verificationCode}</strong></p>`,
