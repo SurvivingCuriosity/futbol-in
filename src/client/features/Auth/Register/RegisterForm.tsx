@@ -33,25 +33,33 @@ export const RegisterForm = () => {
 
   return (
     <>
-      <FormField>
-        <FormLabel>Correo electrónico</FormLabel>
-        <TextInput
-          onChangeText={(text) => {
-            setEmail(text);
-            setError("");
-          }}
-          placeholder="johny@example.com"
-          errorText={error}
-        />
-      </FormField>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleClickRegister();
+        }}
+      >
+        <FormField>
+          <FormLabel>Correo electrónico</FormLabel>
+          <TextInput
+            onChangeText={(text) => {
+              setEmail(text);
+              setError("");
+            }}
+            placeholder="johny@example.com"
+            errorText={error}
+          />
+        </FormField>
 
-      <FormField>
-        <Button
-          label="Registrarme"
-          onClick={handleClickRegister}
-          loading={loading}
-        />
-      </FormField>
+        <FormField>
+          <Button
+            label="Registrarme"
+            onClick={handleClickRegister}
+            loading={loading}
+            disabled={loading}
+          />
+        </FormField>
+      </form>
 
       <p className="my-8 text-center text-xs text-neutral-400">
         o si prefieres...

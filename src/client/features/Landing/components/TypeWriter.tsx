@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const Typewriter = ({
-    words = ["Futbolines", "Dardos", "Billares"],
+    words = ["Tsunami", "Infinity", "Presas EVO", "Presas 2000"],
     typeSpeed = 150, // Velocidad al escribir (ms)
     deleteSpeed = 50, // Velocidad al borrar (ms)
     wordDelay = 3000, // Pausa cuando la palabra se ha escrito (ms)

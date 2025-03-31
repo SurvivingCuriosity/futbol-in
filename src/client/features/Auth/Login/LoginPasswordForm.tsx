@@ -11,10 +11,12 @@ export default function LoginPasswordForm() {
   const searchParams = useSearchParams();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const email = searchParams.get("email") || "";
 
   const handleSignIn = async () => {
+    setLoading(true);
     setError("");
 
     const result = await signIn("credentials", {
@@ -29,13 +31,19 @@ export default function LoginPasswordForm() {
     } else {
       router.push("/");
     }
+    setLoading(false);
   };
 
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSignIn();
+      }}
+    >
       <FormField>
         <FormLabel>Correo electrónico</FormLabel>
-        <TextInput onChangeText={()=>{}} value={email} disabled/>
+        <TextInput onChangeText={() => {}} value={email} disabled />
       </FormField>
 
       <FormField>
@@ -46,8 +54,8 @@ export default function LoginPasswordForm() {
           onChangeText={setPassword}
         />
       </FormField>
-      <Button onClick={handleSignIn} label="Iniciar sesión" />
+      <Button onClick={handleSignIn} label="Iniciar sesión" loading={loading} disabled={loading} />
       {error && <p style={{ color: "red" }}>{error}</p>}
-    </>
+    </form>
   );
 }

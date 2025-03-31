@@ -1,5 +1,4 @@
 import imagen_fondo from "@/client/shared/assets/img/background.jpg";
-import { AppLogo } from "@/client/shared/components/AppLogo";
 import { UserStatus } from "@/core/enum/User/Status";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
@@ -19,7 +18,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className="absolute top-0 left-0 w-full h-dvh">
+    <div className="fixed top-16 left-0 w-full h-dvh">
       <section className="h-full w-full flex items-start justify-center relative">
         <Image
           alt="Imagen de fondo"
@@ -28,13 +27,8 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
           placeholder="blur"
           fill
         />
-        <div className="z-1 w-full p-4">
-          <div className="flex flex-col items-start justify-center max-w-screen-lg mx-auto">
-            <AppLogo href="/" />
-            <div className="mt-4 bg-neutral-950/80 backdrop-blur-xs rounded-lg p-4 w-full max-w-[500px] mx-auto border border-neutral-800">
-              {children}
-            </div>
-          </div>
+        <div className="mt-12 bg-neutral-950/80 backdrop-blur-xs rounded-lg p-4 w-full max-w-[500px] mx-auto border border-neutral-800">
+          {children}
         </div>
       </section>
     </div>

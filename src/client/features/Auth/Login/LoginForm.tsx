@@ -20,7 +20,7 @@ export const LoginForm = () => {
     setError("");
     setLoading(true);
     try {
-      const data = await AuthClient.checkEmail({email});
+      const data = await AuthClient.checkEmail({ email });
 
       if (data.redirect) {
         router.push(data.redirect);
@@ -33,18 +33,27 @@ export const LoginForm = () => {
 
   return (
     <>
-      <FormField>
-        <FormLabel>Correo electrónico</FormLabel>
-        <TextInput onChangeText={setEmail} placeholder="John Doe" />
-      </FormField>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleClickLogin();
+        }}
+      >
+        <FormField>
+          <FormLabel>Correo electrónico</FormLabel>
+          <TextInput onChangeText={setEmail} placeholder="John Doe" />
+        </FormField>
 
-      <FormField>
-        <Button
-          label="Iniciar sesión"
-          onClick={handleClickLogin}
-          loading={loading}
-        />
-      </FormField>
+        <FormField>
+          <Button
+            label="Iniciar sesión"
+            onClick={handleClickLogin}
+            loading={loading}
+            disabled={loading}
+            
+          />
+        </FormField>
+      </form>
 
       {error && <p className="text-red-500 text-xs">{error}</p>}
 

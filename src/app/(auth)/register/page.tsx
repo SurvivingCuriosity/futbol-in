@@ -13,39 +13,32 @@ const RegisterPage = async () => {
 
   const session = await getServerSession(authOptions);
   if (session && session.user) {
-    if(session.user.status === UserStatus.DONE){
-      redirect('/')
+    if (session.user.status === UserStatus.DONE) {
+      redirect("/");
     }
-    if(session.user.status === UserStatus.MUST_CREATE_USERNAME){
-      redirect('/register/init-username')
+    if (session.user.status === UserStatus.MUST_CREATE_USERNAME) {
+      redirect("/register/init-username");
     }
   }
 
-  try {
-    if (token) {
-      const { userId } = verifyRegistrationToken(token || "");
-      if (userId) {
-        const user = await UserService.findById(userId);
-        if (user) {
-          if (user.status === UserStatus.MUST_INIT_ACCOUNT) {
-            redirect("/register/init-account");
-            return null;
-          }
+  if (token) {
+    const { userId } = verifyRegistrationToken(token || "");
+    if (userId) {
+      const user = await UserService.findById(userId);
+      if (user) {
+        if (user.status === UserStatus.MUST_INIT_ACCOUNT) {
+          redirect("/register/init-account");
+        }
 
-          if (user.status === UserStatus.MUST_CONFIRM_EMAIL) {
-            redirect("/register/confirm-email");
-            return null;
-          }
+        if (user.status === UserStatus.MUST_CONFIRM_EMAIL) {
+          redirect("/register/confirm-email");
+        }
 
-          if (user.status === UserStatus.DONE) {
-            redirect("/");
-            return null;
-          }
+        if (user.status === UserStatus.DONE) {
+          redirect("/");
         }
       }
     }
-  } catch (error) {
-    console.error(error);
   }
 
   return <RegisterForm />;

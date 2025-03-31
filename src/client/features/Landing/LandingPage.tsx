@@ -13,7 +13,7 @@ export const LandingPage = async () => {
           style={{ fontSize: "clamp(2.5em, 10vw, 4.5em)", lineHeight: "1em" }}
           className="mb-4 font-extrabold text-balance text-white tracking-tight"
         >
-          Encuentra{" "}
+          Futbolines{" "}
           <span className="text-primary">
             <Typewriter />{" "}
           </span>

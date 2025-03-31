@@ -19,6 +19,8 @@ export default function InitAccountForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   // Debounce: chequear disponibilidad de username
   useEffect(() => {
     if (!username) {
@@ -44,9 +46,11 @@ export default function InitAccountForm() {
   }, [username]);
 
   const handleSubmit = async () => {
+    setLoading(true);
     setError("");
     if (!isUsernameAvailable) {
       setError("Ese nombre de usuario no está disponible");
+      setLoading(false);
       return;
     }
 
@@ -55,8 +59,10 @@ export default function InitAccountForm() {
       if (res) {
         router.push("/");
       }
+      setLoading(false);
     } catch (error: unknown) {
       setError(getErrorMessage(error));
+      setLoading(false);
     }
   };
 
@@ -66,38 +72,45 @@ export default function InitAccountForm() {
         Bienvenido!
       </h1>
 
-      <FormField>
-        <FormLabel>Username</FormLabel>
-        <TextInput
-          value={username}
-          onChangeText={setUsername}
-          placeholder="johny99"
-          successText={
-            isUsernameAvailable ? "Nombre de usuario disponible" : ""
-          }
-          errorText={usernameError}
-        />
-      </FormField>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <FormField>
+          <FormLabel>Nombre de usuario</FormLabel>
+          <TextInput
+            value={username}
+            onChangeText={setUsername}
+            placeholder="johny99"
+            successText={
+              isUsernameAvailable ? "Nombre de usuario disponible" : ""
+            }
+            errorText={usernameError}
+          />
+        </FormField>
 
-      <FormField>
-        <FormLabel>Contraseña</FormLabel>
-        <PasswordInput
-          value={password}
-          onChangeText={setPassword}
-          placeholder="johny99"
-        />
-      </FormField>
+        <FormField>
+          <FormLabel>Contraseña</FormLabel>
+          <PasswordInput
+            value={password}
+            onChangeText={setPassword}
+            placeholder="johny99"
+          />
+        </FormField>
 
-      <FormField>
-        <FormLabel>Confirmar contraseña</FormLabel>
-        <PasswordInput
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          placeholder="johny99"
-        />
-      </FormField>
+        <FormField>
+          <FormLabel>Confirmar contraseña</FormLabel>
+          <PasswordInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            placeholder="johny99"
+          />
+        </FormField>
 
-      <Button onClick={handleSubmit} label="Finalizar" />
+        <Button onClick={handleSubmit} label="Finalizar" loading={loading}/>
+      </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </>
   );
