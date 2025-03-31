@@ -17,7 +17,7 @@ export const CompletarPerfil = ({
 }) => {
   const [nombreDone, setNombreDone] = useState(user.nombre !== null);
   const [posicionDone, setPosicionDone] = useState(
-    user.posicion !== Posicion.NOT_SET
+    user.posicion !== null
   );
   const [telefonoDone, setTelefonoDone] = useState(user.telefono !== null);
 
