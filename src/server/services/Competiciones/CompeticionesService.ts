@@ -44,6 +44,7 @@ export class CompeticionesService {
       tipoDeCompeticion: c.tipoDeCompeticion,
       tipoDeFutbolin: c.tipoDeFutbolin,
       modalidadDeJuego: c.modalidadDeJuego,
+      tipoInscripcion: c.tipoInscripcion,
       cantidadParejas: c.cantidadParejas,
       enfrentamientos: c.enfrentamientos.map((e) => e.toString()),
       equipos: c.equipos.map((e) => e.toString()),

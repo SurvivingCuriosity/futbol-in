@@ -2,6 +2,7 @@ import mongoose, { Document, Model, Schema, Types } from "mongoose";
 import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 
 const ConfigEnfrentamientoSchema = new Schema(
   {
@@ -29,6 +30,7 @@ export interface ICompeticion extends Document {
   tipoDeCompeticion: TipoCompeticion;
   tipoDeFutbolin: TipoFutbolin;
   modalidadDeJuego: ModalidadJuego;
+  tipoInscripcion: TipoInscripcion;
   cantidadParejas: number;
   enfrentamientos: Types.ObjectId[];
   equipos: Types.ObjectId[];
@@ -57,6 +59,11 @@ const CompeticionSchema: Schema<ICompeticion> = new Schema(
       required: false,
     },
     modalidadDeJuego: {
+      type: String,
+      enum: Object.values(ModalidadJuego),
+      required: false,
+    },
+    tipoInscripcion: {
       type: String,
       enum: Object.values(ModalidadJuego),
       required: false,
