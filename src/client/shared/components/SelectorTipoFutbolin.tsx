@@ -21,7 +21,7 @@ const SelectorTipoFutbolin = memo((props: SelectorTipoFutbolinProps) => {
   const futbolinOptions = [
     { value: TipoFutbolin.TSUNAMI, label: "Tsunami" },
     { value: TipoFutbolin.INFINITY, label: "Infinity" },
-    { value: TipoFutbolin.PRESAS, label: "Presas" },
+    { value: TipoFutbolin.PRESAS, label: "Presas 2000" },
     { value: TipoFutbolin.PRESAS_EVO, label: "Presas Evo" },
     { value: TipoFutbolin.DESCONOCIDO, label: "Desconocido" },
     { value: TipoFutbolin.MADERA, label: "De madera" },

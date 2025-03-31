@@ -8,6 +8,7 @@ import { ConfiguracionLiga } from "../types/ConfiguracionLiga";
 import { ConfiguracionTorneo } from "../types/ConfiguracionTorneo";
 import { ConfiguracionTorneoClasificatoria } from "../types/ConfiguracionTorneoClasificatoria";
 import { CompeticionEnCreacion, CrearTorneoContextType } from "./ContextType";
+import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 
 const CrearTorneoContext = createContext<CrearTorneoContextType>(
   null as unknown as CrearTorneoContextType
@@ -28,6 +29,10 @@ const CrearTorneoProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const [tipoDeFutbolin, setTipoDeFutbolin] = useState<TipoFutbolin>(
     TipoFutbolin.TSUNAMI
+  );
+
+  const [tipoInscripcion, setTipoInscripcion] = useState<TipoInscripcion>(
+    TipoInscripcion.ABIERTO
   );
   const [cantidadParejas, setCantidadParejas] = useState<number>(16);
 
@@ -74,6 +79,7 @@ const CrearTorneoProvider = ({ children }: { children: React.ReactNode }) => {
     setNombre(c.nombre);
     setDescripcion(c.descripcion);
     setGooglePlaceId(c.googlePlaceId);
+    setTipoInscripcion(c.tipoInscripcion)
     setActiveStep(activeStep + 1);
   };
 
@@ -85,6 +91,7 @@ const CrearTorneoProvider = ({ children }: { children: React.ReactNode }) => {
       tipoDeCompeticion,
       tipoDeFutbolin,
       modalidadDeJuego,
+      tipoInscripcion,
       cantidadParejas,
       enfrentamientos : [],
       equipos: [],

@@ -1,10 +1,13 @@
 "use client"
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { Button, TextInput } from "futbol-in-ui";
+import { Button, InlinePicker, TextInput } from "futbol-in-ui";
 import dynamic from "next/dynamic";
 import { use, useState } from "react";
 import { CrearTorneoContext } from "../context/CrearTorneoContext";
 import { ConfiguracionBasica } from "../types/ConfiguracionBasica";
+import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
+import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
+import { PlaceOption } from "@/client/shared/components/SearchInputBar";
 export const DatosBasicos = ({
   onCompleted,
 }: {
@@ -16,10 +19,13 @@ export const DatosBasicos = ({
   const [datosBasicos, setDatosBasicos] = useState<ConfiguracionBasica>({
     nombre: "",
     descripcion: "",
-    googlePlaceId: ""
+    googlePlaceId: "",
+    tipoInscripcion: TipoInscripcion.ABIERTO
   });
 
-  const updateField = (field: keyof typeof datosBasicos, value: string) => {
+  const [barSeleccionado, setBarSeleccionado] = useState<PlaceOption|undefined>()
+  
+  const updateField = (field: keyof typeof datosBasicos, value: string|TipoInscripcion) => {
     setDatosBasicos({ ...datosBasicos, [field]: value });
   };
 
@@ -33,6 +39,11 @@ export const DatosBasicos = ({
     { ssr: false }
   );
 
+  const opcionesTipoInscripcion = [
+    { id: 0, label: TipoInscripcion.ABIERTO },
+    { id: 1, label: TipoInscripcion.SEMIABIERTO },
+    { id: 2, label: TipoInscripcion.CERRADO },
+  ];
 
   return (
     <>
@@ -58,11 +69,36 @@ export const DatosBasicos = ({
         <FormField>
           <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
           <SearchInputBar
+            value={barSeleccionado}
             onSelect={(sel) => {
               setDatosBasicos((prev) => ({...prev, googlePlaceId: sel.googlePlaceId}))
             }}
+            onSelectPlaceOption={setBarSeleccionado}
           />
         </FormField>
+        <FormField>
+          <FormLabel>Tipo de inscripción</FormLabel>
+          <InlinePicker 
+            options={opcionesTipoInscripcion}
+            onTabClick={(id) => {
+              const opcionSeleccionada = opcionesTipoInscripcion.find((o) => o.id === id);
+              if (opcionSeleccionada) {
+                updateField("tipoInscripcion", opcionSeleccionada.label)
+              } else {
+                updateField("tipoInscripcion", TipoInscripcion.ABIERTO)
+              }
+            }}
+          />
+        </FormField>
+        <TarjetaMensaje 
+          text={
+            datosBasicos.tipoInscripcion === TipoInscripcion.ABIERTO 
+            ? "Cualquier persona podrá inscribirse a la competición" 
+            : datosBasicos.tipoInscripcion === TipoInscripcion.SEMIABIERTO 
+            ? "Cualquier persona podrá inscribirse a la competición, pero estos deberán ser aprobados por ti." : "Solo tú podrás agregar equipos a la competición"
+          }
+          variant="info"
+        />
         <Button
           label="Siguiente"
           onClick={handleSiguiente}

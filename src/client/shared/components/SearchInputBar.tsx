@@ -17,7 +17,9 @@ export interface PlaceOption extends OptionType {
 
 export default function SearchInputBar({
   onSelect,
+  onSelectPlaceOption,
   disabled,
+  value,
 }: {
   onSelect: (
     val: Pick<
@@ -25,7 +27,9 @@ export default function SearchInputBar({
       "nombre" | "direccion" | "lat" | "lng" | "googlePlaceId"
     >
   ) => void;
+  onSelectPlaceOption?: (val: PlaceOption|undefined) => void;
   disabled?: boolean;
+  value?: PlaceOption
 }) {
   const handleSelect = async (place: SingleValue<PlaceOption>) => {
     if (!place) return;
@@ -42,10 +46,12 @@ export default function SearchInputBar({
       googlePlaceId: place.value || "Desconocido",
     };
     onSelect(selected);
+    if(onSelectPlaceOption) onSelectPlaceOption(place)
   };
 
   return (
     <CustomAsyncSelect<PlaceOption>
+      value={value}
       onSelect={handleSelect}
       // @ts-expect-error qwe
       loadOptions={fetchBares}

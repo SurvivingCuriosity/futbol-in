@@ -50,7 +50,7 @@ export const BottomNav = () => {
   };
 
   return (
-    <menu className="md:hidden fixed bottom-0 w-full h-12 bg-neutral-900/95 z-5 flex justify-around items-center">
+    <menu className="md:hidden fixed bottom-0 w-full h-12 bg-neutral-900/95 z-50 flex justify-around items-center">
       {items.map((item, index) => (
         <Link
           href={item.href}
