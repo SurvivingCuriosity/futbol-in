@@ -1,16 +1,15 @@
 "use client";
 
 import { SpotsClient } from "@/client/shared/client/SpotsClient";
-import { FormField, FormLabel } from "@/packages/components/FormField";
 import SearchInputBar from "@/client/shared/components/SearchInputBar";
 import SearchInputDireccion from "@/client/shared/components/SearchInputDireccion";
 import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
-import { SelectorTipoLugar } from "@/client/shared/components/SelectorTipoLugar";
+import { useComprobarSiObtieneLogro } from "@/client/shared/hooks/useComprobarSiObtieneLogro";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { TipoLogroEnum } from "@/core/enum/Logros/TipoLogroEnum";
 import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
-import { useComprobarSiObtieneLogro } from "@/client/shared/hooks/useComprobarSiObtieneLogro";
 import { IMapItem } from "@/core/types/MapItem/IMapItem";
+import { FormField, FormLabel } from "@/packages/components/FormField";
 import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button } from "futbol-in-ui";
 import { useSession } from "next-auth/react";
@@ -31,7 +30,7 @@ const AgregarSpotPage = () => {
     "direccion" | "nombre" | "lat" | "lng" | "googlePlaceId"
   > | null>(null);
 
-  const [tipoLugar, setTipoLugar] = useState<TipoLugar>(TipoLugar.FUBTOLIN);
+  // const [tipoLugar, setTipoLugar] = useState<TipoLugar>(TipoLugar.FUBTOLIN);
 
   const [tipoFutbolin, setTipoFutbolin] = useState<TipoFutbolin>(
     TipoFutbolin.TSUNAMI
@@ -55,7 +54,7 @@ const AgregarSpotPage = () => {
         direccion: direccionOBar?.direccion || "",
         coordinates: [direccionOBar?.lng || 0, direccionOBar?.lat || 0],
         googlePlaceId: direccionOBar?.googlePlaceId || "",
-        tipoLugar,
+        tipoLugar: TipoLugar.FUBTOLIN,
         tipoFutbolin,
         comentarios,
       });
@@ -85,14 +84,14 @@ const AgregarSpotPage = () => {
           tu aportación.
         </p>
 
-        <FormField>
+        {/* <FormField>
           <FormLabel>Tipo de lugar</FormLabel>
           <SelectorTipoLugar
             onSelect={setTipoLugar}
             disabled={true}
             value={tipoLugar}
           />
-        </FormField>
+        </FormField> */}
 
         <FormField>
           <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>

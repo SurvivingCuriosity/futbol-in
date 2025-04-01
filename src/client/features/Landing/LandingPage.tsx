@@ -1,4 +1,6 @@
 import Typewriter from "@/client/features/Landing/components/TypeWriter";
+import { AppLogo } from "@/client/shared/components/AppLogo";
+import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
 import SearchInputCiudad from "@/client/shared/components/SearchInputCiudad";
 import { faMap, faTrophy, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,7 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const LandingPage = async () => {
   return (
     <main className="flex flex-col items-center justify-center gap-4">
-    
+      <div className="md:hidden mr-auto flex justify-between items-center w-full">
+        <AppLogo />
+        <LoginRegister />
+      </div>
 
       <div className="mt-20 max-w-3xl flex gap-4 flex-col items-stretch justify-center w-full">
         <h1
@@ -25,7 +30,6 @@ export const LandingPage = async () => {
         </p>
 
         <SearchInputCiudad />
-
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-20 space-y-12 md:space-y-0 space-x-0 md:space-x-4">

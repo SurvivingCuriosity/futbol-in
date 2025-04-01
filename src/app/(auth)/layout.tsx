@@ -1,4 +1,5 @@
 import imagen_fondo from "@/client/shared/assets/img/background.jpg";
+import { AppLogo } from "@/client/shared/components/AppLogo";
 import { UserStatus } from "@/core/enum/User/Status";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
@@ -19,15 +20,21 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="fixed top-16 left-0 w-full h-dvh">
-      <section className="h-full w-full flex items-start justify-center relative">
+      <section className="h-full w-full flex items-start justify-center relative px-4">
         <Image
           alt="Imagen de fondo"
           src={imagen_fondo}
           className="h-full absolute object-bottom left-0 object-cover user-select-none"
           placeholder="blur"
           fill
+          draggable={false}
         />
+        <div className="absolute -top-8 left-8 block md:hidden">
+          <AppLogo />
+        </div>
+        
         <div className="mt-12 bg-neutral-950/80 backdrop-blur-xs rounded-lg p-4 w-full max-w-[500px] mx-auto border border-neutral-800">
+          
           {children}
         </div>
       </section>
