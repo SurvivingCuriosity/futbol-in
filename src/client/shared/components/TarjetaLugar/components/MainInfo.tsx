@@ -9,63 +9,71 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { MarcaVerificado } from "./MarcaVerificado";
+import { TipoFutbolinNombre } from "@/core/enum/Futbolin/TipoFutbolin";
 
 export const MainInfo = ({
   spot,
   distanciaMessage,
-  isOpen
+  isOpen,
 }: {
   spot: SpotDTO;
   distanciaMessage: string | null;
   isOpen: boolean;
 }) => {
+  
   const imagen = ImagenFutbolinMap[spot.tipoFutbolin];
   const logo = ImagenFutbolinLogoMap[spot.tipoFutbolin];
 
   return (
-    <div className="z-2 rounded-lg w-full flex justify-between">
-      <div className="w-7/12">
-        <div className="flex items-center gap-1 text-neutral-300">
-          <Image src={logo} alt="Logo" width={32} height={32} />
-          <p className="text-lg font-bold">{spot.tipoFutbolin}</p>
-        </div>
-
-        <div className="mt-2 ml-1 space-y-1">
-          <div className="flex items-center gap-1 text-neutral-400 text-sm">
-            <FontAwesomeIcon className="w-6" icon={faStore} />
-            <p className={`${isOpen ? '' : 'truncate' }`}>
-              {spot.nombre}
-            </p>
-          </div>
-          <div className="flex items-center gap-1 text-neutral-400 text-sm">
-            <FontAwesomeIcon className="w-6" icon={faLocationDot} />
-            <p className={`${isOpen ? '' : 'truncate'}`}>{spot.direccion}</p>
-          </div>
-          {spot.verificado && (
-            <MarcaVerificado
-              fecha={new Date(spot.verificado.fechaVerificacion)}
-              correcto={spot.verificado.correcto}
+    <>
+      <div className="z-2 rounded-lg w-full flex justify-between">
+        <div className="w-full relative z-3">
+          <div className="flex items-center gap-1 text-neutral-300 z-3">
+            <Image
+              src={logo}
+              alt="Logo"
+              width={60}
+              height={60}
+              className="w-10"
             />
+            <p className="text-lg font-bold">{TipoFutbolinNombre[spot.tipoFutbolin]}</p>
+          </div>
+
+          <div className="mt-2 ml-1 space-y-1 z-3 relative">
+            <div className="flex items-center gap-1 text-neutral-300 text-sm">
+              <FontAwesomeIcon className="w-6" icon={faStore} />
+              <p className={`${isOpen ? "" : "truncate"}`}>{spot.nombre}</p>
+            </div>
+            <div className="flex items-center gap-1 text-neutral-300 text-sm">
+              <FontAwesomeIcon className="w-6" icon={faLocationDot} />
+              <p className={`${isOpen ? "" : "truncate"}`}>{spot.direccion}</p>
+            </div>
+            {spot.verificado && (
+              <MarcaVerificado
+                fecha={new Date(spot.verificado.fechaVerificacion)}
+                correcto={spot.verificado.correcto}
+              />
+            )}
+          </div>
+        </div>
+        <div className="flex flex-col h-full w-5/12">
+          <div className="rounded-lg overflow-hidden">
+            <Image
+              src={imagen}
+              alt="Imagen futbolin"
+              width={200}
+              height={200}
+              className="w-44 h-auto object-cover absolute -top-2 -right-2 z-2"
+            />
+          </div>
+          {distanciaMessage && (
+            <span className="flex items-center gap-1 mt-2 ml-auto text-neutral-400">
+              <FontAwesomeIcon icon={faLocationCrosshairs} />
+              <p>{distanciaMessage}</p>
+            </span>
           )}
         </div>
       </div>
-      <div className="flex flex-col h-full w-5/12">
-        <div className="rounded-lg overflow-hidden">
-          <Image
-            src={imagen}
-            alt="Logo"
-            width={200}
-            height={200}
-            className="w-full h-auto max-h-[90%] object-cover rounded-lg aspect-video"
-          />
-        </div>
-        {distanciaMessage && (
-          <span className="flex items-center gap-1 mt-2 ml-auto text-neutral-400">
-            <FontAwesomeIcon icon={faLocationCrosshairs} />
-            <p>{distanciaMessage}</p>
-          </span>
-        )}
-      </div>
-    </div>
+    </>
   );
 };

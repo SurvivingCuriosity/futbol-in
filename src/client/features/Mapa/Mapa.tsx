@@ -3,6 +3,7 @@
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
+import { AdvancedMarker } from "./AdvancedMarker";
 
 export interface MapaProps {
   markers: SpotDTO[];
@@ -12,12 +13,21 @@ export interface MapaProps {
   initialCenter: google.maps.LatLngLiteral | null;
 }
 
+const markerLibrary = "marker";
+
 export function Mapa(props: MapaProps) {
-  const { markers, onSelectMarker, selectedMarker, userLocation, initialCenter } = props;
+  const {
+    markers,
+    onSelectMarker,
+    selectedMarker,
+    userLocation,
+    initialCenter,
+  } = props;
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string,
     id: "google-maps-script",
+    libraries: [markerLibrary],
   });
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -84,15 +94,11 @@ export function Mapa(props: MapaProps) {
         const lng = m.coordinates[0];
 
         return (
-          <Marker
+          <AdvancedMarker
             key={m.googlePlaceId + index}
+            map={map} // le pasamos el map que tenemos en el estado
             position={{ lat, lng }}
-            icon={{
-              url: "/futbolin-logo.svg",
-              scaledSize: new window.google.maps.Size(28, 28),
-              scale: selectedMarker === m ? 1.5 : 1,
-            }}
-            animation={window.google.maps.Animation.DROP}
+            tipoFutbolin={m.tipoFutbolin}
             onClick={() => onSelectMarker(m)}
           />
         );

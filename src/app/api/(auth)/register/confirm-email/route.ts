@@ -1,3 +1,4 @@
+import { handleError } from "@/packages/utils/getErrorMessage";
 import {
   errorResponse,
   successResponse
@@ -23,7 +24,7 @@ export async function POST(request: Request) {
 
     return successResponse({ success: true });
   } catch (err: unknown) {
-    return errorResponse(err);
+    return handleError(err);
   }
 }
 

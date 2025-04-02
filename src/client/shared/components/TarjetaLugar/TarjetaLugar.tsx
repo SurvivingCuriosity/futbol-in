@@ -7,6 +7,8 @@ import { BotonesLikeDislike } from "./components/BotonesLikeDislike";
 import { Comentarios } from "./components/Comentarios";
 import { IndicadorCobertura } from "./components/IndicadorCobertura";
 import { MainInfo } from "./components/MainInfo";
+import Image from "next/image";
+import { ImagenFutbolinLogoMap } from "../../constants/FutbolinesLogoImageMap";
 
 export interface TarjetaLugarProps {
   spot: SpotDTO;
@@ -22,9 +24,9 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
 
   const [spot, setSpot] = useState<SpotDTO>(spotProp);
 
-  useEffect(()=>{
-    setSpot(spotProp)
-  },[spotProp])
+  useEffect(() => {
+    setSpot(spotProp);
+  }, [spotProp]);
 
   const onChangeSpotCallback = (newSpot: SpotDTO) => {
     setSpot(newSpot);
@@ -37,23 +39,40 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
     onSelect(selected ? null : spot);
   };
 
+  const logo = ImagenFutbolinLogoMap[spot.tipoFutbolin];
+
+  console.log(spot.tipoFutbolin)
+
   return (
     <>
       <Colapsable
         containerClassName={`${
           selected ? "border-primary" : "border-neutral-700"
-        } relative p-2 md:p-3 border bg-neutral-900/90 rounded-lg select-none md:min-w-[400px]`}
+        } relative p-2 md:p-3 border bg-neutral-900 rounded-lg select-none md:min-w-[400px] overflow-hidden`}
         open={!!selected}
         visibleContent={
-          <div onClick={handleClickSpot} className="relative">
-            {spot.verificado === null && (
-              <IndicadorCobertura
-                downVotes={spot.votes.down.length}
-                upVotes={spot.votes.up.length}
+          <>
+            <Image
+              src={logo}
+              alt="Logo"
+              width={200}
+              height={200}
+              className="w-40 absolute -top-10 -left-2 z-50 -rotate-12 opacity-5"
+            />
+            <div onClick={handleClickSpot} className="relative">
+              {spot.verificado === null && (
+                <IndicadorCobertura
+                  downVotes={spot.votes.down.length}
+                  upVotes={spot.votes.up.length}
+                />
+              )}
+              <MainInfo
+                spot={spot}
+                distanciaMessage={distanciaMessage}
+                isOpen={!!selected}
               />
-            )}
-            <MainInfo spot={spot} distanciaMessage={distanciaMessage} isOpen={!!selected}/>
-          </div>
+            </div>
+          </>
         }
         extraContent={
           <div

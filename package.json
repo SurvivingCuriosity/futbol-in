@@ -22,6 +22,7 @@
     "@types/classnames": "^2.3.0",
     "@types/google.maps": "^3.58.1",
     "@types/jsonwebtoken": "^9.0.8",
+    "@vis.gl/react-google-maps": "^1.5.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.5.1",

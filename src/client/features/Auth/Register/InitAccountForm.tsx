@@ -2,6 +2,7 @@
 "use client";
 
 import { AuthClient } from "@/client/shared/client/AuthClient";
+import { getErrorClient } from "@/client/shared/client/errorHandler/errorHandler";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, PasswordInput, TextInput } from "futbol-in-ui";
@@ -23,7 +24,7 @@ export default function InitAccountForm() {
 
   // Debounce: chequear disponibilidad de username
   useEffect(() => {
-    if (!username) {
+    if (!username || username.length < 3) {
       setIsUsernameAvailable(false);
       setUsernameError("");
       return;
@@ -48,20 +49,20 @@ export default function InitAccountForm() {
   const handleSubmit = async () => {
     setLoading(true);
     setError("");
-    if (!isUsernameAvailable) {
+    if (username!== "" && !isUsernameAvailable) {
       setError("Ese nombre de usuario no está disponible");
       setLoading(false);
       return;
     }
 
     try {
-      const res = await AuthClient.initAccount({ username, password });
+      const res = await AuthClient.initAccount({ username, password, confirmPassword });
       if (res) {
         router.push("/");
       }
       setLoading(false);
     } catch (error: unknown) {
-      setError(getErrorMessage(error));
+      setError(getErrorClient(error));
       setLoading(false);
     }
   };
@@ -111,7 +112,7 @@ export default function InitAccountForm() {
 
         <Button onClick={handleSubmit} label="Finalizar" loading={loading}/>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="text-red-500 text-xs my-4">{error}</p>}
     </>
   );
 }

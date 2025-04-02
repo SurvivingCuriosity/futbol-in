@@ -30,7 +30,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
           draggable={false}
         />
         <div className="absolute -top-8 left-8 block md:hidden">
-          <AppLogo />
+          <AppLogo href="/"/>
         </div>
         
         <div className="mt-12 bg-neutral-950/80 backdrop-blur-xs rounded-lg p-4 w-full max-w-[500px] mx-auto border border-neutral-800">

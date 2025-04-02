@@ -41,13 +41,13 @@ export class AuthClient {
   // Init account
   static async initAccount(req:InitAccountRequest): Promise<boolean> {
     
-    const { username, password } = req;
+    const { username, password, confirmPassword } = req;
 
     const response = await BaseClient.request<void>(
       "/api/register/init-account",
       {
         method: "POST",
-        body: { username, password },
+        body: { username, password, confirmPassword },
       }
     );
 
@@ -97,6 +97,8 @@ export class AuthClient {
         body: { email },
       }
     );
+
+    console.log('la response es:', response)
 
     if (!response.ok) {
       throw new Error(response.error || "Error en registerEmail");

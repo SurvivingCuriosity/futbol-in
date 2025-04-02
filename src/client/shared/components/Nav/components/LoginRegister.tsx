@@ -7,7 +7,7 @@ export const LoginRegister = () => {
   return (
     <>
       <div className="items-center gap-2 justify-end flex *:whitespace-nowrap">
-        <Link href="/login">
+        <Link href="/login" className="hidden sm:block">
           <Button size="sm" label="Iniciar sesión" />
         </Link>
         <Link href="/register">

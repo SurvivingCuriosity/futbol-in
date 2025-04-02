@@ -1,7 +1,8 @@
 "use client";
 
 import { AuthClient } from "@/client/shared/client/AuthClient";
-import { getErrorMessage } from "@/packages/utils/getErrorMessage";
+import { getErrorMessageClient } from "@/client/shared/client/errorHandler/errorHandler";
+import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -21,7 +22,7 @@ export default function ConfirmEmailForm({ email }: { email: string }) {
       }
       setLoading(false);
     } catch (error: unknown) {
-      setError(getErrorMessage(error));
+      setError(getErrorMessageClient(error, "code"));
       setLoading(false);
     }
   };
@@ -47,13 +48,15 @@ export default function ConfirmEmailForm({ email }: { email: string }) {
           onChange={(e) => setCode(e.target.value)}
           className="border border-neutral-800 rounded-lg p-4 w-full mb-4"
         />
-        <Button onClick={handleVerify} label="Verificar" loading={loading}/>
+        {error && <p className="text-red-500 text-xs mb-4">{error}</p>}
+        <Button onClick={handleVerify} label="Verificar" loading={loading} />
       </form>
-      <p className="p-2 rounded-md bg-neutral-900 text-xs text-neutral-500 mt-4">
-        Recuerda revisar tu carpeta de spam si no ves el correo en tu bandeja de
-        entrada.
-      </p>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <TarjetaMensaje
+        text={
+          "Recuerda revisar tu carpeta de spam si no ves el correo en tu bandeja de entrada."
+        }
+        variant="info"
+      />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { UserStatus } from "@/core/enum/User/Status";
-import { errorResponse } from "@/server/lib/httpResponse";
+import { handleError } from "@/packages/utils/getErrorMessage";
 import { RegistrationService } from "@/server/services/Auth/RegistrationService";
+import { initAccountSchema } from "@/server/validations/register/initAccountValidation";
 
 export async function POST(request: Request) {
   try {
@@ -8,22 +9,21 @@ export async function POST(request: Request) {
     const cookies = request.headers.get("cookie") || "";
     const token = getCookieValue(cookies, "registrationToken");
     if (!token) {
-      return errorResponse("No token found", 401);
+      return handleError("No token found");
     }
 
-    // Extraer username y password del body
-    const { username, password } = await request.json()
-    
-    if (!username || !password) {
-      return errorResponse("Faltan username o password", 400);
-    }
+    const req = await request.json()
+    console.log(req)
+    const validatedReq = await initAccountSchema.parseAsync(req);
+  
+    const {username,password} = validatedReq;
 
     await RegistrationService.initializeAccount(token, username, password);
 
     return RegistrationService.createRegistrationResponse('', UserStatus.DONE);
 
   } catch (err: unknown) {
-    return errorResponse(err);
+    return handleError(err);
   }
 }
 

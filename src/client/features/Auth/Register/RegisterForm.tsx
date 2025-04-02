@@ -1,8 +1,8 @@
 "use client";
 
 import { AuthClient } from "@/client/shared/client/AuthClient";
+import { getErrorMessageClient } from "@/client/shared/client/errorHandler/errorHandler";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -27,7 +27,7 @@ export const RegisterForm = () => {
       }
     } catch (error: unknown) {
       setLoading(false);
-      setError(getErrorMessage(error));
+      setError(getErrorMessageClient(error, 'email'));
     }
   };
 
