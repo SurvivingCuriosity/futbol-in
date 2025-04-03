@@ -1,3 +1,4 @@
+"use client"
 import { useUser } from "@/client/shared/context/UserContext";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";

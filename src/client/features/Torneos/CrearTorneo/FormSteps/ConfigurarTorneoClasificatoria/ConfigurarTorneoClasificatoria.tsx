@@ -69,6 +69,7 @@ export const ConfigurarTorneoClasificatoria = ({
             setTipoEnfrentamiento(opcionesTipoEnfrentamiento[id].label)
           }
           options={opcionesTipoEnfrentamiento}
+          size="sm"
         />
       </FormField>
       <FormField>

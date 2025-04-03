@@ -1,4 +1,4 @@
-import { DetalleCompeticionPage } from "@/client/features/Torneos/DetalleTorneo/DetalleTorneoPage";
+import { ListaParticipantes } from "@/client/features/Torneos/DetalleTorneo/components/ListaParticipantes";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 
 interface PageProps {
@@ -8,12 +8,10 @@ interface PageProps {
 }
 
 const page = async ({ params }: PageProps) => {
-  
   const { idCompeticion } = await params;
-
   const competicion = await CompeticionesService.getById(idCompeticion);
   
-  return <DetalleCompeticionPage competicion={competicion} />;
+  return <ListaParticipantes competicion={competicion} />;
 };
 
 export default page;

@@ -23,6 +23,7 @@ export const FormCantidadParejas = ({
           { id: 1, label: "32" },
           { id: 2, label: "64" },
         ]}
+        size="sm"
       />
     </FormField>
   );

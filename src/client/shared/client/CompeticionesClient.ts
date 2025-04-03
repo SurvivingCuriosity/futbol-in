@@ -1,5 +1,6 @@
 import { BaseClient } from "./BaseClient";
 import { CrearCompeticionRequest, CrearCompeticionResponse } from "./types/Competiciones/CrearCompeticion";
+import { EditarCompeticionRequest, EditarCompeticionResponse } from "./types/Competiciones/EditarCompeticion";
 
 export class CompeticionesClient {
 
@@ -14,6 +15,22 @@ export class CompeticionesClient {
 
     if (!response.ok) {
       throw new Error(response.error || "Error al crear competicion");
+    }
+
+    return response.data;
+  }
+
+  static async actualizarCompeticion(data: EditarCompeticionRequest): Promise<EditarCompeticionResponse> {
+    const response = await BaseClient.request<EditarCompeticionResponse>(
+      "/api/competiciones/editar",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.error || "Error al actualizar competicion");
     }
 
     return response.data;

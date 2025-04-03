@@ -107,6 +107,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
                 setSelectedMarker(null);
                 setView(id === 0 ? "map" : "list");
               }}
+              size="sm"
             />
           </div>
         </header>

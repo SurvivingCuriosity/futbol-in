@@ -28,4 +28,4 @@ export interface CrearTorneoContextType {
   handleCrearTorneo: () => void;
 }
 
-export type CompeticionEnCreacion = Omit<CompeticionDTO, "id" | "createdByUserId">;
+export type CompeticionEnCreacion = Omit<CompeticionDTO, "id" | "createdByUserId" | 'estadoCompeticion'>;

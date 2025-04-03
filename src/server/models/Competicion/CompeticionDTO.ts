@@ -1,3 +1,5 @@
+import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
+import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
 import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
@@ -12,9 +14,10 @@ export interface CompeticionDTO {
   tipoDeFutbolin: TipoFutbolin;
   modalidadDeJuego: ModalidadJuego;
   tipoInscripcion: TipoInscripcion;
+  estadoCompeticion:EstadoCompeticion;
   cantidadParejas: number;
   enfrentamientos: string[];
-  equipos: string[];
+  equipos: Array<{id:string, estado:EstadoEquipoCompeticion}>;
   configuracionEnfrentamientos: {
     cantidadPartidos: number;
     golesParaGanar: number;

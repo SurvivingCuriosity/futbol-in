@@ -18,6 +18,7 @@ export const AjustesBusqueda = () => {
             { id: 2, label: "20km" },
             { id: 3, label: "50km" },
           ]}
+          size="sm"
         />
       </Ajuste>
     </ContainerAjustes>

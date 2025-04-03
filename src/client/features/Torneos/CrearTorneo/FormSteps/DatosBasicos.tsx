@@ -88,6 +88,7 @@ export const DatosBasicos = ({
                 updateField("tipoInscripcion", TipoInscripcion.ABIERTO)
               }
             }}
+            size="sm"
           />
         </FormField>
         <TarjetaMensaje 

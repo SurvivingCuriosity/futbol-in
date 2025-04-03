@@ -3,6 +3,8 @@ import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
+import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
+import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
 
 const ConfigEnfrentamientoSchema = new Schema(
   {
@@ -31,13 +33,17 @@ export interface ICompeticion extends Document {
   tipoDeFutbolin: TipoFutbolin;
   modalidadDeJuego: ModalidadJuego;
   tipoInscripcion: TipoInscripcion;
+  estadoCompeticion: EstadoCompeticion;
   cantidadParejas: number;
   enfrentamientos: Types.ObjectId[];
-  equipos: Types.ObjectId[];
+  equipos: Array<{ id: Types.ObjectId; estado: EstadoEquipoCompeticion }>;
   configuracionEnfrentamientos: {
     cantidadPartidos: number;
     golesParaGanar: number;
-    excepcionSemiFinales: null | { cantidadPartidos: number; golesParaGanar: number };
+    excepcionSemiFinales: null | {
+      cantidadPartidos: number;
+      golesParaGanar: number;
+    };
     excepcionFinal: null | { cantidadPartidos: number; golesParaGanar: number };
   };
   createdByUserId: Types.ObjectId;
@@ -65,12 +71,30 @@ const CompeticionSchema: Schema<ICompeticion> = new Schema(
     },
     tipoInscripcion: {
       type: String,
-      enum: Object.values(ModalidadJuego),
+      enum: Object.values(TipoInscripcion),
+      required: false,
+    },
+    estadoCompeticion: {
+      type: String,
+      enum: Object.values(EstadoCompeticion),
       required: false,
     },
     cantidadParejas: { type: Number, required: false, default: null },
     enfrentamientos: [{ type: Schema.Types.ObjectId, ref: "Enfrentamiento" }],
-    equipos: [{ type: Schema.Types.ObjectId, ref: "Equipo" }],
+    equipos: [
+      {
+        id: {
+          type: Schema.Types.ObjectId,
+          ref: "Equipo",
+          required: true,
+        },
+        estado: {
+          type: String,
+          enum: Object.values(EstadoEquipoCompeticion),
+          required: true,
+        },
+      },
+    ],
     configuracionEnfrentamientos: {
       type: ConfigEnfrentamientosSchema,
       required: false,
