@@ -2,7 +2,7 @@ import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 import connectDb from "@/server/lib/db";
 import { Equipo, IEquipoDocument } from "@/server/models/Equipo/Equipo.model";
 import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
 
 export class EquipoService {
   static async crearEquipo(

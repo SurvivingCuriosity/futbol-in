@@ -35,6 +35,20 @@
 }
 
 @theme {
+
+    /* --color-neutral-50: oklch(0.984 0.003 247.858);
+    --color-neutral-100: oklch(0.968 0.007 247.896);
+    --color-neutral-200: oklch(0.929 0.013 255.508);
+    --color-neutral-300: oklch(0.869 0.022 252.894);
+    --color-neutral-400: oklch(0.704 0.04 256.788);
+    --color-neutral-500: oklch(0.554 0.046 257.417);
+    --color-neutral-600: oklch(0.446 0.043 257.281);
+    --color-neutral-700: oklch(0.372 0.044 257.287);
+    --color-neutral-800: oklch(0.279 0.041 260.031);
+    --color-neutral-900: oklch(0.208 0.042 265.755);
+    --color-neutral-950: oklch(0.129 0.042 264.695); */
+
+
     --color-primary: rgb(110, 213, 89);
 
     --animate-fade-in: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;

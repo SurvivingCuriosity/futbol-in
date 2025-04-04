@@ -1,11 +1,15 @@
+import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
+import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import connectDb from "@/server/lib/db";
 import Competicion, {
   ICompeticion,
 } from "@/server/models/Competicion/Competicion.model";
-import { CompeticionDTO } from "@/server/models/Competicion/CompeticionDTO";
+import { CompeticionDTO, EquipoInscritoDTO } from "@/server/models/Competicion/CompeticionDTO";
+import { Types } from "mongoose";
+import { EquipoService } from "../Equipo/EquipoService";
+import { UserService } from "../User/UserService";
 
 export class CompeticionesService {
-
   static async crearCompeticion(
     competicion: Omit<CompeticionDTO, "id" | "createdByUserId">
   ): Promise<CompeticionDTO> {
@@ -22,20 +26,66 @@ export class CompeticionesService {
     data: Partial<CompeticionDTO>
   ): Promise<CompeticionDTO> {
     await connectDb();
-  
+
     const competicionActualizada = await Competicion.findOneAndUpdate(
       { _id: idCompeticion },
       { $set: data },
       { new: true }
     );
-  
+
     if (!competicionActualizada) {
       throw new Error(`La competición con ID ${idCompeticion} no existe`);
     }
-  
+
     return this.mapToDTO(competicionActualizada);
   }
-  
+
+  static async joinCompeticion(
+    idCompeticion: string,
+    idEquipo: Types.ObjectId
+  ): Promise<CompeticionDTO> {
+    await connectDb();
+    const competicion = await Competicion.findById(idCompeticion);
+    if (!competicion)
+      throw new Error("No se encontró la competición en la base de datos");
+
+    const estado =
+      competicion.tipoInscripcion === TipoInscripcion.ABIERTO
+        ? EstadoEquipoCompeticion.ACEPTADO
+        : EstadoEquipoCompeticion.PENDIENTE;
+
+    competicion.equipos.push({ id: idEquipo, estado });
+    await competicion.save();
+    return this.mapToDTO(competicion);
+  }
+
+  static async getEquipoInscrito(
+    idCompeticion: string,
+    idUsuario: string
+  ): Promise<EquipoInscritoDTO | undefined> {
+    await connectDb();
+    const competicion = await Competicion.findById(idCompeticion);
+
+    if (!competicion) throw new Error("No se encontró la competición");
+
+    const userDb = await UserService.findById(idUsuario.toString());
+    if (!userDb) throw new Error("No se encontró al usuario");
+
+    const equiposUsuario = await EquipoService.findManyById(userDb.equipos);
+    const idsEquiposUsuario = equiposUsuario.map((e) => e.id);
+
+    const equipoInscrito = competicion.equipos.find((e) =>
+      idsEquiposUsuario.includes(e.id.toString())
+    );
+
+    if(!equipoInscrito) return undefined
+
+    return {
+      id: equipoInscrito.id.toString(),
+      estado: equipoInscrito.estado,
+    }
+  }
+
   static async getAll(): Promise<CompeticionDTO[]> {
     await connectDb();
 

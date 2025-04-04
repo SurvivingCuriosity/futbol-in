@@ -54,7 +54,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
           <>
             <Image
               src={logo}
-              alt="Logo"
+              alt={`Logo ${spot.tipoFutbolin}`}
               width={200}
               height={200}
               className="w-40 absolute -top-10 -left-2 z-50 -rotate-12 opacity-5"

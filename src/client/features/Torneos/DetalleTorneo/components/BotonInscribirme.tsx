@@ -22,17 +22,16 @@ export const BotonInscribirme = ({
     estadoCompeticion === EstadoCompeticion.ACTIVO;
 
   const handleInscribirme = () => {
-    console.warn("NOT IMPLEMENTED");
     router.push(`/competicion/torneos/${idCompeticion}/join`);
   };
 
   return (
-    <div className="my-2 w-fit">
+    <div className="w-fit">
       {mostrarBotonInscribirme && (
         <Button
           label="Inscribirme"
           onClick={handleInscribirme}
-          variant="neutral-outline"
+          variant="primary"
           size="sm"
         />
       )}

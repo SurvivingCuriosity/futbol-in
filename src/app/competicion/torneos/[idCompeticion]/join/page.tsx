@@ -1,11 +1,12 @@
 import { ConfirmarInscripcionPage } from "@/client/features/Torneos/ConfirmarInscripcion/ConfirmarInscripcionPage";
+import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
 import { authOptions } from "@/server/lib/authOptions";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";
 import { UserService } from "@/server/services/User/UserService";
 import { getServerSession, Session } from "next-auth";
-import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
+
 
 interface PageProps {
   params: Promise<{
@@ -18,23 +19,28 @@ const page = async ({ params }: PageProps) => {
   const session = (await getServerSession(authOptions)) as Session;
 
   if (!session || !session.user) {
-    redirect("/not-allowed");
+    return <div className="mx-auto p-10"><LoginRegister expanded/></div>
   }
 
   const userDb = await UserService.findById(session.user.id);
 
   if (!userDb) {
-    signOut();
-    redirect("/");
+    return <div className="mx-auto p-10"><LoginRegister expanded/></div>
   }
 
-  const competicion = await CompeticionesService.getById(idCompeticion);
   const equiposUsuario = await EquipoService.findManyById(userDb.equipos);
+
+  const equipoInscrito = await CompeticionesService.getEquipoInscrito(idCompeticion, userDb.id)
+
+  if(equipoInscrito === undefined) {
+    redirect(`/competicion/torneos/${idCompeticion}`)
+  }
 
   return (
     <ConfirmarInscripcionPage
-      competicion={competicion}
+      idCompeticion={idCompeticion}
       equiposUsuario={equiposUsuario}
+      equipoInscrito={equipoInscrito}
     />
   );
 };

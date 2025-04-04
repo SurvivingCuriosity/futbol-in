@@ -9,13 +9,13 @@ interface AdvancedMarkerProps {
 }
 
 const htmlContentMap: Record<TipoFutbolin, string> = {
-  [TipoFutbolin.TSUNAMI]: `<img src="/logos/tsunami.png" width="32" height="32" />`,
-  [TipoFutbolin.PRESAS]: `<img src="/logos/presas.png" width="32" height="32" />`,
-  [TipoFutbolin.PRESAS_EVO]: `<img src="/logos/presas_evo.png" width="32" height="32" />`,
-  [TipoFutbolin.DESCONOCIDO]: `<img src="/logos/desconocido.png" width="32" height="32" />`,
-  [TipoFutbolin.MADERA]: `<img src="/logos/madera.png" width="32" height="32" />`,
-  [TipoFutbolin.INFINITY]: `<img src="/logos/infinity.png" width="32" height="32" />`,
-  [TipoFutbolin.CUALQUIERA]: `<img src="/logos/desconocido.png" width="32" height="32" />`,
+  [TipoFutbolin.TSUNAMI]: `<img alt="Logo tsunami" src="/logos/tsunami.png" width="32" height="32" />`,
+  [TipoFutbolin.PRESAS]: `<img alt="Logo presas" src="/logos/presas.png" width="32" height="32" />`,
+  [TipoFutbolin.PRESAS_EVO]: `<img alt="Logo presas evo" src="/logos/presas_evo.png" width="32" height="32" />`,
+  [TipoFutbolin.DESCONOCIDO]: `<img alt="Logo desconocido" src="/logos/desconocido.png" width="32" height="32" />`,
+  [TipoFutbolin.MADERA]: `<img alt="Logo madera" src="/logos/madera.png" width="32" height="32" />`,
+  [TipoFutbolin.INFINITY]: `<img alt="Logo infinity" src="/logos/infinity.png" width="32" height="32" />`,
+  [TipoFutbolin.CUALQUIERA]: `<img alt="Logo desconocido" src="/logos/desconocido.png" width="32" height="32" />`,
 };
 
 export function AdvancedMarker({

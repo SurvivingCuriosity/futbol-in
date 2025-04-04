@@ -58,6 +58,7 @@ export const BottomNav = () => {
           className={`p-2 ${
             isActive(item.href) ? "text-primary" : "text-white"
           }`}
+          aria-label={item.label}
         >
           <FontAwesomeIcon
             icon={item.icon}
@@ -78,6 +79,7 @@ export const BottomNav = () => {
             height={28}
             className={`text-xl size-6 rounded-full border-2  ${isActive("/perfil") ? "border-primary" : "border-transparent"} object-center object-cover`}
             alt="Imagen de perfil"
+            aria-label="Perfil"
           />
         ) : (
           <FontAwesomeIcon

@@ -17,7 +17,7 @@ export interface CompeticionDTO {
   estadoCompeticion:EstadoCompeticion;
   cantidadParejas: number;
   enfrentamientos: string[];
-  equipos: Array<{id:string, estado:EstadoEquipoCompeticion}>;
+  equipos: Array<EquipoInscritoDTO>;
   configuracionEnfrentamientos: {
     cantidadPartidos: number;
     golesParaGanar: number;
@@ -25,4 +25,9 @@ export interface CompeticionDTO {
     excepcionFinal: null | { cantidadPartidos: number; golesParaGanar: number };
   };
   createdByUserId: string;
+}
+
+export interface EquipoInscritoDTO {
+  id:string;
+  estado:EstadoEquipoCompeticion
 }

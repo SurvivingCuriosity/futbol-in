@@ -1,13 +1,17 @@
 import { BotonInscribirme } from "@/client/features/Torneos/DetalleTorneo/components/BotonInscribirme";
 import { BotonesOwner } from "@/client/features/Torneos/DetalleTorneo/components/BotonesOwner";
+import { ChipEstadoInscripcion } from "@/client/features/Torneos/ListaTorneos/ChipInscripcion";
 import { Nav } from "@/client/features/Torneos/components/Nav";
+import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
+import { UserService } from "@/server/services/User/UserService";
 import { faLocationDot, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import React from "react";
 
 interface PageProps {
@@ -23,16 +27,33 @@ const layout = async ({ params, children }: PageProps) => {
     competicion.googlePlaceId
   );
   const session = await getServerSession(authOptions);
+
+  const user = session?.user;
+
+  if (!user) {
+    redirect("/not-allowed");
+  }
+
+  const userDb = await UserService.findById(user.id);
+
+  if (!userDb) {
+    throw new Error("Usuario no encontrado en la base de datos");
+  }
+
   const isOwner = session?.user?.id === competicion.createdByUserId;
 
-  const estaInscrito = competicion.equipos.find((e) => e.id === session?.user?.id) !== undefined;
+  const equipoInscrito = await CompeticionesService.getEquipoInscrito(
+    idCompeticion,
+    userDb.id
+  );
+  const yaEstaInscrito = equipoInscrito !== undefined;
 
   return (
-    <>
-      <div className="border-b w-full border-primary relative overflow-hidden">
+    <GoBackLayout href="/competicion/torneos" label="Torneos">
+      <div className="border-b pb-2 w-full border-primary relative">
         <FontAwesomeIcon
           icon={faTrophy}
-          className="absolute -top-2 md:absolute -right-2 text-neutral-500/20 -rotate-12 text-[100px]"
+          className="absolute -top-2 md:left-1/3 right-0 text-neutral-500/20 -rotate-12 md:text-[150px] text-[100px]"
         />
         <h1 className="text-xl md:text-4xl font-black text-primary">
           {competicion.nombre}
@@ -56,15 +77,20 @@ const layout = async ({ params, children }: PageProps) => {
             }
           />
         )}
-        <BotonInscribirme
-          idCompeticion={competicion.id}
-          estadoCompeticion={competicion.estadoCompeticion}
-          tipoInscripcion={competicion.tipoInscripcion}
-        />
+
+        <ChipEstadoInscripcion equipoInscrito={equipoInscrito} />
+
+        {!yaEstaInscrito && (
+          <BotonInscribirme
+            idCompeticion={competicion.id}
+            estadoCompeticion={competicion.estadoCompeticion}
+            tipoInscripcion={competicion.tipoInscripcion}
+          />
+        )}
       </div>
-      <Nav idCompeticion={idCompeticion} estaInscrito={estaInscrito}/>
+      <Nav idCompeticion={idCompeticion} estaInscrito={yaEstaInscrito} />
       {children}
-    </>
+    </GoBackLayout>
   );
 };
 

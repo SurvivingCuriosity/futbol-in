@@ -32,6 +32,7 @@ export const BotoneraCompartir = ({
   return (
     <div className="flex items-center gap-2 text-sm mb-4 ml-auto mt-auto">
       <button
+        aria-label="Compartir"
         onClick={handleClickShare}
         className="cursor-pointer size-8 border border-neutral-400 text-neutral-400 w-fit p-1 aspect-square rounded-lg bg-neutral-900"
       >
@@ -39,6 +40,7 @@ export const BotoneraCompartir = ({
       </button>
 
       <button
+        aria-label="Abrir en mapas"
         onClick={handleClickAbrirEnMaps}
         className="cursor-pointer size-8 border border-neutral-400 text-neutral-400 w-fit p-1 aspect-square rounded-lg bg-neutral-900"
       >
