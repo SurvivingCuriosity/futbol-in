@@ -48,7 +48,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
       <Colapsable
         containerClassName={`${
           selected ? "border-primary" : "border-neutral-700"
-        } relative p-2 md:p-3 border bg-neutral-900 rounded-lg select-none md:min-w-[400px] overflow-hidden`}
+        } relative p-2 md:p-3 border bg-neutral-900 rounded-lg select-none w-full md:min-w-[400px] overflow-hidden`}
         open={!!selected}
         visibleContent={
           <>

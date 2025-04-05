@@ -1,14 +1,16 @@
+import { iconTipoDeCompeticionMap } from "@/client/shared/constants/IconTipoDeCompeticionMap";
 import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { authOptions } from "@/server/lib/authOptions";
 import { CompeticionDTO } from "@/server/models/Competicion/CompeticionDTO";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { BotonInscribirme } from "../DetalleTorneo/components/BotonInscribirme";
 import { ChipEstadoCompeticion } from "./ChipEstadoCompeticion";
 import { ChipEstadoInscripcion } from "./ChipInscripcion";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 
 export const TarjetaCompeticion = async ({
   competicion,
@@ -33,14 +35,17 @@ export const TarjetaCompeticion = async ({
 
   const enlaceDetalles =
     competicion.tipoDeCompeticion === TipoCompeticion.TORNEO
-      ? `/competitivo/torneos/${competicion.id}`
-      : `/competitivo/ligas/${competicion.id}`;
+      ? `/competitivo/competiciones/${competicion.id}`
+      : `/competitivo/competiciones/${competicion.id}`;
 
   return (
     <div
       key={competicion.id}
-      className="border border-neutral-800 bg-neutral-900/50 p-2 rounded-lg relative"
+      className="border border-neutral-800 bg-neutral-700/50 p-2 rounded-lg relative overflow-hidden h-max shrink-0"
     >
+
+      <FontAwesomeIcon icon={iconTipoDeCompeticionMap[competicion.tipoDeCompeticion]} width={150} height={150} className="absolute opacity-10 w-fit -top-4 right-0 -rotate-12 text-[100px]" />
+
       <p className="text-xl font-bold">{competicion.nombre}</p>
 
       <ChipEstadoInscripcion

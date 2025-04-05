@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { TarjetaEquipo } from "../../MiPerfil/components/TarjetaEquipo";
-import { ChipEstadoInscripcion } from "../ListaTorneos/ChipInscripcion";
+import { ChipEstadoInscripcion } from "../ListaCompeticion/ChipInscripcion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 
 export interface ConfirmarInscripcionPage {

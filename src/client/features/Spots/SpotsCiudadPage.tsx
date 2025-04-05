@@ -114,7 +114,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
       )}
 
       {/* Contenedor principal */}
-      <div className="w-full flex flex-col md:flex-row gap-4 h-[calc(100dvh-13em)] md:h-[calc(100dvh-15em)] md:overflow-hidden overflow-y-auto">
+      <div className="w-full flex flex-col md:flex-row gap-4 h-[calc(100dvh-14em)] md:h-[calc(100dvh-15em)] md:overflow-hidden overflow-y-auto">
         {/* Lista: se muestra en pantallas pequeñas si view === 'list' y siempre en md y mayores */}
         <div
           className={`${
@@ -144,7 +144,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
             initialCenter={place.coords}
           />
           {selectedMarker !== null && (
-            <div className="absolute bottom-2 z-5 mx-auto backdrop-blur-[2px] w-full p-1 flex items-center justify-center">
+            <div className="absolute bottom-2 z-5 mx-auto shadow w-full p-1 flex items-center justify-center">
               <TarjetaLugar
                 spot={selectedMarker}
                 selected={true}

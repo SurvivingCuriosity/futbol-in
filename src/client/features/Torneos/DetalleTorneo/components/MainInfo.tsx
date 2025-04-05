@@ -30,6 +30,7 @@ export const MainInfo = ({
           <p className="">{competicion.tipoDeCompeticion}</p>
         </div>
       </div>
+      
     </>
   );
 };

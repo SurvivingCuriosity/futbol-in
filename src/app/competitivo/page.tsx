@@ -1,7 +1,8 @@
-import { faCrown, faRankingStar, faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { iconTipoDeCompeticionMap } from "@/client/shared/constants/IconTipoDeCompeticionMap";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import React from "react";
 
 const page = () => {
   const items = [
@@ -13,15 +14,15 @@ const page = () => {
     },
     {
       label: "Torneos",
-      href: "/competitivo/torneos",
+      href: "/competitivo/competiciones",
       descripcion: "Consulta los torneos activos en tu ciudad",
-      icon: faTrophy,
+      icon: iconTipoDeCompeticionMap[TipoCompeticion.TORNEO],
     },
     {
       label: "Ligas",
-      href: "/competitivo/ligas",
+      href: "/competitivo/competiciones",
       descripcion: "Consulta las ligas activas en tu ciudad",
-      icon: faCrown,
+      icon: iconTipoDeCompeticionMap[TipoCompeticion.LIGA],
     },
   ];
 
@@ -41,7 +42,7 @@ const page = () => {
     Ligas: "border-neutral-500",
   };
   const iconColorMap: Record<string, string> = {
-    Ranking: "text-primary",
+    Ranking: "text-primary/50",
     Torneos: "text-sky-500/20",
     Ligas: "text-yellow-500/20",
   };

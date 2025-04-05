@@ -1,7 +1,7 @@
 import { BotonInscribirme } from "@/client/features/Torneos/DetalleTorneo/components/BotonInscribirme";
 import { BotonesOwner } from "@/client/features/Torneos/DetalleTorneo/components/BotonesOwner";
-import { ChipEstadoInscripcion } from "@/client/features/Torneos/ListaTorneos/ChipInscripcion";
-import { NavTorneos } from "@/client/features/Torneos/components/NavTorneos";
+import { ChipEstadoInscripcion } from "@/client/features/Torneos/ListaCompeticion/ChipInscripcion";
+import { NavLigas } from "@/client/features/Torneos/components/NavLigas";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
@@ -15,16 +15,16 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 interface PageProps {
-  params: Promise<{ idTorneo: string }>;
+  params: Promise<{ idCompeticion: string }>;
   children: React.ReactElement;
 }
 
 const layout = async ({ params, children }: PageProps) => {
-  const { idTorneo } = await params;
+  const { idCompeticion } = await params;
 
-  const competicion = await CompeticionesService.getById(idTorneo);
+  const liga = await CompeticionesService.getById(idCompeticion);
   const placeDetails = await GoogleMapsService.getPlaceDetailsFromPlaceId(
-    competicion.googlePlaceId
+    liga.googlePlaceId
   );
   const session = await getServerSession(authOptions);
 
@@ -40,23 +40,23 @@ const layout = async ({ params, children }: PageProps) => {
     throw new Error("Usuario no encontrado en la base de datos");
   }
 
-  const isOwner = session?.user?.id === competicion.createdByUserId;
+  const isOwner = session?.user?.id === liga.createdByUserId;
 
   const equipoInscrito = await CompeticionesService.getEquipoInscrito(
-    idTorneo,
+    idCompeticion,
     userDb.id
   );
   const yaEstaInscrito = equipoInscrito !== undefined;
 
   return (
-    <GoBackLayout href="/competitivo/torneos" label="Torneos" className="max-w-3xl mx-auto">
+    <GoBackLayout href="/competitivo/competiciones" label="Ligas" className="max-w-3xl mx-auto">
       <div className="border-0 sm:border pb-2 w-full border-primary/50 relative p-4 xl:p-8 rounded-2xl bg-neutral-900">
         <FontAwesomeIcon
           icon={faTrophy}
           className="absolute top-2 left-2 xl:right-0 text-neutral-500/20 -rotate-12 md:text-[150px] text-[100px]"
         />
         <h1 className="text-xl md:text-4xl lg:mb-4 font-black text-primary">
-          {competicion.nombre}
+          {liga.nombre}
         </h1>
         <div className="my-2">
           <div className="flex items-center">
@@ -71,24 +71,24 @@ const layout = async ({ params, children }: PageProps) => {
         </div>
         {isOwner && (
           <BotonesOwner
-            idCompeticion={competicion.id}
+            idCompeticion={liga.id}
             competicionNoHaArrancado={
-              competicion.estadoCompeticion === EstadoCompeticion.ACTIVO
+              liga.estadoCompeticion === EstadoCompeticion.ACTIVO
             }
           />
         )}
 
-        <ChipEstadoInscripcion equipoInscrito={equipoInscrito} tipoInscripcion={competicion.tipoInscripcion}/>
+        <ChipEstadoInscripcion equipoInscrito={equipoInscrito} tipoInscripcion={liga.tipoInscripcion}/>
 
         {!yaEstaInscrito && (
           <BotonInscribirme
-            idCompeticion={competicion.id}
-            estadoCompeticion={competicion.estadoCompeticion}
-            tipoInscripcion={competicion.tipoInscripcion}
+          idCompeticion={liga.id}
+            estadoCompeticion={liga.estadoCompeticion}
+            tipoInscripcion={liga.tipoInscripcion}
           />
         )}
       </div>
-      <NavTorneos idCompeticion={idTorneo} estaInscrito={yaEstaInscrito} />
+      <NavLigas idCompeticion={idCompeticion} estaInscrito={yaEstaInscrito} />
       {children}
     </GoBackLayout>
   );

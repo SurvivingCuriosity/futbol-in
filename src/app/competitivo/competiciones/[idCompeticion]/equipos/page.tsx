@@ -10,13 +10,13 @@ import { redirect } from "next/navigation";
 
 interface PageProps {
   params: Promise<{
-    idTorneo: string;
+    idCompeticion: string;
   }>;
 }
 
 const page = async ({ params }: PageProps) => {
-  const { idTorneo } = await params;
-  const competicion = await CompeticionesService.getById(idTorneo);
+  const { idCompeticion } = await params;
+  const competicion = await CompeticionesService.getById(idCompeticion);
   
   
   const session = await getServerSession(authOptions);
@@ -34,7 +34,7 @@ const page = async ({ params }: PageProps) => {
   ? equiposConEstado 
   : equiposConEstado.filter((e) => e.estado === EstadoEquipoCompeticion.ACEPTADO)
 
-  return <ListaParticipantes equipos={equiposMostrar} isOwner={isOwner} idCompeticion={idTorneo}/>
+  return <ListaParticipantes equipos={equiposMostrar} isOwner={isOwner} idCompeticion={idCompeticion}/>
 };
 
 export default page;

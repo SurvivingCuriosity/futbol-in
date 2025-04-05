@@ -3,15 +3,15 @@ import { CompeticionesService } from "@/server/services/Competiciones/Competicio
 
 interface PageProps {
   params: Promise<{
-    idLiga: string;
+    idCompeticion: string;
   }>;
 }
 
 const page = async ({ params }: PageProps) => {
   
-  const { idLiga } = await params;
+  const { idCompeticion } = await params;
 
-  const liga = await CompeticionesService.getById(idLiga);
+  const liga = await CompeticionesService.getById(idCompeticion);
   
   return <DetalleCompeticionPage competicion={liga} />;
 };

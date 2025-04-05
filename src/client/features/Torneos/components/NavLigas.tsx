@@ -7,10 +7,9 @@ import {
   faUserPlus,
   IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { InlinePicker } from "futbol-in-ui";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { NavBase } from "./NavBase";
 
 export const NavLigas = ({
   idCompeticion,
@@ -38,11 +37,11 @@ export const NavLigas = ({
   ];
 
   const linkMap: Record<number, string> = {
-    0: `/competitivo/ligas/${idCompeticion}`,
-    1: `/competitivo/ligas/${idCompeticion}/equipos`,
-    2: `/competitivo/ligas/${idCompeticion}/clasificacion`,
-    3: `/competitivo/ligas/${idCompeticion}/partidos`,
-    4: `/competitivo/ligas/${idCompeticion}/join`,
+    0: `/competitivo/competiciones/${idCompeticion}`,
+    1: `/competitivo/competiciones/${idCompeticion}/equipos`,
+    2: `/competitivo/competiciones/${idCompeticion}/clasificacion`,
+    3: `/competitivo/competiciones/${idCompeticion}/partidos`,
+    4: `/competitivo/competiciones/${idCompeticion}/join`,
   };
 
   const iconMap: Record<number, IconDefinition> = {
@@ -81,24 +80,13 @@ export const NavLigas = ({
   };
 
   return (
-    <div className="my-2 w-full md:min-w-md">
-      <InlinePicker
-        options={opciones}
-        onTabClick={handleTabClick}
-        size="sm"
-        activeTabId={activeTabId}
-        itemContainerClassName="flex items-center p-3 justify-center md:justify-start gap-2"
-        textClassName="hidden md:block text-sm w-fit xl:mx-0 lg:text-lg xl:text-xl"
-      />
-      <h2 className="text-xl font-bold text-neutral-400 mt-2 p-1">
-        <FontAwesomeIcon
-          icon={iconMap[activeTabId]}
-          width={24}
-          height={24}
-          className="mr-2 text-lg"
-        />
-        {headingText[activeTabId]}
-      </h2>
-    </div>
+    <NavBase 
+      headingText={headingText}
+      iconMap={iconMap}
+      options={opciones}
+      activeTabId={activeTabId}
+      onTabClick={handleTabClick}
+      size="sm"
+    />
   );
 };

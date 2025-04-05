@@ -107,7 +107,7 @@ const allNodes = [...nodes, ...nodesFirstRound];
 
 export function CuadroTorneo() {
   return (
-    <div style={{ height: "calc(100dvh - 12em)" }} className="h-full">
+    <div style={{ height: "calc(100dvh - 12em)" }} className="h-full border">
       <ReactFlow
         defaultViewport={{
           zoom: 0,

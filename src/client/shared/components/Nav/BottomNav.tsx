@@ -1,6 +1,6 @@
 "use client";
 
-import fondo from "@/client/shared/assets/img/torneos/enfrentamientos.webp";
+// import fondo from "@/client/shared/assets/img/torneos/enfrentamientos.webp";
 import {
   LStorage,
   LStorageKeys,
@@ -52,14 +52,14 @@ export const BottomNav = () => {
   return (
     <menu className="md:hidden fixed bottom-0 w-full z-2">
       <div className="w-full h-12 bg-neutral-900/95 flex justify-around items-center relative">
-        <Image
+        {/* <Image
           loading="lazy"
           src={fondo}
           alt="Fondo"
           width={200}
           height={100}
           className="absolute bottom-10 w-screen left-0 z-0 rounded-lg opacity-20 grayscale pointer-events-none"
-        />
+        /> */}
         {items.map((item, index) => (
           <Link
             href={item.href}
