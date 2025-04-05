@@ -10,11 +10,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { TarjetaEquipo } from "../../MiPerfil/components/TarjetaEquipo";
 import { ChipEstadoInscripcion } from "../ListaTorneos/ChipInscripcion";
+import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 
 export interface ConfirmarInscripcionPage {
   equiposUsuario: EquipoDTO[];
   idCompeticion: string;
   equipoInscrito: EquipoInscritoDTO|undefined;
+  tipoInscripcion:TipoInscripcion
 }
 
 export const ConfirmarInscripcionPage = (props: ConfirmarInscripcionPage) => {
@@ -22,6 +24,7 @@ export const ConfirmarInscripcionPage = (props: ConfirmarInscripcionPage) => {
     idCompeticion,
     equiposUsuario,
     equipoInscrito,
+    tipoInscripcion
   } = props;
 
   const router = useRouter();
@@ -77,7 +80,7 @@ export const ConfirmarInscripcionPage = (props: ConfirmarInscripcionPage) => {
         disabled={idEquipoSeleccionado === undefined}
       />
       {!equipoInscrito && (
-        <ChipEstadoInscripcion equipoInscrito={equipoInscrito} />
+        <ChipEstadoInscripcion equipoInscrito={equipoInscrito} tipoInscripcion={tipoInscripcion} />
       )}
     </div>
   );

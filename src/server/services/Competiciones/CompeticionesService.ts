@@ -8,6 +8,7 @@ import { CompeticionDTO, EquipoInscritoDTO } from "@/server/models/Competicion/C
 import { Types } from "mongoose";
 import { EquipoService } from "../Equipo/EquipoService";
 import { UserService } from "../User/UserService";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 
 export class CompeticionesService {
   static async crearCompeticion(
@@ -59,6 +60,34 @@ export class CompeticionesService {
     return this.mapToDTO(competicion);
   }
 
+    static async responderInscripcion(
+      idCompeticion: string,
+      idEquipo: Types.ObjectId,
+      aceptado: boolean
+    ): Promise<CompeticionDTO> {
+      await connectDb();
+      const competicion = await Competicion.findById(idCompeticion);
+      if (!competicion)
+        throw new Error("No se encontró la competición en la base de datos");
+    
+      if (aceptado === false) {
+        competicion.equipos = competicion.equipos.filter(
+          (e) => !e.id.equals(idEquipo)
+        );
+      } else {
+        competicion.equipos = competicion.equipos.map((e) => {
+          if (e.id.equals(idEquipo)) {
+            e.estado = EstadoEquipoCompeticion.ACEPTADO;
+          }
+          return e;
+        });
+      }
+    
+      await competicion.save();
+      return this.mapToDTO(competicion);
+    }
+    
+
   static async getEquipoInscrito(
     idCompeticion: string,
     idUsuario: string
@@ -86,12 +115,17 @@ export class CompeticionesService {
     }
   }
 
-  static async getAll(): Promise<CompeticionDTO[]> {
+  static async getAll(tipoCompeticion?:TipoCompeticion|undefined): Promise<CompeticionDTO[]> {
     await connectDb();
 
     const competiciones = await Competicion.find();
 
-    return competiciones.map((c) => this.mapToDTO(c));
+    if(tipoCompeticion) {
+      const mapeadas = competiciones.map((c) => this.mapToDTO(c));
+      return mapeadas.filter((c) => c.tipoDeCompeticion === tipoCompeticion);
+    } else {
+      return competiciones.map((c) => this.mapToDTO(c));
+    }
   }
 
   static async getById(id: string): Promise<CompeticionDTO> {
@@ -119,7 +153,7 @@ export class CompeticionesService {
       estadoCompeticion: c.estadoCompeticion,
       cantidadParejas: c.cantidadParejas,
       enfrentamientos: c.enfrentamientos.map((e) => e.toString()),
-      equipos: c.equipos.map((e) => ({ ...e, id: e.id.toString() })),
+      equipos: c.equipos.map((e) => ({ estado: e.estado, id: e.id.toString() })),
       configuracionEnfrentamientos: c.configuracionEnfrentamientos,
       createdByUserId: c.createdByUserId.toString(),
     };

@@ -1,4 +1,4 @@
-import { faRankingStar, faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { faCrown, faRankingStar, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React from "react";
@@ -7,33 +7,43 @@ const page = () => {
   const items = [
     {
       label: "Ranking",
-      href: "/competicion/ranking",
+      href: "/competitivo/ranking",
       descripcion: "Ver tus mejores resultados",
       icon: faRankingStar,
     },
     {
       label: "Torneos",
-      href: "/competicion/torneos",
+      href: "/competitivo/torneos",
       descripcion: "Consulta los torneos activos en tu ciudad",
       icon: faTrophy,
+    },
+    {
+      label: "Ligas",
+      href: "/competitivo/ligas",
+      descripcion: "Consulta las ligas activas en tu ciudad",
+      icon: faCrown,
     },
   ];
 
   const textColorMap: Record<string, string> = {
-    Ranking: "text-amber-500",
+    Ranking: "text-primary",
     Torneos: "text-sky-500",
+    Ligas: "text-yellow-500",
   };
   const backgroundMap: Record<string, string> = {
-    Ranking: "bg-amber-700/10",
-    Torneos: "bg-sky-700/10",
+    Ranking: "bg-neutral-800/50",
+    Torneos: "bg-neutral-800/50",
+    Ligas: "bg-neutral-800/50",
   };
   const borderColorMap: Record<string, string> = {
-    Ranking: "border-amber-500",
-    Torneos: "border-sky-500",
+    Ranking: "border-neutral-500",
+    Torneos: "border-neutral-500",
+    Ligas: "border-neutral-500",
   };
   const iconColorMap: Record<string, string> = {
-    Ranking: "text-amber-500/50",
-    Torneos: "text-sky-500/50",
+    Ranking: "text-primary",
+    Torneos: "text-sky-500/20",
+    Ligas: "text-yellow-500/20",
   };
 
   return (

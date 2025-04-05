@@ -10,12 +10,12 @@ import { redirect } from "next/navigation";
 
 interface PageProps {
   params: Promise<{
-    idCompeticion: string;
+    idLiga: string;
   }>;
 }
 
 const page = async ({ params }: PageProps) => {
-  const { idCompeticion } = await params;
+  const { idLiga } = await params;
   const session = (await getServerSession(authOptions)) as Session;
 
   if (!session || !session.user) {
@@ -28,19 +28,22 @@ const page = async ({ params }: PageProps) => {
     return <div className="mx-auto p-10"><LoginRegister expanded/></div>
   }
 
+  const competicion = await CompeticionesService.getById(idLiga);
+
   const equiposUsuario = await EquipoService.findManyById(userDb.equipos);
 
-  const equipoInscrito = await CompeticionesService.getEquipoInscrito(idCompeticion, userDb.id)
+  const equipoInscrito = await CompeticionesService.getEquipoInscrito(idLiga, userDb.id)
 
   if(equipoInscrito !== undefined) {
-    redirect(`/competicion/torneos/${idCompeticion}`)
+    redirect(`/competitivo/torneos/${idLiga}`)
   }
 
   return (
     <ConfirmarInscripcionPage
-      idCompeticion={idCompeticion}
+      idCompeticion={idLiga}
       equiposUsuario={equiposUsuario}
       equipoInscrito={equipoInscrito}
+      tipoInscripcion={competicion.tipoInscripcion}
     />
   );
 };

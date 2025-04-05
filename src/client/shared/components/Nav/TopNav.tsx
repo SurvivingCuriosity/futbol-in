@@ -30,7 +30,7 @@ export const TopNav = () => {
   const items = [
     { label: "Buscar", href: rutaFutbolines, icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
-    { label: "Competitivo", href: "/competicion", icon: faTrophy },
+    { label: "Competitivo", href: "/competitivo", icon: faTrophy },
   ];
 
   const isActive = (href: string) => {

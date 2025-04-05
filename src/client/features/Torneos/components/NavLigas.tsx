@@ -5,14 +5,14 @@ import {
   faPeopleGroup,
   faUser,
   faUserPlus,
-  IconDefinition,
+  IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InlinePicker } from "futbol-in-ui";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const Nav = ({
+export const NavLigas = ({
   idCompeticion,
   estaInscrito,
 }: {
@@ -38,11 +38,11 @@ export const Nav = ({
   ];
 
   const linkMap: Record<number, string> = {
-    0: `/competicion/torneos/${idCompeticion}`,
-    1: `/competicion/torneos/${idCompeticion}/equipos`,
-    2: `/competicion/torneos/${idCompeticion}/clasificacion`,
-    3: `/competicion/torneos/${idCompeticion}/partidos`,
-    4: `/competicion/torneos/${idCompeticion}/join`,
+    0: `/competitivo/ligas/${idCompeticion}`,
+    1: `/competitivo/ligas/${idCompeticion}/equipos`,
+    2: `/competitivo/ligas/${idCompeticion}/clasificacion`,
+    3: `/competitivo/ligas/${idCompeticion}/partidos`,
+    4: `/competitivo/ligas/${idCompeticion}/join`,
   };
 
   const iconMap: Record<number, IconDefinition> = {

@@ -1,7 +1,8 @@
+import { ResponderInscripcionRequest, ResponderInscripcionResponse } from '@/client/shared/client/types/Competiciones/ResponderInscripcion';
 import { BaseClient } from "./BaseClient";
 import { CrearCompeticionRequest, CrearCompeticionResponse } from "./types/Competiciones/CrearCompeticion";
 import { EditarCompeticionRequest, EditarCompeticionResponse } from "./types/Competiciones/EditarCompeticion";
-import { JoinCompeticionRequest, JoinCompeticionResponse } from "./types/Competiciones/JoinCompeticionRequest";
+import { JoinCompeticionRequest, JoinCompeticionResponse } from "./types/Competiciones/JoinCompeticion";
 
 export class CompeticionesClient {
 
@@ -48,6 +49,22 @@ export class CompeticionesClient {
 
     if (!response.ok) {
       throw new Error(response.error || "Error al actualizar competicion");
+    }
+
+    return response.data;
+  }
+
+  static async responderInscripcion(data: ResponderInscripcionRequest): Promise<ResponderInscripcionResponse> {
+    const response = await BaseClient.request<ResponderInscripcionResponse>(
+      "/api/competiciones/responder-inscripcion",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.error || "Error al responder inscripción");
     }
 
     return response.data;

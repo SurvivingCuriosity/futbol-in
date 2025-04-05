@@ -37,7 +37,7 @@ export const BotonPerfil: React.FC = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative inline-block z-1">
+    <div ref={containerRef} className="relative inline-block z-20">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className="p-2 focus:outline-none z-1"
@@ -51,7 +51,7 @@ export const BotonPerfil: React.FC = () => {
         />
       </button>
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-48 bg-neutral-800 border border-neutral-700 rounded-md shadow-lg z-50">
+        <div className="absolute top-full right-0 mt-2 w-48 z-90 bg-neutral-800 border border-neutral-700 rounded-md shadow-lg">
           <ul className="divide-y divide-neutral-700">
             {menuItems.map((item, idx) => (
               <li key={idx}>

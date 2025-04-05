@@ -27,7 +27,7 @@ export interface ISpot extends Document {
     down: Types.ObjectId[];
   };
 }
-
+// !!!!!!!! Si en un futuro quisieras permitir múltiples verificaciones (historial de verificaciones), podrías extraer eso a otro esquema (por ejemplo, un array de “Verificaciones” con fecha, user, etc.). Pero, como lo tienes, está perfecto para un primer MVP.
 const SpotSchema: Schema<ISpot> = new Schema(
   {
     nombre: { type: String, required: true },

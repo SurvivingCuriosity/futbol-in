@@ -1,7 +1,7 @@
 import { BotonInscribirme } from "@/client/features/Torneos/DetalleTorneo/components/BotonInscribirme";
 import { BotonesOwner } from "@/client/features/Torneos/DetalleTorneo/components/BotonesOwner";
 import { ChipEstadoInscripcion } from "@/client/features/Torneos/ListaTorneos/ChipInscripcion";
-import { Nav } from "@/client/features/Torneos/components/Nav";
+import { NavTorneos } from "@/client/features/Torneos/components/NavTorneos";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
@@ -15,14 +15,14 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 interface PageProps {
-  params: Promise<{ idCompeticion: string }>;
+  params: Promise<{ idTorneo: string }>;
   children: React.ReactElement;
 }
 
 const layout = async ({ params, children }: PageProps) => {
-  const { idCompeticion } = await params;
+  const { idTorneo } = await params;
 
-  const competicion = await CompeticionesService.getById(idCompeticion);
+  const competicion = await CompeticionesService.getById(idTorneo);
   const placeDetails = await GoogleMapsService.getPlaceDetailsFromPlaceId(
     competicion.googlePlaceId
   );
@@ -43,13 +43,13 @@ const layout = async ({ params, children }: PageProps) => {
   const isOwner = session?.user?.id === competicion.createdByUserId;
 
   const equipoInscrito = await CompeticionesService.getEquipoInscrito(
-    idCompeticion,
+    idTorneo,
     userDb.id
   );
   const yaEstaInscrito = equipoInscrito !== undefined;
 
   return (
-    <GoBackLayout href="/competicion/torneos" label="Torneos" className="max-w-3xl mx-auto">
+    <GoBackLayout href="/competitivo/torneos" label="Torneos" className="max-w-3xl mx-auto">
       <div className="border-0 sm:border pb-2 w-full border-primary/50 relative p-4 xl:p-8 rounded-2xl bg-neutral-900">
         <FontAwesomeIcon
           icon={faTrophy}
@@ -78,7 +78,7 @@ const layout = async ({ params, children }: PageProps) => {
           />
         )}
 
-        <ChipEstadoInscripcion equipoInscrito={equipoInscrito} />
+        <ChipEstadoInscripcion equipoInscrito={equipoInscrito} tipoInscripcion={competicion.tipoInscripcion}/>
 
         {!yaEstaInscrito && (
           <BotonInscribirme
@@ -88,7 +88,7 @@ const layout = async ({ params, children }: PageProps) => {
           />
         )}
       </div>
-      <Nav idCompeticion={idCompeticion} estaInscrito={yaEstaInscrito} />
+      <NavTorneos idCompeticion={idTorneo} estaInscrito={yaEstaInscrito} />
       {children}
     </GoBackLayout>
   );

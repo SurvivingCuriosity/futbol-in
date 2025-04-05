@@ -22,7 +22,7 @@ export const BotonInscribirme = ({
     estadoCompeticion === EstadoCompeticion.ACTIVO;
 
   const handleInscribirme = () => {
-    router.push(`/competicion/torneos/${idCompeticion}/join`);
+    router.push(`/competitivo/torneos/${idCompeticion}/join`);
   };
 
   return (

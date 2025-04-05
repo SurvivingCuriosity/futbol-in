@@ -1,7 +1,7 @@
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO"
+import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO"
 import { TarjetaEquipoTorneo } from "./TarjetaEquipoTorneo"
 
-export const ListaParticipantes = ({equipos}:{equipos:EquipoDTO[]}) => {
+export const ListaParticipantes = ({equipos, isOwner, idCompeticion}:{equipos:EquipoConEstadoDTO[], isOwner:boolean, idCompeticion:string}) => {
 
   return (
     <>
@@ -12,7 +12,7 @@ export const ListaParticipantes = ({equipos}:{equipos:EquipoDTO[]}) => {
         ) : (
           <ul className="w-full space-y-2">
             {equipos.map((e) => (
-              <TarjetaEquipoTorneo equipo={e} key={e.id}/>
+              <TarjetaEquipoTorneo equipo={e} key={e.id} isOwner={isOwner} idCompeticion={idCompeticion}/>
             ))}
           </ul>
         )}

@@ -10,10 +10,14 @@ export function NavLayout({ children }: { children: React.ReactNode }) {
           md:pb-0
           md:max-w-screen-xl 
           md:mx-auto
+          z-1
         "
       >
+        
         {children}
+      
       </main>
+      
       <BottomNav />
     </div>
   );

@@ -2,7 +2,7 @@ import { EditarCompeticionResponse } from "@/client/shared/client/types/Competic
 import {
   JoinCompeticionRequest,
   JoinCompeticionResponse,
-} from "@/client/shared/client/types/Competiciones/JoinCompeticionRequest";
+} from "@/client/shared/client/types/Competiciones/JoinCompeticion";
 import { Equipo } from "@/server/models/Equipo/Equipo.model";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { joinCompeticionSchema } from "@/server/validations/competiciones/joinCompeticionValidation";

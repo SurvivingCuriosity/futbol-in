@@ -1,4 +1,4 @@
-import { JoinCompeticionRequest } from "@/client/shared/client/types/Competiciones/JoinCompeticionRequest";
+import { JoinCompeticionRequest } from "@/client/shared/client/types/Competiciones/JoinCompeticion";
 import { handleError } from "@/packages/utils/getErrorMessage";
 import { joinCompeticionController } from "@/server/controllers/competiciones/joinCompeticionController";
 import { successResponse } from "@/server/lib/httpResponse";

@@ -1,3 +1,4 @@
+import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
 import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 import { Document, Schema, Types, model, models } from "mongoose";
 
@@ -15,6 +16,7 @@ export interface IEquipoDocument extends Document {
   createdByUserId: Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
+  estado: EstadoEquipoCompeticion;
 }
 
 const JugadorSchema = new Schema<IJugador>({
@@ -56,6 +58,12 @@ const EquipoSchema = new Schema<IEquipoDocument>(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    estado: {
+      type: String,
+      enum: Object.values(EstadoEquipoCompeticion),
+      required: false,
+      default: EstadoEquipoCompeticion.ACEPTADO,
     },
   },
   {

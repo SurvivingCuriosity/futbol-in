@@ -8,6 +8,7 @@ import Link from "next/link";
 import { BotonInscribirme } from "../DetalleTorneo/components/BotonInscribirme";
 import { ChipEstadoCompeticion } from "./ChipEstadoCompeticion";
 import { ChipEstadoInscripcion } from "./ChipInscripcion";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 
 export const TarjetaCompeticion = async ({
   competicion,
@@ -30,15 +31,23 @@ export const TarjetaCompeticion = async ({
     competicion.tipoInscripcion !== TipoInscripcion.CERRADO &&
     !estaInscrito;
 
+  const enlaceDetalles =
+    competicion.tipoDeCompeticion === TipoCompeticion.TORNEO
+      ? `/competitivo/torneos/${competicion.id}`
+      : `/competitivo/ligas/${competicion.id}`;
+
   return (
     <div
       key={competicion.id}
       className="border border-neutral-800 bg-neutral-900/50 p-2 rounded-lg relative"
     >
       <p className="text-xl font-bold">{competicion.nombre}</p>
-     
-     <ChipEstadoInscripcion equipoInscrito={equipoInscrito} />
-     
+
+      <ChipEstadoInscripcion
+        equipoInscrito={equipoInscrito}
+        tipoInscripcion={competicion.tipoInscripcion}
+      />
+
       <ChipEstadoCompeticion
         estadoCompeticion={competicion.estadoCompeticion}
       />
@@ -53,7 +62,7 @@ export const TarjetaCompeticion = async ({
         )}
         <Link
           className="text-sm text-neutral-600 text-right block ml-auto"
-          href={`/competicion/torneos/${competicion.id}`}
+          href={enlaceDetalles}
         >
           Más detalles
         </Link>

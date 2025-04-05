@@ -28,7 +28,7 @@ export default async function RankingPage() {
   const usuariosPorPuntuacion = usersParaRanking.sort((a, b) => b.puntuacion - a.puntuacion).map((user, index) => ({...user, posicion: index + 1}));
 
   return (
-    <GoBackLayout href="/competicion">
+    <GoBackLayout href="/competitivo">
       <div className="w-full">
         <h1 className="text-3xl font-black text-primary">Ranking</h1>
         <ul className="w-full space-y-2 mt-2 flex flex-col md:grid grid-cols-3 gap-2 mb-4">

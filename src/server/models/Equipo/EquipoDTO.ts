@@ -1,3 +1,4 @@
+import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
 import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 
 export interface EquipoDTO {
@@ -7,3 +8,5 @@ export interface EquipoDTO {
   jugadores: Array<{usuario:string|null, nombre:string, estado:EstadoJugador}>;
   createdByUserId: string;
 }
+
+export type EquipoConEstadoDTO = EquipoDTO & {estado:EstadoEquipoCompeticion}
