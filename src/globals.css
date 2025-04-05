@@ -36,7 +36,7 @@
 
 @theme {
 
-    /* --color-neutral-50: oklch(0.984 0.003 247.858);
+    --color-neutral-50: oklch(0.984 0.003 247.858);
     --color-neutral-100: oklch(0.968 0.007 247.896);
     --color-neutral-200: oklch(0.929 0.013 255.508);
     --color-neutral-300: oklch(0.869 0.022 252.894);
@@ -46,10 +46,21 @@
     --color-neutral-700: oklch(0.372 0.044 257.287);
     --color-neutral-800: oklch(0.279 0.041 260.031);
     --color-neutral-900: oklch(0.208 0.042 265.755);
-    --color-neutral-950: oklch(0.129 0.042 264.695); */
+    --color-neutral-950: oklch(0.129 0.042 264.695);
 
-
-    --color-primary: rgb(110, 213, 89);
+    --color-primary-50: #e2ffdc;
+    --color-primary-100: #b8ffaa;
+    --color-primary-200: #94fa80;
+    --color-primary-300: #88ed74;
+    --color-primary-400: #7ce168;
+    --color-primary-500: #6ed559;
+    --color-primary-600: #35b20b;
+    --color-primary-700: #207d00;
+    --color-primary-800: #0f4900;
+    --color-primary-900: #031f00;
+  
+    /* Coincide con 500 */
+    --color-primary: var(--color-primary-500);
 
     --animate-fade-in: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     --animate-puff-in: puff-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
