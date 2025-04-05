@@ -14,7 +14,7 @@ import { ChipEstadoInscripcion } from "../ListaTorneos/ChipInscripcion";
 export interface ConfirmarInscripcionPage {
   equiposUsuario: EquipoDTO[];
   idCompeticion: string;
-  equipoInscrito: EquipoInscritoDTO;
+  equipoInscrito: EquipoInscritoDTO|undefined;
 }
 
 export const ConfirmarInscripcionPage = (props: ConfirmarInscripcionPage) => {

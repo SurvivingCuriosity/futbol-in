@@ -49,13 +49,13 @@ const layout = async ({ params, children }: PageProps) => {
   const yaEstaInscrito = equipoInscrito !== undefined;
 
   return (
-    <GoBackLayout href="/competicion/torneos" label="Torneos">
-      <div className="border-b pb-2 w-full border-primary relative">
+    <GoBackLayout href="/competicion/torneos" label="Torneos" className="max-w-3xl mx-auto">
+      <div className="border-0 sm:border pb-2 w-full border-primary/50 relative p-4 xl:p-8 rounded-2xl bg-neutral-900">
         <FontAwesomeIcon
           icon={faTrophy}
-          className="absolute -top-2 md:left-1/3 right-0 text-neutral-500/20 -rotate-12 md:text-[150px] text-[100px]"
+          className="absolute top-2 left-2 xl:right-0 text-neutral-500/20 -rotate-12 md:text-[150px] text-[100px]"
         />
-        <h1 className="text-xl md:text-4xl font-black text-primary">
+        <h1 className="text-xl md:text-4xl lg:mb-4 font-black text-primary">
           {competicion.nombre}
         </h1>
         <div className="my-2">

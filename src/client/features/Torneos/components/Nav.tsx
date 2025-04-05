@@ -24,11 +24,11 @@ export const Nav = ({
 
   const [activeTabId, setActiveTabId] = useState(getTabIdFromPath(pathname));
 
-  const detalles = { id: 0, label: "", icon: faInfoCircle };
-  const equipos = { id: 1, label: "", icon: faPeopleGroup };
-  const clasificacion = { id: 2, label: "", icon: faList12 };
-  const partidos = { id: 3, label: "", icon: faUser };
-  const inscribirme = { id: 4, label: "", icon: faUserPlus };
+  const detalles = { id: 0, label: "Info", icon: faInfoCircle };
+  const equipos = { id: 1, label: "Equipos", icon: faPeopleGroup };
+  const clasificacion = { id: 2, label: "Clasific.", icon: faList12 };
+  const partidos = { id: 3, label: "Partidos", icon: faUser };
+  const inscribirme = { id: 4, label: "Entrar", icon: faUserPlus };
 
   const opciones = [
     detalles,
@@ -81,9 +81,9 @@ export const Nav = ({
   };
 
   return (
-    <div className="my-2 w-full md:w-fit md:min-w-md">
+    <div className="my-2 w-full md:min-w-md">
       <InlinePicker options={opciones} onTabClick={handleTabClick} size="sm" activeTabId={activeTabId}/>
-      <h2 className="text-xl font-bold bg-primary text-neutral-800 mt-2 p-1">
+      <h2 className="text-xl font-bold bg-neutral-800 text-neutral-400 mt-2 p-1">
         <FontAwesomeIcon icon={iconMap[activeTabId]} width={20} height={20} className="mr-2"/>
         {headingText[activeTabId]}
       </h2>
