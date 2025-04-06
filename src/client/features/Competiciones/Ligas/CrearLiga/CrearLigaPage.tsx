@@ -1,10 +1,6 @@
 "use client";
 
-import fondo_datos_basicos from "@/client/shared/assets/img/torneos/datos_basicos.webp";
-import fondo_enfrentamientos from "@/client/shared/assets/img/torneos/enfrentamientos.webp";
-
 import { Stepper } from "@/client/shared/components/Stepper";
-import Image, { StaticImageData } from "next/image";
 import { use } from "react";
 import { CrearLigaContext } from "./context/CrearLigaContext";
 import { useCrearLigaSteps } from "./FormSteps/useCrearLigaSteps";
@@ -17,11 +13,6 @@ export const CrearLigaPage = () => {
 
   const steps = useCrearLigaSteps()
 
-  const imagenFondoMap: Record<number, StaticImageData> = {
-    0: fondo_datos_basicos,
-    2: fondo_enfrentamientos,
-    3: fondo_enfrentamientos,
-  };
 
   return (
     <>
@@ -33,11 +24,6 @@ export const CrearLigaPage = () => {
             setActiveStep={setActiveStep}
           />
         </div>
-        <Image
-          src={imagenFondoMap[activeStep]}
-          alt="Imagen de fondo"
-          className="object-cover fixed top-16 left-0 z-2 rounded-b-2xl h-[600px] w-auto lg:top-16 lg:relative lg:aspect-[12/16]"
-        />
       </div>
     </>
   );
