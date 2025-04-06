@@ -6,6 +6,7 @@ import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
 import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
+import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { UserService } from "@/server/services/User/UserService";
@@ -43,7 +44,7 @@ const layout = async ({ params, children }: PageProps) => {
 
   const isOwner = session?.user?.id === liga.createdByUserId;
 
-  const equipoInscrito = await LigasService.getEquipoInscrito(
+  const equipoInscrito = await CompeticionesService.getEquipoInscrito(
     idLiga,
     userDb.id
   );

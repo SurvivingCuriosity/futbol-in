@@ -1,6 +1,6 @@
 import { JoinCompeticionRequest, JoinCompeticionResponse } from '@/client/shared/client/types/Competiciones/CompeticionesBase/JoinCompeticion';
 import { Equipo } from "@/server/models/Equipo/Equipo.model";
-import { CompeticioneService } from '@/server/services/Competiciones/CompeticionesService';
+import { CompeticionesService } from '@/server/services/Competiciones/CompeticionesService';
 import { joinCompeticionSchema } from '@/server/validations/competiciones/competicionesBase/joinLigaValidation';
 import { validateLoggedInUser } from "@/server/validations/shared/validateLoggedInUser";
 
@@ -18,7 +18,7 @@ export async function joinCompeticionController(
     throw new Error("No se encontró el equipo en la base de datos");
   }
 
-  const updatedCompeticion = await CompeticioneService.join(
+  const updatedCompeticion = await CompeticionesService.join(
     idCompeticion,
     equipo.id
   );

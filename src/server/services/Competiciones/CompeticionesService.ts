@@ -6,9 +6,12 @@ import {
   ICompeticionBase,
 } from "@/server/models/Competicion/CompeticionBase/Competicion.model";
 import { CompeticionBaseDTO } from "@/server/models/Competicion/CompeticionBase/CompeticionBaseDTO";
+import { EquipoCompeticionDTO } from "@/server/models/Equipo/EquipoCompeticion.model";
 import { Types } from "mongoose";
+import { EquipoService } from "../Equipo/EquipoService";
+import { UserService } from "../User/UserService";
 
-export class CompeticioneService {
+export class CompeticionesService {
   static async actualizarCompeticion(
     idCompeticion: string,
     data: Partial<CompeticionBaseDTO>
@@ -68,6 +71,33 @@ export class CompeticioneService {
 
     await liga.save();
     return this.mapToDTO(liga);
+  }
+
+  static async getEquipoInscrito(
+    idCompeticion: string,
+    idUsuario: string
+  ): Promise<EquipoCompeticionDTO | undefined> {
+    await connectDb();
+    const competicion = (await CompeticionBase?.findById(idCompeticion)) as ICompeticionBase;
+
+    if (!competicion) throw new Error("No se encontró el torneo");
+
+    const userDb = await UserService.findById(idUsuario.toString());
+    if (!userDb) throw new Error("No se encontró al usuario");
+
+    const equiposUsuario = await EquipoService.findManyById(userDb.equipos);
+    const idsEquiposUsuario = equiposUsuario.map((e) => e.id);
+
+    const equipoInscrito = competicion.equipos.find((e) =>
+      idsEquiposUsuario.includes(e.id.toString())
+    );
+
+    if (!equipoInscrito) return undefined;
+
+    return {
+      id: equipoInscrito.id.toString(),
+      estado: equipoInscrito.estado,
+    };
   }
 
   static mapToDTO(c: ICompeticionBase): CompeticionBaseDTO {

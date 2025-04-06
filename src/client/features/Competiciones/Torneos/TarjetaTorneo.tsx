@@ -4,7 +4,7 @@ import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { authOptions } from "@/server/lib/authOptions";
 import { TorneoDTO } from "@/server/models/Competicion/Torneos/TorneoDTO";
-import { TorneosService } from "@/server/services/Competiciones/Torneos/TorneosService";
+import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
@@ -22,7 +22,7 @@ export const TarjetaTorneo = async ({
 
   if (!user) return null;
 
-  const equipoInscrito = await TorneosService.getEquipoInscrito(
+  const equipoInscrito = await CompeticionesService.getEquipoInscrito(
     competicion.id,
     user?.id
   );

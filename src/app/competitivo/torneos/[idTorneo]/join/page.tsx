@@ -1,6 +1,7 @@
 import { ConfirmarInscripcionPage } from "@/client/features/Competiciones/common/ConfirmarInscripcion/ConfirmarInscripcionPage";
 import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
 import { authOptions } from "@/server/lib/authOptions";
+import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { TorneosService } from "@/server/services/Competiciones/Torneos/TorneosService";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";
 import { UserService } from "@/server/services/User/UserService";
@@ -39,7 +40,7 @@ const page = async ({ params }: PageProps) => {
 
   const equiposUsuario = await EquipoService.findManyById(userDb.equipos);
 
-  const equipoInscrito = await TorneosService.getEquipoInscrito(
+  const equipoInscrito = await CompeticionesService.getEquipoInscrito(
     idTorneo,
     userDb.id
   );

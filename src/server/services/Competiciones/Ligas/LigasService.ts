@@ -1,9 +1,6 @@
 import connectDb from "@/server/lib/db";
 import { ILiga, Liga } from "@/server/models/Competicion/Ligas/Liga.model";
 import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
-import { EquipoCompeticionDTO } from "@/server/models/Equipo/EquipoCompeticion.model";
-import { EquipoService } from "../../Equipo/EquipoService";
-import { UserService } from "../../User/UserService";
 
 export class LigasService {
   static async crearLiga(
@@ -33,33 +30,6 @@ export class LigasService {
     }
 
     return this.mapToDTO(ligaActualizada);
-  }
-
-  static async getEquipoInscrito(
-    idLiga: string,
-    idUsuario: string
-  ): Promise<EquipoCompeticionDTO | undefined> {
-    await connectDb();
-    const liga = await Liga?.findById(idLiga) as ILiga
-
-    if (!liga) throw new Error("No se encontró la liga");
-
-    const userDb = await UserService.findById(idUsuario.toString());
-    if (!userDb) throw new Error("No se encontró al usuario");
-
-    const equiposUsuario = await EquipoService.findManyById(userDb.equipos);
-    const idsEquiposUsuario = equiposUsuario.map((e) => e.id);
-
-    const equipoInscrito = liga.equipos.find((e) =>
-      idsEquiposUsuario.includes(e.id.toString())
-    );
-
-    if (!equipoInscrito) return undefined;
-
-    return {
-      id: equipoInscrito.id.toString(),
-      estado: equipoInscrito.estado,
-    };
   }
 
   static async getAll(): Promise<LigaDTO[]> {
