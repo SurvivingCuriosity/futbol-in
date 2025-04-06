@@ -1,8 +1,8 @@
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { useEffect, useState } from "react";
+import { getTextoEnfrentamientos, getTextoEnfrentamientosFinal, getTextoEnfrentamientosSemifinal } from "../utils/getTextoEnfrentamientos";
 import { InputGolesParaGanar } from "./InputGolesParaGanar";
 import { InputPartidosPorEnfrentamiento } from "./InputPartidosPorEnfrentamiento";
-import { getTextoEnfrentamientos, getTextoEnfrentamientosFinal, getTextoEnfrentamientosSemifinal } from "../../Ligas/CrearLiga/utils/getTextoEnfrentamientos";
 
 const DEFAULT_PARTIDOS_POR_ENFRENTAMIENTO = 1;
 const DEFAULT_GOLES_PARA_GANAR = 10;

@@ -7,7 +7,6 @@ export const ConfirmarDatosTorneo = () => {
   
   const { competicionEnCreacion } = use(CrearTorneoContext);
   
-
   const handleCrearCompeticion = async () => {
     if(competicionEnCreacion === undefined) return;
     await TorneosClient.crearTorneo(competicionEnCreacion);
@@ -17,7 +16,7 @@ export const ConfirmarDatosTorneo = () => {
     <div>
       <pre>{JSON.stringify(competicionEnCreacion, null, 2)}</pre>
       <Button 
-        label="Crear competicion"
+        label="Crear torneo"
         onClick={handleCrearCompeticion}
       />
     </div>

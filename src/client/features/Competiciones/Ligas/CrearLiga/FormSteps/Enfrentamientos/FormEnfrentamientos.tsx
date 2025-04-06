@@ -1,10 +1,6 @@
+import { getTextoEnfrentamientos, getTextoEnfrentamientosFinal, getTextoEnfrentamientosSemifinal } from "@/client/features/Competiciones/common/utils/getTextoEnfrentamientos";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { useEffect, useState } from "react";
-import {
-  getTextoEnfrentamientos,
-  getTextoEnfrentamientosFinal,
-  getTextoEnfrentamientosSemifinal,
-} from "../../utils/getTextoEnfrentamientos";
 import { InputGolesParaGanar } from "./InputGolesParaGanar";
 import { InputPartidosPorEnfrentamiento } from "./InputPartidosPorEnfrentamiento";
 

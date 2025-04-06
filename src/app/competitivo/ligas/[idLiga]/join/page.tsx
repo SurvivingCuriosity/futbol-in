@@ -1,4 +1,4 @@
-import { ConfirmarInscripcionPage } from "@/client/features/Competiciones/Torneos/ConfirmarInscripcion/ConfirmarInscripcionPage";
+import { ConfirmarInscripcionPage } from "@/client/features/Competiciones/common/ConfirmarInscripcion/ConfirmarInscripcionPage";
 import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
 import { authOptions } from "@/server/lib/authOptions";
 import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";

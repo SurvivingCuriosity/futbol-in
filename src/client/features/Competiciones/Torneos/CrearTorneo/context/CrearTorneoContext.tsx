@@ -3,7 +3,7 @@ import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import React, { createContext, useState } from "react";
 import { ConfigEnfrentamientos } from "../../../common/Enfrentamientos/FormEnfrentamientos";
-import { ConfiguracionBasica } from "../types/ConfiguracionBasica";
+import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { ConfiguracionTorneo } from "../types/ConfiguracionTorneo";
 import { ConfiguracionTorneoClasificatoria } from "../types/ConfiguracionTorneoClasificatoria";
 import { CompeticionEnCreacion, CrearTorneoContextType } from "./ContextType";

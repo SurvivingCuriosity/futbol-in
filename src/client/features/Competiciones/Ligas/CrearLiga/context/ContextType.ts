@@ -1,8 +1,8 @@
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
-import { ConfiguracionBasica } from "../types/ConfiguracionBasica";
 import { ConfiguracionLiga } from "../types/ConfiguracionLiga";
+import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 
 export interface CrearLigaContextType {
   activeStep: number;

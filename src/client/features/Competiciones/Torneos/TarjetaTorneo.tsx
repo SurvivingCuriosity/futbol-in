@@ -8,7 +8,7 @@ import { TorneosService } from "@/server/services/Competiciones/Torneos/TorneosS
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { BotonInscribirme } from "../common/BotonInscribirme";
+import { BotonInscribirmeACompeticion } from "../common/BotonInscribirmeACompeticion";
 import { ChipEstadoCompeticion } from "../common/ChipEstadoCompeticion";
 import { ChipEstadoInscripcion } from "../common/ChipInscripcion";
 
@@ -54,7 +54,7 @@ export const TarjetaTorneo = async ({
 
       <div className="flex items-center justify-between mt-4">
         {puedeApuntarse && (
-          <BotonInscribirme
+          <BotonInscribirmeACompeticion
             estadoCompeticion={competicion.estadoCompeticion}
             tipoInscripcion={competicion.tipoInscripcion}
             idCompeticion={competicion.id}

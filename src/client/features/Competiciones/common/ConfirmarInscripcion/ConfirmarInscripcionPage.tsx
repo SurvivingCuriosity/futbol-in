@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { ChipEstadoInscripcion } from "../../common/ChipInscripcion";
+import { ChipEstadoInscripcion } from "../ChipInscripcion";
 
 export interface ConfirmarInscripcionPage {
   equiposUsuario: EquipoDTO[];

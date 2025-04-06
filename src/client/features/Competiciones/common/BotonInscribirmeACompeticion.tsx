@@ -6,7 +6,7 @@ import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 
-export const BotonInscribirme = ({
+export const BotonInscribirmeACompeticion = ({
   tipoInscripcion,
   estadoCompeticion,
   idCompeticion,

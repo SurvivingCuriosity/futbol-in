@@ -1,5 +1,5 @@
-import { BotonesOwner } from "@/client/features/Competiciones/common/BotonesOwner";
-import { BotonInscribirme } from "@/client/features/Competiciones/common/BotonInscribirme";
+import { BotonArrancarCompeticion } from "@/client/features/Competiciones/common/BotonArrancarCompeticion";
+import { BotonInscribirmeACompeticion } from "@/client/features/Competiciones/common/BotonInscribirmeACompeticion";
 import { ChipEstadoInscripcion } from "@/client/features/Competiciones/common/ChipInscripcion";
 import { NavLigas } from "@/client/features/Competiciones/Ligas/NavLigas";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
@@ -75,7 +75,7 @@ const layout = async ({ params, children }: PageProps) => {
           </p>
         </div>
         {isOwner && (
-          <BotonesOwner
+          <BotonArrancarCompeticion
             idCompeticion={liga.id}
             competicionNoHaArrancado={
               liga.estadoCompeticion === EstadoCompeticion.ACTIVO
@@ -89,7 +89,7 @@ const layout = async ({ params, children }: PageProps) => {
         />
 
         {!yaEstaInscrito && (
-          <BotonInscribirme
+          <BotonInscribirmeACompeticion
             idCompeticion={liga.id}
             estadoCompeticion={liga.estadoCompeticion}
             tipoInscripcion={liga.tipoInscripcion}

@@ -1,4 +1,4 @@
-import { ConfigEnfrentamientos } from "../../../common/Enfrentamientos/FormEnfrentamientos";
+import { ConfigEnfrentamientos } from "../Enfrentamientos/FormEnfrentamientos";
 
   export const getTextoEnfrentamientos = (configuracion:ConfigEnfrentamientos) => {
     const { cantidadPartidos, golesParaGanar } = configuracion;

@@ -4,7 +4,7 @@ import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const BotonesOwner = ({
+export const BotonArrancarCompeticion = ({
   idCompeticion,
   competicionNoHaArrancado,
 }: {

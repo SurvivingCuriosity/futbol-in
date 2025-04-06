@@ -2,8 +2,8 @@ import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import React, { createContext, useState } from "react";
+import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { ConfigEnfrentamiento } from "../FormSteps/Enfrentamientos/FormEnfrentamientos";
-import { ConfiguracionBasica } from "../types/ConfiguracionBasica";
 import { ConfiguracionLiga } from "../types/ConfiguracionLiga";
 import { CompeticionEnCreacion, CrearLigaContextType } from "./ContextType";
 

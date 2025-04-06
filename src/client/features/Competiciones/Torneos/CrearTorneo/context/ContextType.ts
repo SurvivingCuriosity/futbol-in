@@ -1,7 +1,7 @@
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { TorneoDTO } from "@/server/models/Competicion/Torneos/TorneoDTO";
-import { ConfiguracionBasica } from "../types/ConfiguracionBasica";
+import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { ConfiguracionTorneo } from "../types/ConfiguracionTorneo";
 import { ConfiguracionTorneoClasificatoria } from "../types/ConfiguracionTorneoClasificatoria";
 

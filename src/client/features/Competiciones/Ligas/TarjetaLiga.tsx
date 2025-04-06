@@ -4,13 +4,13 @@ import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { authOptions } from "@/server/lib/authOptions";
 import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { BotonInscribirme } from "../common/BotonInscribirme";
+import { BotonInscribirmeACompeticion } from "../common/BotonInscribirmeACompeticion";
 import { ChipEstadoCompeticion } from "../common/ChipEstadoCompeticion";
 import { ChipEstadoInscripcion } from "../common/ChipInscripcion";
-import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 
 export const TarjetaLiga = async ({
   competicion,
@@ -54,7 +54,7 @@ export const TarjetaLiga = async ({
 
       <div className="flex items-center justify-between mt-4">
         {puedeApuntarse && (
-          <BotonInscribirme
+          <BotonInscribirmeACompeticion
             estadoCompeticion={competicion.estadoCompeticion}
             tipoInscripcion={competicion.tipoInscripcion}
             idCompeticion={competicion.id}

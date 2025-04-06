@@ -4,7 +4,7 @@ import { Button, InlinePicker, TextInput } from "futbol-in-ui";
 import dynamic from "next/dynamic";
 import { use, useState } from "react";
 import { CrearTorneoContext } from "../context/CrearTorneoContext";
-import { ConfiguracionBasica } from "../types/ConfiguracionBasica";
+import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { PlaceOption } from "@/client/shared/components/SearchInputBar";
