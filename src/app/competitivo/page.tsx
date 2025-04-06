@@ -14,13 +14,13 @@ const page = () => {
     },
     {
       label: "Torneos",
-      href: "/competitivo/competiciones",
+      href: "/competitivo/torneos",
       descripcion: "Consulta los torneos activos en tu ciudad",
       icon: iconTipoDeCompeticionMap[TipoCompeticion.TORNEO],
     },
     {
       label: "Ligas",
-      href: "/competitivo/competiciones",
+      href: "/competitivo/ligas",
       descripcion: "Consulta las ligas activas en tu ciudad",
       icon: iconTipoDeCompeticionMap[TipoCompeticion.LIGA],
     },
