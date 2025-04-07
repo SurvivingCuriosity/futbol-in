@@ -1,5 +1,24 @@
 import mongoose, { Schema } from "mongoose";
 
+export interface PartidoDTO {
+  enfrentamiento: string;
+  equipoA: string;
+  equipoB: string;
+  golesEquipoA: number;
+  golesEquipoB: number;
+  finalizado: boolean;
+  ganador: string | null;
+}
+
+export interface IPartido extends mongoose.Document {
+  enfrentamiento: mongoose.Types.ObjectId;
+  equipoA: mongoose.Types.ObjectId;
+  equipoB: mongoose.Types.ObjectId;
+  golesEquipoA: number;
+  golesEquipoB: number;
+  finalizado: boolean;
+  ganador: mongoose.Types.ObjectId | null;
+}
 
 const PartidoSchema = new Schema({
   enfrentamiento: {

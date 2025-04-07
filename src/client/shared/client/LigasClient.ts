@@ -7,11 +7,29 @@ import {
   EditarLigaRequest,
   EditarLigaResponse,
 } from "./types/Competiciones/Ligas/EditarLiga";
+import { JoinLigaRequest, JoinLigaResponse } from "./types/Competiciones/Ligas/JoinLiga";
 
 export class LigasClient {
   static async crearLiga(data: CrearLigaRequest): Promise<CrearLigaResponse> {
     const response = await BaseClient.request<CrearLigaResponse>(
       "/api/ligas/crear",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.error || "Error al crear liga");
+    }
+
+    return response.data;
+  }
+
+  static async joinLiga(data: JoinLigaRequest): Promise<JoinLigaResponse> {
+    console.log('Liga client joinLiga', data)
+    const response = await BaseClient.request<JoinLigaResponse>(
+      "/api/ligas/join",
       {
         method: "POST",
         body: data,

@@ -4,5 +4,5 @@ import { ConfigEnfrentamiento } from "../FormSteps/Enfrentamientos/FormEnfrentam
 export interface ConfiguracionLiga {
   idaYVuelta: boolean;
   tipoEnfrentamiento: TipoEnfrentamiento;
-  configEnfrentamientos: ConfigEnfrentamiento;
+  configEnfrentamiento: ConfigEnfrentamiento;
 }

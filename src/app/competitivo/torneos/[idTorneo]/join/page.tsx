@@ -1,5 +1,6 @@
 import { ConfirmarInscripcionPage } from "@/client/features/Competiciones/common/ConfirmarInscripcion/ConfirmarInscripcionPage";
 import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { TorneosService } from "@/server/services/Competiciones/Torneos/TorneosService";
@@ -55,6 +56,7 @@ const page = async ({ params }: PageProps) => {
       equiposUsuario={equiposUsuario}
       equipoInscrito={equipoInscrito}
       tipoInscripcion={competicion.tipoInscripcion}
+      tipoCompeticion={TipoCompeticion.TORNEO}
     />
   );
 };

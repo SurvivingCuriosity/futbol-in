@@ -13,7 +13,6 @@ export const CrearLigaPage = () => {
 
   const steps = useCrearLigaSteps()
 
-
   return (
     <>
       <div className="mx-auto flex flex-col lg:flex-row lg:p-4 h-[calc(100dvh_-_100px)] lg:w-10/12 w-full">

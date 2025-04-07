@@ -4,11 +4,13 @@ import { EnfrentamientoSchema, IEnfrentamiento } from "../../Enfrentamiento/Enfr
 import { CompeticionBase, ICompeticionBase } from "../CompeticionBase/Competicion.model";
 
 export interface ILiga extends ICompeticionBase {
+  idaYVuelta: boolean;
   configEnfrentamiento: IConfigEnfrentamiento
   enfrentamientos: IEnfrentamiento[]
 }
 
 const LigaSchema = new Schema<ILiga>({
+  idaYVuelta: { type: Boolean, required: true },
   configEnfrentamiento: ConfigEnfrentamientoSchema,
   enfrentamientos: [EnfrentamientoSchema]
 });

@@ -18,6 +18,8 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
   const [descripcion, setDescripcion] = useState<string>("");
   const [googlePlaceId, setGooglePlaceId] = useState<string>("");
 
+  const [idaYVuelta, setIdaYVuelta] = useState<boolean>(false);
+
   const [modalidadDeJuego, setModalidadDeJuego] = useState<ModalidadJuego>(
     ModalidadJuego.COMBINADO
   );
@@ -47,8 +49,9 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handleCompletarConfigurarLiga = (c:ConfiguracionLiga) => {
+    setConfigEnfrentamiento(c.configEnfrentamiento)
+    setIdaYVuelta(c.idaYVuelta)
     setActiveStep(activeStep + 1);
-    console.log(c)
   };
 
   const handleCompletarDatosBasicos = (c: ConfiguracionBasica) => {
@@ -76,6 +79,7 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
       enfrentamientos : [],
       equipos: [],
       configEnfrentamiento,
+      idaYVuelta
     }
     setCompeticionEnCreacion(competicion)
   }

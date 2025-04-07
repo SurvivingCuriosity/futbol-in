@@ -1,7 +1,8 @@
 "use client";
 
 import { TarjetaEquipo } from "@/client/features/MiPerfil/components/TarjetaEquipo";
-import { CompeticionesClient } from "@/client/shared/client/CompeticionesClient";
+import { LigasClient } from "@/client/shared/client/LigasClient";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { EquipoCompeticionDTO } from "@/server/models/Equipo/EquipoCompeticion.model";
 import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
@@ -17,6 +18,7 @@ export interface ConfirmarInscripcionPage {
   idCompeticion: string;
   equipoInscrito: EquipoCompeticionDTO|undefined;
   tipoInscripcion:TipoInscripcion
+  tipoCompeticion: TipoCompeticion;
 }
 
 export const ConfirmarInscripcionPage = (props: ConfirmarInscripcionPage) => {
@@ -24,7 +26,8 @@ export const ConfirmarInscripcionPage = (props: ConfirmarInscripcionPage) => {
     idCompeticion,
     equiposUsuario,
     equipoInscrito,
-    tipoInscripcion
+    tipoInscripcion,
+    tipoCompeticion
   } = props;
 
   const router = useRouter();
@@ -47,14 +50,25 @@ export const ConfirmarInscripcionPage = (props: ConfirmarInscripcionPage) => {
 
   const handleInscribirme = async () => {
     if (!idEquipoSeleccionado) return;
-    const res = await CompeticionesClient.join({
-      idCompeticion,
-      idEquipo: idEquipoSeleccionado,
-    });
-    if (res.success) {
-      toast.success("¡Bienvenido a la competición!");
-      router.refresh();
+    console.log(tipoCompeticion)
+    if(tipoCompeticion === TipoCompeticion.LIGA){
+      const res = await LigasClient.joinLiga({
+        idLiga:idCompeticion,
+        idEquipo: idEquipoSeleccionado,
+      });
+      if (res.success) {
+        toast.success("¡Bienvenido a la competición!");
+        router.refresh();
+      }
     }
+    // const res = await CompeticionesClient.join({
+    //   idCompeticion,
+    //   idEquipo: idEquipoSeleccionado,
+    // });
+    // if (res.success) {
+    //   toast.success("¡Bienvenido a la competición!");
+    //   router.refresh();
+    // }
   };
 
   return (

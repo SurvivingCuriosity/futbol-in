@@ -1,7 +1,8 @@
 import { DataTable } from "@/client/shared/components/Table/Table";
 import { Column } from "@/client/shared/components/Table/types";
+import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO";
 
-export const TablaClasificacionLiga = () => {
+export const TablaClasificacionLiga = ({equipos}:{equipos:EquipoConEstadoDTO[]}) => {
   interface TableRow {
     pos: number;
     equipo: string;
@@ -13,28 +14,16 @@ export const TablaClasificacionLiga = () => {
     pts: number;
   }
 
-  const sampleDataClasificacion: TableRow[] = [
-    {
-      pos: 1,
-      equipo: "Los yumas",
-      pj: 10,
-      pg: 8,
-      pp: 2,
-      gf: 20,
-      gc: 10,
-      pts: 10,
-    },
-    {
-      pos: 2,
-      equipo: "Los cracks",
-      pj: 10,
-      pg: 7,
-      pp: 3,
-      gf: 18,
-      gc: 12,
-      pts: 9,
-    },
-  ];
+  const sampleDataClasificacion: TableRow[] = equipos.map((e, i) => ({
+    pos: i + 1,
+    equipo: e.nombreEquipo,
+    pj: 10,
+    pg: 10,
+    pp: 10,
+    gf: 10,
+    gc: 10,
+    pts: 10,
+  }));
 
   const columns: Column<TableRow>[] = [
     {

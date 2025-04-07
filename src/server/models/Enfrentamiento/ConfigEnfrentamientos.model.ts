@@ -1,5 +1,10 @@
 import { Schema } from "mongoose";
 
+export interface ConfigEnfrentamientoDTO {
+  cantidadPartidos: number;
+  golesParaGanar: number;
+}
+
 export interface IConfigEnfrentamiento {
   cantidadPartidos: number;
   golesParaGanar: number;

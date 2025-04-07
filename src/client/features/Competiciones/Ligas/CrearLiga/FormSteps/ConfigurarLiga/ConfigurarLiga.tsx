@@ -35,7 +35,7 @@ export const ConfigurarLiga = ({
     const configLiga: ConfiguracionLiga = {
       idaYVuelta,
       tipoEnfrentamiento,
-      configEnfrentamientos,
+      configEnfrentamiento:configEnfrentamientos,
     };
     onCompleted(configLiga);
   };

@@ -12,7 +12,7 @@ import { BotonesAceptarInscripcion } from "./BotonesAceptarInscripcion";
 export const TarjetaEquipoTorneo = async ({
   equipo,
   isOwner,
-  idCompeticion
+  idCompeticion,
 }: {
   equipo: EquipoConEstadoDTO;
   isOwner: boolean;

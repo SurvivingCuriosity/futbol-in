@@ -20,7 +20,7 @@ const page = async ({ params }: PageProps) => {
   
   const session = await getServerSession(authOptions);
   
-  if(!session){
+  if(!session || !session.user){
     redirect("/not-allowed");
   }
 
@@ -33,7 +33,7 @@ const page = async ({ params }: PageProps) => {
   ? equiposConEstado 
   : equiposConEstado.filter((e) => e.estado === EstadoEquipoCompeticion.ACEPTADO)
 
-  return <ListaEquiposLigaPage equipos={equiposMostrar} isOwner={isOwner} idCompeticion={idLiga}/>
+  return <ListaEquiposLigaPage equipos={equiposMostrar} isOwner={isOwner} idCompeticion={idLiga} />
 };
 
 export default page;

@@ -40,6 +40,7 @@ export const crearLigaSchema = z.object({
   equipos: z.array(EquipoZod),
 
   configEnfrentamiento: ConfigEnfrentamientoZod,
+  idaYVuelta: z.boolean(),
 });
 
 export type CompeticionInput = z.infer<typeof crearLigaSchema>;

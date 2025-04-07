@@ -22,7 +22,6 @@ export async function crearLigaController(
   
   // Validar request
   const liga = crearLigaSchema.parse(data);
-  console.log('Validado spot', liga)
 
   // Construir el objeto a crear
   const competicionACrear: Omit<LigaDTO, "id"> = {
