@@ -175,6 +175,7 @@ const CeldaPartido = ({
   handleChangeGolesEquipoB: (index: number, valor: number) => void;
 }) => {
   const { liga } = use(DetalleLigaContext);
+  const golesParaGanar = liga.configEnfrentamiento.golesParaGanar;
 
   return (
     <div className="flex flex-col h-full">
@@ -193,7 +194,7 @@ const CeldaPartido = ({
         ) : partido.golesEquipoA === 0 ? (
           "-"
         ) : (
-          partido.golesEquipoA
+          <p className={`${golesParaGanar === partido.golesEquipoA ? 'text-green-300' : ''}`}>{partido.golesEquipoA}</p>
         )}
       </div>
       <div
@@ -211,7 +212,7 @@ const CeldaPartido = ({
         ) : partido.golesEquipoB === 0 ? (
           "-"
         ) : (
-          partido.golesEquipoB
+          <p className={`${golesParaGanar === partido.golesEquipoB ? 'text-green-300' : ''}`}>{partido.golesEquipoB}</p>
         )}
       </div>
     </div>
