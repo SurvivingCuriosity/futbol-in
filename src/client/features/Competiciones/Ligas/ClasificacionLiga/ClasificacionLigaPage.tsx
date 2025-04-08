@@ -1,9 +1,12 @@
 "use client";
-import React from "react";
+import { use } from "react";
+import { DetalleLigaContext } from "../DetalleLiga/DetalleLigaContext";
 import { TablaClasificacionLiga } from "./TablaClasificacionLiga";
-import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO";
 
-export const ClasificacionLigaPage = ({equipos}:{equipos:EquipoConEstadoDTO[]}) => {
+export const ClasificacionLigaPage = () => {
+  
+  const {equipos} = use(DetalleLigaContext)
+
   return (
     <div className="w-full">
       <TablaClasificacionLiga equipos={equipos} />

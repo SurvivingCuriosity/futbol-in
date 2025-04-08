@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 
 export interface PartidoDTO {
   enfrentamiento: string;
@@ -51,4 +51,6 @@ const PartidoSchema = new Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Partido', PartidoSchema);
+export const Partido: Model<IPartido> =
+  mongoose.models.Partido ||
+  mongoose.model<IPartido>("Partido", PartidoSchema);

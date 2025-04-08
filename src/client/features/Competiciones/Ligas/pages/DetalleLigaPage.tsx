@@ -1,15 +1,15 @@
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+"use client"
+
+import { use } from "react";
+import { DetalleLigaContext } from "../DetalleLiga/DetalleLigaContext";
 import { MainInfoLiga } from "../DetalleLiga/MainInfoLiga";
 
-
-export const DetalleLigaPage = (props: {
-  competicion: LigaDTO;
-}) => {
-  const { competicion } = props;
+export const DetalleLigaPage = () => {
+  const { liga } = use(DetalleLigaContext);
 
   return (
     <>
-        <MainInfoLiga competicion={competicion} />
+      <MainInfoLiga competicion={liga} />
     </>
   );
 };

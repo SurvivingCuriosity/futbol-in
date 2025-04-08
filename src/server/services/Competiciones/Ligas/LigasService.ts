@@ -3,12 +3,14 @@ import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import connectDb from "@/server/lib/db";
 import { ILiga, Liga } from "@/server/models/Competicion/Ligas/Liga.model";
 import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
-import {
+import Enfrentamiento, {
   EnfrentamientoDTO,
   IEnfrentamiento,
 } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
+import "@/server/models/Partido/Partido.model";
 import { IPartido } from "@/server/models/Partido/Partido.model";
 import { Types } from "mongoose";
+
 
 export class LigasService {
   static async crearLiga(
@@ -58,25 +60,32 @@ export class LigasService {
       throw new Error("No se encontró la liga");
     }
 
-    // Determinar el estado inicial (ACEPTADO o PENDIENTE)
     const estado =
       liga.tipoInscripcion === TipoInscripcion.ABIERTO
         ? EstadoEquipoCompeticion.ACEPTADO
         : EstadoEquipoCompeticion.PENDIENTE;
 
-    // 1. Añadimos el nuevo equipo
+    // 1. Añadimos el nuevo equipo a la liga
     liga.equipos.push({ id: idEquipo, estado });
 
-    // 2. Generamos los enfrentamientos del nuevo equipo contra los existentes
-    const nuevosEnfrentamientos = generarEnfrentamientosLigaParaNuevoEquipo(
+    // 2. Generamos los datos base de enfrentamientos (objetos)
+    const datosEnfrentamientos = generarEnfrentamientosLigaParaNuevoEquipo(
       liga,
       idEquipo
     );
+    // datosEnfrentamientos es un array de IEnfrentamiento, pero sin _id
 
-    // 3. Añadimos al array de enfrentamientos
-    liga.enfrentamientos.push(...nuevosEnfrentamientos);
+    // 3. Creamos esos Enfrentamientos en la colección “Enfrentamiento”
+    // Cada elemento se convertirá en un doc con su _id
+    const docsEnfrentamientos = await Enfrentamiento.insertMany(
+      datosEnfrentamientos
+    );
 
-    // 4. Guardamos en DB
+    // 4. Obtenemos los _id de cada enfrentamiento creado y los metemos en liga.enfrentamientos
+    const idsEnfrentamientos = docsEnfrentamientos.map((doc) => doc._id);
+    liga.enfrentamientos.push(...idsEnfrentamientos);
+
+    // 5. Guardamos la liga en DB (ahora solo guarda IDs en “enfrentamientos”)
     await liga.save();
 
     return this.mapToDTO(liga);
@@ -94,35 +103,43 @@ export class LigasService {
     return this.mapToDTO(liga);
   }
 
-  static async getEnfrentamientos(
-    idLiga: string
-  ): Promise<EnfrentamientoDTO[]> {
+  static async getEnfrentamientos(idLiga: string): Promise<EnfrentamientoDTO[]> {
     await connectDb();
-
-    const liga = await Liga?.findById(idLiga) as ILiga;
-
-    console.log(liga.enfrentamientos)
-
-    const enfrentamientosMapeados: EnfrentamientoDTO[] = liga.enfrentamientos.map(
-      (enf) => ({
-        equipoA: enf.equipoA?.toString() ?? '',
-        equipoB: enf.equipoB?.toString() ?? '',
-        competicion: enf.competicion.toString() ?? '',
-        partidos: (enf.partidos as IPartido[]).map((p) => ({
-          enfrentamiento: p.enfrentamiento.toString() ?? '',
-          equipoA: p.equipoA.toString() ?? '',
-          equipoB: p.equipoB.toString() ?? '',
-          golesEquipoA: p.golesEquipoA,
-          golesEquipoB: p.golesEquipoB,
-          finalizado: p.finalizado,
-          ganador: p.ganador?.toString() ?? '',
-        })),
-        ganador: enf.ganador ? enf.ganador?.toString() ?? '' : null,
-        jugado: enf.jugado,
+  
+    // 1. Buscar la liga y populamos los enfrentamientos y sus partidos
+    const liga = await Liga?.findById(idLiga)
+      .populate({
+        path: "enfrentamientos",      // array de ObjectIDs
+        populate: { path: "partidos" }, // <-- Aquí necesita el modelo "Partido"
       })
-    );
-
-    return enfrentamientosMapeados || [];
+      .exec();
+  
+    if (!liga) {
+      // Si no existe la liga, devolvemos array vacío (o lanza error, depende de tu lógica)
+      return [];
+    }
+  
+    // 2. liga.enfrentamientos ahora debería ser un array de documentos IEnfrentamiento
+    const enfrentamientos = liga.enfrentamientos as unknown as IEnfrentamiento[];
+  
+    // 3. Convertimos cada IEnfrentamiento en tu EnfrentamientoDTO
+    return enfrentamientos.map((enf) => ({
+      id: enf.id.toString(),
+      competicion: enf.competicion?.toString() ?? "",
+      equipoA: enf.equipoA?.toString() ?? "",
+      equipoB: enf.equipoB?.toString() ?? "",
+      partidos: (enf.partidos as IPartido[]).map((p) => ({
+        enfrentamiento: p.enfrentamiento?.toString() ?? "",
+        equipoA: p.equipoA?.toString() ?? "",
+        equipoB: p.equipoB?.toString() ?? "",
+        golesEquipoA: p.golesEquipoA,
+        golesEquipoB: p.golesEquipoB,
+        finalizado: p.finalizado,
+        ganador: p.ganador?.toString() ?? "",
+      })),
+      ganador: enf.ganador ? enf.ganador.toString() : null,
+      jugado: enf.jugado,
+    }));
   }
 
   static mapToDTO(c: ILiga): LigaDTO {
@@ -154,14 +171,14 @@ export class LigasService {
 function generarEnfrentamientosLigaParaNuevoEquipo(
   liga: ILiga,
   nuevoEquipoId: Types.ObjectId
-): IEnfrentamiento[] {
+): Omit<IEnfrentamiento, "id">[] {
+
   const esIdaYVuelta = liga.idaYVuelta;
 
   return liga.equipos
     .filter((eq) => !eq.id.equals(nuevoEquipoId))
     .flatMap((eq) => {
-      // Enfrentamiento “ida”: eq -> A, nuevo -> B
-      const ida: IEnfrentamiento = {
+      const ida = {
         competicion: liga._id,
         equipoA: eq.id,
         equipoB: nuevoEquipoId,
@@ -170,9 +187,8 @@ function generarEnfrentamientosLigaParaNuevoEquipo(
         jugado: false,
       };
 
-      // Enfrentamiento “vuelta” (opcional)
       if (esIdaYVuelta) {
-        const vuelta: IEnfrentamiento = {
+        const vuelta = {
           competicion: liga._id,
           equipoA: nuevoEquipoId,
           equipoB: eq.id,

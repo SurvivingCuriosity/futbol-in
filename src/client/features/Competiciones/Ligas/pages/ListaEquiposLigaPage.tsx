@@ -1,15 +1,13 @@
-import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO";
-import { TarjetaEquipoTorneo } from "../../Torneos/DetalleTorneo/components/TarjetaEquipoTorneo";
+"use client"
 
-export const ListaEquiposLigaPage = ({
-  equipos,
-  isOwner,
-  idCompeticion,
-}: {
-  equipos: EquipoConEstadoDTO[];
-  isOwner: boolean;
-  idCompeticion: string;
-}) => {
+import { use } from "react";
+import { TarjetaEquipoTorneo } from "../../Torneos/DetalleTorneo/components/TarjetaEquipoTorneo";
+import { DetalleLigaContext } from "../DetalleLiga/DetalleLigaContext";
+
+export const ListaEquiposLigaPage = () => {
+  
+  const {equipos, liga, isOwner} = use(DetalleLigaContext);
+
   return (
     <>
       {equipos.length === 0 ? (
@@ -23,7 +21,7 @@ export const ListaEquiposLigaPage = ({
               equipo={e}
               key={e.id}
               isOwner={isOwner}
-              idCompeticion={idCompeticion}
+              idCompeticion={liga.id}
             />
           ))}
         </ul>

@@ -2,6 +2,7 @@ import mongoose, { Model, Schema, Types } from "mongoose";
 import { IPartido, PartidoDTO } from "../Partido/Partido.model";
 
 export interface EnfrentamientoDTO {
+  id: string;
   competicion: string;
   equipoA: string;
   equipoB: string;
@@ -11,6 +12,7 @@ export interface EnfrentamientoDTO {
 }
 
 export interface IEnfrentamiento {
+  id: string;
   competicion: mongoose.Types.ObjectId;
   equipoA: mongoose.Types.ObjectId;
   equipoB: mongoose.Types.ObjectId;

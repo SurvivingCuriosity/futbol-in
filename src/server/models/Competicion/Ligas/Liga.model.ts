@@ -1,18 +1,22 @@
-import { Schema } from "mongoose";
+import { Schema, Types } from "mongoose";
 import { ConfigEnfrentamientoSchema, IConfigEnfrentamiento } from '../../Enfrentamiento/ConfigEnfrentamientos.model';
-import { EnfrentamientoSchema, IEnfrentamiento } from "../../Enfrentamiento/Enfrentamiento.model";
 import { CompeticionBase, ICompeticionBase } from "../CompeticionBase/Competicion.model";
 
 export interface ILiga extends ICompeticionBase {
   idaYVuelta: boolean;
   configEnfrentamiento: IConfigEnfrentamiento
-  enfrentamientos: IEnfrentamiento[]
+  enfrentamientos: Types.ObjectId[]
 }
 
 const LigaSchema = new Schema<ILiga>({
   idaYVuelta: { type: Boolean, required: true },
   configEnfrentamiento: ConfigEnfrentamientoSchema,
-  enfrentamientos: [EnfrentamientoSchema]
+  enfrentamientos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Enfrentamiento",
+    },
+  ]
 });
 
 

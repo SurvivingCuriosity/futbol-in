@@ -6,7 +6,8 @@ import { PartidoDTO } from "@/server/models/Partido/Partido.model";
 import { faCheck, faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { use, useState } from "react";
-import { PartidosLigaContext } from "./PartidosLigaContex";
+import { DetalleLigaContext } from "../DetalleLiga/DetalleLigaContext";
+import { EnfrentamientosClient } from "@/client/shared/client/EnfrentamientosClient";
 
 export const TarjetaEnfrentamiento = ({
   enfrentamiento,
@@ -19,13 +20,12 @@ export const TarjetaEnfrentamiento = ({
 }) => {
   const [editing, setEditing] = useState(false);
 
-  const { equipoInscrito, isOwner, configEnfrentamiento } =
-    use(PartidosLigaContext);
+  const { equipoInscrito, isOwner, liga } = use(DetalleLigaContext);
 
   const [partidos, setPartidos] = useState<PartidoDTO[]>(
     enfrentamiento.partidos.length > 0
       ? enfrentamiento.partidos
-      : new Array(configEnfrentamiento.cantidadPartidos).fill({
+      : new Array(liga.configEnfrentamiento.cantidadPartidos).fill({
           enfrentamiento: enfrentamiento.competicion,
           equipoA: enfrentamiento.equipoA,
           equipoB: enfrentamiento.equipoB,
@@ -61,14 +61,28 @@ export const TarjetaEnfrentamiento = ({
     setEditing(true);
   };
 
-  const handleUpdateResultado = () => {
+  const handleUpdateResultado = async () => {
     setEditing(false);
-    console.log(partidos);
+    const res = await EnfrentamientosClient.completarPartidos({
+      idLiga: liga.id,
+      idEnfrentamiento: enfrentamiento.id,
+      partidos: partidos.map((p) => ({
+        equipoA: p.equipoA,
+        equipoB: p.equipoB,
+        golesEquipoA: p.golesEquipoA,
+        golesEquipoB: p.golesEquipoB,
+        finalizado: p.finalizado,
+        ganador: p.ganador,
+      })),
+    })
+    console.log(res)
   };
 
   const handleCancelUpdate = () => {
     setEditing(false);
   };
+
+  const puedeEditar = isOwner || jugadorLogadoEsEquipoA || jugadorLogadoEsEquipoB;
 
   return (
     <div className="bg-neutral-900 rounded-lg border border-neutral-700 flex flex-row">
@@ -90,7 +104,7 @@ export const TarjetaEnfrentamiento = ({
       <div className="flex flex-row">
         {partidos.map((p, i) => (
           <CeldaPartido
-            key={p.equipoA + p.equipoB+i}
+            key={p.equipoA + p.equipoB + i}
             partido={p}
             editing={editing}
             index={i}
@@ -100,9 +114,8 @@ export const TarjetaEnfrentamiento = ({
         ))}
       </div>
       <div className="border-neutral-700 flex items-center justify-center w-full">
-        {isOwner ||
-          jugadorLogadoEsEquipoA ||
-          (jugadorLogadoEsEquipoB &&
+        {puedeEditar
+          &&
             (editing ? (
               <div className="flex flex-col gap-2">
                 <button onClick={handleUpdateResultado}>
@@ -116,7 +129,7 @@ export const TarjetaEnfrentamiento = ({
               <button onClick={handleEdit}>
                 <FontAwesomeIcon icon={faPen} />
               </button>
-            )))}
+            ))}
       </div>
     </div>
   );
@@ -161,7 +174,7 @@ const CeldaPartido = ({
   handleChangeGolesEquipoA: (index: number, valor: number) => void;
   handleChangeGolesEquipoB: (index: number, valor: number) => void;
 }) => {
-  const { configEnfrentamiento } = use(PartidosLigaContext);
+  const { liga } = use(DetalleLigaContext);
 
   return (
     <div className="flex flex-col h-full">
@@ -172,7 +185,7 @@ const CeldaPartido = ({
           <input
             type="number"
             min={0}
-            max={configEnfrentamiento.golesParaGanar}
+            max={liga.configEnfrentamiento.golesParaGanar}
             className="w-full p-0.5 bg-neutral-100 rounded"
             onChange={(e) => handleChangeGolesEquipoA(index, +e.target.value)}
             value={partido.golesEquipoA === 0 ? "" : partido.golesEquipoA}
@@ -190,7 +203,7 @@ const CeldaPartido = ({
           <input
             type="number"
             min={0}
-            max={configEnfrentamiento.golesParaGanar}
+            max={liga.configEnfrentamiento.golesParaGanar}
             onChange={(e) => handleChangeGolesEquipoB(index, +e.target.value)}
             className="w-full p-0.5 bg-neutral-100 rounded"
             value={partido.golesEquipoB === 0 ? "" : partido.golesEquipoB}
