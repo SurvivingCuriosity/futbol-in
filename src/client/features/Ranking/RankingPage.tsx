@@ -16,11 +16,12 @@ export default async function RankingPage() {
     spotsCreados: user.stats.lugaresAgregados,
     spotsVotados: user.stats.lugaresRevisados,
     spotsVerificados: user.stats.lugaresVerificados,
-    puntuacion: getPuntuacion(user.stats.lugaresAgregados, user.stats.lugaresRevisados, user.stats.lugaresVerificados),
+    puntuacion: getPuntuacion(user.stats.lugaresAgregados ?? 0, user.stats.lugaresRevisados ?? 0, user.stats.lugaresVerificados ?? 0),
   }))
 
 
   function getPuntuacion(lugaresAgregados: number, lugaresRevisados: number, lugaresVerificados: number) {
+    console.log(lugaresAgregados, lugaresRevisados, lugaresVerificados)
     const puntuacion = lugaresAgregados*5 + lugaresRevisados*2 + lugaresVerificados*2;
     return puntuacion;
   }

@@ -1,8 +1,15 @@
 import { DataTable } from "@/client/shared/components/Table/Table";
 import { Column } from "@/client/shared/components/Table/types";
+import { EnfrentamientoDTO } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
 import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO";
 
-export const TablaClasificacionLiga = ({equipos}:{equipos:EquipoConEstadoDTO[]}) => {
+export const TablaClasificacionLiga = ({
+  equipos,
+  enfrentamientos,
+}: {
+  equipos: EquipoConEstadoDTO[];
+  enfrentamientos: EnfrentamientoDTO[];
+}) => {
   interface TableRow {
     pos: number;
     equipo: string;
@@ -17,8 +24,8 @@ export const TablaClasificacionLiga = ({equipos}:{equipos:EquipoConEstadoDTO[]})
   const sampleDataClasificacion: TableRow[] = equipos.map((e, i) => ({
     pos: i + 1,
     equipo: e.nombreEquipo,
-    pj: 10,
-    pg: 10,
+    pj: enfrentamientos.filter((e) => e.equipoA === e.id || e.equipoB === e.id).length,
+    pg: enfrentamientos.filter((e) => e.ganador === e.id).length,
     pp: 10,
     gf: 10,
     gc: 10,

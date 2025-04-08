@@ -5,11 +5,11 @@ import { TablaClasificacionLiga } from "./TablaClasificacionLiga";
 
 export const ClasificacionLigaPage = () => {
   
-  const {equipos} = use(DetalleLigaContext)
+  const {equipos, enfrentamientos} = use(DetalleLigaContext)
 
   return (
     <div className="w-full">
-      <TablaClasificacionLiga equipos={equipos} />
+      <TablaClasificacionLiga equipos={equipos} enfrentamientos={enfrentamientos} />
     </div>
   );
 };
