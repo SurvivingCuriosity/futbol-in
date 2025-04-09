@@ -75,11 +75,11 @@ const AgregarSpotPage = () => {
         nuevoLogro={nuevoLogro}
         />
       )}
-      <div className="max-w-xl mx-auto w-full p-4 border border-neutral-700 rounded-lg flex flex-col gap-2">
+      <div className="max-w-xl mx-auto w-full md:p-4 md:border border-neutral-700 rounded-lg flex flex-col gap-2">
         <h1 className="text-2xl font-extrabold tracking-tight text-primary">
           Agregar un nuevo futbolín
         </h1>
-        <p className="text-neutral-400 text-sm mb-8 bg-neutral-900 p-4 rounded-lg">
+        <p className="text-neutral-400 text-xs md:mb-8 bg-neutral-900 p-2 rounded-lg text-balance">
           Asegurate de que la información introducida es correcta. Gracias por
           tu aportación.
         </p>

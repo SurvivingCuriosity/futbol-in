@@ -11,6 +11,7 @@ const HomePage = ({tieneNotificaciones, notificaciones}:{tieneNotificaciones:boo
     <div>
       <Header tieneNotificaciones={tieneNotificaciones} notificaciones={notificaciones} />
       <div className="h-full w-full flex flex-col md:grid grid-cols-5 grid-rows-5 gap-8 *:h-full md:*:border md:*:p-4 *:border-neutral-800 *:rounded-lg">
+
         <div className="col-span-3 row-span-3 max-h-[500px]">
           <TablonMensajes />
         </div>

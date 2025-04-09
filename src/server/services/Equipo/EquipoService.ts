@@ -25,8 +25,9 @@ export class EquipoService {
   }
 
   static async findManyById(
-    idsEquipos: Types.ObjectId[]
+    idsEquipos: Types.ObjectId[] | undefined
   ): Promise<EquipoDTO[]> {
+    if(!idsEquipos) return []
     await connectDb();
     const equipos = await Equipo.find({ _id: { $in: idsEquipos } });
     return equipos.map((e) => this.mapToDTO(e));

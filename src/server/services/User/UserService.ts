@@ -77,7 +77,7 @@ export class UserService {
       new: true,
       runValidators: true,
     });
-    console.log('Updated user: ', updatedUser);
+    console.log("Updated user: ", updatedUser);
     return updatedUser;
   }
 
@@ -139,6 +139,8 @@ export class UserService {
       nombre: user.nombre,
       telefono: user.telefono,
       posicion: user.posicion,
+      ciudad: user.ciudad,
+      ciudadActual: user.ciudadActual
     };
   }
 }

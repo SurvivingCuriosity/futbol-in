@@ -39,7 +39,17 @@ export const authOptions: NextAuthOptions = {
         }
 
         // Esto es lo que recibirá "user" en el callback 'jwt' inmediatamente después
-        return UserService.mapToDTO(user);
+        return {
+          name: user.name,
+          id: user._id.toString(),
+          status: user.status,
+          role: user.role || [UserRole.USER],
+          email: user.email,
+          image: user.imagen,
+          ciudadActual: user.ciudadActual as string,
+          provider: user.provider,
+          imagen: user.imagen,
+        }
       },
     }),
   ],
@@ -96,6 +106,7 @@ export const authOptions: NextAuthOptions = {
         session.user.status = dbUser.status || UserStatus.MUST_CONFIRM_EMAIL;
         session.user.imagen = dbUser.imagen;
         session.user.role = token.role || [UserRole.USER];
+        session.user.ciudadActual = dbUser.ciudadActual
       }
       
       if (session.user && !dbUser) {
@@ -104,6 +115,7 @@ export const authOptions: NextAuthOptions = {
         session.user.provider = token.provider as AuthProvider;
         session.user.role = token.role || [UserRole.USER];
         session.user.imagen = token.image as string;
+        session.user.ciudadActual = token.ciudadActual as string;
       }
 
       return session;

@@ -1,3 +1,4 @@
+import { HeaderLocation } from "@/client/features/Home/Header/HeaderLocation";
 import SearchInputCiudad from "@/client/shared/components/SearchInputCiudad";
 import React from "react";
 
@@ -18,6 +19,7 @@ const layout = async (props: CityLayoutProps) => {
 
   return (
     <>
+      <HeaderLocation />
       <h1 className="hidden md:block text-3xl mb-2 font-extrabold text-primary tracking-tight">
         Futbolines en {ciudadLabel}
       </h1>

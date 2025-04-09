@@ -24,4 +24,6 @@ export interface UserDTO {
   nombre: string|undefined|null;
   telefono: string|undefined|null;
   posicion: Posicion|undefined|null;
+  ciudad: string|undefined|null;
+  ciudadActual: string|undefined|null;
 }

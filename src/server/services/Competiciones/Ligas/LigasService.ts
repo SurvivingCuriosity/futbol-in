@@ -1,3 +1,4 @@
+import { EliminarLigaResponse } from "@/client/shared/client/types/Competiciones/Ligas/EliminarLiga";
 import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import connectDb from "@/server/lib/db";
@@ -8,8 +9,8 @@ import Enfrentamiento, {
   IEnfrentamiento,
 } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
 import "@/server/models/Partido/Partido.model";
-import { IPartido } from "@/server/models/Partido/Partido.model";
-import { Types } from "mongoose";
+import { IPartido, Partido } from "@/server/models/Partido/Partido.model";
+import { ObjectId, Types } from "mongoose";
 
 
 export class LigasService {
@@ -89,6 +90,25 @@ export class LigasService {
     await liga.save();
 
     return this.mapToDTO(liga);
+  }
+
+  static async eliminarLiga(idLiga: string, idUser:ObjectId): Promise<EliminarLigaResponse> {
+    await connectDb();
+    const liga = await Liga?.findById(idLiga);
+
+    if (!liga) {
+      throw new Error("No se encontró la liga");
+    }
+
+    if(liga.createdByUserId.toString() !== idUser.toString()) {
+      throw new Error("No tienes permisos para eliminar esta liga");
+    }
+
+    await Liga?.findByIdAndDelete(idLiga);
+    await Enfrentamiento?.deleteMany({ competicion: idLiga });
+    await Partido?.deleteMany({ competicion: idLiga });
+
+    return { success: true };
   }
 
   static async getById(id: string): Promise<LigaDTO> {

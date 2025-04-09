@@ -25,6 +25,7 @@ declare module "next-auth" {
     provider: AuthProvider;
     status?: UserStatus;
     imagen?: string;
+    ciudadActual: string;
   }
 }
 
@@ -38,6 +39,7 @@ declare module "next-auth/jwt" {
     status?: UserStatus;
     provider?: AuthProvider;
     imagen?: string;
+    ciudadActual?: string;
     // Más campos si quieres
   }
 }

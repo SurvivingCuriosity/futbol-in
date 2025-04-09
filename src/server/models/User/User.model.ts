@@ -29,6 +29,8 @@ export interface IUserDocument extends Document {
   nombre: string|undefined|null;
   telefono: string|undefined|null;
   posicion: Posicion|undefined|null;
+  ciudad: string|undefined|null;
+  ciudadActual: string|undefined|null;
 }
 
 const userSchema = new Schema<IUserDocument>(
@@ -65,6 +67,8 @@ const userSchema = new Schema<IUserDocument>(
     nombre: { type: String, default: null },
     telefono: { type: String, default: null },
     posicion: { type: String, enum: Object.values(Posicion), default: null },
+    ciudad: { type: String, default: null },
+    ciudadActual: { type: String, default: null },
   },
   {
     timestamps: true,
