@@ -3,7 +3,7 @@
   "name": "Futbol-In",
   "icons": [
     {
-      "src": "/favicon.png",
+      "src": "/favicon/web-app-manifest-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

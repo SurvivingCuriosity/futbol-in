@@ -43,6 +43,14 @@ export class LigasService {
     return this.mapToDTO(ligaActualizada);
   }
 
+  static async getLigasDeCiudad(ciudad: string): Promise<LigaDTO[]> {
+    await connectDb();
+
+    const ligas = (await Liga?.find({ ciudad: ciudad })) as ILiga[];
+
+    return ligas.map((c) => this.mapToDTO(c));
+  }
+  
   static async getAll(): Promise<LigaDTO[]> {
     await connectDb();
 

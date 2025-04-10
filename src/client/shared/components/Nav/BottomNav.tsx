@@ -34,6 +34,9 @@ export const BottomNav = () => {
     return pathname.startsWith(href);
   };
 
+
+  if(session.status === 'unauthenticated') return null
+
   return (
     <menu className="md:hidden fixed bottom-0 w-full z-2">
       <div className="w-full h-12 bg-neutral-900/95 flex justify-around items-center relative">

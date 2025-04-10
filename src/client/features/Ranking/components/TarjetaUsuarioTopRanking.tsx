@@ -11,7 +11,7 @@ export default function TarjetaUsuarioTopRanking({ user, posicion, puntuacion }:
   const router = useRouter();
 
   const handleNavigateToUser = () => {
-    router.push(`/user/${user.name}?from=competicion/ranking`);
+    router.push(`/user/${user.name}?from=competitivo/ranking`);
   };
 
   return (
