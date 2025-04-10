@@ -10,32 +10,25 @@ import { validateLoggedInUser } from "@/server/validations/shared/validateLogged
 export async function crearLigaController(
   data: CrearLigaRequest
 ): Promise<CrearLigaResponse> {
-  // Validar usuario que realiza la peticion
-  const userDb = await validateLoggedInUser();
 
-  console.log('En controller')
+  const userDb = await validateLoggedInUser();
   
   if (!puedeCrearTorneos(UserService.mapToDTO(userDb))) {
     throw new Error("No tienes permisos para editar esta competición");
   }
-  console.log('Tiene eprmiso')
   
-  // Validar request
   const liga = crearLigaSchema.parse(data);
 
-  // Construir el objeto a crear
   const competicionACrear: Omit<LigaDTO, "id"> = {
     ...liga,
     createdByUserId: userDb.id,
     estadoCompeticion: EstadoCompeticion.ACTIVO,
   };
 
-  // Crear la
   const createdLiga = await LigasService.crearLiga(
     competicionACrear
   );
 
-  // Respuesta
   const response: CrearLigaResponse = {
     success: true,
     liga: createdLiga,

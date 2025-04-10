@@ -18,6 +18,7 @@ const CrearTorneoProvider = ({ children }: { children: React.ReactNode }) => {
   const [nombre, setNombre] = useState<string>("");
   const [descripcion, setDescripcion] = useState<string>("");
   const [googlePlaceId, setGooglePlaceId] = useState<string>("");
+  const [ciudad, setCiudad] = useState<string>("");
 
 
   const [modalidadDeJuego, setModalidadDeJuego] = useState<ModalidadJuego>(
@@ -66,6 +67,7 @@ const CrearTorneoProvider = ({ children }: { children: React.ReactNode }) => {
     setGooglePlaceId(c.googlePlaceId);
     setTipoInscripcion(c.tipoInscripcion)
     setActiveStep(activeStep + 1);
+    setCiudad(ciudad)
   };
 
   const handleCrearTorneo = () => {
@@ -73,6 +75,7 @@ const CrearTorneoProvider = ({ children }: { children: React.ReactNode }) => {
       nombre,
       descripcion, 
       googlePlaceId,
+      ciudad,
       tipoDeFutbolin,
       modalidadDeJuego,
       tipoInscripcion,

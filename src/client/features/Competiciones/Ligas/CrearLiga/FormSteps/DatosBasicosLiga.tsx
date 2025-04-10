@@ -8,19 +8,21 @@ import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { PlaceOption } from "@/client/shared/components/SearchInputBar";
 import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
+import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicipios";
 export const DatosBasicosLiga = ({
   onCompleted,
 }: {
   onCompleted: (datos: ConfiguracionBasica) => void;
 }) => {
 
-  const {tipoDeFutbolin, handleCrearTorneo} = use(CrearLigaContext)
+  const {tipoDeFutbolin} = use(CrearLigaContext)
 
   const [datosBasicos, setDatosBasicos] = useState<ConfiguracionBasica>({
     nombre: "",
     descripcion: "",
     googlePlaceId: "",
-    tipoInscripcion: TipoInscripcion.ABIERTO
+    tipoInscripcion: TipoInscripcion.ABIERTO,
+    ciudad: ""
   });
 
   const [barSeleccionado, setBarSeleccionado] = useState<PlaceOption|undefined>()
@@ -31,7 +33,6 @@ export const DatosBasicosLiga = ({
 
   const handleSiguiente = () => {
     onCompleted(datosBasicos);
-    handleCrearTorneo()
   };
 
   const SearchInputBar = dynamic(
@@ -65,6 +66,10 @@ export const DatosBasicosLiga = ({
             onChangeText={(t) => updateField("descripcion", t)}
             placeholder="Escribe aquí una descripción breve de la competición"
           />
+        </FormField>
+        <FormField>
+          <FormLabel>Ciudad / municipio * </FormLabel>
+          <SearchInputMunicipios onSelect={(v) => updateField("ciudad", v)} />
         </FormField>
         <FormField>
           <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>

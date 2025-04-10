@@ -174,6 +174,7 @@ export class LigasService {
       estadoCompeticion: c.estadoCompeticion,
       cantidadParejas: c.cantidadParejas,
       enfrentamientos: c.enfrentamientos.map((e) => e.toString()),
+      ciudad: c.ciudad,
       equipos: c.equipos.map((e) => ({
         estado: e.estado,
         id: e.id.toString(),

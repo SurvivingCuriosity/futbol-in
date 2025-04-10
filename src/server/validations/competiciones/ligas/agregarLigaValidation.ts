@@ -30,6 +30,7 @@ export const crearLigaSchema = z.object({
   nombre: z.string().min(1, "El nombre es requerido"),
   descripcion: z.string(),
   googlePlaceId: z.string().min(1, "Se requiere googlePlaceId"),
+  ciudad: z.string(),
 
   tipoDeFutbolin: z.nativeEnum(TipoFutbolin),
   modalidadDeJuego: z.nativeEnum(ModalidadJuego),

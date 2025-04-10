@@ -7,7 +7,15 @@ import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsServic
 import { ObjectId, Types } from "mongoose";
 
 export class SpotService {
-  // Creación
+  static async getById(id: string): Promise<SpotDTO> {
+    await connectDb();
+    const spot = await Spot.findById(id);
+    if (!spot) {
+      throw new Error("Spot no encontrado");
+    }
+    return this.mapToDTO(spot);
+  }
+
   static async createSpot(
     spot: Omit<SpotDTO, "id" | "votes">
   ): Promise<SpotDTO> {
@@ -31,7 +39,6 @@ export class SpotService {
     return this.mapToDTO(created);
   }
 
-  // Votar y verificar
   static async verificarSpot(
     idSpot: string,
     vote: "up" | "down",
@@ -79,8 +86,6 @@ export class SpotService {
     return this.mapToDTO(updated);
   }
 
-  // Obtención
-
   static async findNearbyByPlaceId(placeId: string): Promise<SpotDTO[]> {
     await connectDb();
 
@@ -104,12 +109,23 @@ export class SpotService {
     return lugares.map((lugar) => this.mapToDTO(lugar));
   }
 
+  static async findInCiudad(ciudad: string): Promise<SpotDTO[]> {
+    await connectDb();
+
+    const lugares = await Spot.find({
+      ciudad: ciudad,
+    }).lean<ISpot[]>();
+
+    return lugares.map((lugar) => this.mapToDTO(lugar));
+  }
+
   static mapToDTO(lugar: ISpot): SpotDTO {
     return {
       id: lugar._id.toString(),
       nombre: lugar.nombre,
       direccion: lugar.direccion,
       googlePlaceId: lugar.googlePlaceId,
+      ciudad: lugar.ciudad,
       coordinates: [...lugar.location.coordinates],
       tipoLugar: lugar.tipoLugar as TipoLugar,
       tipoFutbolin: lugar.tipoFutbolin as TipoFutbolin,

@@ -3,14 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const BotoneraCompartir = ({
   googlePlaceId,
+  idSpot,
 }: {
   googlePlaceId: string;
+  idSpot:string
 }) => {
   const handleClickShare = async () => {
     await navigator.share({
-      title: "Comparte este lugar",
-      text: "Comparte este lugar",
-      url: "https://futbol-in.vercel.app/futbolines/salamanca/ChIJRXzdx10mPw0Rqqm_C9Dkei8",
+      title: "Futbolin",
+      text: "¡Échale un ojo a este futbolín en futbolin.app!",
+      url: `https://futbolin.app/spots/detalle/${idSpot}`,
     });
   };
 

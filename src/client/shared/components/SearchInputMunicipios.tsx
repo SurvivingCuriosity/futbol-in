@@ -5,16 +5,12 @@ import { AsyncSelectProps } from "futbol-in-ui";
 import dynamic from "next/dynamic";
 import { SingleValue } from "react-select";
 
-export interface OptionType {
+export interface MunicipioOption {
   value: string;
   label: string;
 }
 
-export interface PlaceOption extends OptionType {
-  data: google.maps.places.AutocompletePrediction;
-}
-
-const CustomAsyncSelectNoSSR = dynamic<AsyncSelectProps<PlaceOption>>(
+const CustomAsyncSelectNoSSR = dynamic<AsyncSelectProps<MunicipioOption>>(
   () =>
     import("futbol-in-ui").then((mod) => ({
       default: mod.CustomAsyncSelect,
@@ -25,19 +21,24 @@ const CustomAsyncSelectNoSSR = dynamic<AsyncSelectProps<PlaceOption>>(
 );
 
 export interface SearchInputCiudadProps {
+  value?:string;
   palceholder?: string;
   onSelect: (v:string) => void
 }
 
 export default function SearchInputMunicipios(props: SearchInputCiudadProps) {
-  const { palceholder = "Introduce una ciudad...", onSelect } = props;
+  const { palceholder = "Introduce una ciudad...", onSelect, value = null } = props;
 
-  const handleSelect = async (place: SingleValue<PlaceOption>) => {
+  const handleSelect = async (place: SingleValue<MunicipioOption>) => {
     onSelect(place?.label || '')
   };
 
   return (
     <CustomAsyncSelectNoSSR
+      value={value ? {
+        label: value,
+        value: value,
+      } : undefined}
       onSelect={handleSelect}
       loadOptions={fetchMunicipios}
       disabled={false}

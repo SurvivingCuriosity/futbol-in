@@ -5,6 +5,7 @@ export interface SpotDTO {
   id: string;
   nombre: string;
   direccion: string;
+  ciudad: string;
   googlePlaceId: string;
   coordinates: [number, number];
   tipoLugar: TipoLugar;

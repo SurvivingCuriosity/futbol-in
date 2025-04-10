@@ -66,6 +66,7 @@ export class TorneosService {
       tipoInscripcion: c.tipoInscripcion,
       estadoCompeticion: c.estadoCompeticion,
       cantidadParejas: c.cantidadParejas,
+      ciudad: c.ciudad,
       enfrentamientos: c.enfrentamientos.map((e) => e.toString()),
       equipos: c.equipos.map((e) => ({
         estado: e.estado,

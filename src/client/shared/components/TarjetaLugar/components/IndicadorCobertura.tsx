@@ -26,10 +26,10 @@ export const IndicadorCobertura = ({
 
   return (
     <div
-      className={`absolute top-1 right-1 z-3 bg-black rounded text-xs flex gap-1 items-center ${textColor} p-1`}
+      className={`top-1 right-1 z-3 bg-black rounded text-xs flex gap-1 items-center ${textColor} p-1`}
     >
       <p>{diferencia}</p>
-      <FontAwesomeIcon icon={icon} />
+      <FontAwesomeIcon icon={icon} className="w-2"/>
     </div>
   );
 };

@@ -1,11 +1,17 @@
 import Typewriter from "@/client/features/Landing/components/TypeWriter";
 import { AppLogo } from "@/client/shared/components/AppLogo";
 import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
-import SearchInputCiudad from "@/client/shared/components/SearchInputCiudad";
 import { faMap, faTrophy, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import { SearchInputRedirect } from "./components/SearchInputRedirect";
 
 export const LandingPage = async () => {
+  const sampleStaticRoutes = [
+    { label: "Futbolines en Salamanca", href: `/spots/Salamanca_Salamanca` },
+    { label: "Futbolines en Zamora", href: `/spots/Zamora_Zamora` },
+  ];
+
   return (
     <main className="flex flex-col items-center justify-center gap-4">
       <div className="md:hidden mr-auto flex justify-between items-center w-full">
@@ -29,7 +35,13 @@ export const LandingPage = async () => {
           Filtra por marca, cercanía etc.
         </p>
 
-        <SearchInputCiudad />
+        <SearchInputRedirect />
+        
+        {sampleStaticRoutes.map((r) => (
+          <Link key={r.label} href={r.href} className="underline underline-offset-2 text-neutral-400 decoration-neutral-700">
+            {r.label}
+          </Link>
+        ))}
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-20 space-y-12 md:space-y-0 space-x-0 md:space-x-4">

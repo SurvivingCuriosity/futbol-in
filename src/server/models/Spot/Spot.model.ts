@@ -7,6 +7,7 @@ export interface ISpot extends Document {
   nombre: string;
   direccion: string;
   googlePlaceId: string;
+  ciudad: string;
   location: {
     type: string;
     coordinates: [number, number];
@@ -27,12 +28,12 @@ export interface ISpot extends Document {
     down: Types.ObjectId[];
   };
 }
-// !!!!!!!! Si en un futuro quisieras permitir múltiples verificaciones (historial de verificaciones), podrías extraer eso a otro esquema (por ejemplo, un array de “Verificaciones” con fecha, user, etc.). Pero, como lo tienes, está perfecto para un primer MVP.
 const SpotSchema: Schema<ISpot> = new Schema(
   {
     nombre: { type: String, required: true },
     direccion: { type: String, required: true },
     googlePlaceId: { type: String, required: true },
+    ciudad: { type: String, required: true },
     location: {
       type: { type: String, enum: ["Point"], required: true },
       coordinates: { type: [Number], required: true },
@@ -65,6 +66,7 @@ const SpotSchema: Schema<ISpot> = new Schema(
 );
 
 SpotSchema.index({ location: "2dsphere" });
+SpotSchema.index({ ciudad: "text" });
 
 const Spot: Model<ISpot> =
   mongoose.models.Spot || mongoose.model<ISpot>("Spot", SpotSchema);

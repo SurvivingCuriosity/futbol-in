@@ -11,12 +11,10 @@ export interface CrearLigaContextType {
   modalidadDeJuego: ModalidadJuego;
   tipoDeFutbolin: TipoFutbolin;
 
-  competicionEnCreacion: CompeticionEnCreacion | undefined;
-
   handleCompletarModalidadDeJuego: (f: TipoFutbolin, m: ModalidadJuego) => void;
   handleCompletarConfigurarLiga: (c: ConfiguracionLiga) => void;
   handleCompletarDatosBasicos: (c: ConfiguracionBasica) => void;
-  handleCrearTorneo: () => void;
+  getCompeticionCrear: () => CompeticionEnCreacion;
 }
 
 export type CompeticionEnCreacion = Omit<LigaDTO, "id" | "createdByUserId" | 'estadoCompeticion'>;

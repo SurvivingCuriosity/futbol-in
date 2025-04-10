@@ -1,6 +1,6 @@
 import { PlaceOption } from "@/client/shared/components/SearchInputBar";
 
-export async function fetchBares(inputValue: string): Promise<PlaceOption[]> {
+export async function fetchBares(inputValue: string|number): Promise<PlaceOption[]> {
   if (!inputValue) return [];
   const res = await fetch(
     `/api/bares-autocomplete?input=${encodeURIComponent(inputValue)}`

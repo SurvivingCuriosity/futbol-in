@@ -1,8 +1,9 @@
 "use client";
 
-import SearchInputCiudad from "@/client/shared/components/SearchInputCiudad";
 import { TarjetaLugar } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
+import { useUserLocation } from "@/client/shared/services/UserLocation/useUserLocation";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { ICoords } from "@/core/types/Spot/Coords";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
 import { InlinePicker } from "futbol-in-ui";
@@ -12,20 +13,15 @@ import { Mapa } from "../Mapa/Mapa";
 import { ButtonFiltros, Filtros } from "./components/Filtros/Filtros";
 import { PreviewFiltros } from "./components/Filtros/PreviewFiltros";
 import ListaSpots, { getDistanciaEntre } from "./ListaSpots";
-import { useUserLocation } from "@/client/shared/services/UserLocation/useUserLocation";
-import { FullPlace } from "@/app/spots/[ciudad]/[placeId]/page";
-import {
-  LStorage,
-  LStorageKeys,
-} from "@/client/shared/services/LocalStorage/LStorage";
 
 export interface SpotsCiudadPageProps {
   spots: SpotDTO[];
-  place: FullPlace;
+  coords: ICoords;
+  ciudad: string;
 }
 
 export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
-  const { spots, place } = props;
+  const { spots, coords, ciudad } = props;
 
   const userLocation = useUserLocation();
 
@@ -51,23 +47,6 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
 
   const handleSelectSpot = (spot: SpotDTO | null) => {
     setSelectedMarker(spot);
-
-    if (!spot) return;
-
-    let ultimosSpotsVistos =
-      (LStorage.getItem(LStorageKeys.ULTIMOS_SPOTS_VISTOS) as SpotDTO[]) || [];
-
-    ultimosSpotsVistos = ultimosSpotsVistos.filter(
-      (s) => s.googlePlaceId !== spot.googlePlaceId
-    );
-
-    ultimosSpotsVistos.unshift(spot);
-
-    if (ultimosSpotsVistos.length > 3) {
-      ultimosSpotsVistos.pop();
-    }
-
-    LStorage.setItem(LStorageKeys.ULTIMOS_SPOTS_VISTOS, ultimosSpotsVistos);
   };
 
   if (spotsFiltrados.length === 0) {
@@ -78,15 +57,10 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
         </p>
         <Link
           className="bg-primary text-neutral-900 px-4 p-2 text-lg rounded-2xl w-fit mx-auto"
-          href="/agregar-spot"
+          href={`/agregar-spot?ciudad=${ciudad}`}
         >
           {`Añade el primero`}
         </Link>
-        <hr className="my-8 text-neutral-800" />
-        <p className="text-center text-neutral-400 mb-8">
-          o busca en otra ciudad...
-        </p>
-        <SearchInputCiudad />
       </div>
     );
   }
@@ -141,7 +115,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
             selectedMarker={selectedMarker}
             onSelectMarker={handleSelectSpot}
             userLocation={currentCoords}
-            initialCenter={place.coords}
+            initialCenter={coords}
           />
           {selectedMarker !== null && (
             <div className="absolute bottom-2 z-5 mx-auto shadow w-full p-1 flex items-center justify-center">

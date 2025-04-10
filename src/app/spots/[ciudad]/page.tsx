@@ -1,4 +1,5 @@
 import { SpotsCiudadPage } from "@/client/features/Spots/SpotsCiudadPage";
+import { decodeCiudad } from "@/core/helpers/encodeCiudad";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { SpotService } from "@/server/services/Spots/SpotsService";
 
@@ -10,7 +11,7 @@ export async function generateMetadata({
   params: Promise<{ ciudad: string; placeId: string }>;
 }) {
   const { ciudad } = await params;
-  const ciudadCapitalizada = decodeURIComponent(ciudad.charAt(0).toUpperCase() + ciudad.slice(1));
+  const ciudadCapitalizada = decodeURIComponent(ciudad.split('_')[0]);
 
   return {
     title: `Futbolines en ${ciudadCapitalizada}`,
@@ -36,21 +37,16 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: Promise<{ ciudad: string; placeId: string }>;
+  params: Promise<{ ciudad: string }>;
 }) {
-  const { placeId, ciudad } = await params;
+  const { ciudad } = await params;
 
-  const spots = await SpotService.findNearbyByPlaceId(placeId);
-  const nombreCiudad = decodeURIComponent(ciudad.charAt(0).toUpperCase() + ciudad.slice(1));
-  const coords = await GoogleMapsService.getCoordinatesFromPlaceId(placeId)
+  const ciudadParaBusqueda = decodeCiudad(ciudad)
 
-  const fullPlace:FullPlace = {
-    ciudad: nombreCiudad,
-    coords,
-    placeId,
-  }
+  const spots = await SpotService.findInCiudad(ciudadParaBusqueda);
+  const coords = await GoogleMapsService.getCoordinatesFromCiudad(ciudad);
 
-  return <SpotsCiudadPage spots={spots} place={fullPlace}/>;
+  return <SpotsCiudadPage spots={spots} coords={coords} ciudad={ciudad}/>;
 }
 
 

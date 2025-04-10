@@ -15,6 +15,7 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
   const [activeStep, setActiveStep] = useState(0);
 
   const [nombre, setNombre] = useState<string>("");
+  const [ciudad, setCiudad] = useState<string>("");
   const [descripcion, setDescripcion] = useState<string>("");
   const [googlePlaceId, setGooglePlaceId] = useState<string>("");
 
@@ -37,8 +38,6 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
     golesParaGanar: 10,
   });
 
-  const [competicionEnCreacion, setCompeticionEnCreacion] = useState<CompeticionEnCreacion|undefined>()
-
   const handleCompletarModalidadDeJuego = (
     f: TipoFutbolin,
     m: ModalidadJuego
@@ -51,27 +50,25 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
   const handleCompletarConfigurarLiga = (c:ConfiguracionLiga) => {
     setConfigEnfrentamiento(c.configEnfrentamiento)
     setIdaYVuelta(c.idaYVuelta)
-    setActiveStep(activeStep + 1);
   };
 
   const handleCompletarDatosBasicos = (c: ConfiguracionBasica) => {
+    console.log('Completa datos básicos', c)
     setNombre(c.nombre);
     setDescripcion(c.descripcion);
     setGooglePlaceId(c.googlePlaceId);
     setTipoInscripcion(c.tipoInscripcion)
     setActiveStep(activeStep + 1);
+    setCiudad(c.ciudad)
     setCantidadParejas(16)
-    setConfigEnfrentamiento({
-      cantidadPartidos: 4,
-      golesParaGanar: 10,
-    })
   };
 
-  const handleCrearTorneo = () => {
+  const getCompeticionCrear = () => {
     const competicion:CompeticionEnCreacion = {
       nombre,
       descripcion, 
       googlePlaceId,
+      ciudad,
       tipoDeFutbolin,
       modalidadDeJuego,
       tipoInscripcion,
@@ -81,7 +78,7 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
       configEnfrentamiento,
       idaYVuelta
     }
-    setCompeticionEnCreacion(competicion)
+    return competicion
   }
 
   return (
@@ -91,11 +88,10 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
         setActiveStep,
         modalidadDeJuego,
         tipoDeFutbolin,
-        competicionEnCreacion,
         handleCompletarModalidadDeJuego,
         handleCompletarConfigurarLiga,
         handleCompletarDatosBasicos,
-        handleCrearTorneo
+        getCompeticionCrear
       }}
     >
       {children}

@@ -22,6 +22,28 @@ export class GoogleMapsService {
     return data;
   }
 
+  static async getCoordinatesFromCiudad(ciudad: string) {
+    if (!ciudad) {
+      return errorResponse("ciudad es requerida", 400);
+    }
+
+    const url =
+      `https://maps.googleapis.com/maps/api/geocode/json` +
+      `?address=${encodeURIComponent(ciudad)}` +
+      `&key=${this.key}` +
+      `&components=country:es` +
+      `&fields=geometry`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.status !== "OK") {
+      return errorResponse("No se pudo obtener la ciudad", 500);
+    }
+
+    return data.results[0].geometry.location;
+  }
+
   static async getCoordinatesFromPlaceId(placeId: string) {
     if (!placeId) {
       return errorResponse("placeId es requerido", 400);

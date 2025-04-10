@@ -7,8 +7,9 @@ import { EquipoCompeticionDTO } from "../../Equipo/EquipoCompeticion.model";
 export interface CompeticionBaseDTO {
   id: string;
   nombre: string;
-  descripcion?: string;
-  googlePlaceId?: string;
+  descripcion: string;
+  ciudad: string;
+  googlePlaceId: string;
   tipoDeFutbolin: TipoFutbolin;
   modalidadDeJuego: ModalidadJuego;
   tipoInscripcion: TipoInscripcion;

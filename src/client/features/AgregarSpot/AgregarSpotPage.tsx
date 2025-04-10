@@ -3,6 +3,7 @@
 import { SpotsClient } from "@/client/shared/client/SpotsClient";
 import SearchInputBar from "@/client/shared/components/SearchInputBar";
 import SearchInputDireccion from "@/client/shared/components/SearchInputDireccion";
+import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicipios";
 import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
 import { useComprobarSiObtieneLogro } from "@/client/shared/hooks/useComprobarSiObtieneLogro";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
@@ -13,18 +14,24 @@ import { FormField, FormLabel } from "@/packages/components/FormField";
 import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button } from "futbol-in-ui";
 import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { EnhorabuenaNuevaMedalla } from "../Logros/EnhorabuenaNuevaMedalla";
+import { decodeCiudad } from "@/core/helpers/encodeCiudad";
+
 
 const AgregarSpotPage = () => {
-
   const session = useSession();
+
+  const params = useSearchParams()
+  const ciudadParam = params.get('ciudad')
 
   const { nuevoLogro, comprobarSiGanaMedalla } = useComprobarSiObtieneLogro(
     TipoLogroEnum.AGREGAR_SPOTS
   );
 
+  const [ciudad, setCiudad] = useState<string>(decodeCiudad(ciudadParam || '') || '');
   const [direccionOBar, setDireccionOBar] = useState<Pick<
     IMapItem,
     "direccion" | "nombre" | "lat" | "lng" | "googlePlaceId"
@@ -53,6 +60,7 @@ const AgregarSpotPage = () => {
         nombre: direccionOBar?.nombre || "",
         direccion: direccionOBar?.direccion || "",
         coordinates: [direccionOBar?.lng || 0, direccionOBar?.lat || 0],
+        ciudad,
         googlePlaceId: direccionOBar?.googlePlaceId || "",
         tipoLugar: TipoLugar.FUBTOLIN,
         tipoFutbolin,
@@ -70,11 +78,7 @@ const AgregarSpotPage = () => {
 
   return (
     <>
-      {nuevoLogro && (
-        <EnhorabuenaNuevaMedalla
-        nuevoLogro={nuevoLogro}
-        />
-      )}
+      {nuevoLogro && <EnhorabuenaNuevaMedalla nuevoLogro={nuevoLogro} />}
       <div className="max-w-xl mx-auto w-full md:p-4 md:border border-neutral-700 rounded-lg flex flex-col gap-2">
         <h1 className="text-2xl font-extrabold tracking-tight text-primary">
           Agregar un nuevo futbolín
@@ -92,6 +96,11 @@ const AgregarSpotPage = () => {
             value={tipoLugar}
           />
         </FormField> */}
+
+        <FormField>
+          <FormLabel>Ciudad</FormLabel>
+          <SearchInputMunicipios onSelect={setCiudad} value={decodeCiudad(ciudadParam || '') || ''}/>
+        </FormField>
 
         <FormField>
           <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>

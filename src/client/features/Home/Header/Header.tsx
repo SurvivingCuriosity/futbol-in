@@ -22,7 +22,7 @@ export const Header = ({
 
   return (
     <header className="flex flex-col border-b border-neutral-700 pb-2 mb-2">
-      <div className="flex items-center justify-between pt-1">
+      <div className="flex items-center justify-between pb-1">
         <div className="flex items-center gap-2">
           <Image
             src={imageUrl || "/default_user.svg"}

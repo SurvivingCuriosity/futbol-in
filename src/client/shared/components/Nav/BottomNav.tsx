@@ -1,10 +1,5 @@
 "use client";
 
-// import fondo from "@/client/shared/assets/img/torneos/enfrentamientos.webp";
-import {
-  LStorage,
-  LStorageKeys,
-} from "@/client/shared/services/LocalStorage/LStorage";
 import {
   faCirclePlus,
   faHome,
@@ -25,19 +20,9 @@ export const BottomNav = () => {
 
   const session = useSession();
 
-  const ultimaUbicacion =
-    typeof window !== "undefined" &&
-    LStorage.getItem(LStorageKeys.ULTIMAS_UBICACIONES)?.[0];
-
-  const ciudad = encodeURIComponent(ultimaUbicacion?.ciudad);
-  const placeId = ultimaUbicacion?.placeId;
-
-  const rutaFutbolines =
-    ciudad && placeId ? `/spots/${ciudad}/${placeId}` : "/spots";
-
   const items = [
     { label: "Home", href: "/", icon: faHome },
-    { label: "Buscar", href: rutaFutbolines, icon: faMagnifyingGlass },
+    { label: "Buscar", href: `/spots`, icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
     { label: "Ranking", href: "/competitivo", icon: faTrophy },
   ];

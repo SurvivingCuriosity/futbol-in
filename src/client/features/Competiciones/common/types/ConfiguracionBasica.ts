@@ -5,4 +5,5 @@ export interface ConfiguracionBasica {
   descripcion: string;
   googlePlaceId: string;
   tipoInscripcion: TipoInscripcion;
+  ciudad: string;
 }

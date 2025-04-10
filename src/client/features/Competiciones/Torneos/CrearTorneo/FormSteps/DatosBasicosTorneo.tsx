@@ -20,7 +20,8 @@ export const DatosBasicosTorneo = ({
     nombre: "",
     descripcion: "",
     googlePlaceId: "",
-    tipoInscripcion: TipoInscripcion.ABIERTO
+    tipoInscripcion: TipoInscripcion.ABIERTO,
+    ciudad: ""
   });
 
   const [barSeleccionado, setBarSeleccionado] = useState<PlaceOption|undefined>()

@@ -53,7 +53,6 @@ export default function SearchInputBar({
     <CustomAsyncSelect<PlaceOption>
       value={value}
       onSelect={handleSelect}
-      // @ts-expect-error qwe
       loadOptions={fetchBares}
       disabled={disabled}
       placeholder="Escribe para buscar..."

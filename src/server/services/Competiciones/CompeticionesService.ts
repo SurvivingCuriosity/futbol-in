@@ -106,6 +106,7 @@ export class CompeticionesService {
       nombre: c.nombre,
       descripcion: c.descripcion,
       googlePlaceId: c.googlePlaceId,
+      ciudad:c.ciudad,
       tipoDeFutbolin: c.tipoDeFutbolin,
       modalidadDeJuego: c.modalidadDeJuego,
       tipoInscripcion: c.tipoInscripcion,

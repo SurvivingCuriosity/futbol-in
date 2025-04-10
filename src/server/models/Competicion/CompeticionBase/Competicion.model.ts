@@ -8,8 +8,9 @@ import { EquipoCompeticionSchema, IEquipoCompeticion } from '../../Equipo/Equipo
 export interface ICompeticionBase extends Document {
   _id: Types.ObjectId;
   nombre: string;
-  descripcion?: string;
-  googlePlaceId?: string;
+  descripcion: string;
+  ciudad: string;
+  googlePlaceId: string;
   tipoDeFutbolin: TipoFutbolin;
   modalidadDeJuego: ModalidadJuego
   tipoInscripcion: TipoInscripcion;
@@ -29,6 +30,7 @@ const BaseCompeticionSchema = new Schema<ICompeticionBase>(
   {
     nombre: { type: String, required: true },
     descripcion: { type: String },
+    ciudad: { type: String, required: true },
     googlePlaceId: { type: String },
     tipoDeFutbolin: {
       type: String,

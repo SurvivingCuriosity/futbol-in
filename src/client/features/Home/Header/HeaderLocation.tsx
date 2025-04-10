@@ -7,11 +7,13 @@ import { Window } from "@/packages/components/Window";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const HeaderLocation = () => {
-  const router = useRouter();
+export const HeaderLocation = ({
+  onChangeCiudad,
+}: {
+  onChangeCiudad?: (ciudad: string) => void;
+}) => {
   const user = useGetLoggedInUserClient();
   const { update } = useSession();
 
@@ -22,19 +24,21 @@ export const HeaderLocation = () => {
   }
 
   const handleChangeCiudadActual = async (nuevaCiudadActual: string) => {
-    setShowWindow(false)
+    setShowWindow(false);
     const res = await UserClient.updateUser({
       ...user,
       ciudadActual: nuevaCiudadActual,
     });
 
     if (res.success) {
-      await update()
-      router.refresh();
+      await update();
+    }
+    if (onChangeCiudad) {
+      onChangeCiudad(nuevaCiudadActual);
     }
   };
 
-  if(!user.ciudadActual) return null;
+  if (!user.ciudadActual) return null;
 
   return (
     <div className="flex justify-between w-full">
@@ -54,7 +58,9 @@ export const HeaderLocation = () => {
       {showWindow && (
         <Window onClose={() => setShowWindow(false)}>
           <div className="p-5 w-full max-w-xl">
-            <p className="text-2xl md:text-3xl font-bold mb-3 text-neutral-400">¿Dónde te encuentras?</p>
+            <p className="text-2xl md:text-3xl font-bold mb-3 text-neutral-400">
+              ¿Dónde te encuentras?
+            </p>
             <SearchInputMunicipios onSelect={handleChangeCiudadActual} />
           </div>
         </Window>

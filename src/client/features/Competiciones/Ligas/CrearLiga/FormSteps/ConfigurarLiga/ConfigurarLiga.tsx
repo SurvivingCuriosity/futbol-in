@@ -1,27 +1,36 @@
-import React, { useState } from "react";
-import { ConfigEnfrentamiento } from "../Enfrentamientos/FormEnfrentamientos";
-import { InputPartidosPorEnfrentamiento } from "../Enfrentamientos/InputPartidosPorEnfrentamiento";
-import { InputGolesParaGanar } from "../Enfrentamientos/InputGolesParaGanar";
-import { TipoEnfrentamiento } from "@/core/enum/Competicion/TipoEnfrentamiento";
-import { Button, InlinePicker } from "futbol-in-ui";
+import { LigasClient } from "@/client/shared/client/LigasClient";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
+import { TipoEnfrentamiento } from "@/core/enum/Competicion/TipoEnfrentamiento";
 import { FormField, FormLabel } from "@/packages/components/FormField";
+import { Button, InlinePicker } from "futbol-in-ui";
+import { useRouter } from "next/navigation";
+import { use, useState } from "react";
+import { toast } from "react-toastify";
+import { CrearLigaContext } from "../../context/CrearLigaContext";
 import { ConfiguracionLiga } from "../../types/ConfiguracionLiga";
+import { ConfigEnfrentamiento } from "../Enfrentamientos/FormEnfrentamientos";
+import { InputGolesParaGanar } from "../Enfrentamientos/InputGolesParaGanar";
+import { InputPartidosPorEnfrentamiento } from "../Enfrentamientos/InputPartidosPorEnfrentamiento";
 
 export const ConfigurarLiga = ({
   onCompleted,
 }: {
   onCompleted: (c: ConfiguracionLiga) => void;
 }) => {
+  const router = useRouter();
+
+  const { getCompeticionCrear } = use(CrearLigaContext);
+
   const [idaYVuelta, setIdaYVuelta] = useState<boolean>(false);
 
   const [tipoEnfrentamiento, setTipoEnfrentamiento] =
     useState<TipoEnfrentamiento>(TipoEnfrentamiento.AL_MEJOR_DE);
 
-  const [configEnfrentamientos, setConfigEnfrentamientos] = useState<ConfigEnfrentamiento>({
-    cantidadPartidos: 4,
-    golesParaGanar: 10,
-  });
+  const [configEnfrentamientos, setConfigEnfrentamientos] =
+    useState<ConfigEnfrentamiento>({
+      cantidadPartidos: 4,
+      golesParaGanar: 10,
+    });
 
   const opcionesTipoEnfrentamiento = [
     { id: 0, label: TipoEnfrentamiento.AL_MEJOR_DE },
@@ -31,13 +40,20 @@ export const ConfigurarLiga = ({
   const textoAlMejorDe = `Se juega al mejor de ${configEnfrentamientos.cantidadPartidos} partidos. No hay posibilidad de empate. 3 puntos por ganar el enfrentamiento. El perdedor recibe 1 punto si gana un partido.`;
   const textoJugarUnTotalDe = `Se juega un total de ${configEnfrentamientos.cantidadPartidos} partidos. Se gana un punto por partido ganado.`;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const configLiga: ConfiguracionLiga = {
       idaYVuelta,
       tipoEnfrentamiento,
-      configEnfrentamiento:configEnfrentamientos,
+      configEnfrentamiento: configEnfrentamientos,
     };
     onCompleted(configLiga);
+    const competicionCrear = getCompeticionCrear();
+    if (competicionCrear === undefined) return;
+    const res = await LigasClient.crearLiga(competicionCrear);
+    if (res.success) {
+      toast.success("Liga creada!");
+      router.replace("/competitivo/ligas");
+    }
   };
 
   return (
@@ -77,7 +93,10 @@ export const ConfigurarLiga = ({
           }
           value={configEnfrentamientos.cantidadPartidos}
           onUpdateValue={(v) =>
-            setConfigEnfrentamientos((prev) => ({ ...prev, cantidadPartidos: v }))
+            setConfigEnfrentamientos((prev) => ({
+              ...prev,
+              cantidadPartidos: v,
+            }))
           }
         />
         <InputGolesParaGanar
@@ -95,7 +114,7 @@ export const ConfigurarLiga = ({
         }
         variant="info"
       />
-      <Button label="Siguiente" onClick={handleSubmit} />
+      <Button label="Crear liga" onClick={handleSubmit} />
     </>
   );
 };

@@ -1,23 +1,20 @@
 import { ImagenFutbolinMap } from "@/client/shared/constants/FutbolinesImageMap";
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
+import { TipoFutbolinNombre } from "@/core/enum/Futbolin/TipoFutbolin";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import {
-  faLocationCrosshairs,
   faLocationDot,
-  faStore,
+  faStore
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { MarcaVerificado } from "./MarcaVerificado";
-import { TipoFutbolinNombre } from "@/core/enum/Futbolin/TipoFutbolin";
 
 export const MainInfo = ({
   spot,
-  distanciaMessage,
   isOpen,
 }: {
   spot: SpotDTO;
-  distanciaMessage: string | null;
   isOpen: boolean;
 }) => {
   
@@ -26,7 +23,7 @@ export const MainInfo = ({
 
   return (
     <>
-      <div className="z-2 rounded-lg w-full flex justify-between">
+      <div className="rounded-lg w-full flex justify-between">
         <div className="w-full relative z-3">
           <div className="flex items-center gap-1 text-neutral-300 z-3">
             <Image
@@ -56,24 +53,15 @@ export const MainInfo = ({
             )}
           </div>
         </div>
-        <div className="flex flex-col h-full w-5/12">
-          <div className="rounded-lg overflow-hidden">
-            <Image
+        <Image
               src={imagen}
               alt="Imagen futbolin"
               width={200}
               height={200}
               className="w-44 h-auto object-cover absolute -top-2 -right-2 z-2"
             />
-          </div>
-          {distanciaMessage && (
-            <span className="flex items-center gap-1 mt-2 ml-auto text-neutral-400">
-              <FontAwesomeIcon icon={faLocationCrosshairs} />
-              <p>{distanciaMessage}</p>
-            </span>
-          )}
+
         </div>
-      </div>
     </>
   );
 };

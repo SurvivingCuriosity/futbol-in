@@ -30,11 +30,11 @@ const CustomAsyncSelectNoSSR = dynamic<AsyncSelectProps<PlaceOption>>(
 );
 
 export interface SearchInputCiudadProps {
-  palceholder?: string;
+  placeholder?: string;
 }
 
 export default function SearchInputCiudad(props: SearchInputCiudadProps) {
-  const { palceholder = "Introduce una ciudad..." } = props;
+  const { placeholder = "Introduce una ciudad..." } = props;
 
   const router = useRouter();
 
@@ -68,7 +68,7 @@ export default function SearchInputCiudad(props: SearchInputCiudadProps) {
       onSelect={handleSelect}
       loadOptions={fetchCiudades}
       disabled={false}
-      placeholder={palceholder}
+      placeholder={placeholder}
       noOptionsMessage="No hay resultados"
       loadingMessage="Cargando..."
     />

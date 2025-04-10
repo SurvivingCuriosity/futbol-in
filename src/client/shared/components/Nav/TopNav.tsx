@@ -5,30 +5,19 @@ import {
   faMagnifyingGlass,
   faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BotonPerfil } from "./components/BotonPerfil";
-import { useSession } from "next-auth/react";
 import { LoginRegister } from "./components/LoginRegister";
-import { LStorage, LStorageKeys } from "../../services/LocalStorage/LStorage";
 
 export const TopNav = () => {
   const pathname = usePathname();
 
   const session = useSession();
 
-  const ultimaUbicacion =
-    typeof window !== "undefined" &&
-    LStorage.getItem(LStorageKeys.ULTIMAS_UBICACIONES)?.[0];
-
-  const ciudad = encodeURIComponent(ultimaUbicacion?.ciudad);
-  const placeId = ultimaUbicacion?.placeId;
-
-  const rutaFutbolines =
-    ciudad && placeId ? `/spots/${ciudad}/${placeId}` : "/spots";
-
   const items = [
-    { label: "Buscar", href: rutaFutbolines, icon: faMagnifyingGlass },
+    { label: "Buscar", href: `/spots`, icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
     { label: "Competitivo", href: "/competitivo", icon: faTrophy },
   ];
