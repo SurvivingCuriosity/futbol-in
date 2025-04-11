@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api
+Disallow: /ajustes
+Disallow: /perfil
+Disallow: /login
+Disallow: /register
+Sitemap: https://futbolin.app/sitemap.xml
