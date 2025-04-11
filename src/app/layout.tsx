@@ -36,11 +36,7 @@ export default function RootLayout({
               href="/favicon/favicon-96x96.png"
               sizes="96x96"
             />
-            <link
-              rel="icon"
-              type="image/svg+xml"
-              href="/favicon/favicon.svg"
-            />
+            <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
             <link rel="shortcut icon" href="/favicon/favicon.ico" />
             <link
               rel="apple-touch-icon"
@@ -48,6 +44,18 @@ export default function RootLayout({
               href="/favicon/apple-touch-icon.png"
             />
             <meta name="apple-mobile-web-app-title" content="Futbol-in" />
+            <meta
+              name="description"
+              content="Añade y descubre futbolines de tu ciudad. Organiza y gestiona ligas de manera sencilla. Apúntate a torneos y visualiza tus resultados en tiempo real."
+            />
+            <meta
+              property="og:description"
+              content="Añade y descubre futbolines de tu ciudad. Organiza y gestiona ligas de manera sencilla. Apúntate a torneos y visualiza tus resultados en tiempo real."
+            />
+            <meta
+              property="og:image"
+              content="https://futbolin.app/favicon/web-app-manifest-512x512.png"
+            />
             <link rel="manifest" href="/favicon/site.webmanifest" />
             <link rel="icon" href="/futbolin-logo.svg" />
           </head>
