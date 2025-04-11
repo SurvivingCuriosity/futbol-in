@@ -1,4 +1,5 @@
 import { AppLogo } from '@/client/shared/components/AppLogo'
+import Link from 'next/link'
 
 export const Footer = () => {
   return (
@@ -15,7 +16,7 @@ export const Footer = () => {
                     <a href="#" className="hover:underline me-4 md:me-6">About</a>
                 </li>
                 <li>
-                    <a href="#" className="hover:underline me-4 md:me-6">Privacy Policy</a>
+                    <Link href="/politica-de-privacidad" className="hover:underline me-4 md:me-6">Política de privacidad</Link>
                 </li>
                 <li>
                     <a href="#" className="hover:underline me-4 md:me-6">Licensing</a>
