@@ -23,6 +23,7 @@ export class GoogleMapsService {
   }
 
   static async getCoordinatesFromCiudad(ciudad: string) {
+    console.log('Llega ciudad: ', ciudad)
     if (!ciudad) {
       return errorResponse("ciudad es requerida", 400);
     }
@@ -33,6 +34,8 @@ export class GoogleMapsService {
       `&key=${this.key}` +
       `&components=country:es` +
       `&fields=geometry`;
+
+    console.log(url)
 
     const res = await fetch(url);
     const data = await res.json();

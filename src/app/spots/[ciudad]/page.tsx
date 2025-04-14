@@ -44,7 +44,8 @@ export default async function Page({
   const ciudadParaBusqueda = decodeCiudad(ciudad)
 
   const spots = await SpotService.findInCiudad(ciudadParaBusqueda);
-  const coords = await GoogleMapsService.getCoordinatesFromCiudad(ciudad);
+  
+  const coords = await GoogleMapsService.getCoordinatesFromCiudad(ciudadParaBusqueda);
 
   return <SpotsCiudadPage spots={spots} coords={coords} ciudad={ciudad}/>;
 }
