@@ -5,6 +5,8 @@ import { UserDTO } from "@/server/models/User/UserDTO";
 import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
 import { signOut } from "next-auth/react";
 
+export const revalidate = 60 * 3;
+
 const HomePageContainer = async ({ user }: { user: UserDTO | undefined }) => {
 
   if(!user){
