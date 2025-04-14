@@ -19,16 +19,16 @@ export async function generateMetadata({
     openGraph: {
       title: `Futbolines en ${ciudadCapitalizada}`,
       description: `Aquí encontrarás los mejores futbolines en ${ciudadCapitalizada}.`,
-      url: `https://futbol-in.vercel.app/futbolines/${ciudad}`,
+      url: `https://futbolin.app/spots/${ciudad}`,
       images: [
         {
-          url: "https://futbol-in.vercel.app/favicon.png",
+          url: "https://futbolin.app/favicon.png",
           width: 1200,
           height: 630,
         },
       ],
       locale: "es_ES",
-      siteName: "Futbol-In",
+      siteName: "Futbol-in",
       type: "website",
     },
   };
