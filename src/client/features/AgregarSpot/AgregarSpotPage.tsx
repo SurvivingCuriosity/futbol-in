@@ -19,19 +19,23 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { EnhorabuenaNuevaMedalla } from "../Logros/EnhorabuenaNuevaMedalla";
-
+import SelectorDistribucionFutbolin from "@/client/shared/components/SelectorDistribucionFutbolin";
+import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
+import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 
 const AgregarSpotPage = () => {
   const session = useSession();
 
-  const params = useSearchParams()
-  const ciudadParam = params.get('ciudad')
+  const params = useSearchParams();
+  const ciudadParam = params.get("ciudad");
 
   const { nuevoLogro, comprobarSiGanaMedalla } = useComprobarSiObtieneLogro(
     TipoLogroEnum.AGREGAR_SPOTS
   );
 
-  const [ciudad, setCiudad] = useState<string>(decodeCiudad(ciudadParam || '') || '');
+  const [ciudad, setCiudad] = useState<string>(
+    decodeCiudad(ciudadParam || "") || ""
+  );
   const [direccionOBar, setDireccionOBar] = useState<Pick<
     IMapItem,
     "direccion" | "nombre" | "lat" | "lng" | "googlePlaceId"
@@ -41,11 +45,25 @@ const AgregarSpotPage = () => {
     TipoFutbolin.TSUNAMI
   );
 
+  const [distribucion, setDistribucion] = useState<DistribucionFutbolin>(
+    DistribucionFutbolin.F4
+  );
+
   const [comentarios, setComentarios] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   const [noEncuentraElBar, setNoEncuentraElBar] = useState(false);
+
+  const handleSetCiudad = (selected: string) => {
+    const ciudadesF5 = ["Murcia", "Valencia", "Alicante/Alacant", "Castellón"];
+    if (ciudadesF5.includes(selected.split(",")[1].trim())) {
+      setDistribucion(DistribucionFutbolin.F5);
+    } else {
+      setDistribucion(DistribucionFutbolin.F4);
+    }
+    setCiudad(selected);
+  };
 
   const handleAgregarFutbolin = async () => {
     setLoading(true);
@@ -63,6 +81,7 @@ const AgregarSpotPage = () => {
         tipoLugar: TipoLugar.FUBTOLIN,
         tipoFutbolin,
         comentarios,
+        distribucion,
       });
       toast.success("¡Agregado correctamente!");
       comprobarSiGanaMedalla(res.spotsCreados);
@@ -88,18 +107,39 @@ const AgregarSpotPage = () => {
 
         <FormField>
           <FormLabel>Ciudad</FormLabel>
-          <SearchInputMunicipios onSelect={setCiudad} value={decodeCiudad(ciudadParam || '') || ''}/>
-        </FormField>
-
-        <FormField>
-          <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
-          <SearchInputBar
-            onSelect={(sel) => {
-              setDireccionOBar(sel);
-            }}
-            disabled={noEncuentraElBar}
+          <SearchInputMunicipios
+            onSelect={handleSetCiudad}
+            value={decodeCiudad(ciudadParam || "") || ""}
           />
         </FormField>
+
+        {!noEncuentraElBar ? (
+          <FormField>
+            <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
+            <SearchInputBar
+              onSelect={(sel) => {
+                setDireccionOBar(sel);
+              }}
+              disabled={noEncuentraElBar}
+              placeholder="Busca el bar.."
+            />
+          </FormField>
+        ) : (
+          <div className="flex flex-col gap-1">
+            <TarjetaMensaje
+              variant="info"
+              text="Asegúrate de incluir el número"
+            />
+            <FormField className="mb-0">
+              <FormLabel>Dirección</FormLabel>
+              <SearchInputDireccion
+                onSelect={(sel) => setDireccionOBar(sel)}
+                disabled={!noEncuentraElBar}
+                placeholder="Introduce dirección"
+              />
+            </FormField>
+          </div>
+        )}
 
         <label className="flex items-center text-xs text-neutral-400">
           <input
@@ -111,21 +151,22 @@ const AgregarSpotPage = () => {
           No aparece el bar que busco
         </label>
 
-        <FormField>
-          <FormLabel>Dirección</FormLabel>
-          <SearchInputDireccion
-            onSelect={(sel) => setDireccionOBar(sel)}
-            disabled={!noEncuentraElBar}
-          />
-        </FormField>
-
-        <FormField>
-          <FormLabel>Tipo de futbolín *</FormLabel>
-          <SelectorTipoFutbolin
-            onSelect={setTipoFutbolin}
-            value={tipoFutbolin}
-          />
-        </FormField>
+        <div className="grid grid-cols-3 gap-2">
+          <FormField className="col-span-2">
+            <FormLabel>Tipo de futbolín *</FormLabel>
+            <SelectorTipoFutbolin
+              onSelect={setTipoFutbolin}
+              value={tipoFutbolin}
+            />
+          </FormField>
+          <FormField>
+            <FormLabel>Distrubucion *</FormLabel>
+            <SelectorDistribucionFutbolin
+              onSelect={setDistribucion}
+              value={distribucion}
+            />
+          </FormField>
+        </div>
 
         <FormField>
           <FormLabel>Comentarios</FormLabel>

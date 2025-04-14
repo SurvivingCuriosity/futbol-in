@@ -17,6 +17,7 @@ export interface PlaceOption extends OptionType {
 export default function SearchInputDireccion({
   onSelect,
   disabled,
+  placeholder="Escribe para buscar..."
 }: {
   onSelect: (
     val: Pick<
@@ -25,6 +26,7 @@ export default function SearchInputDireccion({
     >
   ) => void;
   disabled?: boolean;
+  placeholder?: string;
 }) {
   const handleSelect = async (place: SingleValue<PlaceOption>) => {
     if (!place) return;
@@ -47,7 +49,7 @@ export default function SearchInputDireccion({
       onSelect={handleSelect}
       loadOptions={fetchDirecciones}
       disabled={disabled}
-      placeholder="Escribe para buscar..."
+      placeholder={placeholder}
       noOptionsMessage="No hay resultados"
       loadingMessage="Cargando..."
     />

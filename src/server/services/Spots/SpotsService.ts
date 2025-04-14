@@ -129,6 +129,7 @@ export class SpotService {
       coordinates: [...lugar.location.coordinates],
       tipoLugar: lugar.tipoLugar as TipoLugar,
       tipoFutbolin: lugar.tipoFutbolin as TipoFutbolin,
+      distribucion: lugar.distribucion,
       comentarios: lugar.comentarios,
       addedByUserId: lugar.addedByUserId.toString(),
       verificado: lugar.verificado

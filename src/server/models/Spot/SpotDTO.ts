@@ -1,3 +1,4 @@
+import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
 
@@ -10,6 +11,7 @@ export interface SpotDTO {
   coordinates: [number, number];
   tipoLugar: TipoLugar;
   tipoFutbolin: TipoFutbolin;
+  distribucion: DistribucionFutbolin;
   comentarios: string;
   addedByUserId: string;
   verificado: null | {

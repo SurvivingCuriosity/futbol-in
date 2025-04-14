@@ -20,6 +20,7 @@ export default function SearchInputBar({
   onSelectPlaceOption,
   disabled,
   value,
+  placeholder = "Escribe para buscar..."
 }: {
   onSelect: (
     val: Pick<
@@ -30,6 +31,7 @@ export default function SearchInputBar({
   onSelectPlaceOption?: (val: PlaceOption|undefined) => void;
   disabled?: boolean;
   value?: PlaceOption
+  placeholder?: string;
 }) {
   const handleSelect = async (place: SingleValue<PlaceOption>) => {
     if (!place) return;
@@ -55,7 +57,7 @@ export default function SearchInputBar({
       onSelect={handleSelect}
       loadOptions={fetchBares}
       disabled={disabled}
-      placeholder="Escribe para buscar..."
+      placeholder={placeholder}
       noOptionsMessage="No hay resultados"
       loadingMessage="Cargando..."
     />

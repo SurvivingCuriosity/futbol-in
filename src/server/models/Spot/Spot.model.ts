@@ -1,3 +1,4 @@
+import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
 import mongoose, { Document, Model, ObjectId, Schema, Types } from "mongoose";
@@ -14,6 +15,7 @@ export interface ISpot extends Document {
   };
   tipoLugar: TipoLugar;
   tipoFutbolin: TipoFutbolin;
+  distribucion: DistribucionFutbolin;
   comentarios: string;
   addedByUserId: Types.ObjectId;
 
@@ -42,6 +44,11 @@ const SpotSchema: Schema<ISpot> = new Schema(
     tipoFutbolin: {
       type: String,
       enum: Object.values(TipoFutbolin),
+      required: true,
+    },
+    distribucion: {
+      type: String,
+      enum: Object.values(DistribucionFutbolin),
       required: true,
     },
     comentarios: { type: String },
