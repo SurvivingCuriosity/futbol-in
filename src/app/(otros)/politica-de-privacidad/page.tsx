@@ -1,5 +1,7 @@
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 
+export const revalidate = false;
+
 const page = () => {
   return (
     <GoBackLayout href="/">
