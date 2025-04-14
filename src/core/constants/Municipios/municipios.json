@@ -8076,7 +8076,7 @@
   },
   {
     "parent_code": "0",
-    "label": "Balears, Illes",
+    "label": "Islas Baleares",
     "code": "04",
     "provinces": [
       {
@@ -25357,7 +25357,7 @@
   },
   {
     "parent_code": "0",
-    "label": "Cataluńa",
+    "label": "Cataluña",
     "code": "09",
     "provinces": [
       {
@@ -30133,7 +30133,7 @@
       {
         "parent_code": "10",
         "code": "03",
-        "label": "Alicante/Alacant",
+        "label": "Alicante",
         "towns": [
           {
             "parent_code": "03",
@@ -30845,7 +30845,7 @@
       {
         "parent_code": "10",
         "code": "12",
-        "label": "Castellón/Castelló",
+        "label": "Castellón",
         "towns": [
           {
             "parent_code": "12",
@@ -31527,7 +31527,7 @@
       {
         "parent_code": "10",
         "code": "46",
-        "label": "Valencia/València",
+        "label": "Valencia",
         "towns": [
           {
             "parent_code": "46",
@@ -32772,7 +32772,7 @@
           {
             "parent_code": "46",
             "code": "8",
-            "label": "València"
+            "label": "Valencia"
           },
           {
             "parent_code": "46",
@@ -36426,7 +36426,7 @@
   },
   {
     "parent_code": "0",
-    "label": "Madrid, Comunidad de",
+    "label": "Madrid",
     "code": "13",
     "provinces": [
       {
@@ -37335,7 +37335,7 @@
   },
   {
     "parent_code": "0",
-    "label": "Murcia, Región de",
+    "label": "Murcia",
     "code": "14",
     "provinces": [
       {
@@ -37574,7 +37574,7 @@
   },
   {
     "parent_code": "0",
-    "label": "Navarra, Comunidad Foral de",
+    "label": "Navarra",
     "code": "15",
     "provinces": [
       {
@@ -38954,7 +38954,7 @@
       {
         "parent_code": "16",
         "code": "01",
-        "label": "Araba/Álava",
+        "label": "Álava",
         "towns": [
           {
             "parent_code": "01",
@@ -40231,13 +40231,13 @@
   },
   {
     "parent_code": "0",
-    "label": "Rioja, La",
+    "label": "La Rioja",
     "code": "17",
     "provinces": [
       {
         "parent_code": "17",
         "code": "26",
-        "label": "Rioja, La",
+        "label": "La Rioja",
         "towns": [
           {
             "parent_code": "26",
