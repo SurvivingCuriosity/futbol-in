@@ -41,7 +41,7 @@ const page = async ({ params }: PageProps) => {
   const equipoInscrito = await CompeticionesService.getEquipoInscrito(idLiga, userDb.id)
 
   if(equipoInscrito !== undefined) {
-    redirect(`/competitivo/torneos/${idLiga}`)
+    redirect(`/competitivo/ligas/${idLiga}`)
   }
 
   return (
