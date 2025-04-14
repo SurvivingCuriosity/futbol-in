@@ -39,7 +39,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
         alt={`Logo ${spot.tipoFutbolin}`}
         width={200}
         height={200}
-        className="w-40 absolute -top-10 -left-2 z-2 -rotate-12 opacity-5"
+        className="w-40 absolute -top-10 -left-2 z-1 -rotate-12 opacity-5"
       />
       <div onClick={handleClickSpot} className="relative">
         <MainInfo spot={spot} isOpen={!!selected} />
@@ -50,7 +50,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
               <p>{distanciaMessage}</p>
             </span>
           )}
-          <Link href={`/spots/detalle/${spot.id}`} className="ml-auto z-3">Más detalles</Link>
+          <Link href={`/spots/detalle/${spot.id}`} className="ml-auto z-2 text-neutral-400 p-0.5">Más detalles</Link>
         </div>
       </div>
     </div>

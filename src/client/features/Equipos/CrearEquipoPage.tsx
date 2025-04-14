@@ -10,12 +10,15 @@ import { FormField, FormLabel } from "@/packages/components/FormField";
 import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const CrearEquipoPage = () => {
   const router = useRouter();
+
+  const params = useSearchParams()
+  const from = params.get('from')
 
   const [nombreEquipo, setNombreEquipo] = useState("");
   const [imagenEquipo, setImagenEquipo] = useState("");
@@ -94,7 +97,7 @@ export const CrearEquipoPage = () => {
   );
 
   return (
-    <GoBackLayout href="/perfil" className="max-w-lg mx-auto">
+    <GoBackLayout href={from || "/perfil"} className="max-w-lg mx-auto">
       <h1 className="text-2xl font-extrabold text-primary mb-2">
         Crear equipo
       </h1>

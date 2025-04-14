@@ -24,7 +24,7 @@ export const MainInfo = ({
   return (
     <>
       <div className="rounded-lg w-full flex justify-between">
-        <div className="w-full relative z-3">
+        <div className="w-full relative z-2">
           <div className="flex items-center gap-1 text-neutral-300 z-3">
             <Image
               src={logo}
@@ -58,7 +58,7 @@ export const MainInfo = ({
               alt="Imagen futbolin"
               width={200}
               height={200}
-              className="w-44 h-auto object-cover absolute -top-2 -right-2 z-2"
+              className="w-44 h-auto object-cover absolute -top-2 -right-2 z-1"
             />
 
         </div>

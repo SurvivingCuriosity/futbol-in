@@ -34,20 +34,9 @@ export const BottomNav = () => {
     return pathname.startsWith(href);
   };
 
-
-  if(session.status === 'unauthenticated') return null
-
   return (
     <menu className="md:hidden fixed bottom-0 w-full z-2">
       <div className="w-full h-12 bg-neutral-900/95 flex justify-around items-center relative">
-        {/* <Image
-          loading="lazy"
-          src={fondo}
-          alt="Fondo"
-          width={200}
-          height={100}
-          className="absolute bottom-10 w-screen left-0 z-0 rounded-lg opacity-20 grayscale pointer-events-none"
-        /> */}
         {items.map((item, index) => (
           <Link
             href={item.href}
@@ -56,21 +45,22 @@ export const BottomNav = () => {
               isActive(item.href) ? "text-primary" : "text-white"
             }`}
             aria-label={item.label}
+            prefetch
           >
             <FontAwesomeIcon
               icon={item.icon}
-              width={28}
-              height={28}
+              width={22}
+              height={22}
               className="text-xl"
             />
           </Link>
         ))}
-        <Link href={"/perfil"} className={`p-2`}>
+        <Link href={"/perfil"} className={`p-2`} prefetch>
           {session.status === "authenticated" ? (
             <Image
               src={imageUrl || "/default_user.svg"}
-              width={28}
-              height={28}
+              width={22}
+              height={22}
               className={`text-xl size-6 rounded-full border-2  ${
                 isActive("/perfil") ? "border-primary" : "border-transparent"
               } object-center object-cover`}
@@ -80,8 +70,8 @@ export const BottomNav = () => {
           ) : (
             <FontAwesomeIcon
               icon={faUser}
-              width={28}
-              height={28}
+              width={22}
+              height={22}
               className="text-xl"
             />
           )}

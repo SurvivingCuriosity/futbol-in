@@ -119,13 +119,13 @@ export class LigasService {
     return { success: true };
   }
 
-  static async getById(id: string): Promise<LigaDTO> {
+  static async getById(id: string): Promise<LigaDTO|null> {
     await connectDb();
 
-    const liga = await Liga?.findById(id);
+    const liga = await Liga?.findOne({ _id: id });
 
     if (!liga) {
-      throw new Error("No se encontró la liga");
+      return null
     }
 
     return this.mapToDTO(liga);

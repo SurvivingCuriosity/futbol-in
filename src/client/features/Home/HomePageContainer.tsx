@@ -21,7 +21,7 @@ const HomePageContainer = async ({ user }: { user: UserDTO | undefined }) => {
 
   const tieneNotificaciones = notificaciones.equiposPendientes.length > 0;
 
-  return <HomePage tieneNotificaciones={tieneNotificaciones} notificaciones={notificaciones} />;
+  return <HomePage user={user} tieneNotificaciones={tieneNotificaciones} notificaciones={notificaciones} />;
 };
 
 export default HomePageContainer;

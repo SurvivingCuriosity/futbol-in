@@ -1,9 +1,9 @@
 "use client";
 import {
+  faFutbol,
   faInfoCircle,
   faList12,
   faPeopleGroup,
-  faUser,
   faUserPlus,
   IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
@@ -26,7 +26,7 @@ export const NavLigas = ({
   const detalles = { id: 0, label: "Información", icon: faInfoCircle };
   const equipos = { id: 1, label: "Equipos", icon: faPeopleGroup };
   const clasificacion = { id: 2, label: "Clasific.", icon: faList12 };
-  const partidos = { id: 3, label: "Partidos", icon: faUser };
+  const partidos = { id: 3, label: "Partidos", icon: faFutbol };
   const inscribirme = { id: 4, label: "Entrar", icon: faUserPlus };
 
   const opciones = [
@@ -48,7 +48,7 @@ export const NavLigas = ({
     0: faInfoCircle,
     1: faPeopleGroup,
     2: faList12,
-    3: faUser,
+    3: faFutbol,
     4: faUserPlus,
   };
 

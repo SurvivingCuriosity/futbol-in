@@ -105,7 +105,7 @@ const edgeTypes = {
 
 const allNodes = [...nodes, ...nodesFirstRound];
 
-export function CuadroTorneo() {
+function CuadroTorneo() {
   return (
     <div style={{ height: "calc(100dvh - 12em)" }} className="h-full border">
       <ReactFlow
@@ -126,3 +126,5 @@ export function CuadroTorneo() {
     </div>
   );
 }
+
+export default CuadroTorneo

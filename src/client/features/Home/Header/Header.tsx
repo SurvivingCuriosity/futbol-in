@@ -1,6 +1,6 @@
 import { useUser } from "@/client/shared/context/UserContext";
-import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
+import { UserDTO } from "@/server/models/User/UserDTO";
 import Image from "next/image";
 import { BotonNotificaciones } from "../Notificaciones/BotonNotificaciones";
 import { HeaderLocation } from "./HeaderLocation";
@@ -8,11 +8,12 @@ import { HeaderLocation } from "./HeaderLocation";
 export const Header = ({
   tieneNotificaciones,
   notificaciones,
+  user
 }: {
   tieneNotificaciones: boolean;
   notificaciones: INotificaciones;
+  user:UserDTO|undefined
 }) => {
-  const user = useGetLoggedInUserClient();
 
   const { imageUrl } = useUser();
 

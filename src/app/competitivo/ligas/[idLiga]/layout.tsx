@@ -8,6 +8,7 @@ import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
 import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
 import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
+import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";
@@ -29,7 +30,18 @@ interface PageProps {
 const layout = async ({ params, children }: PageProps) => {
   const { idLiga } = await params;
 
-  const liga = await LigasService.getById(idLiga);
+  let liga: LigaDTO | null = null;
+
+  try {
+    liga = await LigasService.getById(idLiga);
+  } catch {
+    liga = null
+  }
+
+  if(liga === null) {
+    return <p>Naaa</p>
+  }
+
   const placeDetails = await GoogleMapsService.getPlaceDetailsFromPlaceId(
     liga.googlePlaceId ?? ""
   );

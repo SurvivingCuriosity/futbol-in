@@ -31,7 +31,7 @@ export function useUserLocation() {
         });
       },
       (err) => {
-        console.error("Error obteniendo la ubicación del usuario:", err);
+        console.warn("Error obteniendo la ubicación del usuario:", err);
       },
       {
         enableHighAccuracy: true,

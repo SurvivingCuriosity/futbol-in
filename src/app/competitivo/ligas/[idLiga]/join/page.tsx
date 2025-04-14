@@ -32,6 +32,10 @@ const page = async ({ params }: PageProps) => {
 
   const competicion = await LigasService.getById(idLiga);
 
+  if(competicion === null) {
+    return <p>Ups... esta competición no existe</p>
+  }
+
   const equiposUsuario = await EquipoService.findManyById(userDb.equipos);
 
   const equipoInscrito = await CompeticionesService.getEquipoInscrito(idLiga, userDb.id)

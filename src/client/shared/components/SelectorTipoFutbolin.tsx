@@ -19,12 +19,12 @@ const SelectorTipoFutbolin = memo((props: SelectorTipoFutbolinProps) => {
   } = props;
 
   const futbolinOptions = [
-    { value: TipoFutbolin.TSUNAMI, label: "Tsunami" },
-    { value: TipoFutbolin.INFINITY, label: "Infinity" },
-    { value: TipoFutbolin.PRESAS, label: "Presas 2000" },
-    { value: TipoFutbolin.PRESAS_EVO, label: "Presas Evo" },
-    { value: TipoFutbolin.DESCONOCIDO, label: "Desconocido" },
-    { value: TipoFutbolin.MADERA, label: "De madera" },
+    { value: TipoFutbolin.TSUNAMI, label: "Tsunami", imageUrl: '/logos/tsunami.png' },
+    { value: TipoFutbolin.INFINITY, label: "Infinity", imageUrl: '/logos/infinity.png' },
+    { value: TipoFutbolin.PRESAS, label: "Presas 2000", imageUrl: '/logos/presas.png' },
+    { value: TipoFutbolin.PRESAS_EVO, label: "Presas Evo", imageUrl: '/logos/presas_evo.png' },
+    { value: TipoFutbolin.DESCONOCIDO, label: "Desconocido", imageUrl: '/logos/desconocido.png' },
+    { value: TipoFutbolin.MADERA, label: "De madera", imageUrl: '/logos/madera.png' },
   ];
 
   const options = incluirOpcionTodos

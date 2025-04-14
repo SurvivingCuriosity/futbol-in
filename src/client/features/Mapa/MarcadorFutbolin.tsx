@@ -18,7 +18,7 @@ const htmlContentMap: Record<TipoFutbolin, string> = {
   [TipoFutbolin.CUALQUIERA]: `<img alt="Logo desconocido" src="/logos/desconocido.png" width="32" height="32" />`,
 };
 
-export function AdvancedMarker({
+export function MarcadorFutbolin({
   map,
   position,
   onClick,
@@ -67,5 +67,5 @@ export function AdvancedMarker({
     };
   }, [map, position, tipoFutbolin, onClick]);
 
-  return null; // No renderiza nada, pues el marcador vive en el mapa
+  return null;
 }

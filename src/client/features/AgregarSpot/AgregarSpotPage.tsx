@@ -1,5 +1,6 @@
 "use client";
 
+import { getErrorClient } from "@/client/shared/client/errorHandler/errorHandler";
 import { SpotsClient } from "@/client/shared/client/SpotsClient";
 import SearchInputBar from "@/client/shared/components/SearchInputBar";
 import SearchInputDireccion from "@/client/shared/components/SearchInputDireccion";
@@ -9,17 +10,15 @@ import { useComprobarSiObtieneLogro } from "@/client/shared/hooks/useComprobarSi
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { TipoLogroEnum } from "@/core/enum/Logros/TipoLogroEnum";
 import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
+import { decodeCiudad } from "@/core/helpers/encodeCiudad";
 import { IMapItem } from "@/core/types/MapItem/IMapItem";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button } from "futbol-in-ui";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { EnhorabuenaNuevaMedalla } from "../Logros/EnhorabuenaNuevaMedalla";
-import { decodeCiudad } from "@/core/helpers/encodeCiudad";
-import { getErrorClient } from "@/client/shared/client/errorHandler/errorHandler";
 
 
 const AgregarSpotPage = () => {
@@ -37,8 +36,6 @@ const AgregarSpotPage = () => {
     IMapItem,
     "direccion" | "nombre" | "lat" | "lng" | "googlePlaceId"
   > | null>(null);
-
-  // const [tipoLugar, setTipoLugar] = useState<TipoLugar>(TipoLugar.FUBTOLIN);
 
   const [tipoFutbolin, setTipoFutbolin] = useState<TipoFutbolin>(
     TipoFutbolin.TSUNAMI
@@ -88,15 +85,6 @@ const AgregarSpotPage = () => {
           Asegurate de que la información introducida es correcta. Gracias por
           tu aportación.
         </p>
-
-        {/* <FormField>
-          <FormLabel>Tipo de lugar</FormLabel>
-          <SelectorTipoLugar
-            onSelect={setTipoLugar}
-            disabled={true}
-            value={tipoLugar}
-          />
-        </FormField> */}
 
         <FormField>
           <FormLabel>Ciudad</FormLabel>

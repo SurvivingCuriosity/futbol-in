@@ -1,9 +1,10 @@
 "use client";
 
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
-import { AdvancedMarker } from "./AdvancedMarker";
+import { MarcadorFutbolin } from "./MarcadorFutbolin";
+import { MarcadorUsuario } from "./MarcadorUsuario";
 
 export interface MapaProps {
   markers: SpotDTO[];
@@ -13,7 +14,7 @@ export interface MapaProps {
   initialCenter: google.maps.LatLngLiteral | null;
 }
 
-const markerLibrary = "marker";
+const markerLibrary = ["marker"];
 
 export function Mapa(props: MapaProps) {
   const {
@@ -27,7 +28,8 @@ export function Mapa(props: MapaProps) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string,
     id: "google-maps-script",
-    libraries: [markerLibrary],
+    //@ts-expect-error - El tipo de la librería no es correcto
+    libraries: markerLibrary,
   });
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -40,7 +42,7 @@ export function Mapa(props: MapaProps) {
       map.panTo({ lat: lat - 0.0005, lng });
       map.setZoom(18); // Ajusta el nivel de zoom a tu gusto
     }
-  }, [map, selectedMarker]);
+  }, [selectedMarker]);
 
   const handleMapClick = React.useCallback(
     (e: google.maps.MapMouseEvent) => {
@@ -94,7 +96,7 @@ export function Mapa(props: MapaProps) {
         const lng = m.coordinates[0];
 
         return (
-          <AdvancedMarker
+          <MarcadorFutbolin
             key={m.googlePlaceId + index}
             map={map} // le pasamos el map que tenemos en el estado
             position={{ lat, lng }}
@@ -105,11 +107,9 @@ export function Mapa(props: MapaProps) {
       })}
 
       {userLocation && (
-        <Marker
+        <MarcadorUsuario
+          map={map}
           position={userLocation}
-          icon={{
-            url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-          }}
         />
       )}
     </GoogleMap>

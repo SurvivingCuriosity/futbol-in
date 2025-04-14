@@ -58,7 +58,7 @@ export const TarjetaLiga = ({ liga }: { liga: LigaDTO }) => {
         icon={iconTipoDeCompeticionMap[TipoCompeticion.LIGA]}
         width={150}
         height={150}
-        className="absolute opacity-10 w-fit -top-4 right-0 -rotate-12 text-[100px]"
+        className="absolute opacity-10 w-fit -top-4 right-0 -rotate-12 text-[100px] pointer-events-none"
       />
 
       <p className="text-xl font-bold">{liga.nombre}</p>

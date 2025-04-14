@@ -22,7 +22,7 @@ const layout = async (props: CityLayoutProps) => {
       <h1 className="text-xl lg:text-3xl leading-5 font-bold text-primary tracking-tighter mb-2">
         Futbolines en {ciudadLabel}
       </h1>
-      <span className="w-full my-2 z-2 relative">
+      <span className="w-full my-2 z-3 relative">
         <SearchInputRedirect />
       </span>
       {children}
