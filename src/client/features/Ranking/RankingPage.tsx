@@ -21,7 +21,6 @@ export default async function RankingPage() {
 
 
   function getPuntuacion(lugaresAgregados: number, lugaresRevisados: number, lugaresVerificados: number) {
-    console.log(lugaresAgregados, lugaresRevisados, lugaresVerificados)
     const puntuacion = lugaresAgregados*5 + lugaresRevisados*2 + lugaresVerificados*2;
     return puntuacion;
   }
