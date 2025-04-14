@@ -22,9 +22,9 @@ export class SpotService {
     await connectDb();
 
     // Validaciones de dominio:
-    const exists = await Spot.findOne({ googlePlaceId: spot.googlePlaceId });
+    const exists = await Spot.findOne({ googlePlaceId: spot.googlePlaceId, tipoFutbolin:spot.tipoFutbolin });
     if (exists) {
-      throw new Error("Este spot ya existe en la base de datos");
+      throw new Error("Este futbolín ya está agregado");
     }
 
     // Crear el documento

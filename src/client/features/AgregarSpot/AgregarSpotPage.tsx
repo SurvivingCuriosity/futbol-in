@@ -19,6 +19,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { EnhorabuenaNuevaMedalla } from "../Logros/EnhorabuenaNuevaMedalla";
 import { decodeCiudad } from "@/core/helpers/encodeCiudad";
+import { getErrorClient } from "@/client/shared/client/errorHandler/errorHandler";
 
 
 const AgregarSpotPage = () => {
@@ -70,7 +71,7 @@ const AgregarSpotPage = () => {
       comprobarSiGanaMedalla(res.spotsCreados);
       setLoading(false);
     } catch (error) {
-      toast.error(`Ups... ${getErrorMessage(error)}`);
+      toast.error(`Ups... ${getErrorClient(error)}`);
       setLoading(false);
       console.error("Error al agregar spot:", error);
     }
