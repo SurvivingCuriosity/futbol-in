@@ -1,6 +1,8 @@
 import { ChipPosicionJugador } from "@/client/shared/components/ChipPosicionJugador";
 import { useUser } from "@/client/shared/context/UserContext";
 import { UserDTO } from "@/server/models/User/UserDTO";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { ImagenPerfil } from "./ImagenPerfil";
@@ -21,6 +23,13 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
           <p className="font-bold text-3xl text-primary">{user.name}</p>
           {user.nombre && (
             <p className="text-sm text-neutral-500">{user.nombre}</p>
+          )}
+          {user.ciudad && (
+            <div className="flex items-center gap-2 my-2 mb-4 text-neutral-300">
+              <FontAwesomeIcon icon={faLocationDot} />
+              <p className="text-xs">{user.ciudad.split(',')[0]}</p>
+              <p className="text-xs text-neutral-600">({user.ciudad.split(',')[1].trim()})</p>
+            </div>
           )}
           {user.posicion && (
             <div className="flex items-center gap-2 my-2 mb-4">
