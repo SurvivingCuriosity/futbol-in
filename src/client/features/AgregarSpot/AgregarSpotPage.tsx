@@ -129,6 +129,7 @@ const AgregarSpotPage = () => {
             <FormField>
               <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
               <SearchInputBar
+                ciudad={ciudad}
                 onSelect={(sel) => {
                   setDireccionOBar(sel);
                 }}

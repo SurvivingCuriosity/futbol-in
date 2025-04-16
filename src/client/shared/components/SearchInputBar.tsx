@@ -28,12 +28,14 @@ const CustomAsyncSelectNoSSR = dynamic<AsyncSelectProps<PlaceOption>>(
 );
 
 export default function SearchInputBar({
+  ciudad = "",
   onSelect,
   onSelectPlaceOption,
   disabled,
   value,
   placeholder = "Escribe para buscar..."
 }: {
+  ciudad?:string
   onSelect: (
     val: Pick<
       IMapItem,
@@ -67,7 +69,7 @@ export default function SearchInputBar({
     <CustomAsyncSelectNoSSR
       value={value}
       onSelect={handleSelect}
-      loadOptions={fetchBares}
+      loadOptions={(input)=>fetchBares(input, ciudad)}
       disabled={disabled}
       placeholder={placeholder}
       noOptionsMessage="No hay resultados"
