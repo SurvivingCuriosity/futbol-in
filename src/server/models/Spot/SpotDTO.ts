@@ -14,6 +14,7 @@ export interface SpotDTO {
   distribucion: DistribucionFutbolin;
   comentarios: string;
   addedByUserId: string;
+  idOperador:string|null;
   verificado: null | {
     correcto: boolean;
     idUser: string;

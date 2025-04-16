@@ -1,6 +1,7 @@
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 
 export interface OperadorDTO {
+  id:string;
   usuarios: string[];
   bio: string;
   enlaces: string[];

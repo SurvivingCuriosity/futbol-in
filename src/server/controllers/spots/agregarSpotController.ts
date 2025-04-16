@@ -18,6 +18,8 @@ export async function agregarSpotController(
   // Validar request
   const spot = agregarSpotSchema.parse(data) as SpotDTO;
 
+  const idOperador = userDb?.idOperador;
+
   // Construir el objeto a crear
   const spotACrear = {
     ...spot,
@@ -30,6 +32,7 @@ export async function agregarSpotController(
             fechaVerificacion: new Date(),
           }
         : null,
+      idOperador: idOperador?.toString() || null
   };
 
   // Crear el spot

@@ -71,7 +71,7 @@ export class UserService {
   }
 
   static async createPerfilOperador(data:{
-    operador: OperadorDTO,
+    operador: Omit<OperadorDTO,'id'>,
     idUsuario: string
   }): Promise<IOperadorDocument> {
     await connectDb();
@@ -146,6 +146,21 @@ export class UserService {
       { _id: userId },
       { $inc: { [`stats.${statKey}`]: 1 } }
     );
+  }
+
+  static mapOperadorToDTO(operador: IOperadorDocument): OperadorDTO {
+    return {
+      id: operador._id.toString(),
+      nombreComercial: operador.nombreComercial,
+      ciudad: operador.ciudad,
+      bio: operador.bio,
+      enlaces: operador.enlaces,
+      telefonos: operador.telefonos,
+      usuarios: operador.usuarios.map((u) => u.toString()),
+      futbolines: operador.futbolines,
+      fondo: operador.fondo,
+      logo: operador.logo,
+    }
   }
 
   static mapToDTO(user: IUserDocument): UserDTO {

@@ -3,7 +3,7 @@ import { Document, Schema, Types, model, models } from "mongoose";
 
 export interface IOperadorDocument extends Document {
   _id: Types.ObjectId;
-  usuarios: Types.ObjectId;
+  usuarios: Types.ObjectId[];
   bio: string;
   nombreComercial: string;
   telefonos: Array<{ persona: string; numero: string }>;
@@ -11,7 +11,7 @@ export interface IOperadorDocument extends Document {
   futbolines: TipoFutbolin[];
   logo: string;
   fondo: string;
-  enlaces: string;
+  enlaces: string[];
 }
 
 const operadorSchema = new Schema<IOperadorDocument>(

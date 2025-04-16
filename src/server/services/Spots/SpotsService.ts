@@ -5,6 +5,7 @@ import Spot, { ISpot } from "@/server/models/Spot/Spot.model";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { ObjectId, Types } from "mongoose";
+import { ZodError } from "zod";
 
 export class SpotService {
   static async getById(id: string): Promise<SpotDTO> {
@@ -22,9 +23,18 @@ export class SpotService {
     await connectDb();
 
     // Validaciones de dominio:
-    const exists = await Spot.findOne({ googlePlaceId: spot.googlePlaceId, tipoFutbolin:spot.tipoFutbolin });
+    const exists = await Spot.findOne({
+      googlePlaceId: spot.googlePlaceId,
+      tipoFutbolin: spot.tipoFutbolin,
+    });
     if (exists) {
-      throw new Error("Este futbolín ya está agregado");
+      throw new ZodError([
+        {
+          message: "Este futbolín ya está agregado",
+          path: ["futbolin"],
+          code: "custom",
+        },
+      ]);
     }
 
     // Crear el documento
@@ -59,6 +69,14 @@ export class SpotService {
 
     await spot.save();
     return this.mapToDTO(spot);
+  }
+
+  static async getSpotsDeOperador(idOperador: string): Promise<SpotDTO[]> {
+    await connectDb();
+    const spots = await Spot.find({
+      idOperador: idOperador,
+    }).lean<ISpot[]>();
+    return spots.map((spot) => this.mapToDTO(spot));
   }
 
   static async votarSpot(
@@ -127,6 +145,7 @@ export class SpotService {
       googlePlaceId: lugar.googlePlaceId,
       ciudad: lugar.ciudad,
       coordinates: [...lugar.location.coordinates],
+      idOperador: lugar.idOperador?.toString() || null,
       tipoLugar: lugar.tipoLugar as TipoLugar,
       tipoFutbolin: lugar.tipoFutbolin as TipoFutbolin,
       distribucion: lugar.distribucion,
