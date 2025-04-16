@@ -16,8 +16,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No hay sesión" }, { status: 401 });
     }
 
-    const {username} = await request.json();
-    
+    const { username } = await request.json();
+
     if (!username) {
       return NextResponse.json({ error: "Falta username" }, { status: 400 });
     }
@@ -53,12 +53,15 @@ export async function POST(request: Request) {
     user.status = UserStatus.DONE;
     await user.save();
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     const response = NextResponse.json({ success: true });
     response.cookies.set("registrationToken", "", {
-      maxAge: 0, // Caduca inmediatamente
-      path: "/", // Asegura que coincida con el path donde se seteó
-      // secure: true // En producción con HTTPS
-      // httpOnly: true // Si ya estaba en httpOnly
+      maxAge: 0,
+      path: "/",
+      secure: isProduction,
+      httpOnly: true,
+      sameSite: "strict",
     });
     return response;
   } catch (err) {
