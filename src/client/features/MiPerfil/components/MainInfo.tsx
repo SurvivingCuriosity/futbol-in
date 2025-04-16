@@ -7,6 +7,8 @@ import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { ImagenPerfil } from "./ImagenPerfil";
 import { MarcaVerificado } from "./MarcaVerificado";
+import { esOperador } from "@/core/helpers/esOperador";
+import { BotonPerfilOperador } from "./BotonPerfilOperador";
 
 export const MainInfo = ({ user }: { user: UserDTO }) => {
   const router = useRouter();
@@ -14,7 +16,7 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
   const { imageUrl } = useUser();
 
   return (
-    <div className="flex flex-col mx-auto items-center md:gap-4 w-full md:w-fit min-w-xs">
+    <div className="flex flex-col mx-auto items-center md:gap-4 w-full min-w-xs max-w-lg">
       <ImagenPerfil imagenUrl={imageUrl} />
 
       <span className="flex flex-row items-start md:flex-col">
@@ -27,8 +29,10 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
           {user.ciudad && (
             <div className="flex items-center gap-2 my-2 mb-4 text-neutral-300">
               <FontAwesomeIcon icon={faLocationDot} />
-              <p className="text-xs">{user.ciudad.split(',')[0]}</p>
-              <p className="text-xs text-neutral-600">({user.ciudad.split(',')[1].trim()})</p>
+              <p className="text-xs">{user.ciudad.split(",")[0]}</p>
+              <p className="text-xs text-neutral-600">
+                ({user.ciudad.split(",")[1].trim()})
+              </p>
             </div>
           )}
           {user.posicion && (
@@ -41,9 +45,15 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
               Miembro desde {new Date(user.createdAt)?.toLocaleDateString()}
             </p>
           )}
+          {esOperador(user) && (
+            <p className="text-sm text-neutral-500">Operador</p>
+          )}
         </span>
       </span>
-      <span className="flex items-center gap-2 w-full mt-4 max-w-xs">
+      <span className="flex items-center gap-2 w-full mt-4">
+        {esOperador(user) && (
+          <BotonPerfilOperador user={user}/>
+        )}
         <Button
           label="Editar perfil"
           size="sm"

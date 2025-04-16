@@ -23,7 +23,7 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
   return (
     <div className="w-full h-full md:gap-8 justify-between flex flex-col space-y-8 md:space-y-0 md:mt-4 rounded-lg md:p-8 relative">
       <MainInfo user={user}/>
-
+      
       <CompletarPerfil user={user} onUpdateUser={setUser}/>
 
       <Logros user={user} />

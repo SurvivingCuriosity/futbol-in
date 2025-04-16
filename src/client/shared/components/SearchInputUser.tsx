@@ -1,15 +1,14 @@
 "use client";
-import { SingleValue } from "react-select";
-import { CustomAsyncSelect } from "futbol-in-ui";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { fetchUsers } from "@/server/services/User/searchUsers";
+import { CustomAsyncSelect } from "futbol-in-ui";
+import { SingleValue } from "react-select";
 
 export interface UserOption {
   value: string;
   label: string;
   data: UserDTO;
 }
-
 export default function SearchInputUser({
   value,
   onSelect,

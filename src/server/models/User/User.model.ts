@@ -6,6 +6,7 @@ import { Document, Schema, Types, model, models } from "mongoose";
 
 export interface IUserDocument extends Document {
   _id: Types.ObjectId;
+  idOperador: Types.ObjectId|null;
   name?: string;
   email: string;
   password?: string;
@@ -36,6 +37,7 @@ export interface IUserDocument extends Document {
 const userSchema = new Schema<IUserDocument>(
   {
     name: { type: String },
+    idOperador: { type: Schema.Types.ObjectId, ref: "Operador", default: null },
     email: { type: String, required: true },
     password: { type: String },
     imagen: { type: String, default: "" },

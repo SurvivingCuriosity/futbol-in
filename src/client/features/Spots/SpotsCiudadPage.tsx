@@ -49,7 +49,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
     setSelectedMarker(spot);
   };
 
-  if (spotsFiltrados.length === 0) {
+  if (spots.length === 0) {
     return (
       <div className="p-10 max-w-md mx-auto flex flex-col items-stretch h-full">
         <p className="text-center text-neutral-400 mb-8 text-2xl">
@@ -67,25 +67,26 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
 
   return (
     <>
-      {spotsFiltrados.length > 0 && (
-        <header className="flex justify-start items-center w-full">
-          <ButtonFiltros onFiltrosChange={setFiltros} filtros={filtros} />
-          <PreviewFiltros filtros={filtros} onFiltrosChange={setFiltros} />
-          <div className="md:hidden block ml-auto">
-            <InlinePicker
-              options={[
-                { id: 1, icon: faList, label: "" },
-                { id: 0, icon: faMap, label: "" },
-              ]}
-              onTabClick={(id) => {
-                setSelectedMarker(null);
-                setView(id === 0 ? "map" : "list");
-              }}
-              size="sm"
-            />
-          </div>
-        </header>
-      )}
+      <header className="flex justify-start items-center w-full">
+        <ButtonFiltros onFiltrosChange={setFiltros} filtros={filtros} />
+        <PreviewFiltros filtros={filtros} onFiltrosChange={setFiltros} />
+        <div className="md:hidden block ml-auto">
+          <InlinePicker
+            options={[
+              { id: 1, icon: faList, label: "" },
+              { id: 0, icon: faMap, label: "" },
+            ]}
+            onTabClick={(id) => {
+              setSelectedMarker(null);
+              setView(id === 0 ? "map" : "list");
+            }}
+            size="sm"
+          />
+        </div>
+      </header>
+
+
+{spotsFiltrados.length === 0 && <p className="text-neutral-500 p-5">Ups... no hay resultados</p>}
 
       {/* Contenedor principal */}
       <div className="w-full flex flex-col md:flex-row gap-4 h-[calc(100dvh-14em)] md:h-[calc(100dvh-15em)] md:overflow-hidden overflow-y-auto">

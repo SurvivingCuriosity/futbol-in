@@ -2,6 +2,8 @@ import { AuthProvider } from "@/core/enum/User/AuthProvider";
 import { UserRole } from "@/core/enum/User/Role";
 import { UserStatus } from "@/core/enum/User/Status";
 import connectDb from "@/server/lib/db";
+import { IOperadorDocument, Operador } from "@/server/models/User/Operador.model";
+import { OperadorDTO } from "@/server/models/User/OperadorDTO";
 import { IUserDocument, User } from "@/server/models/User/User.model";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import bcrypt from "bcryptjs";
@@ -68,6 +70,32 @@ export class UserService {
     return user.save();
   }
 
+  static async createPerfilOperador(data:{
+    operador: OperadorDTO,
+    idUsuario: string
+  }): Promise<IOperadorDocument> {
+    await connectDb();
+    const operadorCreado = new Operador(data.operador);
+    const user = await User.findById(data.idUsuario)
+
+    if(!user){
+      throw new Error('No se encontró al usuario en la base de datos')
+    }
+
+    user.idOperador = operadorCreado.id;
+    await user.save()
+    return await operadorCreado.save();
+  }
+
+  static async getPerfilOperador(idOperador:string): Promise<IOperadorDocument> {
+    await connectDb();
+    const operador = await Operador.findById(idOperador);
+    if(!operador){
+      throw new Error('No se encontró al operador en la base de datos')
+    }
+    return operador;
+  }
+
   static async updateUser(
     userId: string,
     updateData: Partial<UserDTO>
@@ -123,6 +151,7 @@ export class UserService {
   static mapToDTO(user: IUserDocument): UserDTO {
     return {
       id: user._id.toString(),
+      idOperador: user.idOperador?.toString() || null,
       name: user.name || "",
       email: user.email,
       imagen: user.imagen,

@@ -3,6 +3,7 @@
 import { EquiposClient } from "@/client/shared/client/EquiposClient";
 import { ImagenEditable } from "@/client/shared/components/ImagenEditable";
 import { UserOption } from "@/client/shared/components/SearchInputUser";
+import { SelectLoader } from "@/client/shared/components/SelectLoader";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
@@ -17,8 +18,8 @@ import { toast } from "react-toastify";
 export const CrearEquipoPage = () => {
   const router = useRouter();
 
-  const params = useSearchParams()
-  const from = params.get('from')
+  const params = useSearchParams();
+  const from = params.get("from");
 
   const [nombreEquipo, setNombreEquipo] = useState("");
   const [imagenEquipo, setImagenEquipo] = useState("");
@@ -41,12 +42,20 @@ export const CrearEquipoPage = () => {
   const handleCrearEquipo = async () => {
     subirImagenEquipo().then((newUrl) => {
       setUploadedFile(undefined);
-      // Si tiene una cuenta, ponemos al compañero como pendiente, si no como aceptado directamente 
+      // Si tiene una cuenta, ponemos al compañero como pendiente, si no como aceptado directamente
       // (UN USUARIO SIN CUENTA NO PUEDE ACEPTAR UNIRSE LOL)
       EquiposClient.crearEquipo({
         imagenEquipo: newUrl,
         nombreEquipo: nombreEquipo,
-        jugadores: [{...companero, estado: companero.usuario === null ? EstadoJugador.ACEPTADO : EstadoJugador.PENDIENTE}]
+        jugadores: [
+          {
+            ...companero,
+            estado:
+              companero.usuario === null
+                ? EstadoJugador.ACEPTADO
+                : EstadoJugador.PENDIENTE,
+          },
+        ],
       })
         .then((res) => {
           if (res.success) {
@@ -57,15 +66,15 @@ export const CrearEquipoPage = () => {
           }
         })
         .catch((err) => {
-          toast.error("Hubo un error al crear el equipo" + getErrorMessage(err));
+          toast.error(
+            "Hubo un error al crear el equipo" + getErrorMessage(err)
+          );
         });
-
     });
-    
   };
 
   const subirImagenEquipo = async (): Promise<string> => {
-    if (!uploadedFile) return '';
+    if (!uploadedFile) return "";
     const formData = new FormData();
     formData.append("file", uploadedFile);
     formData.append("type", "user");
@@ -75,7 +84,7 @@ export const CrearEquipoPage = () => {
       body: formData,
     });
     const data = await res.json();
-    return data.path
+    return data.path;
   };
 
   const handleUploadImagen = (file: File) => {
@@ -93,7 +102,7 @@ export const CrearEquipoPage = () => {
 
   const SearchInputUser = dynamic(
     () => import("@/client/shared/components/SearchInputUser"),
-    { ssr: false }
+    { ssr: false, loading: () => <SelectLoader value="Cargando..." /> }
   );
 
   return (

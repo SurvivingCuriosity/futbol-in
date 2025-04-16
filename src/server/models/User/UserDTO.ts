@@ -5,6 +5,7 @@ import { UserStatus } from "@/core/enum/User/Status";
 
 export interface UserDTO {
   id: string;
+  idOperador: string|null;
   name: string;
   email: string;
   imagen: string;

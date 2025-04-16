@@ -1,6 +1,7 @@
 "use client";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
-import { CustomSelect } from "futbol-in-ui";
+import { CustomSelectProps, OptionType } from "futbol-in-ui";
+import dynamic from "next/dynamic";
 import { memo } from "react";
 
 export interface SelectorTipoFutbolinProps {
@@ -9,6 +10,16 @@ export interface SelectorTipoFutbolinProps {
   disabled?: boolean;
   incluirOpcionTodos?: boolean;
 }
+
+const CustomSelect = dynamic<CustomSelectProps<OptionType>>(
+  () =>
+    import("futbol-in-ui").then((mod) => ({
+      default: mod.CustomSelect,
+    })),
+  {
+    ssr: false,
+  }
+);
 
 const SelectorTipoFutbolin = memo((props: SelectorTipoFutbolinProps) => {
   const {
@@ -38,7 +49,7 @@ const SelectorTipoFutbolin = memo((props: SelectorTipoFutbolinProps) => {
     <CustomSelect
       value={options.find((o) => o.value === value)}
       onSelect={(selectedOption) => {
-        onSelect(selectedOption.value);
+        onSelect(selectedOption.value as TipoFutbolin);
       }}
       options={options}
       disabled={disabled}
