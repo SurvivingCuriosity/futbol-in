@@ -16,7 +16,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const CrearPerfilOperadorPage = () => {
-  const [operadorEnCreacion, setOperadorEnCreacion] = useState<OperadorDTO>({
+  const [operadorEnCreacion, setOperadorEnCreacion] = useState<Omit<OperadorDTO,'id'>>({
     nombreComercial: "",
     ciudad: "",
     bio: "",
@@ -42,7 +42,7 @@ export const CrearPerfilOperadorPage = () => {
   >([]);
 
   const handleSubmit = async () => {
-    const operadorCrear:OperadorDTO = {
+    const operadorCrear:Omit<OperadorDTO,'id'> = {
         ...operadorEnCreacion,
         futbolines,
         enlaces,

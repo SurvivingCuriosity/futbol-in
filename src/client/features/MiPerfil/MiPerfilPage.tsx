@@ -9,6 +9,7 @@ import { MainInfo } from "./components/MainInfo";
 import { MisEquipos } from "./components/MisEquipos";
 import { CompletarPerfil } from "./CompletarPerfil/CompletarPerfil";
 import { useState } from "react";
+import { HamburguerMenu } from "./components/HamburguerMenu/HamburguerMenu";
 
 export interface MiPerfilPageProps {
   user: UserDTO;
@@ -22,6 +23,9 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
 
   return (
     <div className="w-full h-full md:gap-8 justify-between flex flex-col space-y-8 md:space-y-0 md:mt-4 rounded-lg md:p-8 relative">
+
+      <HamburguerMenu user={user} />
+
       <MainInfo user={user}/>
       
       <CompletarPerfil user={user} onUpdateUser={setUser}/>

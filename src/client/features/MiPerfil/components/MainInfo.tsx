@@ -16,44 +16,38 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
   const { imageUrl } = useUser();
 
   return (
-    <div className="flex flex-col mx-auto items-center md:gap-4 w-full min-w-xs max-w-lg">
-      <ImagenPerfil imagenUrl={imageUrl} />
-
-      <span className="flex flex-row items-start md:flex-col">
-        <MarcaVerificado user={user} />
-        <span className="flex flex-col gap-1 items-center">
+    <div className="flex flex-col mx-auto items-start md:gap-4 w-full min-w-xs max-w-lg">
+      <div className="flex items-center gap-2 mb-2">
+        <ImagenPerfil imagenUrl={imageUrl} />
+        <div>
           <p className="font-bold text-3xl text-primary">{user.name}</p>
           {user.nombre && (
             <p className="text-sm text-neutral-500">{user.nombre}</p>
           )}
-          {user.ciudad && (
-            <div className="flex items-center gap-2 my-2 mb-4 text-neutral-300">
-              <FontAwesomeIcon icon={faLocationDot} />
-              <p className="text-xs">{user.ciudad.split(",")[0]}</p>
-              <p className="text-xs text-neutral-600">
-                ({user.ciudad.split(",")[1].trim()})
-              </p>
-            </div>
-          )}
           {user.posicion && (
-            <div className="flex items-center gap-2 my-2 mb-4">
+            <div className="flex items-center gap-2">
               <ChipPosicionJugador posicion={user.posicion} />
             </div>
           )}
-          {user.createdAt && (
-            <p className="text-xs text-neutral-400">
-              Miembro desde {new Date(user.createdAt)?.toLocaleDateString()}
-            </p>
-          )}
-          {esOperador(user) && (
-            <p className="text-sm text-neutral-500">Operador</p>
-          )}
-        </span>
-      </span>
-      <span className="flex items-center gap-2 w-full mt-4">
-        {esOperador(user) && (
-          <BotonPerfilOperador user={user}/>
+        </div>
+      </div>
+
+      <MarcaVerificado user={user} />
+      <div className="flex flex-row my-4 items-center gap-2 justify-between w-full">
+        {user.ciudad && (
+          <div className="flex items-center gap-2 text-neutral-300">
+            <FontAwesomeIcon icon={faLocationDot} />
+            <p className="text-xs">{user.ciudad.split(",")[0]}</p>
+          </div>
         )}
+        {user.createdAt && (
+          <p className="text-xs text-neutral-400">
+            Miembro desde {new Date(user.createdAt)?.toLocaleDateString()}
+          </p>
+        )}
+      </div>
+      <span className="flex items-center gap-2 w-full mt-4">
+        {esOperador(user) && <BotonPerfilOperador user={user} />}
         <Button
           label="Editar perfil"
           size="sm"
