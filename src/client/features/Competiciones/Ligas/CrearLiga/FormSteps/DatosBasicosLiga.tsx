@@ -69,6 +69,7 @@ export const DatosBasicosLiga = ({
         <FormField>
           <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
           <SearchInputBar
+            ciudad={datosBasicos.ciudad}
             value={barSeleccionado}
             onSelect={(sel) => {
               setDatosBasicos((prev) => ({...prev, googlePlaceId: sel.googlePlaceId}))
