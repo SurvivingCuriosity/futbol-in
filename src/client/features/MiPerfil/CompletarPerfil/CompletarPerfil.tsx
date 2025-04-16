@@ -69,6 +69,7 @@ export const CompletarPerfil = ({
     const res = await UserClient.updateUser({
       ...user,
       ciudadActual: nuevaCiudad,
+      ciudad: nuevaCiudad,
     });
     if (res.success) {
       setCiudadDone(true);
