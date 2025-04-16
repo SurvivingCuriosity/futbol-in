@@ -28,7 +28,7 @@
     "bcryptjs": "^2.4.3",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
-    "futbol-in-ui": "^0.0.27",
+    "futbol-in-ui": "^0.0.28",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.7",
     "next": "^15.1.5",
