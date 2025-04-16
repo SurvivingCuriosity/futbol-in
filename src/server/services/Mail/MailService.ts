@@ -3,10 +3,13 @@ import sgMail from "@sendgrid/mail";
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 
 export class MailService {
-  static async sendVerificationEmail(email: string, verificationCode: string): Promise<void> {
+  static async sendVerificationEmail(
+    email: string,
+    verificationCode: string
+  ): Promise<void> {
     const msg = {
       to: email,
-      from: "contacto@futbolin.app",
+      from: { email: "contacto@futbolin.app", name: "Futbol-in" },
       subject: "Verificación de Email",
       text: `Tu código de verificación es: ${verificationCode}`,
       html: `<p>Tu código de verificación es: <strong>${verificationCode}</strong></p>`,
