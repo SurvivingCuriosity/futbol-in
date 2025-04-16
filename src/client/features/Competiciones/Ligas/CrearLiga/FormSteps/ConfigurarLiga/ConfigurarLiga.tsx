@@ -41,18 +41,24 @@ export const ConfigurarLiga = ({
   const textoJugarUnTotalDe = `Se juega un total de ${configEnfrentamientos.cantidadPartidos} partidos. Se gana un punto por partido ganado.`;
 
   const handleSubmit = async () => {
-    const configLiga: ConfiguracionLiga = {
-      idaYVuelta,
-      tipoEnfrentamiento,
-      configEnfrentamiento: configEnfrentamientos,
-    };
-    onCompleted(configLiga);
-    const competicionCrear = getCompeticionCrear();
-    if (competicionCrear === undefined) return;
-    const res = await LigasClient.crearLiga(competicionCrear);
-    if (res.success) {
-      toast.success("Liga creada!");
-      router.replace("/competitivo/ligas");
+    try {
+      const configLiga: ConfiguracionLiga = {
+        idaYVuelta,
+        tipoEnfrentamiento,
+        configEnfrentamiento: configEnfrentamientos,
+      };
+      onCompleted(configLiga);
+      const competicionCrear = getCompeticionCrear();
+      if (competicionCrear === undefined) return;
+      const res = await LigasClient.crearLiga(competicionCrear);
+      if (res.success) {
+        toast.success("Liga creada!");
+        router.replace("/competitivo/ligas");
+      }
+    } catch {
+      toast.error(
+        "Ups... Error al crear la liga. Comprueba que has introducido todos los campos necesarios"
+      );
     }
   };
 
