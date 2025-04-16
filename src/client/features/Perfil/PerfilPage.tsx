@@ -1,10 +1,10 @@
 "use client";
 
+import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { useSearchParams } from "next/navigation";
 import { Logros } from "./components/Logros";
 import { MainInfo } from "./components/MainInfo";
-import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 
 export interface MiPerfilPageProps {
   user: UserDTO;
@@ -22,6 +22,7 @@ export const PerfilPage = (props: MiPerfilPageProps) => {
         <MainInfo user={user} />
 
         <Logros user={user} />
+
       </div>
     </GoBackLayout>
   );

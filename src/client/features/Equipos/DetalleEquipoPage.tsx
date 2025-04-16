@@ -4,13 +4,14 @@ import { EquiposClient } from "@/client/shared/client/EquiposClient";
 import { useUser } from "@/client/shared/context/UserContext";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
+import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { Button } from "futbol-in-ui";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { TarjetaUsuarioEquipo } from "./TarjetaUsuarioEquipo";
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
+import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 
 export const DetalleEquipoPage = ({
   equipo,
@@ -55,6 +56,10 @@ export const DetalleEquipoPage = ({
             Creado por {creador?.name}
           </p>
         </div>
+        <TarjetaMensaje 
+          variant="info"
+          text="Ponte en contacto con soporte@futbolin.app o en nuestra cuenta de instagram para cambiar el nombre del equipo"
+        />
         <div className="w-full">
           <p className="text-neutral-500 mb-1">Jugadores:</p>
           <div className="w-full space-y-1">

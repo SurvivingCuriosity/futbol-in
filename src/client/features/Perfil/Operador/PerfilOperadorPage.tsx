@@ -6,8 +6,7 @@ import Image from "next/image";
 import { ButtonWhatsapp } from "./ButtonWhatsapp";
 
 export const PerfilOperadorPage = ({ operador }: { operador: OperadorDTO }) => {
-
-    return (
+  return (
     <div className="flex flex-col max-w-lg mx-auto">
       <h1 className="text-3xl font-black text-primary mb-4">
         {operador.nombreComercial}

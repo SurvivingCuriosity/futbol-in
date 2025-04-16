@@ -10,6 +10,8 @@ import { CambiarImagenPerfil } from "./components/CambiarImagenPerfil";
 import { DatosDeAcceso } from "./components/DatosDeAcceso";
 import { Posicion } from "@/core/enum/Posicion/Posicion";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
 const opciones = [
   { id: 0, value: Posicion.DELANTERO },
@@ -54,8 +56,9 @@ export const EditarPerfilPage = () => {
       {hayCambios && (
         <button
           onClick={handleSubmit}
-          className="absolute -top-10 right-0 p-1 px-2 text-neutral-900 bg-green-600 rounded-lg"
+          className="fixed right-2 md:top-20 flex items-center z-20 gap-2 top-2 p-1 px-2 text-neutral-900 bg-green-500 rounded-lg"
         >
+          <FontAwesomeIcon icon={faFloppyDisk} width={14} height={14} />
           Guardar
         </button>
       )}

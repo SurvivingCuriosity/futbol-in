@@ -41,8 +41,8 @@ export const TarjetaUsuarioEquipo = ({
         <ChipPosicionJugador posicion={Posicion.DELANTERO} />
       </div>
       {estado === EstadoJugador.PENDIENTE && (
-        <span className="absolute top-1 right-1">
-          <ChipPosicionJugador posicion={Posicion.DELANTERO} />
+        <span className="absolute top-1 right-1 text-neutral-400 text-xs">
+          Pendiente
         </span>
       )}
     </div>

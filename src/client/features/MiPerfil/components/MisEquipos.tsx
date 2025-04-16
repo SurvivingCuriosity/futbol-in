@@ -10,12 +10,16 @@ export const MisEquipos = ({ equipos }: { equipos: EquipoDTO[] }) => {
     router.push("/perfil/crear-equipo");
   };
 
+  const handleClickEquipo = async (idEquipo:string) => {
+    router.push(`/equipos/${idEquipo}`);
+  };
+
   return (
     <div className="grow p-3 bg-neutral-900 rounded-lg">
       <p className="mb-2 text-xl">Mis equipos</p>
       <ul className="my-2 flex gap-2 overflow-x-auto w-full">
         {equipos.map((e) => (
-          <TarjetaEquipo equipo={e} key={e.id}/>
+          <TarjetaEquipo equipo={e} key={e.id} onClick={()=>handleClickEquipo(e.id)}/>
         ))}
       </ul>
       <Button

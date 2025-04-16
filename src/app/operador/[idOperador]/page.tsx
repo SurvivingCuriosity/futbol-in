@@ -37,10 +37,10 @@ const page = async ({params}:OperadorPageProps) => {
 
     const {idOperador} = await params
     const operador = await UserService.getPerfilOperador(idOperador)
-    
+    const mappedOperador = UserService.mapOperadorToDTO(operador)
 
   return (
-    <PerfilOperadorPage operador={UserService.mapOperadorToDTO(operador)} />
+    <PerfilOperadorPage operador={mappedOperador} />
   )
 }
 
