@@ -2,15 +2,13 @@
 
 import { EquiposClient } from "@/client/shared/client/EquiposClient";
 import { ImagenEditable } from "@/client/shared/components/ImagenEditable";
-import { UserOption } from "@/client/shared/components/SearchInputUser";
-import { SelectLoader } from "@/client/shared/components/SelectLoader";
+import SearchInputUser, { UserOption } from "@/client/shared/components/SearchInputUser";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
-import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -99,11 +97,6 @@ export const CrearEquipoPage = () => {
       usuario: selected.data.id,
     });
   };
-
-  const SearchInputUser = dynamic(
-    () => import("@/client/shared/components/SearchInputUser"),
-    { ssr: false, loading: () => <SelectLoader value="Cargando..." /> }
-  );
 
   return (
     <GoBackLayout href={from || "/perfil"} className="max-w-lg mx-auto">

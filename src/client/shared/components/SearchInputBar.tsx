@@ -2,7 +2,8 @@
 import { IMapItem } from "@/core/types/MapItem/IMapItem";
 import { fetchBares } from "@/server/services/Places/fetchBares";
 import { getCoordinatesFromPlaceId } from "@/server/services/Places/getCoordinatesFromPlaceId";
-import { CustomAsyncSelect } from "futbol-in-ui";
+import { AsyncSelectProps } from "futbol-in-ui";
+import dynamic from "next/dynamic";
 import { SingleValue } from "react-select";
 
 
@@ -14,6 +15,17 @@ export interface OptionType {
 export interface PlaceOption extends OptionType {
   data: google.maps.places.AutocompletePrediction;
 }
+
+
+const CustomAsyncSelectNoSSR = dynamic<AsyncSelectProps<PlaceOption>>(
+  () =>
+    import("futbol-in-ui").then((mod) => ({
+      default: mod.CustomAsyncSelect,
+    })),
+  {
+    ssr: false,
+  }
+);
 
 export default function SearchInputBar({
   onSelect,
@@ -52,7 +64,7 @@ export default function SearchInputBar({
   };
 
   return (
-    <CustomAsyncSelect<PlaceOption>
+    <CustomAsyncSelectNoSSR
       value={value}
       onSelect={handleSelect}
       loadOptions={fetchBares}

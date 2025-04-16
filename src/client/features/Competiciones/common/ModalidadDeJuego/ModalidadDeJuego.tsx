@@ -1,10 +1,10 @@
 "use client";
 
+import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { Button } from "futbol-in-ui";
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import { TarjetaModalidadDeJuego } from "./TarjetaModalidadDeJuego";
 
@@ -21,11 +21,6 @@ export const ModalidadDeJuego = ({
   const handleSiguiente = () => {
     onCompleted(tipoFutbolin, modalidadDeJuego);
   };
-
-  const SelectorTipoFutbolin = dynamic(
-    () => import("@/client/shared/components/SelectorTipoFutbolin"),
-    { ssr: false }
-  );
 
   return (
     <>
