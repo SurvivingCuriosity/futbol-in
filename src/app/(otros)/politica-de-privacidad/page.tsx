@@ -1,10 +1,14 @@
+"use client"
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
+import { useSearchParams } from "next/navigation";
 
-export const revalidate = false;
+const Page = () => {
 
-const page = () => {
+  const params = useSearchParams()
+  const from = params.get('from')
+
   return (
-    <GoBackLayout href="/">
+    <GoBackLayout href={from || '/'}>
       <div className="max-w-4xl mx-auto py-8 px-4">
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-center mb-2">
@@ -299,4 +303,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
