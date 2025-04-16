@@ -1,14 +1,14 @@
 "use client"
+import SearchInputBar, { PlaceOption } from "@/client/shared/components/SearchInputBar";
+import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicipios";
+import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
+import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { Button, InlinePicker, TextInput } from "futbol-in-ui";
-import dynamic from "next/dynamic";
 import { use, useState } from "react";
-import { CrearLigaContext } from "../context/CrearLigaContext";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
-import { PlaceOption } from "@/client/shared/components/SearchInputBar";
 import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
-import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicipios";
+import { CrearLigaContext } from "../context/CrearLigaContext";
+
 export const DatosBasicosLiga = ({
   onCompleted,
 }: {
@@ -34,11 +34,6 @@ export const DatosBasicosLiga = ({
   const handleSiguiente = () => {
     onCompleted(datosBasicos);
   };
-
-  const SearchInputBar = dynamic(
-    () => import("@/client/shared/components/SearchInputBar"),
-    { ssr: false }
-  );
 
   const opcionesTipoInscripcion = [
     { id: 0, label: TipoInscripcion.ABIERTO },

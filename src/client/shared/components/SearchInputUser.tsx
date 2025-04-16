@@ -1,7 +1,8 @@
 "use client";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { fetchUsers } from "@/server/services/User/searchUsers";
-import { CustomAsyncSelect } from "futbol-in-ui";
+import { AsyncSelectProps } from "futbol-in-ui";
+import dynamic from "next/dynamic";
 import { SingleValue } from "react-select";
 
 export interface UserOption {
@@ -9,6 +10,17 @@ export interface UserOption {
   label: string;
   data: UserDTO;
 }
+
+const CustomAsyncSelectNoSSR = dynamic<AsyncSelectProps<UserOption>>(
+  () =>
+    import("futbol-in-ui").then((mod) => ({
+      default: mod.CustomAsyncSelect,
+    })),
+  {
+    ssr: false,
+  }
+);
+
 export default function SearchInputUser({
   value,
   onSelect,
@@ -24,9 +36,9 @@ export default function SearchInputUser({
     onSelect(selected);
   };
 
-  // 3) Renderizas tu CustomAsyncSelect
+
   return (
-    <CustomAsyncSelect<UserOption>
+    <CustomAsyncSelectNoSSR
       value={value}
       onSelect={handleSelect}
       loadOptions={fetchUsers}
