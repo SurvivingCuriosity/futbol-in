@@ -1,18 +1,13 @@
-// /api/login/route.ts
 import { errorResponse } from "@/server/lib/httpResponse";
 import { RegistrationService } from "@/server/services/Auth/RegistrationService";
 import { UserService } from "@/server/services/User/UserService";
-import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     const email = await request.json();
 
     if (!email) {
-      return NextResponse.json(
-        { error: "No se introdujo email" },
-        { status: 400 }
-      );
+      return errorResponse("No existe un usuario con este email", 404);
     }
 
     const user = await UserService.findByEmail(email);
