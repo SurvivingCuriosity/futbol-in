@@ -30,7 +30,7 @@ export const TopNav = () => {
   };
 
   return (
-    <menu className="hidden md:block w-full h-16 bg-neutral-900">
+    <menu className="hidden md:block w-full h-16 bg-neutral-900 z-2 relative">
       <div className="flex items-center h-full mx-auto justify-between gap-8 max-w-screen-xl px-4">
         <div className="flex items-center gap-8">
           <AppLogo href="/" />
