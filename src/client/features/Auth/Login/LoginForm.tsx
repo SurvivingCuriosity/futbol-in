@@ -1,8 +1,8 @@
 "use client";
 
 import { AuthClient } from "@/client/shared/client/AuthClient";
+import { getErrorClient } from "@/client/shared/client/errorHandler/errorHandler";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -27,7 +27,7 @@ export const LoginForm = () => {
       }
     } catch (err: unknown) {
       setLoading(false);
-      setError(getErrorMessage(err));
+      setError(getErrorClient(err));
     }
   };
 
@@ -49,13 +49,13 @@ export const LoginForm = () => {
             label="Iniciar sesión"
             onClick={handleClickLogin}
             loading={loading}
-            disabled={loading}
+            disabled={email === "" || loading}
             
           />
         </FormField>
       </form>
 
-      {error && <p className="text-red-500 text-xs">{error}</p>}
+      {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
 
       <p className="my-8 text-center text-xs text-neutral-400">
         o si prefieres...

@@ -55,7 +55,7 @@ export default function LoginPasswordForm() {
         />
       </FormField>
       <Button onClick={handleSignIn} label="Iniciar sesión" loading={loading} disabled={loading} />
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
     </form>
   );
 }
