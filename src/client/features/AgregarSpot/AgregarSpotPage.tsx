@@ -1,12 +1,16 @@
 "use client";
 
-import { getErrorClient } from "@/client/shared/client/errorHandler/errorHandler";
+import { getErrorsClient } from "@/client/shared/client/errorHandler/errorHandler";
 import { SpotsClient } from "@/client/shared/client/SpotsClient";
+import { ErrorMessage } from "@/client/shared/components/ErrorMessage";
 import SearchInputBar from "@/client/shared/components/SearchInputBar";
 import SearchInputDireccion from "@/client/shared/components/SearchInputDireccion";
 import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicipios";
+import SelectorDistribucionFutbolin from "@/client/shared/components/SelectorDistribucionFutbolin";
 import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
+import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { useComprobarSiObtieneLogro } from "@/client/shared/hooks/useComprobarSiObtieneLogro";
+import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { TipoLogroEnum } from "@/core/enum/Logros/TipoLogroEnum";
 import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
@@ -19,9 +23,6 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { EnhorabuenaNuevaMedalla } from "../Logros/EnhorabuenaNuevaMedalla";
-import SelectorDistribucionFutbolin from "@/client/shared/components/SelectorDistribucionFutbolin";
-import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
-import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 
 const AgregarSpotPage = () => {
   const session = useSession();
@@ -52,6 +53,10 @@ const AgregarSpotPage = () => {
   const [comentarios, setComentarios] = useState("");
 
   const [loading, setLoading] = useState(false);
+
+  const [errors, setErrors] = useState<Record<string, string> | undefined>(
+    undefined
+  );
 
   const [noEncuentraElBar, setNoEncuentraElBar] = useState(false);
 
@@ -87,9 +92,12 @@ const AgregarSpotPage = () => {
       comprobarSiGanaMedalla(res.spotsCreados);
       setLoading(false);
     } catch (error) {
-      toast.error(`Ups... ${getErrorClient(error)}`);
+      const errores = getErrorsClient(error);
+      if(errores && 'futbolin' in errores){
+        toast.error(errores['futbolin'])
+      }
+      setErrors(getErrorsClient(error));
       setLoading(false);
-      console.error("Error al agregar spot:", error);
     }
   };
 
@@ -111,19 +119,27 @@ const AgregarSpotPage = () => {
             onSelect={handleSetCiudad}
             value={decodeCiudad(ciudadParam || "") || ""}
           />
+          {errors && errors["ciudad"] && (
+            <ErrorMessage message={errors["ciudad"]} />
+          )}
         </FormField>
 
         {!noEncuentraElBar ? (
-          <FormField>
-            <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
-            <SearchInputBar
-              onSelect={(sel) => {
-                setDireccionOBar(sel);
-              }}
-              disabled={noEncuentraElBar}
-              placeholder="Busca el bar.."
-            />
-          </FormField>
+          <>
+            <FormField>
+              <FormLabel>Nombre del bar/sala de juegos etc. *</FormLabel>
+              <SearchInputBar
+                onSelect={(sel) => {
+                  setDireccionOBar(sel);
+                }}
+                disabled={noEncuentraElBar}
+                placeholder="Busca el bar.."
+              />
+              {errors && errors["nombre"] && (
+                <ErrorMessage message={errors["nombre"]} />
+              )}
+            </FormField>
+          </>
         ) : (
           <div className="flex flex-col gap-1">
             <TarjetaMensaje
@@ -137,6 +153,9 @@ const AgregarSpotPage = () => {
                 disabled={!noEncuentraElBar}
                 placeholder="Introduce dirección"
               />
+              {errors && errors["nombre"] && (
+                <ErrorMessage message={errors["nombre"]} />
+              )}
             </FormField>
           </div>
         )}
