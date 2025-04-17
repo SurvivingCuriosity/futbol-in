@@ -8,6 +8,18 @@ import { ObjectId, Types } from "mongoose";
 import { ZodError } from "zod";
 
 export class SpotService {
+
+  static async getAll(): Promise<SpotDTO[]> {
+    await connectDb();
+    const spot = await Spot.find()
+    return spot.map((spot) => this.mapToDTO(spot));
+  }
+
+  static async deleteSpot(id: string): Promise<void> {
+    await connectDb();
+    await Spot.findByIdAndDelete(id);
+  }
+
   static async getById(id: string): Promise<SpotDTO> {
     await connectDb();
     const spot = await Spot.findById(id);

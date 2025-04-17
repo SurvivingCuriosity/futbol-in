@@ -3,5 +3,6 @@ export enum UserRole {
   VERIFICADO = "verificado",
   ADMIN = "admin",
   CREA_TORNEOS = "crea_torneos",
-  OPERADOR = 'operador'
+  OPERADOR = 'operador',
+  GOD = 'god'
 }

@@ -30,13 +30,6 @@ export default function RootLayout({
           <head>
             <link rel="manifest" href="/manifest.json" />
             <meta name="theme-color" content="#0E172B" />
-            <link
-              rel="icon"
-              type="image/png"
-              href="/favicon/favicon-96x96.png"
-              sizes="96x96"
-            />
-            <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
             <link rel="shortcut icon" href="/favicon/favicon.ico" />
             <link
               rel="apple-touch-icon"
@@ -54,10 +47,10 @@ export default function RootLayout({
             />
             <meta
               property="og:image"
-              content="https://futbolin.app/favicon/web-app-manifest-512x512.png"
+              content="https://futbolin.app/favicon/icon-512x512.png"
             />
             <link rel="manifest" href="/favicon/site.webmanifest" />
-            <link rel="icon" href="/futbolin-logo.svg" />
+            <link rel="icon" href="/favicon/icon-192x192.png" />
           </head>
           <body
             className={`antialiased bg-neutral-950 text-neutral-50 ${roboto.className}`}

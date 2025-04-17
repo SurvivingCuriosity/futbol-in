@@ -23,7 +23,10 @@ export const HamburguerMenu = ({ user }: { user: UserDTO }) => {
   };
 
   return (
-    <nav style={{ zIndex: 1000 }} className="fixed top-2 right-2 md:top-20 md:right-72">
+    <nav
+      style={{ zIndex: 1000 }}
+      className="fixed top-2 right-2 md:top-20 md:right-72"
+    >
       <div>
         <div className="mx-auto flex flex-row items-center justify-between py-2 text-neutral-200">
           <button
@@ -71,8 +74,36 @@ export const HamburguerMenu = ({ user }: { user: UserDTO }) => {
                     setIsOpen(false);
                   }}
                 >
-                  <Link href={`/operador/${user.idOperador}/futbolines?from=/perfil`}>
+                  <Link
+                    href={`/operador/${user.idOperador}/futbolines?from=/perfil`}
+                  >
                     Mis futbolines
+                  </Link>
+                </li>
+              )}
+              {esOperador(user) && (
+                <li
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  <Link
+                    href={`/god/futbolines?from=/perfil`}
+                  >
+                    Futbolines
+                  </Link>
+                </li>
+              )}
+              {esOperador(user) && (
+                <li
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  <Link
+                    href={`/god/usuarios?from=/perfil`}
+                  >
+                    Usuarios
                   </Link>
                 </li>
               )}

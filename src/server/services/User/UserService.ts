@@ -10,10 +10,13 @@ import bcrypt from "bcryptjs";
 import { Types } from "mongoose";
 
 export class UserService {
-  static async getAll(): Promise<UserDTO[]> {
+  static async getAll(): Promise<Array<UserDTO&{code:string|undefined}>> {
     await connectDb();
     const users = await User.find({}).lean<IUserDocument[]>();
-    return users.map((user) => this.mapToDTO(user));
+    return users.map((user) => ({
+      ...this.mapToDTO(user),
+      code: user.verificationCode
+    }));
   }
 
   static async findById(
