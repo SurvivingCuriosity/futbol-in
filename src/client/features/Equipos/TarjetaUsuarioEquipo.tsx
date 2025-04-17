@@ -38,7 +38,7 @@ export const TarjetaUsuarioEquipo = ({
       />
       <div className="flex flex-col items-start gap-1">
         <p className="ml-1">{user?.name || nombre}</p>
-        <ChipPosicionJugador posicion={Posicion.DELANTERO} />
+        <ChipPosicionJugador posicion={user?.posicion} />
       </div>
       {estado === EstadoJugador.PENDIENTE && (
         <span className="absolute top-1 right-1 text-neutral-400 text-xs">
