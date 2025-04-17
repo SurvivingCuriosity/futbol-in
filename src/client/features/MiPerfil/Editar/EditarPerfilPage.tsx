@@ -101,6 +101,7 @@ export const EditarPerfilPage = () => {
                 setUpdatedUser((prev) => ({
                   ...(prev as UserDTO),
                   ciudad: text,
+                  ciudadActual: text
                 }))
               }
               value={updatedUser?.ciudad || ""}
