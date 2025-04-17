@@ -9,7 +9,7 @@ const HomePage = ({user, tieneNotificaciones, notificaciones}:{user:UserDTO|unde
   return (
     <div>
       <Header user={user} tieneNotificaciones={tieneNotificaciones} notificaciones={notificaciones} />
-      <p className="p-10 text-center text-neutral-400">Aún no hay nada por aquí</p>
+      <p className="p-10 text-center text-neutral-400">Aún no hay nada por aquí. Hola vika</p>
       {/* <div className="h-full w-full flex flex-col md:grid grid-cols-5 grid-rows-5 gap-8 *:h-full md:*:border md:*:p-4 *:border-neutral-800 *:rounded-lg">
 
         <div className="col-span-3 row-span-3 max-h-[500px]">
