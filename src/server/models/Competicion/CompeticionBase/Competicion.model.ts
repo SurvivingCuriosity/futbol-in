@@ -4,6 +4,7 @@ import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import mongoose, { Document, Model, Schema, Types } from "mongoose";
 import { EquipoCompeticionSchema, IEquipoCompeticion } from '../../Equipo/EquipoCompeticion.model';
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 
 export interface ICompeticionBase extends Document {
   _id: Types.ObjectId;
@@ -11,6 +12,7 @@ export interface ICompeticionBase extends Document {
   descripcion: string;
   ciudad: string;
   googlePlaceId: string;
+  tipoCompeticion: TipoCompeticion;
   tipoDeFutbolin: TipoFutbolin;
   modalidadDeJuego: ModalidadJuego
   tipoInscripcion: TipoInscripcion;
@@ -32,6 +34,12 @@ const BaseCompeticionSchema = new Schema<ICompeticionBase>(
     descripcion: { type: String },
     ciudad: { type: String, required: true },
     googlePlaceId: { type: String },
+    tipoCompeticion: {
+      type: String,
+      enum: Object.values(TipoCompeticion),
+      required: true,
+      default: TipoCompeticion.LIGA,
+    },
     tipoDeFutbolin: {
       type: String,
       enum: Object.values(TipoFutbolin),

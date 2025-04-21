@@ -1,12 +1,16 @@
 import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { z } from "zod";
 
 export const objectIdSchema = z
   .string()
-  .regex(/^[0-9a-fA-F]{24}$/, "El ID debe ser un ObjectId válido de 24 hexadecimales");
+  .regex(
+    /^[0-9a-fA-F]{24}$/,
+    "El ID debe ser un ObjectId válido de 24 hexadecimales"
+  );
 
 export const ConfigEnfrentamientoZod = z.object({
   cantidadPartidos: z.number().min(1, "Debe haber al menos 1 partido"),
@@ -32,6 +36,7 @@ export const crearTorneoSchema = z.object({
   googlePlaceId: z.string().min(1, "Se requiere googlePlaceId"),
   ciudad: z.string(),
 
+  tipoCompeticion: z.nativeEnum(TipoCompeticion),
   tipoDeFutbolin: z.nativeEnum(TipoFutbolin),
   modalidadDeJuego: z.nativeEnum(ModalidadJuego),
   tipoInscripcion: z.nativeEnum(TipoInscripcion),

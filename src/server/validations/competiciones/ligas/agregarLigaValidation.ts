@@ -1,5 +1,6 @@
 import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { z } from "zod";
@@ -32,6 +33,7 @@ export const crearLigaSchema = z.object({
   googlePlaceId: z.string().min(1, "Se requiere googlePlaceId"),
   ciudad: z.string(),
 
+  tipoCompeticion: z.nativeEnum(TipoCompeticion),
   tipoDeFutbolin: z.nativeEnum(TipoFutbolin),
   modalidadDeJuego: z.nativeEnum(ModalidadJuego),
   tipoInscripcion: z.nativeEnum(TipoInscripcion),

@@ -6,6 +6,7 @@ import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { ConfigEnfrentamiento } from "../FormSteps/Enfrentamientos/FormEnfrentamientos";
 import { ConfiguracionLiga } from "../types/ConfiguracionLiga";
 import { CompeticionEnCreacion, CrearLigaContextType } from "./ContextType";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 
 const CrearLigaContext = createContext<CrearLigaContextType>(
   null as unknown as CrearLigaContextType
@@ -76,7 +77,8 @@ const CrearLigaProvider = ({ children }: { children: React.ReactNode }) => {
       enfrentamientos : [],
       equipos: [],
       configEnfrentamiento,
-      idaYVuelta
+      idaYVuelta,
+      tipoCompeticion:TipoCompeticion.LIGA
     }
     return competicion
   }

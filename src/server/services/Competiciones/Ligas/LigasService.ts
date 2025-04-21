@@ -1,5 +1,6 @@
 import { EliminarLigaResponse } from "@/client/shared/client/types/Competiciones/Ligas/EliminarLiga";
 import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import connectDb from "@/server/lib/db";
 import { ILiga, Liga } from "@/server/models/Competicion/Ligas/Liga.model";
@@ -174,6 +175,7 @@ export class LigasService {
     return {
       id: c._id.toString(),
       nombre: c.nombre,
+      tipoCompeticion: TipoCompeticion.LIGA,
       descripcion: c.descripcion,
       googlePlaceId: c.googlePlaceId,
       tipoDeFutbolin: c.tipoDeFutbolin,

@@ -1,3 +1,4 @@
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import connectDb from "@/server/lib/db";
 import {
   ITorneo,
@@ -59,6 +60,7 @@ export class TorneosService {
     return {
       id: c._id.toString(),
       nombre: c.nombre,
+      tipoCompeticion: TipoCompeticion.TORNEO,
       descripcion: c.descripcion,
       googlePlaceId: c.googlePlaceId,
       tipoDeFutbolin: c.tipoDeFutbolin,

@@ -32,7 +32,7 @@ const columns: Column<UsuarioEnRanking>[] = [
     sortable: true,
     cell: ({ row }) => {
       // JSX personalizado en la celda
-      return <strong className="text-primary">#{row.posicion}</strong>;
+      return <strong className="text-primary">#{row.posicion || 0}</strong>;
     },
   },
   {
@@ -61,7 +61,7 @@ const columns: Column<UsuarioEnRanking>[] = [
       return (
         <strong className="bg-primary/10 p-1 px-2 rounded-lg w-14 flex items-center justify-between">
           <FontAwesomeIcon icon={faPlus} className="text-primary mr-1" />
-          {row.spotsCreados}
+          {row.spotsCreados || 0}
         </strong>
       );
     },
@@ -86,7 +86,7 @@ const columns: Column<UsuarioEnRanking>[] = [
       return (
         <strong className="bg-primary/10 p-1 px-2 rounded-lg w-14 flex items-center justify-between">
           <FontAwesomeIcon icon={faThumbsUp} className="text-primary mr-1" />
-          {row.spotsVotados}
+          {row.spotsVotados || 0}
         </strong>
       );
     },
@@ -111,7 +111,7 @@ const columns: Column<UsuarioEnRanking>[] = [
         return (
           <strong className="bg-primary/10 p-1 px-2 rounded-lg w-14 flex items-center justify-between">
             <FontAwesomeIcon icon={faCheck} className="text-primary mr-1" />
-            {row.spotsVerificados}
+            {row.spotsVerificados || 0}
           </strong>
         );
       },
@@ -133,7 +133,7 @@ const columns: Column<UsuarioEnRanking>[] = [
     sortFn: (a, b) => a.puntuacion - b.puntuacion, // Ejemplo de sortFn personalizado
     cell: ({ row }) => {
       // JSX personalizado en la celda
-      return <strong>{row.puntuacion}</strong>;
+      return <strong>{row.puntuacion || 0}</strong>;
     },
   },
 ];

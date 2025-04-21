@@ -7,6 +7,7 @@ import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { ConfiguracionTorneo } from "../types/ConfiguracionTorneo";
 import { ConfiguracionTorneoClasificatoria } from "../types/ConfiguracionTorneoClasificatoria";
 import { CompeticionEnCreacion, CrearTorneoContextType } from "./ContextType";
+import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 
 const CrearTorneoContext = createContext<CrearTorneoContextType>(
   null as unknown as CrearTorneoContextType
@@ -83,6 +84,7 @@ const CrearTorneoProvider = ({ children }: { children: React.ReactNode }) => {
       enfrentamientos : [],
       equipos: [],
       configEnfrentamientos,
+      tipoCompeticion: TipoCompeticion.TORNEO
     }
     setCompeticionEnCreacion(competicion)
   }

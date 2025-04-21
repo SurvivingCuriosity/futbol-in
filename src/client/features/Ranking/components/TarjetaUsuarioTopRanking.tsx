@@ -1,11 +1,11 @@
 "use client";
 
 import { StorageClient } from "@/client/shared/client/StorageClient";
+import { ImagenCuadrada } from "@/client/shared/components/ImagenCuadrada";
 import { esUsuarioVerificado } from "@/core/helpers/esUsuarioVerificado";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -49,13 +49,7 @@ export default function TarjetaUsuarioTopRanking({
       )}
       {image !== "" ? (
         <div className="relative">
-          <Image
-            src={image}
-            alt="avatar"
-            width={55}
-            height={55}
-            className="rounded-full size-14"
-          />
+          <ImagenCuadrada src={image} size="md" alt="Imagen de usuario" />
           <div className="absolute -top-2 -left-2 text-sm font-bold text-black bg-primary rounded-full size-7 flex items-center justify-center">{`#${posicion}`}</div>
         </div>
       ) : (

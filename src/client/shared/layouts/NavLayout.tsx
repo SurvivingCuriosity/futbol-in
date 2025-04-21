@@ -13,13 +13,16 @@ export function NavLayout({ children }: { children: React.ReactNode }) {
           z-1
         "
       >
-        <Image src={'/fondo.png'} alt="Imagen de fondo" width={400} height={400} className="fixed bottom-11 w-screen md:w-[80%] left-1/2 -translate-x-1/2 h-auto z-0 pointer-events-none"/>
-        <div className="z-1 relative w-full">
-          {children}
-        </div>
-      
+        <Image
+          src={"/fondo.png"}
+          alt="Imagen de fondo"
+          width={400}
+          height={400}
+          className="fixed bottom-11 w-screen md:w-[80%] left-1/2 -translate-x-1/2 h-auto z-0 pointer-events-none"
+        />
+        <div className="z-1 relative w-full">{children}</div>
       </main>
-      
+
       <BottomNav />
     </div>
   );

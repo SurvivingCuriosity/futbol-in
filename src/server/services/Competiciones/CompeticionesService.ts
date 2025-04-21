@@ -124,6 +124,7 @@ export class CompeticionesService {
     return {
       id: c._id.toString(),
       nombre: c.nombre,
+      tipoCompeticion: c.tipoCompeticion,
       descripcion: c.descripcion,
       googlePlaceId: c.googlePlaceId,
       ciudad:c.ciudad,

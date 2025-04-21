@@ -1,3 +1,4 @@
+import { TipoCompeticion } from './../../../../core/enum/Competicion/TipoCompeticion';
 import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
 import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
 import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
@@ -10,6 +11,7 @@ export interface CompeticionBaseDTO {
   descripcion: string;
   ciudad: string;
   googlePlaceId: string;
+  tipoCompeticion: TipoCompeticion;
   tipoDeFutbolin: TipoFutbolin;
   modalidadDeJuego: ModalidadJuego;
   tipoInscripcion: TipoInscripcion;
