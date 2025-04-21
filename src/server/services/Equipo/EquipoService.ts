@@ -26,6 +26,21 @@ export class EquipoService {
     revalidatePath('/perfil')
   }
 
+  static async getEquiposDeUsuario(idUsuario: string): Promise<EquipoDTO[]> {
+    await connectDb();
+
+    const userObjectId = new Types.ObjectId(idUsuario);
+
+    const equipos = await Equipo.find({
+      $or: [
+        { createdByUserId: userObjectId },
+        { "jugadores.usuario": userObjectId }
+      ]
+    });
+
+    return equipos.map(e => this.mapToDTO(e));
+  }
+
   static async findManyById(
     idsEquipos: Types.ObjectId[] | undefined
   ): Promise<EquipoDTO[]> {

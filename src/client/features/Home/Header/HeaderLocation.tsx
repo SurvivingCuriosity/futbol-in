@@ -2,8 +2,8 @@
 
 import { UserClient } from "@/client/shared/client/UserClient";
 import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicipios";
-import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { Window } from "@/packages/components/Window";
+import { UserDTO } from "@/server/models/User/UserDTO";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
@@ -11,10 +11,11 @@ import { useState } from "react";
 
 export const HeaderLocation = ({
   onChangeCiudad,
+  user
 }: {
   onChangeCiudad?: (ciudad: string) => void;
+  user:UserDTO
 }) => {
-  const user = useGetLoggedInUserClient();
   const { update } = useSession();
 
   const [showWindow, setShowWindow] = useState(false);

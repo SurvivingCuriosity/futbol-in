@@ -9,22 +9,32 @@ import { Header } from "./Header/Header";
 import { steps } from "./intro/steps";
 import { UserClient } from "@/client/shared/client/UserClient";
 import { useSession } from "next-auth/react";
-import { LStorage, LStorageKeys } from "@/client/shared/services/LocalStorage/LStorage";
+import {
+  LStorage,
+  LStorageKeys,
+} from "@/client/shared/services/LocalStorage/LStorage";
+import { ListaCompeticionesHome } from "./CompeticionesHome/ListaCompeticionesHome";
+import { CompeticionBaseDTO } from "@/server/models/Competicion/CompeticionBase/CompeticionBaseDTO";
 
 const HomePage = ({
   user,
   tieneNotificaciones,
   notificaciones,
+  competiciones,
 }: {
   user: UserDTO | undefined;
   tieneNotificaciones: boolean;
   notificaciones: INotificaciones;
+  competiciones: CompeticionBaseDTO[];
 }) => {
   const { update } = useSession();
 
   const [ciudadDone, setCiudadDone] = useState(user?.ciudadActual !== null);
 
-  const stepsEnabled = window && window.localStorage && LStorage.getItem(LStorageKeys.TOUR_INICIO_DONE) !== "true";
+  const stepsEnabled =
+    window &&
+    window.localStorage &&
+    LStorage.getItem(LStorageKeys.TOUR_INICIO_DONE) !== "true";
   const initialStep = 0;
 
   const handleUpdateCiudadActual = async (nuevaCiudad: string | null) => {
@@ -36,12 +46,12 @@ const HomePage = ({
     if (res.success) {
       setCiudadDone(true);
     }
-    update()
+    update();
   };
 
   const onExit = () => {
     LStorage.setItem(LStorageKeys.TOUR_INICIO_DONE, "true");
-    console.log(LStorage.getItem(LStorageKeys.TOUR_INICIO_DONE))
+    console.log(LStorage.getItem(LStorageKeys.TOUR_INICIO_DONE));
   };
 
   return (
@@ -57,9 +67,15 @@ const HomePage = ({
           <CompletarCiudad onSubmit={handleUpdateCiudadActual} />
         </div>
       )}
-      <p className="texto p-10 text-center text-neutral-400">
-        Aún no hay nada por aquí 🫣
-      </p>
+
+      {competiciones.length > 0 ? (
+        <ListaCompeticionesHome competiciones={competiciones} />
+      ) : (
+        <p className="texto p-10 text-center text-neutral-400">
+          Aún no hay nada por aquí 🫣
+        </p>
+      )}
+
       <Steps
         enabled={stepsEnabled}
         steps={steps}

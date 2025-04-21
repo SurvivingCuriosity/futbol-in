@@ -100,6 +100,26 @@ export class CompeticionesService {
     };
   }
 
+  static async getCompeticionesDeUsuario(idUsuario: string): Promise<CompeticionBaseDTO[]> {
+    await connectDb();
+    
+    if(!idUsuario) return []
+    const equipos = await EquipoService.getEquiposDeUsuario(idUsuario);
+    const idsEquipos = equipos.map((e) => e.id);
+
+    const competiciones = await CompeticionBase.find({
+      equipos: {
+        $elemMatch: {
+          id: {
+            $in: idsEquipos,
+          },
+        },
+      },
+    }).lean<ICompeticionBase[]>();
+
+    return competiciones.map((c) => this.mapToDTO(c));
+  }
+
   static mapToDTO(c: ICompeticionBase): CompeticionBaseDTO {
     return {
       id: c._id.toString(),

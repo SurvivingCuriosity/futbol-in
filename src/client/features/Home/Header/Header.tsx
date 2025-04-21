@@ -45,7 +45,7 @@ export const Header = ({
           notificaciones={notificaciones}
         />
       </div>
-     <HeaderLocation />
+     <HeaderLocation user={user}/>
     </header>
   );
 };
