@@ -4,6 +4,8 @@ import { authOptions } from "@/server/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
+export const revalidate = 60
+
 const page = async () => {
   const session = await getServerSession(authOptions)
   
