@@ -7,7 +7,7 @@ export const BotonPerfilOperador = ({ user }: { user: UserDTO }) => {
 
   const perfilSinCrear = user.idOperador === null;
 
-  if (perfilSinCrear) {
+  if (perfilSinCrear || !user.idOperador) {
     return (
       <Button
         variant="outline"
