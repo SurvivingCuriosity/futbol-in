@@ -1,5 +1,5 @@
 import { LOGROS_DISPONIBLES } from "@/core/constants/LogrosDisponibles";
-import { Medalla } from "./Medalla";
+import { MedallaIcon } from "../MiPerfil/components/MedallaIcon";
 
 export const LogrosPage = () => {
 
@@ -25,13 +25,14 @@ export const LogrosPage = () => {
             <p className="text-neutral-500 mb-5 text-sm">{logro.descripcion}</p>
             <ul className="flex gap-2 w-full items-center justify-between">
               {logro.steps.map((step, index) => (
-                <div key={step} className="w-full">
-                  <Medalla
+                <div key={step} className="w-fit mx-auto flex flex-col items-center">
+                  <MedallaIcon
                     level={index + 1}
                     icon={logro.icon}
-                    text={logro.stepDescription(step)}
-                    smallText={step.toString()}
+                    conseguida={step >= logro.steps[0]}
+                    showConseguidaIcon={false}
                   />
+                  <p className="text-sm text-neutral-500">{logro.steps[index]}</p>
                 </div>
               ))}
             </ul>

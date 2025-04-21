@@ -25,7 +25,7 @@ export const ProgresoLogro = (props: ProgresoLogroProps) => {
   return (
     <Colapsable
       open={open}
-      containerClassName={`flex flex-col border border-neutral-600 rounded-lg p-2 px-4 ${
+      containerClassName={`flex flex-col border border-neutral-600 rounded-lg p-2 px-4 max-w-md ${
         borderClass[getLevel(value, logro.steps)]
       }`}
       visibleContent={
@@ -45,7 +45,7 @@ export const ProgresoLogro = (props: ProgresoLogroProps) => {
           <div
             className={`${
               open ? "translate-x-0" : "translate-x-12"
-            } transition-transform duration-200`}
+            } transition-transform duration-200 w-9/12`}
           >
             <p
               className={`font-bold ${
@@ -54,7 +54,7 @@ export const ProgresoLogro = (props: ProgresoLogroProps) => {
             >
               {logro.nombre}
             </p>
-            <p className="text-sm font-light text-neutral-400">
+            <p className="text-xs font-light text-neutral-400">
               {logro.descripcion} Actual: {value.toString()}
             </p>
           </div>

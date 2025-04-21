@@ -3,6 +3,7 @@ import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
 import { authOptions } from "@/server/lib/authOptions";
 import { IUserDocument } from "@/server/models/User/User.model";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";
+import { SpotService } from "@/server/services/Spots/SpotsService";
 import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -13,21 +14,27 @@ export default async function page() {
   if (!session?.user) {
     redirect("/not-allowed");
   }
-  
+
   const fullUser = await UserService.findById(session.user.id);
 
-  if(!fullUser){
+  if (!fullUser) {
     redirect("/not-allowed");
   }
-  
-  const equipos = await EquipoService.findManyById(fullUser?.equipos)
+
+  const equipos = await EquipoService.findManyById(fullUser?.equipos);
 
   const equiposAceptados = equipos.filter((equipo) => {
-    const jugador = equipo.jugadores.find(
-      (j) => j.usuario === fullUser.id
-    );
+    const jugador = equipo.jugadores.find((j) => j.usuario === fullUser.id);
     return jugador?.estado === EstadoJugador.ACEPTADO;
   });
 
-  return (<MiPerfilPage user={UserService.mapToDTO(fullUser as IUserDocument)} equipos={equiposAceptados} />);
+  const futbolines = await SpotService.getSpotsDeUsuario(fullUser.id);
+
+  return (
+    <MiPerfilPage
+      user={UserService.mapToDTO(fullUser as IUserDocument)}
+      equipos={equiposAceptados}
+      futbolines={futbolines}
+    />
+  );
 }

@@ -1,4 +1,5 @@
 import {
+  bgClass,
   borderClass,
   darkBgClass,
   levelClass,
@@ -11,45 +12,70 @@ export interface MedallaIconProps {
   level: number;
   conseguida: boolean;
   showConseguidaIcon?: boolean;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 export const MedallaIcon = (props: MedallaIconProps) => {
-  const { size = 'md', conseguida, icon, level, showConseguidaIcon = true } = props;
+  const {
+    size = "md",
+    conseguida,
+    icon,
+    level,
+    showConseguidaIcon = true,
+  } = props;
 
-  const sizeClass:Record<string, string> = {
-    sm: 'size-6',
-    md: 'size-8',
-    lg: 'size-10',
-    xl: 'size-16',
-  }
-  const iconSizeClass:Record<string, string> = {
-    sm: 'text-xs',
-    md: 'text-xs',
-    lg: 'text-lg',
-    xl: 'text-2xl',
-  }
-
+  const sizeClass: Record<string, string> = {
+    sm: "size-6",
+    md: "size-8",
+    lg: "size-10",
+    xl: "size-16",
+  };
+  const iconSizeClass: Record<string, string> = {
+    sm: "text-xs",
+    md: "text-xs",
+    lg: "text-lg",
+    xl: "text-2xl",
+  };
 
   return (
-    <div
-      className={`${
-        conseguida ? "" : "grayscale-100"
-      } relative bg-transparent w-fit rounded-lg ${borderClass[level]} ${
-        darkBgClass[level]
-      } justify-center flex items-center`}
-    >
+    <div className="relative">
       {conseguida && showConseguidaIcon && (
         <FontAwesomeIcon
           icon={faCheck}
-          className="p-0.5 absolute -top-1 -right-1 text-xs bg-green-400 text-neutral-700 z-3 border rounded-full size-3"
+          className="p-0.5 absolute -top-1 -right-1 text-xs rounded-full bg-green-400 text-neutral-700 z-9 border size-3"
         />
       )}
-
       <div
-        className={`${sizeClass[size]} ${levelClass[level]} ${level === 0 ? 'border-dashed' : 'border'} border aspect-square size-8 flex items-center justify-center rounded-full z-2`}
+        style={{
+          clipPath:
+            "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+        }}
+        className={`z-1 h-9 w-8 ${bgClass[level]} flex items-center justify-center`}
       >
-        {level > 0 && <FontAwesomeIcon icon={icon} className={`${iconSizeClass[size]}`} />}
+        <div
+          style={{
+            clipPath:
+              "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+          }}
+          className={`${conseguida ? "" : "grayscale-100"}  ${
+            borderClass[level]
+          } ${
+            darkBgClass[level]
+          } justify-center flex items-center z-2 relative h-7 w-6`}
+        >
+          <div
+            className={`${sizeClass[size]} ${levelClass[level]} ${
+              level === 0 ? "border-dashed" : "border"
+            } border aspect-square size-8 flex items-center justify-center z-2`}
+          >
+            {level > 0 && (
+              <FontAwesomeIcon
+                icon={icon}
+                className={`${iconSizeClass[size]}`}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

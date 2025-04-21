@@ -29,6 +29,8 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "futbol-in-ui": "^0.0.28",
+    "intro.js": "^7.2.0",
+    "intro.js-react": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.7",
     "next": "^15.1.5",

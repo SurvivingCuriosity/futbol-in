@@ -7,11 +7,11 @@ export const textColorClass: Record<number, string> = {
 };
 
 export const darkBgClass: Record<number, string> = {
-  1: "bg-orange-600/10",
-  2: "bg-neutral-400/10",
-  3: "bg-amber-400/10",
-  4: "bg-sky-400/10",
-  5: "bg-purple-500/10",
+  1: "bg-orange-950",
+  2: "bg-neutral-950",
+  3: "bg-amber-950",
+  4: "bg-sky-950",
+  5: "bg-purple-950",
 };
 
 export const bgClass: Record<number, string> = {

@@ -18,6 +18,7 @@ export const GoBackLayout = (props: GoBackLayoutProps) => {
       <Link
         href={href}
         className="bg-neutral-900 p-1 px-2 text-neutral-400 rounded hover:text-primary hover:bg-neutral-800"
+        prefetch
       >
         <FontAwesomeIcon icon={faArrowLeft} width={24} height={24} />
         {label}

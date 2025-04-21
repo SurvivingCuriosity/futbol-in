@@ -29,6 +29,7 @@ export class SpotService {
     return this.mapToDTO(spot);
   }
 
+  
   static async createSpot(
     spot: Omit<SpotDTO, "id" | "votes">
   ): Promise<SpotDTO> {
@@ -87,6 +88,15 @@ export class SpotService {
     await connectDb();
     const spots = await Spot.find({
       idOperador: idOperador,
+    }).lean<ISpot[]>();
+    return spots.map((spot) => this.mapToDTO(spot));
+  }
+
+  
+  static async getSpotsDeUsuario(idUsuario: string): Promise<SpotDTO[]> {
+    await connectDb();
+    const spots = await Spot.find({
+      addedByUserId: idUsuario,
     }).lean<ISpot[]>();
     return spots.map((spot) => this.mapToDTO(spot));
   }

@@ -22,6 +22,14 @@
         border-radius: 9px;
     }
 
+
+    .intro-t {
+        color: var(--color-neutral-500)
+    }
+    .intro-h {
+        color: var(--color-neutral-500)
+    }
+
     ::-webkit-scrollbar-thumb {
         background: #929292;
         border-radius: 9px;

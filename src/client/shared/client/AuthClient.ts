@@ -54,7 +54,7 @@ export class AuthClient {
     if (!response.ok) {
       throw new Error(response.error || "Error en initAccount");
     }
-
+    
     return true;
   }
 

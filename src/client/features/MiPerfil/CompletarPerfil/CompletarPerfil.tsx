@@ -2,7 +2,6 @@ import { UserClient } from "@/client/shared/client/UserClient";
 import { Posicion } from "@/core/enum/Posicion/Posicion";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { useEffect, useState } from "react";
-import { CompletarCiudad } from "./steps/CompletarCiudadActual";
 import { CompletarNombre } from "./steps/CompletarNombre";
 import { CompletarPosicion } from "./steps/CompletarPosicion";
 import { CompletarTelefono } from "./steps/CompletarTelefono";
@@ -19,15 +18,14 @@ export const CompletarPerfil = ({
   const [nombreDone, setNombreDone] = useState(user.nombre !== null);
   const [posicionDone, setPosicionDone] = useState(user.posicion !== null);
   const [telefonoDone, setTelefonoDone] = useState(user.telefono !== null);
-  const [ciudadDone, setCiudadDone] = useState(user.ciudadActual !== null);
 
   const [allDone, setAllDone] = useState(
-    nombreDone && posicionDone && telefonoDone && ciudadDone
+    nombreDone && posicionDone && telefonoDone
   );
 
   useEffect(() => {
-    setAllDone(nombreDone && posicionDone && telefonoDone && ciudadDone);
-  }, [nombreDone, posicionDone, telefonoDone, ciudadDone]);
+    setAllDone(nombreDone && posicionDone && telefonoDone);
+  }, [nombreDone, posicionDone, telefonoDone]);
 
   const handleUpdateNombre = async (nuevoNombre: string | null) => {
     const res = await UserClient.updateUser({ ...user, nombre: nuevoNombre });
@@ -65,27 +63,13 @@ export const CompletarPerfil = ({
     }
   };
 
-  const handleUpdateCiudadActual = async (nuevaCiudad: string | null) => {
-    const res = await UserClient.updateUser({
-      ...user,
-      ciudadActual: nuevaCiudad,
-      ciudad: nuevaCiudad,
-    });
-    if (res.success) {
-      setCiudadDone(true);
-    }
-    if (res.updatedUser) {
-      onUpdateUser(res.updatedUser);
-    }
-  };
-
   if (!user || haCompletadoElPerfil(user) || allDone) {
     return null;
   }
 
   return (
     <div className="rounded-lg">
-      <p>{`Completa tu perfil`}</p>
+      <p className="text-primary font-bold text-2xl">{`Completa tu perfil 🥳`}</p>
       <ul className="flex space-x-2 overflow-x-auto overflow-y-visible my-2 pb-2 snap-x snap-mandatory">
         {!nombreDone && (
           <TarjetaCompletarPerfil titulo="¿Cómo te llamas?">
@@ -106,11 +90,6 @@ export const CompletarPerfil = ({
         )}
 
       </ul>
-        {!ciudadDone && (
-          <TarjetaCompletarPerfil titulo="Tu ciudad">
-            <CompletarCiudad onSubmit={handleUpdateCiudadActual} />
-          </TarjetaCompletarPerfil>
-        )}
     </div>
   );
 };

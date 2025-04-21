@@ -8,8 +8,8 @@ export const CompletarCiudad = ({onSubmit}:{onSubmit:(nuevoTelefono:string|null)
 
   return (
     <>
-      <span className="flex items-center gap-2">
-        <span className="w-full grow z-20">
+      <span className="flex items-center gap-2 z-9999 relative">
+        <span className="w-full grow z-20 relative">
           <SearchInputMunicipios onSelect={setCiudad}/>
         </span>
       </span>

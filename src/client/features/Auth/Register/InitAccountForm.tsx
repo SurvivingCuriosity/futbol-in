@@ -1,4 +1,3 @@
-// /app/register/step3/page.tsx
 "use client";
 
 import { AuthClient } from "@/client/shared/client/AuthClient";
@@ -8,6 +7,7 @@ import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, PasswordInput, TextInput } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function InitAccountForm() {
   const router = useRouter();
@@ -58,6 +58,7 @@ export default function InitAccountForm() {
     try {
       const res = await AuthClient.initAccount({ username, password, confirmPassword });
       if (res) {
+        toast.success('Inicia sesión con tu nueva cuenta')
         router.push("/");
       }
       setLoading(false);

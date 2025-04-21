@@ -1,6 +1,7 @@
 export const LStorageKeys = {
     ULTIMAS_UBICACIONES: 'ULTIMAS_UBICACIONES',
     ULTIMOS_SPOTS_VISTOS: 'ULTIMOS_SPOTS_VISTOS',
+    TOUR_INICIO_DONE: 'TOUR_INICIO_DONE',
 }
 
 export class LStorage {

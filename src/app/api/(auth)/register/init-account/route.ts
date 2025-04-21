@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     }
 
     const req = await request.json()
-    console.log(req)
+
     const validatedReq = await initAccountSchema.parseAsync(req);
   
     const {username,password} = validatedReq;
