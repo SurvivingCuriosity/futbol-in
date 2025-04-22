@@ -1,5 +1,7 @@
-
 import { SearchInputRedirect } from "@/client/features/Landing/components/SearchInputRedirect";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import React from "react";
 
 interface CityLayoutProps {
@@ -15,13 +17,19 @@ const layout = async (props: CityLayoutProps) => {
 
   const { ciudad } = await params;
 
-  const ciudadLabel = decodeURIComponent(ciudad).split('_')[0];
+  const ciudadLabel = decodeURIComponent(ciudad).split("_")[0];
 
   return (
     <>
-      <h1 className="text-xl lg:text-3xl leading-5 font-bold text-primary tracking-tighter mb-2">
-        Futbolines en {ciudadLabel}
-      </h1>
+      <div className="flex items-center justify-between mb-2">
+        <h1 className="text-xl lg:text-3xl leading-5 font-bold text-primary tracking-tighter">
+          Futbolines en {ciudadLabel}
+        </h1>
+        <Link href={`/spots/global?from=${`/spots/${ciudad}`}`} className="text-neutral-500 hover:text-primary">
+          <FontAwesomeIcon icon={faGlobe} className="mr-1" />
+          Mapa global
+        </Link>
+      </div>
       <span className="w-full my-2 z-3 relative">
         <SearchInputRedirect />
       </span>

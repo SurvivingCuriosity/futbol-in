@@ -67,7 +67,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
 
   return (
     <>
-      <header className="flex justify-start items-center w-full">
+      <header className="flex justify-start items-center w-full mt-2">
         <ButtonFiltros onFiltrosChange={setFiltros} filtros={filtros} />
         <PreviewFiltros filtros={filtros} onFiltrosChange={setFiltros} />
         <div className="md:hidden block ml-auto">

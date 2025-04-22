@@ -1,7 +1,7 @@
 "use client";
 
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, Libraries, useLoadScript } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import { MarcadorFutbolin } from "./MarcadorFutbolin";
 import { MarcadorUsuario } from "./MarcadorUsuario";
@@ -12,9 +12,11 @@ export interface MapaProps {
   selectedMarker: SpotDTO | null;
   userLocation: google.maps.LatLngLiteral | null;
   initialCenter: google.maps.LatLngLiteral | null;
+  zoom?: number;
+  restrictToSpain?:boolean;
 }
 
-const markerLibrary = ["marker"];
+const markerLibrary = ["marker"] as Libraries;
 
 export function Mapa(props: MapaProps) {
   const {
@@ -23,12 +25,13 @@ export function Mapa(props: MapaProps) {
     selectedMarker,
     userLocation,
     initialCenter,
+    zoom = 14,
+    restrictToSpain = true,
   } = props;
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string,
     id: "google-maps-script",
-    //@ts-expect-error - El tipo de la librería no es correcto
     libraries: markerLibrary,
   });
 
@@ -39,10 +42,10 @@ export function Mapa(props: MapaProps) {
     const lng = selectedMarker?.coordinates[0];
 
     if (map && selectedMarker && lat && lng) {
-      map.panTo({ lat: lat - 0.0005, lng });
-      map.setZoom(18); // Ajusta el nivel de zoom a tu gusto
+      map.setZoom(18);
+      map.setCenter({ lat: lat - 0.0005, lng });
     }
-  }, [selectedMarker]);
+  }, [selectedMarker, map]);
 
   const handleMapClick = React.useCallback(
     (e: google.maps.MapMouseEvent) => {
@@ -77,18 +80,22 @@ export function Mapa(props: MapaProps) {
         rotateControl: true,
         tilt: 45,
         heading: 0,
-        zoom: 14,
+        zoom: zoom,
+        minZoom: 1,
+        maxZoom: 20,
         zoomControl: false,
         mapId: "729d891f5d94366",
-        restriction: {
-          latLngBounds: {
-            north: 43.79,
-            south: 36.0,
-            west: -9.3,
-            east: 4.3,
-          },
-          strictBounds: false,
-        },
+        restriction: restrictToSpain
+          ? {
+              latLngBounds: {
+                north: 46.0, // antes 43.79
+                south: 33.0, // antes 36.0
+                west: -10.5, // antes -9.3
+                east: 6.5, // antes 4.3
+              },
+              strictBounds: false,
+            }
+          : null,
       }}
     >
       {markers.map((m, index) => {
@@ -106,12 +113,7 @@ export function Mapa(props: MapaProps) {
         );
       })}
 
-      {userLocation && (
-        <MarcadorUsuario
-          map={map}
-          position={userLocation}
-        />
-      )}
+      {userLocation && <MarcadorUsuario map={map} position={userLocation} />}
     </GoogleMap>
   );
 }
