@@ -39,7 +39,7 @@ const layout = async ({ params, children }: PageProps) => {
   }
 
   if(liga === null) {
-    return <p>Naaa</p>
+    return <p className="text-center p-10 text-neutral-500">Ups, esta liga ya no existe...</p>
   }
 
   const placeDetails = await GoogleMapsService.getPlaceDetailsFromPlaceId(
