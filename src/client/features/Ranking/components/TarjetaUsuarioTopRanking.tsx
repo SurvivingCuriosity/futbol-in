@@ -50,11 +50,11 @@ export default function TarjetaUsuarioTopRanking({
       )}
       {image !== "" ? (
         <div className="relative">
-          <ImagenCuadrada src={image} size="md" alt="Imagen de usuario" />
+          <ImagenCuadrada src={image} size="lg" alt="Imagen de usuario" showBorder={false}/>
           <div className="absolute -top-2 -left-2 text-sm font-bold text-black bg-primary rounded-full size-7 flex items-center justify-center">{`#${posicion}`}</div>
         </div>
       ) : (
-        <div className="bg-neutral-700 size-14 rounded-full flex items-center justify-center relative">
+        <div className="bg-neutral-700 size-[70px] rounded-full flex items-center justify-center relative">
           <div className="absolute -top-2 -left-2 text-sm font-bold text-black bg-primary rounded-full size-7 flex items-center justify-center">{`#${posicion}`}</div>
           {user?.name?.charAt(0).toUpperCase()}
         </div>
