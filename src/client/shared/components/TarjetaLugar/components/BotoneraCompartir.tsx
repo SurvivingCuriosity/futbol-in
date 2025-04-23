@@ -32,7 +32,7 @@ export const BotoneraCompartir = ({
   };
 
   return (
-    <div className="flex items-center gap-2 text-sm mb-4 ml-auto mt-auto">
+    <div className="flex items-center gap-2 text-sm mt-auto">
       <button
         aria-label="Compartir"
         onClick={handleClickShare}

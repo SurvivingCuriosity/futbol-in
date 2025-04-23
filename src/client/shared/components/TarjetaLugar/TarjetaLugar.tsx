@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ImagenFutbolinLogoMap } from "../../constants/FutbolinesLogoImageMap";
 import { MainInfo } from "./components/MainInfo";
+import { BotoneraCompartir } from "./components/BotoneraCompartir";
 
 export interface TarjetaLugarProps {
   spot: SpotDTO;
@@ -32,8 +33,12 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
 
   return (
     <div
-      className={`relative p-2 md:p-3 border border-neutral-700 bg-neutral-900 rounded-lg select-none w-full md:min-w-[400px] overflow-hidden`}
+      className={`group relative p-2 md:p-3 border border-neutral-700 bg-neutral-900 rounded-lg select-none w-full md:min-w-[400px] overflow-hidden`}
     >
+      <span className="absolute top-1 right-1 z-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+      <BotoneraCompartir googlePlaceId={spot.googlePlaceId} idSpot={spot.id} />
+      </span>
+
       <Image
         src={logo}
         alt={`Logo ${spot.tipoFutbolin}`}
@@ -50,7 +55,12 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
               <p>{distanciaMessage}</p>
             </span>
           )}
-          <Link href={`/spots/detalle/${spot.id}`} className="ml-auto z-2 text-neutral-400 p-0.5">Más detalles</Link>
+          <Link
+            href={`/spots/detalle/${spot.id}`}
+            className="ml-auto z-2 text-neutral-400 p-0.5"
+          >
+            Más detalles
+          </Link>
         </div>
       </div>
     </div>
