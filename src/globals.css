@@ -26,6 +26,7 @@
     .intro-t {
         color: var(--color-neutral-500)
     }
+
     .intro-h {
         color: var(--color-neutral-500)
     }
@@ -67,18 +68,18 @@
     --color-primary-700: #207d00;
     --color-primary-800: #0f4900;
     --color-primary-900: #031f00;
-  
+
     /* Coincide con 500 */
     --color-primary: var(--color-primary-500);
 
     --animate-fade-in: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     --animate-puff-in: puff-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    --animate-fade-in-top: fade-in-top 0.5s ease-out both;
 
     @keyframes fade-in {
         0% {
             opacity: 0;
         }
-
         ,
         100% {
             opacity: 1;
@@ -86,17 +87,28 @@
     }
 
     @keyframes puff-in {
-
         0% {
             transform: scale(2)translateY(-200px);
             filter: blur(2px);
             opacity: 0;
         }
-
         ,
         to: {
             transform: scale(1)translateY(0px);
             filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade-in-top {
+        0% {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        ,
+        to: {
+            transform: translateY(0);
             opacity: 1;
         }
     }

@@ -27,7 +27,6 @@ const layout = async (props: CityLayoutProps) => {
         </h1>
         <Link href={`/spots/global?from=${`/spots/${ciudad}`}`} className="text-neutral-500 hover:text-primary">
           <FontAwesomeIcon icon={faGlobe} className="mr-1" />
-          Mapa global
         </Link>
       </div>
       <span className="w-full my-2 z-3 relative">

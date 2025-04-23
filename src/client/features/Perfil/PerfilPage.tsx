@@ -3,8 +3,9 @@
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { useSearchParams } from "next/navigation";
-import { Logros } from "./components/Logros";
+
 import { MainInfo } from "./components/MainInfo";
+import { Logros } from "../MiPerfil/components/Logros";
 
 export interface MiPerfilPageProps {
   user: UserDTO;

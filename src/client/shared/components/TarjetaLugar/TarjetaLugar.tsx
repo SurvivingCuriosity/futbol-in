@@ -35,7 +35,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
     <div
       className={`group relative p-2 md:p-3 border border-neutral-700 bg-neutral-900 rounded-lg select-none w-full md:min-w-[400px] overflow-hidden`}
     >
-      <span className="absolute top-1 right-1 z-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+      <span className="absolute top-1 right-1 z-3 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
       <BotoneraCompartir googlePlaceId={spot.googlePlaceId} idSpot={spot.id} />
       </span>
 
@@ -44,7 +44,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
         alt={`Logo ${spot.tipoFutbolin}`}
         width={200}
         height={200}
-        className="w-40 absolute -top-10 -left-2 z-1 -rotate-12 opacity-5"
+        className="w-40 absolute -top-10 -left-2 z-1 -rotate-12 opacity-5 pointer-events-none"
       />
       <div onClick={handleClickSpot} className="relative">
         <MainInfo spot={spot} isOpen={!!selected} />

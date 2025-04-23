@@ -9,6 +9,7 @@ import { useState } from "react";
 import { ProgresoLogro } from "./ProgresoLogro";
 import { MedallaIcon } from "./MedallaIcon";
 import { getLevel } from "@/server/services/Logros/GetLevel";
+import { Tooltip } from "@/client/shared/components/Tooltip/Tooltip";
 
 export const Logros = ({ user }: { user: UserDTO }) => {
   const futbolinesAgregados = user.stats.lugaresAgregados;
@@ -20,7 +21,7 @@ export const Logros = ({ user }: { user: UserDTO }) => {
   return (
     <div className="grow p-3 bg-neutral-900 rounded-lg">
       <div className="flex items-center justify-between">
-        <p className="mb-2 text-xl text-primary font-bold">Logros</p>
+        <p className="text-xl text-primary font-bold mb-4">Logros</p>
         <button
           aria-label="Expandir logros"
           onClick={() => setIsExpanded(!isExpanded)}
@@ -49,25 +50,36 @@ export const Logros = ({ user }: { user: UserDTO }) => {
           />
         </div>
       ) : (
-        <div className="flex gap-2">
-          <MedallaIcon
-            icon={LOGROS_DISPONIBLES[0].icon}
-            level={getLevel(futbolinesAgregados, LOGROS_DISPONIBLES[0].steps)}
-            conseguida={futbolinesAgregados >= LOGROS_DISPONIBLES[0].steps[0]}
-            showConseguidaIcon={false}
-          />
-          <MedallaIcon
-            icon={LOGROS_DISPONIBLES[1].icon}
-            level={getLevel(futbolinesVotados, LOGROS_DISPONIBLES[1].steps)}
-            conseguida={futbolinesVotados >= LOGROS_DISPONIBLES[1].steps[0]}
-            showConseguidaIcon={false}
-          />
-          <MedallaIcon
-            icon={LOGROS_DISPONIBLES[2].icon}
-            level={getLevel(futbolinesVerificados, LOGROS_DISPONIBLES[2].steps)}
-            conseguida={futbolinesVerificados >= LOGROS_DISPONIBLES[2].steps[0]}
-            showConseguidaIcon={false}
-          />
+        <div className="flex gap-4">
+          <Tooltip id="medalla" content={LOGROS_DISPONIBLES[0].stepDescription(futbolinesAgregados)}>
+            <MedallaIcon
+              icon={LOGROS_DISPONIBLES[0].icon}
+              level={getLevel(futbolinesAgregados, LOGROS_DISPONIBLES[0].steps)}
+              conseguida={futbolinesAgregados >= LOGROS_DISPONIBLES[0].steps[0]}
+              showConseguidaIcon={false}
+            />
+          </Tooltip>
+          <Tooltip id="medalla2" content={LOGROS_DISPONIBLES[1].stepDescription(futbolinesVotados)}>
+            <MedallaIcon
+              icon={LOGROS_DISPONIBLES[1].icon}
+              level={getLevel(futbolinesVotados, LOGROS_DISPONIBLES[1].steps)}
+              conseguida={futbolinesVotados >= LOGROS_DISPONIBLES[1].steps[0]}
+              showConseguidaIcon={false}
+            />
+          </Tooltip>
+          <Tooltip id="medalla3" content={LOGROS_DISPONIBLES[2].stepDescription(futbolinesVerificados)}>
+            <MedallaIcon
+              icon={LOGROS_DISPONIBLES[2].icon}
+              level={getLevel(
+                futbolinesVerificados,
+                LOGROS_DISPONIBLES[2].steps
+              )}
+              conseguida={
+                futbolinesVerificados >= LOGROS_DISPONIBLES[2].steps[0]
+              }
+              showConseguidaIcon={false}
+            />
+          </Tooltip>
         </div>
       )}
       <Link

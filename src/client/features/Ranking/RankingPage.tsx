@@ -33,12 +33,15 @@ export default async function RankingPage() {
         <h1 className="text-3xl font-black text-primary">Ranking</h1>
         <ul className="w-full space-y-2 mt-2 flex flex-col md:grid grid-cols-3 gap-2 mb-4">
           {usuariosPorPuntuacion.slice(0, 3).map((user, index) => (
+            <div key={user.id} className="animate-fade-in-top" style={{animationDelay: `${index * 0.1}s`}}>
+
             <TarjetaUsuarioTopRanking
               user={users.find((u) => u.name === user.usuario) as UserDTO}
               puntuacion={user.puntuacion}
-              key={user.id}
+              
               posicion={index + 1}
-            />
+              />
+              </div>
           ))}
         </ul>
         <span className="hidden md:block">

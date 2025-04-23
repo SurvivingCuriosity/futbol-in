@@ -17,15 +17,20 @@ const ListaSpots = (props: ListaSpotsProps) => {
         className={`space-y-2 pt-2 md:space-y-4 w-full md:max-w-md h-full overflow-hidden md:overflow-y-scroll mx-auto pr-2`}
       >
         {futbolines.map((f, index) => (
-          <TarjetaLugar
+          <div
             key={f.nombre + index}
-            spot={f}
-            selected={f.googlePlaceId === selectedLugar?.googlePlaceId}
-            onSelect={onSelect}
-            distanciaMessage={
-              userCoords ? getDistanciaEntre(userCoords, f.coordinates) : null
-            }
-          />
+            className="animate-fade-in-top"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <TarjetaLugar
+              spot={f}
+              selected={f.googlePlaceId === selectedLugar?.googlePlaceId}
+              onSelect={onSelect}
+              distanciaMessage={
+                userCoords ? getDistanciaEntre(userCoords, f.coordinates) : null
+              }
+            />
+          </div>
         ))}
       </ul>
     </>

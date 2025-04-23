@@ -4,7 +4,7 @@ import {
   darkBgClass,
   levelClass,
 } from "@/core/constants/ColoresMedallas";
-import { faCheck, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faQuestion, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface MedallaIconProps {
@@ -50,7 +50,7 @@ export const MedallaIcon = (props: MedallaIconProps) => {
           clipPath:
             "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
         }}
-        className={`z-1 h-9 w-8 ${bgClass[level]} flex items-center justify-center`}
+        className={`z-1 h-9 w-8 ${bgClass[level] || 'bg-neutral-700'} flex items-center justify-center`}
       >
         <div
           style={{
@@ -58,9 +58,9 @@ export const MedallaIcon = (props: MedallaIconProps) => {
               "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
           }}
           className={`${conseguida ? "" : "grayscale-100"}  ${
-            borderClass[level]
+            borderClass[level] || 'border-neutral-900'
           } ${
-            darkBgClass[level]
+            darkBgClass[level] || 'bg-neutral-900'
           } justify-center flex items-center z-2 relative h-7 w-6`}
         >
           <div
@@ -70,7 +70,7 @@ export const MedallaIcon = (props: MedallaIconProps) => {
           >
             {level > 0 && (
               <FontAwesomeIcon
-                icon={icon}
+                icon={icon || faQuestion}
                 className={`${iconSizeClass[size]}`}
               />
             )}
