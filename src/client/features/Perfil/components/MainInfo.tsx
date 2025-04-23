@@ -7,7 +7,8 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 export const MainInfo = ({ user }: { user: UserDTO }) => {
   return (
-    <div className="flex flex-col mx-auto items-start md:gap-4 w-full min-w-xs max-w-lg">
+    <div className="flex flex-col mx-auto items-start md:gap-4 w-full min-w-xs max-w-lg relative">
+      <MarcaVerificado user={user} />
       <div className="flex items-center gap-2 mb-2">
         <ImagenPerfil user={user} />
         <div>
@@ -23,7 +24,6 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
         </div>
       </div>
 
-      <MarcaVerificado user={user} />
       <div className="flex flex-row my-4 items-center gap-2 justify-between w-full">
         {user.ciudad && (
           <div className="flex items-center gap-2 text-neutral-300">

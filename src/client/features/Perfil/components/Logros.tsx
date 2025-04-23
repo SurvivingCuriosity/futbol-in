@@ -6,18 +6,62 @@ import { textColorClass } from "@/core/constants/ColoresMedallas";
 
 export const Logros = ({ user }: { user: UserDTO }) => {
   const futbolinesAgregados = user.stats.lugaresAgregados;
+  const futbolinesVotados = user.stats.lugaresRevisados;
+  const futbolinesVerificados = user.stats.lugaresVerificados;
 
   return (
-    <div className="p-3 bg-neutral-900 rounded-lg">
-      <p className="text-neutral-500 mb-2">Logros:</p>
-      <div className="flex flex-row">
+    <div className="p-4 bg-neutral-900 rounded-lg space-y-4">
+      <p className="text-primary font-bold text-2xl mb-4">Logros:</p>
+      <div className="flex flex-row items-center">
         <MedallaIcon
           icon={LOGROS_DISPONIBLES[0].icon}
           level={getLevel(futbolinesAgregados, LOGROS_DISPONIBLES[0].steps)}
           conseguida={futbolinesAgregados >= LOGROS_DISPONIBLES[0].steps[0]}
           showConseguidaIcon={false}
         />
-        <p className={`ml-2 ${textColorClass[getLevel(futbolinesAgregados, LOGROS_DISPONIBLES[0].steps)]}`}>{LOGROS_DISPONIBLES[0].stepDescription(futbolinesAgregados)}</p>
+        <p
+          className={`ml-2 ${
+            textColorClass[
+              getLevel(futbolinesAgregados, LOGROS_DISPONIBLES[0].steps)
+            ]
+          }`}
+        >
+          {LOGROS_DISPONIBLES[0].stepDescription(futbolinesAgregados)}
+        </p>
+      </div>
+      <div className="flex flex-row items-center">
+        <MedallaIcon
+          icon={LOGROS_DISPONIBLES[1].icon}
+          level={getLevel(futbolinesVotados, LOGROS_DISPONIBLES[1].steps)}
+          conseguida={futbolinesVotados >= LOGROS_DISPONIBLES[1].steps[1]}
+          showConseguidaIcon={false}
+        />
+        <p
+          className={`ml-2 ${
+            textColorClass[
+              getLevel(futbolinesVotados, LOGROS_DISPONIBLES[1].steps)
+            ]
+          }`}
+        >
+          {LOGROS_DISPONIBLES[1].stepDescription(futbolinesVotados)}
+        </p>
+      </div>
+      <div className="flex flex-row items-center">
+        <MedallaIcon
+          icon={LOGROS_DISPONIBLES[2].icon}
+          level={getLevel(futbolinesVerificados, LOGROS_DISPONIBLES[2].steps)}
+          conseguida={futbolinesVerificados >= LOGROS_DISPONIBLES[2].steps[2]}
+          showConseguidaIcon={false}
+        />
+        <p
+          className={`ml-2 ${
+            textColorClass[
+              getLevel(futbolinesVerificados, LOGROS_DISPONIBLES[2].steps)
+            ]
+          }`}
+        >
+          {LOGROS_DISPONIBLES[2].stepDescription(futbolinesVerificados)}
+        </p>
       </div>
     </div>
   );

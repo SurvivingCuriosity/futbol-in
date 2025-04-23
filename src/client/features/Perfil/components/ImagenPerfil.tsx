@@ -17,7 +17,7 @@ export const ImagenPerfil = ({ user }: { user: UserDTO }) => {
     }, [user?.imagen]);
 
   return user.imagen === "" ? (
-    <FontAwesomeIcon icon={faUserCircle} className="text-neutral-700 size-8" />
+    <FontAwesomeIcon icon={faUserCircle} width={80} height={80} size={'5x'} className="text-neutral-700 w-fit" />
   ) : (
     <Image
       src={imageUrl || "/default_user.svg"}
