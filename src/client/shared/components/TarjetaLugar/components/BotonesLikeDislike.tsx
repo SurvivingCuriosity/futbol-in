@@ -21,6 +21,19 @@ export const BotonesLikeDislike = ({
   agregadoPorUsuario: boolean;
 }) => {
   const user = useGetLoggedInUserClient();
+  
+  const loHaVotadoPositivamente = spot.votes.up.includes((user as UserDTO)?.id);
+  const loHaVotadoNegativamente = spot.votes.down.includes(
+    (user as UserDTO)?.id
+  );
+  const loHaVerificadoPositivamente =
+    spot.verificado &&
+    spot.verificado.idUser === user?.id &&
+    spot.verificado.correcto;
+  const loHaVerificadoNegativamente =
+    spot.verificado &&
+    spot.verificado.idUser === user?.id &&
+    spot.verificado.correcto === false;
 
   const handleClickVotar = async (type: "up" | "down") => {
     const votarSpotResponse = await SpotsClient.votarSpot({
@@ -36,6 +49,22 @@ export const BotonesLikeDislike = ({
       vote: type,
     });
     onChangeSpotCallback(verificarSpotResponse.spot);
+  };
+
+  const handleClickDeshacerVoto = async (type: "up" | "down") => {
+    const votarSpotResponse = await SpotsClient.deshacerVoto({
+      spotId: spot.id,
+      vote: type,
+    });
+    onChangeSpotCallback(votarSpotResponse.spot);
+  };
+
+  const handleClickDeshacerVerificacion = async (type: "up" | "down") => {
+    const votarSpotResponse = await SpotsClient.deshacerVerificarSpot({
+      spotId: spot.id,
+      vote: type,
+    });
+    onChangeSpotCallback(votarSpotResponse.spot);
   };
 
   if (!user) {
@@ -56,36 +85,82 @@ export const BotonesLikeDislike = ({
         <div className="flex items-center gap-2 text-sm">
           <button
             onClick={() => handleClickVerificar("up")}
-            className="cursor-pointer border w-full rounded-lg p-2 hover:bg-sky-500/20 bg-sky-500/5 border-sky-500 text-sky-500"
+            className="cursor-pointer border w-full rounded-lg p-2 hover:bg-sky-500/20 bg-sky-900/50 border-sky-500 text-sky-500"
           >
             <FontAwesomeIcon icon={faCheckCircle} className="mr-2" />
             Verificar
           </button>
           <button
             onClick={() => handleClickVerificar("down")}
-            className="cursor-pointer border w-full rounded-lg p-2 hover:bg-neutral-500/20 bg-neutral-500/5 border-neutral-400 text-neutral-400"
+            className="cursor-pointer border w-full rounded-lg p-2 hover:bg-neutral-500/20 bg-neutral-800/80 border-neutral-300 text-neutral-300"
           >
             <FontAwesomeIcon icon={faFaceFrown} className="mr-2" />
             Rechazar
           </button>
         </div>
       );
-    } else return null;
+    } else {
+      if (loHaVerificadoPositivamente) {
+        return (
+          <div className="flex items-center gap-2 mt-4">
+            <p className="text-sm text-sky-600">Has verificado este futbolín</p>
+            <button
+              onClick={() => handleClickDeshacerVerificacion("up")}
+              className="text-sm text-neutral-500 underline"
+            >
+              Deshacer
+            </button>
+          </div>
+        );
+      }
+
+      if (loHaVerificadoNegativamente) {
+        return (
+          <div className="flex items-center gap-2 mt-4">
+            <p className="text-sm text-red-500">
+              Indicaste que el lugar no es correcto
+            </p>
+            <button
+              onClick={() => handleClickDeshacerVerificacion("down")}
+              className="text-sm text-neutral-500 underline"
+            >
+              Deshacer
+            </button>
+          </div>
+        );
+      }
+    }
   }
 
-  if (spot.votes.up.includes((user as UserDTO)?.id)) {
+  if (loHaVotadoPositivamente) {
     return (
-      <p className="text-xs text-green-600">
-        Indicaste que el lugar es correcto
-      </p>
+      <div className="flex items-center gap-2 mt-4">
+        <p className="text-sm text-green-600">
+          Indicaste que el lugar es correcto
+        </p>
+        <button
+          onClick={() => handleClickDeshacerVoto("up")}
+          className="text-sm text-neutral-500 underline"
+        >
+          Deshacer
+        </button>
+      </div>
     );
   }
 
-  if (spot.votes.down.includes((user as UserDTO)?.id)) {
+  if (loHaVotadoNegativamente) {
     return (
-      <p className="text-xs text-red-500">
-        Indicaste que el lugar no es correcto
-      </p>
+      <div className="flex items-center gap-2 mt-4">
+        <p className="text-sm text-red-500">
+          Indicaste que el lugar no es correcto
+        </p>
+        <button
+          onClick={() => handleClickDeshacerVoto("down")}
+          className="text-sm text-neutral-500 underline"
+        >
+          Deshacer
+        </button>
+      </div>
     );
   }
 

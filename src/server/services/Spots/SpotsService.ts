@@ -84,6 +84,40 @@ export class SpotService {
     return this.mapToDTO(spot);
   }
 
+  static async deshacerVerificarSpot(
+    idSpot: string,
+    vote: "up" | "down",
+    idUser: ObjectId                // puede quedar como lo tenías
+  ): Promise<SpotDTO> {
+    await connectDb();
+    const spot = await Spot.findById(idSpot);
+  
+    if (!spot) {
+      throw new Error("Spot no encontrado");
+    }
+  
+    const verif = spot.verificado;
+    const expectedCorrect = vote === "up";
+  
+    // Comprobamos por strings en vez de equals()
+    const hasVerified =
+      verif != null &&
+      verif.idUser.toString() === idUser.toString() &&
+      verif.correcto === expectedCorrect;
+  
+    if (!hasVerified) {
+      throw new Error(
+        `No puedes deshacer una verificación que no hayas realizado como '${vote}'`
+      );
+    }
+  
+    // Eliminamos la verificación
+    spot.verificado = null
+  
+    const updated = await spot.save();
+    return this.mapToDTO(updated);
+  }
+
   static async getSpotsDeOperador(idOperador: string): Promise<SpotDTO[]> {
     await connectDb();
     const spots = await Spot.find({
@@ -122,6 +156,29 @@ export class SpotService {
 
     spot.votes[vote].push(idUser);
 
+    const updated = await spot.save();
+    return this.mapToDTO(updated);
+  }
+
+  static async deshacerVotoSpot(
+    idSpot: string,
+    vote: "up" | "down",
+    idUser: Types.ObjectId
+  ): Promise<SpotDTO> {
+    await connectDb();
+    const spot = await Spot.findById(idSpot);
+  
+    if (!spot) {
+      throw new Error("Spot no encontrado");
+    }
+  
+    const hasVotedThisWay = spot.votes[vote].some(uid => uid.equals(idUser));
+    if (!hasVotedThisWay) {
+      throw new Error(`No has votado ${vote} este spot`);
+    }
+  
+    spot.votes[vote] = spot.votes[vote].filter(uid => !uid.equals(idUser));
+  
     const updated = await spot.save();
     return this.mapToDTO(updated);
   }

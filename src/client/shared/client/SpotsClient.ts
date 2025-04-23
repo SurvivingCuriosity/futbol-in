@@ -20,6 +20,22 @@ export class SpotsClient {
     return response.data;
   }
 
+  static async deshacerVoto(data: VotarSpotRequest): Promise<VotarSpotResponse> {
+    const response = await BaseClient.request<VotarSpotResponse>(
+      "/api/spots/deshacer-votar",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.error || "Error en votarSpot");
+    }
+
+    return response.data;
+  }
+
   static async borrarSpot(idSpot: string): Promise<void> {
     const response = await BaseClient.request<void>(
       "/api/spots/delete",
@@ -39,6 +55,21 @@ export class SpotsClient {
   static async verificarSpot(data: VerificarSpotRequest): Promise<VerificarSpotResponse> {
     const response = await BaseClient.request<VerificarSpotResponse>(
       "/api/spots/verificar",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.error || "Error en votarSpot");
+    }
+
+    return response.data;
+  }
+  static async deshacerVerificarSpot(data: VerificarSpotRequest): Promise<VerificarSpotResponse> {
+    const response = await BaseClient.request<VerificarSpotResponse>(
+      "/api/spots/deshacer-verificar",
       {
         method: "POST",
         body: data,
