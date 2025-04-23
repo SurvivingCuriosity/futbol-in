@@ -18,6 +18,7 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
   return (
     <>
       <div className="flex flex-col mx-auto items-start md:gap-4 w-full min-w-xs max-w-lg border-b border-primary">
+      <MarcaVerificado user={user} />
         <div className="flex items-center gap-2 mb-2">
           <ImagenPerfil imagenUrl={imageUrl} />
           <div>
@@ -33,7 +34,7 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
           </div>
         </div>
 
-        <MarcaVerificado user={user} />
+
 
         <div className="flex flex-row my-4 items-center gap-2 justify-between w-full">
           {user.ciudad && (
