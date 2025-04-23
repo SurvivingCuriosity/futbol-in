@@ -8,22 +8,23 @@ export interface ImagenCuadradaProps {
   defaultSrc?: string;
   alt?: string;
   size: ImageSize;
+  showBorder?: boolean;
 }
 
 export const ImagenCuadrada = ({
   src,
   defaultSrc = "/default_user.svg",
-  alt="image",
-  size = 'md',
+  alt = "image",
+  size = "md",
+  showBorder = false,
 }: ImagenCuadradaProps) => {
-
-    const sizeMap:Record<ImageSize, number> = {
-        xs: 20,
-        sm: 30,
-        md: 40,
-        lg: 70,
-        xl: 100
-    }
+  const sizeMap: Record<ImageSize, number> = {
+    xs: 20,
+    sm: 30,
+    md: 40,
+    lg: 70,
+    xl: 100,
+  };
 
   return (
     <Image
@@ -35,7 +36,9 @@ export const ImagenCuadrada = ({
         width: sizeMap[size],
         height: sizeMap[size],
       }}
-      className="w-full h-full rounded-full border-2 border-primary object-center object-cover"
+      className={`w-full h-full rounded-full ${
+        showBorder ? "border-2" : ""
+      } border-primary object-center object-cover`}
     />
   );
 };
