@@ -1,9 +1,8 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DataTable } from "../../../shared/components/Table/Table";
 import { Column } from "../../../shared/components/Table/types";
-import { faCheck, faPlus, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { TarjetaStats } from "./TarjetaStats";
 
 export interface UsuarioEnRanking {
   id: string;
@@ -59,10 +58,7 @@ const columns: Column<UsuarioEnRanking>[] = [
     cell: ({ row }) => {
       // JSX personalizado en la celda
       return (
-        <strong className="bg-primary/10 p-1 px-2 rounded-lg w-14 flex items-center justify-between">
-          <FontAwesomeIcon icon={faPlus} className="text-primary mr-1" />
-          {row.spotsCreados || 0}
-        </strong>
+        <TarjetaStats value={row.spotsCreados} kind="agregados" />
       );
     },
   },
@@ -84,10 +80,7 @@ const columns: Column<UsuarioEnRanking>[] = [
     cell: ({ row }) => {
       // JSX personalizado en la celda
       return (
-        <strong className="bg-primary/10 p-1 px-2 rounded-lg w-14 flex items-center justify-between">
-          <FontAwesomeIcon icon={faThumbsUp} className="text-primary mr-1" />
-          {row.spotsVotados || 0}
-        </strong>
+        <TarjetaStats value={row.spotsVotados} kind="votados" />
       );
     },
   },
@@ -109,10 +102,7 @@ const columns: Column<UsuarioEnRanking>[] = [
     cell: ({ row }) => {
         // JSX personalizado en la celda
         return (
-          <strong className="bg-primary/10 p-1 px-2 rounded-lg w-14 flex items-center justify-between">
-            <FontAwesomeIcon icon={faCheck} className="text-primary mr-1" />
-            {row.spotsVerificados || 0}
-          </strong>
+          <TarjetaStats value={row.spotsVerificados} kind="verificados" />
         );
       },
   },

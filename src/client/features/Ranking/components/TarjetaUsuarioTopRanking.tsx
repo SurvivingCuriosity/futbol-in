@@ -8,6 +8,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { TarjetaStats } from "./TarjetaStats";
 
 export default function TarjetaUsuarioTopRanking({
   user,
@@ -62,6 +63,11 @@ export default function TarjetaUsuarioTopRanking({
         <p className="">{user?.name}</p>
         <p className="text-xl text-neutral-400 font-bold">{puntuacion} pts</p>
       </span>
+      <div className="flex md:flex-col gap-1 text-xs ml-auto">
+        <TarjetaStats value={user.stats.lugaresAgregados} kind="agregados" />
+        <TarjetaStats value={user.stats.lugaresRevisados} kind="votados" />
+        <TarjetaStats value={user.stats.lugaresVerificados} kind="verificados" />
+      </div>
     </li>
   );
 }
