@@ -1,16 +1,39 @@
+"use client"
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
 import { OperadorDTO } from "@/server/models/User/OperadorDTO";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { ButtonWhatsapp } from "./ButtonWhatsapp";
+import Link from "next/link";
+import { ImagenCuadrada } from "@/client/shared/components/ImagenCuadrada";
+import { useEffect, useState } from "react";
+import { StorageClient } from "@/client/shared/client/StorageClient";
 
-export const PerfilOperadorPage = ({ operador }: { operador: OperadorDTO }) => {
+export const PerfilOperadorPage = ({
+  operador,
+}: {
+  operador: OperadorDTO;
+}) => {
+
+  const [imgUrl, setImgUrl] = useState<string>('');
+
+  useEffect(() => {
+    const getImageUrl = async () => {
+      const res = await StorageClient.getImageUrl(operador.logo);
+      setImgUrl(res);
+    }
+    getImageUrl();
+  }, [operador.logo]);
+
   return (
     <div className="flex flex-col max-w-lg mx-auto">
-      <h1 className="text-3xl font-black text-primary mb-4">
-        {operador.nombreComercial}
-      </h1>
+      <div className="flex flex-col items-center gap-2 mb-4">
+        <ImagenCuadrada size="xl" src={imgUrl} alt="Logo de la empresa" />
+        <h1 className="text-3xl font-black text-primary ">
+          {operador.nombreComercial}
+        </h1>
+      </div>
 
       <p className="text-primary underline">¿Dónde estamos?</p>
       <div className="text-sm text-neutral-300 flex items-center gap-2 p-2 mb-4">
@@ -54,6 +77,7 @@ export const PerfilOperadorPage = ({ operador }: { operador: OperadorDTO }) => {
           </div>
         ))}
       </div>
+      <Link href={`/operador/${operador.id}/editar`}>Editar</Link>
     </div>
   );
 };

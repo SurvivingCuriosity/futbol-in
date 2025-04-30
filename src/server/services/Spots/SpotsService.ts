@@ -126,7 +126,6 @@ export class SpotService {
     return spots.map((spot) => this.mapToDTO(spot));
   }
 
-  
   static async getSpotsDeUsuario(idUsuario: string): Promise<SpotDTO[]> {
     await connectDb();
     const spots = await Spot.find({
@@ -182,6 +181,22 @@ export class SpotService {
     const updated = await spot.save();
     return this.mapToDTO(updated);
   }
+
+  static async updateSpot(idSpot: string, data: Partial<SpotDTO>): Promise<SpotDTO|undefined> {
+    await connectDb();
+    const spot = await Spot.findById(idSpot);
+
+    if (!spot) {
+      throw new Error("Spot no encontrado");
+    }
+
+    const updated = await Spot.findByIdAndUpdate(idSpot, data, {
+      new: true,
+      runValidators: true,
+    });
+
+    return updated ? this.mapToDTO(updated) : undefined;
+  } 
 
   static async findNearbyByPlaceId(placeId: string): Promise<SpotDTO[]> {
     await connectDb();

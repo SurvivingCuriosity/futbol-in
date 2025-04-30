@@ -11,7 +11,7 @@ export const BotonPerfilOperador = ({ user }: { user: UserDTO }) => {
     return (
       <Button
         variant="outline"
-        label="Operador"
+        label="Crear perfil operador"
         size="sm"
         onClick={() => router.push("/operador/crear")}
       />
@@ -21,7 +21,7 @@ export const BotonPerfilOperador = ({ user }: { user: UserDTO }) => {
   return (
     <Button
       variant="outline"
-      label="Operador"
+      label="Perfil de operador"
       size="sm"
       onClick={() => router.push(`/operador/${user.idOperador}`)}
     />

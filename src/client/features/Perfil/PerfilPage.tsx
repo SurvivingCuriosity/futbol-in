@@ -6,13 +6,18 @@ import { useSearchParams } from "next/navigation";
 
 import { MainInfo } from "./components/MainInfo";
 import { Logros } from "../MiPerfil/components/Logros";
+import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { MisFutbolines } from "../MiPerfil/components/MisFutbolines";
+import { OperadorDTO } from "@/server/models/User/OperadorDTO";
 
 export interface MiPerfilPageProps {
   user: UserDTO;
+  spots: SpotDTO[]
+  operador: OperadorDTO|null|undefined
 }
 
 export const PerfilPage = (props: MiPerfilPageProps) => {
-  const { user } = props;
+  const { user, spots, operador } = props;
 
   const searchParams = useSearchParams();
   const fromParam = searchParams.get("from") || "/";
@@ -23,6 +28,8 @@ export const PerfilPage = (props: MiPerfilPageProps) => {
         <MainInfo user={user} />
 
         <Logros user={user} />
+
+        <MisFutbolines futbolines={spots} operador={operador}/>
 
       </div>
     </GoBackLayout>

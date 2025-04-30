@@ -1,15 +1,40 @@
+"use client";
+
 import { TarjetaLugar } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
+import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { OperadorDTO } from "@/server/models/User/OperadorDTO";
 
 export interface ListaSpotsProps {
   futbolines: SpotDTO[];
   selectedLugar: SpotDTO | null;
   onSelect: (lugar: SpotDTO | null) => void;
   userCoords: number[] | null;
+  operadores:OperadorDTO[];
 }
 
 const ListaSpots = (props: ListaSpotsProps) => {
-  const { futbolines, selectedLugar, onSelect, userCoords } = props;
+  const { futbolines, selectedLugar, onSelect, userCoords, operadores } = props;
+
+  const user = useGetLoggedInUserClient();
+  
+  const operadorUser = operadores.find((o) => o.id === user?.idOperador)
+
+  const puedeReclamarloComoOperador = (f: SpotDTO): boolean => {
+    if (!operadorUser) return false;
+
+    const yaLoGestiona = f.idOperador === operadorUser.id;
+
+    if(yaLoGestiona) return false
+
+    const trabajaElTipoDeFutbolin = operadorUser.futbolines.includes(
+      f.tipoFutbolin
+    );
+    const provinciaDelOperador = operadorUser.ciudad.split(",")[1].trim();
+    const provinciaDelSpot = f.ciudad.split(",")[1].trim();
+
+    return trabajaElTipoDeFutbolin && provinciaDelOperador === provinciaDelSpot;
+  };
 
   return (
     <>
@@ -29,6 +54,8 @@ const ListaSpots = (props: ListaSpotsProps) => {
               distanciaMessage={
                 userCoords ? getDistanciaEntre(userCoords, f.coordinates) : null
               }
+              puedeReclamarloComoOperador={puedeReclamarloComoOperador(f)}
+              operador={operadores.find((o) => o.id === f.idOperador)}
             />
           </div>
         ))}
@@ -54,6 +81,7 @@ export const getDistanciaEntre = (
   const R = 6371;
 
   // Convertir grados a radianes
+
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLng = ((lng2 - lng1) * Math.PI) / 180;
 

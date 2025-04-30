@@ -1,24 +1,50 @@
+"use client";
+
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { OperadorDTO } from "@/server/models/User/OperadorDTO";
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ImagenFutbolinLogoMap } from "../../constants/FutbolinesLogoImageMap";
-import { MainInfo } from "./components/MainInfo";
 import { BotoneraCompartir } from "./components/BotoneraCompartir";
+import { BotonReclamarComoOperador } from "./components/BotonReclamarComoOperador";
+import { MainInfo } from "./components/MainInfo";
+import { ImagenCuadrada } from "../ImagenCuadrada";
+import { StorageClient } from "../../client/StorageClient";
 
 export interface TarjetaLugarProps {
   spot: SpotDTO;
   selected?: boolean;
   onSelect?: (l: SpotDTO | null) => void;
   distanciaMessage: string | null;
+  puedeReclamarloComoOperador?: boolean;
+  operador: OperadorDTO|null|undefined
 }
 
 export const TarjetaLugar = (props: TarjetaLugarProps) => {
-  const { spot: spotProp, selected, onSelect, distanciaMessage } = props;
+  const {
+    spot: spotProp,
+    selected,
+    onSelect,
+    distanciaMessage,
+    puedeReclamarloComoOperador = false,
+    operador
+  } = props;
 
   const [spot, setSpot] = useState<SpotDTO>(spotProp);
+
+  const [logoOperador, setLogoOperador] = useState<string>('');
+
+  useEffect(() => {
+    const getImageUrl = async () => {
+      if(!operador || !operador.logo) return;
+      const res = await StorageClient.getImageUrl(operador?.logo);
+      setLogoOperador(res);
+    }
+    getImageUrl();
+  }, [operador?.logo, operador]);
 
   useEffect(() => {
     setSpot(spotProp);
@@ -36,7 +62,10 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
       className={`group relative p-2 md:p-3 border border-neutral-700 bg-neutral-900 rounded-lg select-none w-full md:min-w-[400px] overflow-hidden`}
     >
       <span className="absolute top-1 right-1 z-3 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
-      <BotoneraCompartir googlePlaceId={spot.googlePlaceId} idSpot={spot.id} />
+        <BotoneraCompartir
+          googlePlaceId={spot.googlePlaceId}
+          idSpot={spot.id}
+        />
       </span>
 
       <Image
@@ -62,6 +91,21 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
             Más detalles
           </Link>
         </div>
+
+        {operador && 
+          <Link href={`/operador/${operador.id}`} className="flex items-center gap-2 ml-auto z-2 text-neutral-400 p-0.5 underline">
+            <ImagenCuadrada 
+              size="sm"
+              src={logoOperador}
+              alt="Logo de la empresa"
+            />
+            {operador.nombreComercial}
+          </Link>
+        }
+
+        {puedeReclamarloComoOperador && spot.idOperador !== operador?.id && (
+          <BotonReclamarComoOperador spot={spot} onUpdate={setSpot}/>
+        )}
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import React from "react";
 
-export const Spinner = () => {
+export const Spinner = ({className = ""}:{className?:string}) => {
   return (
-    <div role="status" className="w-fit">
+    <div role="status" className={`w-fit ${className}`}>
       <svg
         aria-hidden="true"
         className="w-8 h-8 animate-spin text-neutral-600 fill-primary"

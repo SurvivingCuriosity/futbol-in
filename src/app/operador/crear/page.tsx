@@ -1,4 +1,4 @@
-import { CrearPerfilOperadorPage } from '@/client/features/MiPerfil/Operador/CrearPerfilOperadorPage'
+import { CrearPerfilOperadorPage } from '@/client/features/Operador/CrearPerfilOperadorPage'
 import React from 'react'
 
 const page = () => {

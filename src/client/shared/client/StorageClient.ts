@@ -9,6 +9,7 @@ export class StorageClient {
         method: "GET",
       }
     );
+    console.log(response)
     if (!imageName) {
       throw new Error("Intentando buscar imagen sin url");
     }

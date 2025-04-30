@@ -13,15 +13,17 @@ import { Mapa } from "../Mapa/Mapa";
 import { ButtonFiltros, Filtros } from "./components/Filtros/Filtros";
 import { PreviewFiltros } from "./components/Filtros/PreviewFiltros";
 import ListaSpots, { getDistanciaEntre } from "./ListaSpots";
+import { OperadorDTO } from "@/server/models/User/OperadorDTO";
 
 export interface SpotsCiudadPageProps {
   spots: SpotDTO[];
   coords: ICoords;
   ciudad: string;
+  operadores: OperadorDTO[]
 }
 
 export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
-  const { spots, coords, ciudad } = props;
+  const { spots, coords, ciudad, operadores } = props;
 
   const userLocation = useUserLocation();
 
@@ -85,12 +87,11 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
         </div>
       </header>
 
+      {spotsFiltrados.length === 0 && (
+        <p className="text-neutral-500 p-5">Ups... no hay resultados</p>
+      )}
 
-{spotsFiltrados.length === 0 && <p className="text-neutral-500 p-5">Ups... no hay resultados</p>}
-
-      {/* Contenedor principal */}
       <div className="w-full flex flex-col md:flex-row gap-4 h-[calc(100dvh-14em)] md:h-[calc(100dvh-15em)] md:overflow-hidden overflow-y-auto">
-        {/* Lista: se muestra en pantallas pequeñas si view === 'list' y siempre en md y mayores */}
         <div
           className={`${
             view === "map" ? "hidden" : "block"
@@ -100,6 +101,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
             futbolines={spotsFiltrados}
             selectedLugar={selectedMarker}
             onSelect={handleSelectSpot}
+            operadores={operadores}
             userCoords={
               currentCoords ? [currentCoords.lng, currentCoords.lat] : null
             }
@@ -124,6 +126,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
                 spot={selectedMarker}
                 selected={true}
                 onSelect={() => {}}
+                operador={operadores.find((o) => o.id === selectedMarker.idOperador)}
                 distanciaMessage={
                   currentCoords
                     ? getDistanciaEntre(

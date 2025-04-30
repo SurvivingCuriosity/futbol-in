@@ -90,9 +90,19 @@ export class UserService {
     return await operadorCreado.save();
   }
 
-  static async getPerfilOperador(idOperador:string): Promise<IOperadorDocument> {
+  static async getPerfilOperador(idOperador:string|null): Promise<IOperadorDocument|null> {
+    if(!idOperador) return null
     await connectDb();
     const operador = await Operador.findById(idOperador);
+    if(!operador){
+      throw new Error('No se encontró al operador en la base de datos')
+    }
+    return operador;
+  }
+
+  static async getPerfilesOperadores(idsOperador:string[]): Promise<IOperadorDocument[]> {
+    await connectDb();
+    const operador = await Operador.find({ _id: { $in: idsOperador } });
     if(!operador){
       throw new Error('No se encontró al operador en la base de datos')
     }
@@ -108,8 +118,19 @@ export class UserService {
       new: true,
       runValidators: true,
     });
-    console.log("Updated user: ", updatedUser);
     return updatedUser;
+  }
+
+  static async updateOperador(
+    operadorId: string,
+    updateData: Partial<UserDTO>
+  ): Promise<IOperadorDocument | null> {
+    await connectDb();
+    const updatedOperador = await Operador.findByIdAndUpdate(operadorId, updateData, {
+      new: true,
+      runValidators: true,
+    });
+    return updatedOperador;
   }
 
   static async validatePassword(
@@ -158,7 +179,10 @@ export class UserService {
       ciudad: operador.ciudad,
       bio: operador.bio,
       enlaces: operador.enlaces,
-      telefonos: operador.telefonos,
+      telefonos: operador.telefonos.map(t => ({
+        numero: t.numero,
+        persona: t.persona
+      })),
       usuarios: operador.usuarios.map((u) => u.toString()),
       futbolines: operador.futbolines,
       fondo: operador.fondo,

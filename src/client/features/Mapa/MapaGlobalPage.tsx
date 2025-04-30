@@ -37,6 +37,7 @@ export const MapaGlobalPage = ({ spots }: { spots: SpotDTO[] }) => {
               selected={true}
               onSelect={() => {}}
               distanciaMessage={null}
+              operador={null}
             />
           </div>
         )}

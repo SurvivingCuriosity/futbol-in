@@ -31,6 +31,7 @@ export const UltimosSpotsLS = () => {
                   spot={spot}
                   key={spot.id}
                   distanciaMessage={null}
+                  operador={null}
                 />
               )
             )}

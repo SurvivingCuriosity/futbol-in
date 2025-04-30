@@ -3,35 +3,42 @@ import { UserClient } from "@/client/shared/client/UserClient";
 import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicipios";
 import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
-import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { OperadorDTO } from "@/server/models/User/OperadorDTO";
-import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, TextInput } from "futbol-in-ui";
-import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import {
+  PreviewEnlaces,
+  PreviewFutbolinesSeleccionados,
+  PreviewTelefonos,
+} from "./CrearPerfilOperadorPage";
+import { ImagenEditable } from "@/client/shared/components/ImagenEditable";
+import { StorageClient } from "@/client/shared/client/StorageClient";
+import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 
-export const CrearPerfilOperadorPage = () => {
-  const [operadorEnCreacion, setOperadorEnCreacion] = useState<Omit<OperadorDTO,'id'>>({
-    nombreComercial: "",
-    ciudad: "",
-    bio: "",
-    enlaces: [],
-    futbolines: [],
-    telefonos: [],
-    usuarios: [],
-    fondo: "",
-    logo: "",
-  });
+export const EditarPerfilOperadorPage = ({
+  operador,
+}: {
+  operador: OperadorDTO;
+}) => {
+  const [operadorEnCreacion, setOperadorEnCreacion] = useState<OperadorDTO>(
+    operador as OperadorDTO
+  );
 
-  const [futbolines, setFutbolines] = useState<TipoFutbolin[]>([]);
+  const [futbolines, setFutbolines] = useState<TipoFutbolin[]>(
+    operador.futbolines
+  );
 
-  const [enlaces, setEnlaces] = useState<string[]>([]);
+  const [enlaces, setEnlaces] = useState<string[]>(operador.enlaces);
   const [enlaceActual, setEnlaceActual] = useState<string>("");
+
+  const [imageUrlLocal, setImageUrlLocal] = useState<string>('');
+  const [loadingImagen, setLoadingImagen] = useState(false);
 
   const [telefonoActual, setTelefonoActual] = useState<{
     persona: string;
@@ -39,28 +46,75 @@ export const CrearPerfilOperadorPage = () => {
   }>({ persona: "", numero: "" });
   const [telefonos, setTelefonos] = useState<
     Array<{ persona: string; numero: string }>
-  >([]);
+  >(operador.telefonos);
+
+
+  useEffect(() => {
+    const getImageUrl = async () => {
+      const res = await StorageClient.getImageUrl(operador.logo);
+      setImageUrlLocal(res);
+    }
+    getImageUrl();
+  }, [operador.logo]);
 
   const handleSubmit = async () => {
-    const operadorCrear:Omit<OperadorDTO,'id'> = {
-        ...operadorEnCreacion,
-        futbolines,
-        enlaces,
-        telefonos
-    }
-    const res = await UserClient.crearPerfilOperador(operadorCrear)
-    if(res.success){
-        toast.success('Perfil creado')
+    const operadorCrear: OperadorDTO = {
+      ...operadorEnCreacion,
+      futbolines,
+      enlaces,
+      telefonos,
+    };
+    const res = await UserClient.actualizarPerfilOperador({
+      idOperador: operador.id,
+      data: operadorCrear,
+    });
+    if (res.success) {
+      toast.success("Perfil actualizado");
     } else {
-        toast.error('Upss... error')
+      toast.error("Upss... error");
     }
+  };
+
+  const handleNewImage = async (file: File) => {
+        try {
+          const nombreImagen = operador.logo
+          setLoadingImagen(true);
+          // Borramos la actual
+          if(nombreImagen){
+            await StorageClient.delete(nombreImagen);
+          }
+    
+          // Subimos la nueva
+          const path = await StorageClient.upload(file, "user");
+    
+          if (path) {
+            await UserClient.cambiarImagenPerfilOperador(path);
+            const newImageUrl = await StorageClient.getImageUrl(path)
+            setImageUrlLocal(newImageUrl)
+            setLoadingImagen(false);
+          }
+        } catch (err: unknown) {
+          toast.error(getErrorMessage(err));
+          setLoadingImagen(false);
+        }
+  }
+
+  if (!operador) {
+    return <p>No se encontró el operador</p>;
   }
 
   return (
     <GoBackLayout href="/perfil" className="max-w-screen-lg mx-auto">
       <h1 className="text-primary text-2xl font-bold mb-2">
-        Crear perfil de operador
+        Editar perfil de operador
       </h1>
+      <ImagenEditable 
+        url={imageUrlLocal}
+        width={150}
+        height={150}
+        onNewImage={handleNewImage}
+        loading={loadingImagen}
+      />
       <FormField>
         <FormLabel>Nombre comercial</FormLabel>
         <TextInput
@@ -149,10 +203,6 @@ export const CrearPerfilOperadorPage = () => {
           </button>
         </div>
         <PreviewTelefonos telefonos={telefonos} setTelefonos={setTelefonos} />
-        <PreviewFutbolinesSeleccionados
-          futbolines={futbolines}
-          setFutbolines={setFutbolines}
-        />
       </FormField>
       <FormField>
         <FormLabel>Enlaces</FormLabel>
@@ -179,121 +229,7 @@ export const CrearPerfilOperadorPage = () => {
         </div>
         <PreviewEnlaces enlaces={enlaces} setEnlaces={setEnlaces} />
       </FormField>
-      <Button 
-        onClick={handleSubmit}
-        label="Crear perfil"
-      />
+      <Button onClick={handleSubmit} label="Actualizar perfil" />
     </GoBackLayout>
-  );
-};
-
-const PreviewFutbolinesSeleccionados = ({
-  futbolines,
-  setFutbolines,
-}: {
-  futbolines: TipoFutbolin[];
-  setFutbolines: (futbolines: TipoFutbolin[]) => void;
-}) => {
-  const handleEliminarFutbolin = (futbolinEliminar: TipoFutbolin) => {
-    const nuevosFutbolines = futbolines.filter((f) => f !== futbolinEliminar);
-    setFutbolines(nuevosFutbolines);
-  };
-
-  if (futbolines.length === 0) return null;
-
-  return (
-    <ul className="flex items-center gap-2 my-2 flex-wrap">
-      {futbolines.map((f) => (
-        <div
-          key={f}
-          className="flex items-center gap-2 bg-neutral-800 px-2 rounded-md"
-        >
-          <Image
-            src={ImagenFutbolinLogoMap[f]}
-            width={25}
-            height={25}
-            alt="Logo futbolin"
-          />
-          <p>{f}</p>
-          <button
-            aria-label="Eliminar futbolín"
-            onClick={() => handleEliminarFutbolin(f)}
-          >
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-        </div>
-      ))}
-    </ul>
-  );
-};
-
-const PreviewTelefonos = ({
-  telefonos,
-  setTelefonos,
-}: {
-  telefonos: Array<{ persona: string; numero: string }>;
-  setTelefonos: (telefonos: Array<{ persona: string; numero: string }>) => void;
-}) => {
-  const handleEliminarTelefono = (telefonoEliminar: string) => {
-    const nuevosTelefonos = telefonos.filter(
-      (t) => t.numero !== telefonoEliminar
-    );
-    setTelefonos(nuevosTelefonos);
-  };
-
-  if (telefonos.length === 0) return null;
-
-  return (
-    <ul className="flex items-center gap-2 my-2 flex-wrap">
-      {telefonos.map((t) => (
-        <div
-          key={t.numero}
-          className="flex items-center gap-2 bg-neutral-800 px-2 rounded-md"
-        >
-          <p>{t.persona}</p>
-          <p>{t.numero}</p>
-          <button
-            aria-label="Eliminar telefono"
-            onClick={() => handleEliminarTelefono(t.numero)}
-          >
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-        </div>
-      ))}
-    </ul>
-  );
-};
-
-const PreviewEnlaces = ({
-  enlaces,
-  setEnlaces,
-}: {
-  enlaces: string[];
-  setEnlaces: (enlaces: string[]) => void;
-}) => {
-  const handleEliminarEnlace = (enlaceEliminar: string) => {
-    const nuevosTelefonos = enlaces.filter((e) => e !== enlaceEliminar);
-    setEnlaces(nuevosTelefonos);
-  };
-
-  if (enlaces.length === 0) return null;
-
-  return (
-    <ul className="flex items-center gap-2 my-2 flex-wrap">
-      {enlaces.map((e) => (
-        <div
-          key={e}
-          className="flex items-center gap-2 bg-neutral-800 px-2 rounded-md"
-        >
-          <p>{e}</p>
-          <button
-            aria-label="Eliminar enlace"
-            onClick={() => handleEliminarEnlace(e)}
-          >
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-        </div>
-      ))}
-    </ul>
   );
 };

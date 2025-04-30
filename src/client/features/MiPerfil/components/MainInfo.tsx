@@ -18,7 +18,7 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
   return (
     <>
       <div className="flex flex-col mx-auto items-start md:gap-4 w-full min-w-xs max-w-lg border-b border-primary">
-      <MarcaVerificado user={user} />
+        <MarcaVerificado user={user} />
         <div className="flex items-center gap-2 mb-2">
           <ImagenPerfil imagenUrl={imageUrl} />
           <div>
@@ -34,8 +34,6 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
           </div>
         </div>
 
-
-
         <div className="flex flex-row my-4 items-center gap-2 justify-between w-full">
           {user.ciudad && (
             <div className="flex items-center gap-2 text-neutral-300">
@@ -50,20 +48,22 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
           )}
         </div>
       </div>
-      
-      <span className="flex items-center gap-2 w-full">
+
+      <span className="flex flex-col items-center gap-2 w-full">
+        <span className="flex items-center gap-2 w-full">
+          <Button
+            label="Editar perfil"
+            size="sm"
+            onClick={() => router.push("/perfil/editar?from=perfil")}
+          />
+          <Button
+            label="Ajustes"
+            size="sm"
+            variant="neutral-outline"
+            onClick={() => router.push("/ajustes?from=perfil")}
+          />
+        </span>
         {esOperador(user) && <BotonPerfilOperador user={user} />}
-        <Button
-          label="Editar perfil"
-          size="sm"
-          onClick={() => router.push("/perfil/editar?from=perfil")}
-        />
-        <Button
-          label="Ajustes"
-          size="sm"
-          variant="neutral-outline"
-          onClick={() => router.push("/ajustes?from=perfil")}
-        />
       </span>
     </>
   );

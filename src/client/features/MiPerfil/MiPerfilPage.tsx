@@ -38,7 +38,7 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
         <MisEquipos equipos={equipos} />
       </div>
 
-      <MisFutbolines futbolines={futbolines} />
+      <MisFutbolines futbolines={futbolines} operador={null}/>
 
       <span className="md:hidden">
         <Button

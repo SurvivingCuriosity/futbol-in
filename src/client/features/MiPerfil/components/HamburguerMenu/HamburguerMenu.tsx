@@ -1,4 +1,5 @@
-import { esOperador } from "@/core/helpers/esOperador";
+import { esGod } from "@/core/helpers/esGod";
+import { cuentaOperadorIniciada, esOperador } from "@/core/helpers/esOperador";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -68,7 +69,7 @@ export const HamburguerMenu = ({ user }: { user: UserDTO }) => {
                   Política de privacidad
                 </Link>
               </li>
-              {esOperador(user) && (
+              {esOperador(user) && cuentaOperadorIniciada(user) && (
                 <li
                   onClick={() => {
                     setIsOpen(false);
@@ -81,7 +82,7 @@ export const HamburguerMenu = ({ user }: { user: UserDTO }) => {
                   </Link>
                 </li>
               )}
-              {esOperador(user) && (
+              {esOperador(user) && cuentaOperadorIniciada(user) && (
                 <li
                   onClick={() => {
                     setIsOpen(false);
@@ -94,7 +95,7 @@ export const HamburguerMenu = ({ user }: { user: UserDTO }) => {
                   </Link>
                 </li>
               )}
-              {esOperador(user) && (
+              {esGod(user) && (
                 <li
                   onClick={() => {
                     setIsOpen(false);

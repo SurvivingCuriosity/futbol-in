@@ -2,6 +2,7 @@ import { SpotsCiudadPage } from "@/client/features/Spots/SpotsCiudadPage";
 import { decodeCiudad } from "@/core/helpers/encodeCiudad";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { SpotService } from "@/server/services/Spots/SpotsService";
+import { UserService } from "@/server/services/User/UserService";
 
 export const revalidate = 3600;
 
@@ -11,7 +12,7 @@ export async function generateMetadata({
   params: Promise<{ ciudad: string; placeId: string }>;
 }) {
   const { ciudad } = await params;
-  const ciudadCapitalizada = decodeURIComponent(ciudad.split('_')[0]);
+  const ciudadCapitalizada = decodeURIComponent(ciudad.split("_")[0]);
 
   return {
     title: `Futbolines en ${ciudadCapitalizada}`,
@@ -41,15 +42,25 @@ export default async function Page({
 }) {
   const { ciudad } = await params;
 
-  const ciudadParaBusqueda = decodeCiudad(ciudad)
+  const ciudadParaBusqueda = decodeCiudad(ciudad);
 
   const spots = await SpotService.findInCiudad(ciudadParaBusqueda);
-  
-  const coords = await GoogleMapsService.getCoordinatesFromCiudad(ciudadParaBusqueda);
 
-  return <SpotsCiudadPage spots={spots} coords={coords} ciudad={ciudad}/>;
+  const coords = await GoogleMapsService.getCoordinatesFromCiudad(
+    ciudadParaBusqueda
+  );
+
+  const idsOperadoresSet = new Set(spots.map((s) => s.idOperador));
+
+  const idsOperadores: string[] = [...idsOperadoresSet].filter(
+    (id): id is string => id !== null
+  );
+
+  const operadores = await UserService.getPerfilesOperadores(idsOperadores);
+  const operadoresMapeados = operadores.map(UserService.mapOperadorToDTO);
+
+  return <SpotsCiudadPage spots={spots} coords={coords} ciudad={ciudad} operadores={operadoresMapeados}/>;
 }
-
 
 export interface FullPlace {
   ciudad: string;

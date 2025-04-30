@@ -1,5 +1,6 @@
 import { PerfilPage } from "@/client/features/Perfil/PerfilPage";
 import { NavLayout } from "@/client/shared/layouts/NavLayout";
+import { SpotService } from "@/server/services/Spots/SpotsService";
 import { UserService } from "@/server/services/User/UserService";
 
 interface PageProps {
@@ -11,7 +12,7 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { username } = await params;
 
-  const userDoc = await UserService.findByUsername(username)
+  const userDoc = await UserService.findByUsername(username);
 
   if (!userDoc) {
     return (
@@ -22,8 +23,15 @@ export default async function Page({ params }: PageProps) {
   }
 
   const user = UserService.mapToDTO(userDoc);
+  const spots = await SpotService.getSpotsDeUsuario(user.id);
+  const operador =
+    (await UserService.getPerfilOperador(user.idOperador)) || null;
 
   return (
-    <PerfilPage user={user} />
+    <PerfilPage
+      user={user}
+      spots={spots}
+      operador={operador ? UserService.mapOperadorToDTO(operador) : null}
+    />
   );
 }
