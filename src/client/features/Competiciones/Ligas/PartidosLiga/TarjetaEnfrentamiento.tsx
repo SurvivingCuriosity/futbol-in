@@ -22,6 +22,8 @@ export const TarjetaEnfrentamiento = ({
 
   const { equipoInscrito, isOwner, liga } = use(DetalleLigaContext);
 
+  console.log(enfrentamiento)
+
   const [partidos, setPartidos] = useState<PartidoDTO[]>(
     enfrentamiento.partidos.length > 0
       ? enfrentamiento.partidos
@@ -67,12 +69,13 @@ export const TarjetaEnfrentamiento = ({
       idLiga: liga.id,
       idEnfrentamiento: enfrentamiento.id,
       partidos: partidos.map((p) => ({
+        id: p.id || undefined,
         equipoA: p.equipoA,
         equipoB: p.equipoB,
         golesEquipoA: p.golesEquipoA,
         golesEquipoB: p.golesEquipoB,
         finalizado: p.finalizado,
-        ganador: p.ganador,
+        ganador: null,
       })),
     })
     console.log(res)

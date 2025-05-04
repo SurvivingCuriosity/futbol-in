@@ -2,6 +2,7 @@ import { DataTable } from "@/client/shared/components/Table/Table";
 import { Column } from "@/client/shared/components/Table/types";
 import { EnfrentamientoDTO } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
 import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { getGolesAFavor, getGolesEnContra, getPartidosGanados, getPartidosJugados, getPartidosPerdidos } from "./helpers";
 
 export const TablaClasificacionLiga = ({
   equipos,
@@ -24,25 +25,20 @@ export const TablaClasificacionLiga = ({
   const sampleDataClasificacion: TableRow[] = equipos.map((e, i) => ({
     pos: i + 1,
     equipo: e.nombreEquipo,
-    pj: enfrentamientos.filter((e) => e.equipoA === e.id || e.equipoB === e.id).length,
-    pg: enfrentamientos.filter((e) => e.ganador === e.id).length,
-    pp: 10,
-    gf: 10,
-    gc: 10,
-    pts: 10,
+    pj: getPartidosJugados(e, enfrentamientos),
+    pg: getPartidosGanados(e, enfrentamientos),
+    pp: getPartidosPerdidos(e, enfrentamientos),
+    gf: getGolesAFavor(e, enfrentamientos),
+    gc: getGolesEnContra(e, enfrentamientos),
+    pts: getPartidosGanados(e, enfrentamientos),
   }));
 
   const columns: Column<TableRow>[] = [
     {
       key: "posicion",
-      header: (sortState) => (
+      header: () => (
         <span>
           Pos.
-          {sortState.columnKey === "posicion" && (
-            <span className="ml-1">
-              {sortState.direction === "asc" ? "▲" : "▼"}
-            </span>
-          )}
         </span>
       ),
       accessor: (row) => row.pos,
