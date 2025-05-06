@@ -1,14 +1,13 @@
 "use client";
-import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
-import { TarjetaEnfrentamiento } from "./TarjetaEnfrentamiento";
+import { EnfrentamientoDTO } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
+import { TextInput } from "futbol-in-ui";
 import { use, useState } from "react";
 import { DetalleLigaContext } from "../DetalleLiga/DetalleLigaContext";
-import { TextInput } from "futbol-in-ui";
-import { EnfrentamientoDTO } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
+import { TarjetaEnfrentamiento } from "./TarjetaEnfrentamiento";
 
 export const PartidosLigaPage = () => {
 
-  const {equipos, enfrentamientos, liga} = use(DetalleLigaContext)
+  const {equipos, enfrentamientos} = use(DetalleLigaContext)
 
   const [q, setQ] = useState("");
 
@@ -46,10 +45,6 @@ export const PartidosLigaPage = () => {
 
   return (
    <>
-    <TarjetaMensaje 
-        text={`Se jugarán ${liga.configEnfrentamiento.cantidadPartidos} partidos a ${liga.configEnfrentamiento.golesParaGanar} goles`}
-        variant="info"
-      />
       <div className="my-2">
         <TextInput value={q} onChangeText={handleFilter} placeholder="Buscar..."/>
         {enfrentamientosFiltrados.length === 0 && <p className="p-4 rounded-lg flex items-center justify-center text-neutral-500">No hay partidos</p>}

@@ -23,7 +23,7 @@ export const TarjetaEquipoTorneo = ({
 
   return (
     <div className="flex flex-col w-full border border-neutral-800 rounded-lg p-2">
-      <div className="flex items-center  w-full  gap-4 relative">
+      <div className="flex items-center  w-full gap-4 relative">
         
         <p className="w-32">{equipo.nombreEquipo}</p>
         <div className="flex flex-col w-full gap-1">
@@ -33,7 +33,7 @@ export const TarjetaEquipoTorneo = ({
               nombre={equipo.jugadores[0].nombre}
             />
           ) : (
-            <p className="p-2 border rounded-lg bg-neutral-900 border-neutral-800 font-bold text-neutral-200">{equipo.jugadores[0].nombre}</p>
+            <p className="p-1 border rounded-lg bg-neutral-900 border-neutral-800 text-sm font-semibold text-neutral-200">{equipo.jugadores[0].nombre}</p>
           )}
 
           {equipo.jugadores[1].usuario !== null ? (
@@ -42,7 +42,7 @@ export const TarjetaEquipoTorneo = ({
               nombre={equipo.jugadores[1].nombre}
             />
           ) : (
-            <p className="p-2 border rounded-lg bg-neutral-900 border-neutral-800 font-bold text-neutral-200">{equipo.jugadores[1].nombre}</p>
+            <p className="p-1 border rounded-lg bg-neutral-900 border-neutral-800 text-sm font-semibold text-neutral-200">{equipo.jugadores[1].nombre}</p>
           )}
         </div>
       </div>
@@ -75,7 +75,7 @@ export const TarjetaJugadorTorneo = ({
       setFullUser(user);
     };
     getUser();
-  }, []);
+  }, [idJugador]);
 
   return (
     <div
@@ -83,13 +83,13 @@ export const TarjetaJugadorTorneo = ({
         isSelf
           ? "bg-neutral-800 border-primary/50"
           : "bg-neutral-900 border-neutral-800"
-      }  w-full rounded-lg p-2 `}
+      }  w-full rounded-lg p-1`}
     >
-      <span className="flex items-center gap-2">
+      <span className="flex items-center gap-2 text-sm">
         <p
           className={` ${
             isSelf ? "text-primary" : "text-neutral-200"
-          } font-bold`}
+          } font-semibold`}
         >
           {nombre.toLowerCase()}
         </p>
