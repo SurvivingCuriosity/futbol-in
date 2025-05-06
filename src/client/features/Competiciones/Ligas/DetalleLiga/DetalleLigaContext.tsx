@@ -12,6 +12,7 @@ export interface DetalleLigaContext {
     equipos: EquipoConEstadoDTO[],
     enfrentamientos: EnfrentamientoDTO[],
     isOwner: boolean;
+    placeDetails: google.maps.places.PlaceResult
 }
 
 export const DetalleLigaContext = createContext<DetalleLigaContext>(

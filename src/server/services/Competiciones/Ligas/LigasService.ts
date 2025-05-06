@@ -158,6 +158,7 @@ export class LigasService {
       equipoA: enf.equipoA?.toString() ?? "",
       equipoB: enf.equipoB?.toString() ?? "",
       partidos: (enf.partidos as IPartido[]).map((p) => ({
+        id: p.id.toString(),
         enfrentamiento: p.enfrentamiento?.toString() ?? "",
         equipoA: p.equipoA?.toString() ?? "",
         equipoB: p.equipoB?.toString() ?? "",

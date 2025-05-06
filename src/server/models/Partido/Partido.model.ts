@@ -1,6 +1,7 @@
 import mongoose, { Model, Schema } from "mongoose";
 
 export interface PartidoDTO {
+  id: string;
   enfrentamiento: string;
   equipoA: string;
   equipoB: string;

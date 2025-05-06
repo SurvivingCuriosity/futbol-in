@@ -5,6 +5,7 @@ export const completarPartidosSchema = z.object({
   idEnfrentamiento: z.string(),
   partidos: z.array(
     z.object({
+      id: z.string().optional(),
       equipoA: z.string(),
       equipoB: z.string(),
       golesEquipoA: z.number().min(0),
