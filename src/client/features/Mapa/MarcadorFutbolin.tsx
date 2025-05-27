@@ -15,6 +15,8 @@ const htmlContentMap: Record<TipoFutbolin, string> = {
   [TipoFutbolin.DESCONOCIDO]: `<img alt="Logo desconocido" src="/logos/desconocido.png" width="32" height="32" />`,
   [TipoFutbolin.MADERA]: `<img alt="Logo madera" src="/logos/madera.png" width="32" height="32" />`,
   [TipoFutbolin.INFINITY]: `<img alt="Logo infinity" src="/logos/infinity.png" width="32" height="32" />`,
+  [TipoFutbolin.TECNO]: `<img alt="Logo infinity" src="/logos/tecno.png" width="32" height="32" />`,
+  [TipoFutbolin.REM]: `<img alt="Logo infinity" src="/logos/rem.webp" width="32" height="32" />`,
   [TipoFutbolin.CUALQUIERA]: `<img alt="Logo desconocido" src="/logos/desconocido.png" width="32" height="32" />`,
 };
 

@@ -34,6 +34,8 @@ const SelectorTipoFutbolin = memo((props: SelectorTipoFutbolinProps) => {
     { value: TipoFutbolin.INFINITY, label: "Infinity", imageUrl: '/logos/infinity.png' },
     { value: TipoFutbolin.PRESAS, label: "Presas 2000", imageUrl: '/logos/presas.png' },
     { value: TipoFutbolin.PRESAS_EVO, label: "Presas Evo", imageUrl: '/logos/presas_evo.png' },
+    { value: TipoFutbolin.TECNO, label: "Tecno", imageUrl: '/logos/tecno.png' },
+    { value: TipoFutbolin.REM, label: "Rem", imageUrl: '/logos/rem.webp' },
     { value: TipoFutbolin.DESCONOCIDO, label: "Desconocido", imageUrl: '/logos/desconocido.png' },
     { value: TipoFutbolin.MADERA, label: "De madera", imageUrl: '/logos/madera.png' },
   ];

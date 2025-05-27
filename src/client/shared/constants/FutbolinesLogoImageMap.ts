@@ -9,5 +9,7 @@ export const ImagenFutbolinLogoMap: Record<TipoFutbolin, string> = {
   [TipoFutbolin.DESCONOCIDO]: '/logos/desconocido.png',
   [TipoFutbolin.MADERA]: '/logos/madera.png',
   [TipoFutbolin.INFINITY]: '/logos/infinity.png',
+  [TipoFutbolin.TECNO]: '/logos/tecno.png',
+  [TipoFutbolin.REM]: '/logos/rem.webp',
   [TipoFutbolin.CUALQUIERA]: '/logos/desconocido.png',
 };

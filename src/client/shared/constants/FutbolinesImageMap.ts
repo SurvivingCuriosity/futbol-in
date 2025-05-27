@@ -23,6 +23,8 @@ export const ImagenFutbolinMap: Record<TipoFutbolin, StaticImageData> = {
   [TipoFutbolin.MADERA]: madera_deg,
   [TipoFutbolin.INFINITY]: infinity_deg,
   [TipoFutbolin.CUALQUIERA]: desconocido_deg,
+  [TipoFutbolin.TECNO]: desconocido_deg,
+  [TipoFutbolin.REM]: desconocido_deg,
 };
 
 
@@ -34,4 +36,6 @@ export const ImagenFutbolinMapNoDeg: Record<TipoFutbolin, StaticImageData> = {
   [TipoFutbolin.MADERA]: madera,
   [TipoFutbolin.INFINITY]: infinity,
   [TipoFutbolin.CUALQUIERA]: desconocido,
+  [TipoFutbolin.TECNO]: desconocido,
+  [TipoFutbolin.REM]: desconocido,
 };
