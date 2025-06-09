@@ -120,7 +120,7 @@ export const DetalleFutbolinPage = ({
           onChangeSpotCallback={setInnerSpot}
           agregadoPorUsuario={agregadoPorUsuario}
         />
-        {agregadoPorUsuario || esUsuarioVerificado(user as UserDTO) && (
+        {(agregadoPorUsuario || esUsuarioVerificado(user as UserDTO)) && (
           <Button onClick={handleEditarFutbolin} label="Editar" />
         )}
       </div>
