@@ -10,22 +10,22 @@ export interface ListaSpotsProps {
   selectedLugar: SpotDTO | null;
   onSelect: (lugar: SpotDTO | null) => void;
   userCoords: number[] | null;
-  operadores:OperadorDTO[];
+  operadores: OperadorDTO[];
 }
 
 const ListaSpots = (props: ListaSpotsProps) => {
   const { futbolines, selectedLugar, onSelect, userCoords, operadores } = props;
 
   const user = useGetLoggedInUserClient();
-  
-  const operadorUser = operadores.find((o) => o.id === user?.idOperador)
+
+  const operadorUser = operadores.find((o) => o.id === user?.idOperador);
 
   const puedeReclamarloComoOperador = (f: SpotDTO): boolean => {
     if (!operadorUser) return false;
 
     const yaLoGestiona = f.idOperador === operadorUser.id;
 
-    if(yaLoGestiona) return false
+    if (yaLoGestiona) return false;
 
     const trabajaElTipoDeFutbolin = operadorUser.futbolines.includes(
       f.tipoFutbolin
@@ -44,7 +44,7 @@ const ListaSpots = (props: ListaSpotsProps) => {
         {futbolines.map((f, index) => (
           <div
             key={f.nombre + index}
-            className="animate-fade-in-top"
+            className={index <= 7 ? "animate-fade-in-top" : ""}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             <TarjetaLugar
