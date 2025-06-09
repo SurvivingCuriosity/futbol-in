@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { DataTable } from "../../../shared/components/Table/Table";
 import { Column } from "../../../shared/components/Table/types";
 import { TarjetaStats } from "./TarjetaStats";
@@ -39,6 +40,10 @@ const columns: Column<UsuarioEnRanking>[] = [
     header: "Usuario",
     accessor: (row) => row.usuario,
     sortable: false,
+    cell: ({ row }) => {
+      // JSX personalizado en la celda
+      return <Link className="underline" href={`/user/${row.usuario}?from=competitivo/ranking`}>{row.usuario}</Link>;
+    },
   },
   {
     key: "spotsCreados",
