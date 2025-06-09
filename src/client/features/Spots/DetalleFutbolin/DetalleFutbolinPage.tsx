@@ -10,19 +10,34 @@ import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoI
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { TipoFutbolinNombre } from "@/core/enum/Futbolin/TipoFutbolin";
+import { esUsuarioVerificado } from "@/core/helpers/esUsuarioVerificado";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { UserDTO } from "@/server/models/User/UserDTO";
 import { faLocationDot, faStore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "futbol-in-ui";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const DetalleFutbolinPage = ({ futbolin }: { futbolin: SpotDTO }) => {
+export const DetalleFutbolinPage = ({
+  futbolin,
+  addedByUser,
+}: {
+  futbolin: SpotDTO;
+  addedByUser: UserDTO | null;
+}) => {
   const imagen = ImagenFutbolinMapNoDeg[futbolin.tipoFutbolin];
   const logo = ImagenFutbolinLogoMap[futbolin.tipoFutbolin];
   const user = useGetLoggedInUserClient();
   const agregadoPorUsuario = futbolin.addedByUserId === user?.id;
-
+  const router = useRouter();
   const [innerSpot, setInnerSpot] = useState<SpotDTO>(futbolin);
+
+  const handleEditarFutbolin = () => {
+    router.push(`/spots/detalle/${futbolin.id}/editar`);
+  };
 
   return (
     <GoBackLayout href="/spots" label="Futbolines">
@@ -74,6 +89,16 @@ export const DetalleFutbolinPage = ({ futbolin }: { futbolin: SpotDTO }) => {
             className="w-full md:max-w-80 h-auto object-cover -top-2 -right-2 z-2 rounded-2xl mx-auto"
           />
         </div>
+        <p className="my-2 text-neutral-400">
+          Futbolín agregado por{" "}
+          {addedByUser !== null ? (
+            <Link href={`/user/${addedByUser.name}`} className="underline">
+              {addedByUser.name}
+            </Link>
+          ) : (
+            "desconocido"
+          )}
+        </p>
 
         <div className="rounded-lg w-full flex justify-between z-2">
           <div className="w-full relative">
@@ -89,12 +114,15 @@ export const DetalleFutbolinPage = ({ futbolin }: { futbolin: SpotDTO }) => {
         </div>
 
         <Comentarios comentarios={innerSpot.comentarios} />
-        
+
         <BotonesLikeDislike
           spot={innerSpot}
           onChangeSpotCallback={setInnerSpot}
           agregadoPorUsuario={agregadoPorUsuario}
         />
+        {agregadoPorUsuario || esUsuarioVerificado(user as UserDTO) && (
+          <Button onClick={handleEditarFutbolin} label="Editar" />
+        )}
       </div>
     </GoBackLayout>
   );

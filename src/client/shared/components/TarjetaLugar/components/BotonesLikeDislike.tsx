@@ -69,20 +69,20 @@ export const BotonesLikeDislike = ({
 
   if (!user) {
     return (
-      <p className="text-xs text-neutral-600">
+      <p className="mb-2 text-xs text-neutral-600">
         Inicia sesión para valorar este lugar
       </p>
     );
   }
 
   if (agregadoPorUsuario) {
-    return <p className="text-xs text-neutral-600">Spot agregado por ti</p>;
+    return <p className="text-xs text-neutral-600 my-2">Spot agregado por ti</p>;
   }
 
   if (esUsuarioVerificado(user)) {
     if (!spot.verificado) {
       return (
-        <div className="flex items-center gap-2 text-sm">
+        <div className="mb-2 flex items-center gap-2 text-sm">
           <button
             onClick={() => handleClickVerificar("up")}
             className="cursor-pointer border w-full rounded-lg p-2 hover:bg-sky-500/20 bg-sky-900/50 border-sky-500 text-sky-500"
@@ -102,7 +102,7 @@ export const BotonesLikeDislike = ({
     } else {
       if (loHaVerificadoPositivamente) {
         return (
-          <div className="flex items-center gap-2 mt-4">
+          <div className="mb-2 flex items-center gap-2 mt-4">
             <p className="text-sm text-sky-600">Has verificado este futbolín</p>
             <button
               onClick={() => handleClickDeshacerVerificacion("up")}
@@ -116,7 +116,7 @@ export const BotonesLikeDislike = ({
 
       if (loHaVerificadoNegativamente) {
         return (
-          <div className="flex items-center gap-2 mt-4">
+          <div className="mb-2 flex items-center gap-2 mt-4">
             <p className="text-sm text-red-500">
               Indicaste que el lugar no es correcto
             </p>
@@ -134,7 +134,7 @@ export const BotonesLikeDislike = ({
 
   if (loHaVotadoPositivamente) {
     return (
-      <div className="flex items-center gap-2 mt-4">
+      <div className="mb-2 flex items-center gap-2 mt-4">
         <p className="text-sm text-green-600">
           Indicaste que el lugar es correcto
         </p>
@@ -150,7 +150,7 @@ export const BotonesLikeDislike = ({
 
   if (loHaVotadoNegativamente) {
     return (
-      <div className="flex items-center gap-2 mt-4">
+      <div className="mb-2 flex items-center gap-2 mt-4">
         <p className="text-sm text-red-500">
           Indicaste que el lugar no es correcto
         </p>
