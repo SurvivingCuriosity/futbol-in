@@ -24,7 +24,7 @@ export const PerfilPage = (props: MiPerfilPageProps) => {
 
   return (
     <GoBackLayout href={`/${fromParam}`}>
-      <div className="w-full h-full md:gap-8 justify-between flex flex-col space-y-8 md:space-y-0 md:mt-4 md:flex-row rounded-lg md:p-8 relative">
+      <div className="w-full h-full md:gap-8 justify-between flex flex-col space-y-8 md:space-y-0 md:mt-4 rounded-lg md:p-8 relative">
         <MainInfo user={user} />
 
         <Logros user={user} />
