@@ -46,12 +46,15 @@ export default async function Page({
 
   const spots = await SpotService.findInCiudad(ciudadParaBusqueda);
 
+  const googleInfoSpots = await GoogleMapsService.getPlaceDetailsFromPlaceIds(
+    spots.map((s) => s.googlePlaceId)
+  );
+
   const coords = await GoogleMapsService.getCoordinatesFromCiudad(
     ciudadParaBusqueda
   );
 
   const idsOperadoresSet = new Set(spots.map((s) => s.idOperador));
-
   const idsOperadores: string[] = [...idsOperadoresSet].filter(
     (id): id is string => id !== null
   );
@@ -59,7 +62,15 @@ export default async function Page({
   const operadores = await UserService.getPerfilesOperadores(idsOperadores);
   const operadoresMapeados = operadores.map(UserService.mapOperadorToDTO);
 
-  return <SpotsCiudadPage spots={spots} coords={coords} ciudad={ciudad} operadores={operadoresMapeados}/>;
+  return (
+    <SpotsCiudadPage
+      spots={spots}
+      googleInfoSpots={googleInfoSpots}
+      coords={coords}
+      ciudad={ciudad}
+      operadores={operadoresMapeados}
+    />
+  );
 }
 
 export interface FullPlace {

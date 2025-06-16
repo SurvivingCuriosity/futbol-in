@@ -1,5 +1,5 @@
+import { CurrentOpening } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
 import { errorResponse } from "@/server/lib/httpResponse";
-
 export type AutoCompleteKind = "address" | "establishment" | "(cities)";
 
 export class GoogleMapsService {
@@ -23,7 +23,7 @@ export class GoogleMapsService {
   }
 
   static async getCoordinatesFromCiudad(ciudad: string) {
-    console.log('Llega ciudad: ', ciudad)
+    console.log("Llega ciudad: ", ciudad);
     if (!ciudad) {
       return errorResponse("ciudad es requerida", 400);
     }
@@ -35,7 +35,7 @@ export class GoogleMapsService {
       `&components=country:es` +
       `&fields=geometry`;
 
-    console.log(url)
+    console.log(url);
 
     const res = await fetch(url);
     const data = await res.json();
@@ -67,8 +67,10 @@ export class GoogleMapsService {
 
     return data.result.geometry.location;
   }
-  
-  static async getPlaceDetailsFromPlaceId(placeId: string):Promise<google.maps.places.PlaceResult> {
+
+  static async getPlaceDetailsFromPlaceId(
+    placeId: string
+  ): Promise<google.maps.places.PlaceResult> {
     if (!placeId) {
       return errorResponse("placeId es requerido", 400);
     }
@@ -76,7 +78,7 @@ export class GoogleMapsService {
     const url =
       `https://maps.googleapis.com/maps/api/place/details/json` +
       `?place_id=${placeId}` +
-      `&key=${this.key}`
+      `&key=${this.key}`;
 
     const res = await fetch(url);
     const data = await res.json();
@@ -86,6 +88,43 @@ export class GoogleMapsService {
     }
 
     return data.result;
+  }
+
+  static async getPlaceDetailsFromPlaceIds(
+    placeIds: string[]
+  ): Promise<Array<google.maps.places.PlaceResult & CurrentOpening>> {
+    if (!Array.isArray(placeIds) || placeIds.length === 0) {
+      throw new Error("placeIds es requerido");
+    }
+
+    // → Campos mínimos que quieres (reduce coste y tamaño de la respuesta)
+    const fields =
+      "place_id,name,formatted_address,geometry/location,photos,types,current_opening_hours";
+
+    /* ---------- 1. Disparamos todas las peticiones en paralelo ---------- */
+    const requests = placeIds.map(async (id) => {
+      const url =
+        `https://maps.googleapis.com/maps/api/place/details/json` +
+        `?place_id=${encodeURIComponent(id)}` +
+        `&fields=${fields}` +
+        `&key=${this.key}`;
+
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status} al consultar ${id}`);
+      }
+
+      const data = await res.json();
+
+      if (data.status !== "OK") {
+        throw new Error(`No se pudo obtener el lugar ${id}: ${data.status}`);
+      }
+
+      return data.result;
+    });
+
+    /* ---------- 2. Esperamos todas y devolvemos el array limpio ---------- */
+    return Promise.all(requests);
   }
 
   static async getNombreLocalidadFromPlaceId(placeId: string) {

@@ -14,7 +14,7 @@ export const MisFutbolines = ({ futbolines, operador }: { futbolines: SpotDTO[],
         <ul className="my-2 flex gap-2 overflow-x-auto w-full">
           {futbolines.map((e) => (
             <span className="w-11/12 md:w-7/12 lg:w-5/12 shrink-0 pb-2" key={e.id}>
-              <TarjetaLugar spot={e} distanciaMessage={""} operador={operador}/>
+              <TarjetaLugar spot={e} distanciaMessage={""} operador={operador} />
             </span>
           ))}
         </ul>

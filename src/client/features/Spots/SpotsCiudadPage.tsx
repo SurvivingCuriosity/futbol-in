@@ -1,55 +1,89 @@
 "use client";
 
-import { TarjetaLugar } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
+import {
+  CurrentOpening,
+  TarjetaLugar,
+} from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
 import { useUserLocation } from "@/client/shared/services/UserLocation/useUserLocation";
 import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 import { ICoords } from "@/core/types/Spot/Coords";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { OperadorDTO } from "@/server/models/User/OperadorDTO";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
 import { InlinePicker } from "futbol-in-ui";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Mapa } from "../Mapa/Mapa";
 import { ButtonFiltros, Filtros } from "./components/Filtros/Filtros";
 import { PreviewFiltros } from "./components/Filtros/PreviewFiltros";
 import ListaSpots, { getDistanciaEntre } from "./ListaSpots";
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
 
 export interface SpotsCiudadPageProps {
   spots: SpotDTO[];
   coords: ICoords;
   ciudad: string;
-  operadores: OperadorDTO[]
+  operadores: OperadorDTO[];
+  googleInfoSpots: Array<google.maps.places.PlaceResult & CurrentOpening>;
 }
 
 export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
-  const { spots, coords, ciudad, operadores } = props;
+  const { spots, coords, ciudad, operadores, googleInfoSpots } = props;
 
   const userLocation = useUserLocation();
 
   const currentCoords = userLocation;
 
-  const [spotsFiltrados, setSpotsFiltrados] = useState<SpotDTO[]>(spots);
   const [selectedMarker, setSelectedMarker] = useState<SpotDTO | null>(null);
   const [view, setView] = useState<"list" | "map">("list");
   const [filtros, setFiltros] = useState<Filtros | null>(null);
 
-  useEffect(() => {
-    if (filtros === null) {
-      setSpotsFiltrados(spots);
-    } else {
-      const porTipoDeFutbolin =
-        filtros.tipoFutbolin === TipoFutbolin.CUALQUIERA
-          ? spots
-          : spots.filter((f) => f.tipoFutbolin === filtros.tipoFutbolin);
+  /** Devuelve `true` si el spot pasa TODOS los filtros. */
+  function cumpleFiltros(
+    spot: SpotDTO,
+    filtros: Filtros | null,
+    abiertos: Set<string> // place_id abiertos “ahora”
+  ): boolean {
+    if (!filtros) return true; // sin filtros → todos pasan
 
-      setSpotsFiltrados(porTipoDeFutbolin);
-    }
-  }, [filtros, spots]);
+    // 1. Tipo de futbolín
+    if (
+      filtros.tipoFutbolin !== TipoFutbolin.CUALQUIERA &&
+      spot.tipoFutbolin !== filtros.tipoFutbolin
+    )
+      return false;
 
-  const handleSelectSpot = (spot: SpotDTO | null) => {
-    setSelectedMarker(spot);
-  };
+    // 2. Verificado
+    if (filtros.soloVerificados && !spot.verificado) return false;
+
+    // 3. Bar abierto
+    if (filtros.soloBaresAbiertos && !abiertos.has(spot.googlePlaceId))
+      return false;
+
+    return true;
+  }
+
+  const abiertosAhora = useMemo(() => {
+    return new Set(
+      googleInfoSpots
+        .filter((s) => s.current_opening_hours?.open_now)
+        .map((s) => s.place_id)
+    );
+  }, [googleInfoSpots]);
+
+  const spotsFiltrados = useMemo(
+    () =>
+      spots.filter((s) =>
+        cumpleFiltros(s, filtros, abiertosAhora as Set<string>)
+      ),
+    [spots, filtros, abiertosAhora]
+  );
+
+  const handleSelectSpot = useCallback(
+    () => (spot: SpotDTO | null) => {
+      setSelectedMarker(spot);
+    },
+    []
+  );
 
   if (spots.length === 0) {
     return (
@@ -99,6 +133,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
         >
           <ListaSpots
             futbolines={spotsFiltrados}
+            googleInfoSpots={googleInfoSpots}
             selectedLugar={selectedMarker}
             onSelect={handleSelectSpot}
             operadores={operadores}
@@ -123,10 +158,15 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
           {selectedMarker !== null && (
             <div className="absolute bottom-2 z-5 mx-auto shadow w-full p-1 flex items-center justify-center">
               <TarjetaLugar
+                googleInfo={googleInfoSpots.find(
+                  (s) => s.place_id === selectedMarker.googlePlaceId
+                )}
                 spot={selectedMarker}
                 selected={true}
                 onSelect={() => {}}
-                operador={operadores.find((o) => o.id === selectedMarker.idOperador)}
+                operador={operadores.find(
+                  (o) => o.id === selectedMarker.idOperador
+                )}
                 distanciaMessage={
                   currentCoords
                     ? getDistanciaEntre(

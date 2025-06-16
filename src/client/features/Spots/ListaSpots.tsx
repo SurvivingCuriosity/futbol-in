@@ -1,6 +1,9 @@
 "use client";
 
-import { TarjetaLugar } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
+import {
+  CurrentOpening,
+  TarjetaLugar,
+} from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { OperadorDTO } from "@/server/models/User/OperadorDTO";
@@ -11,10 +14,18 @@ export interface ListaSpotsProps {
   onSelect: (lugar: SpotDTO | null) => void;
   userCoords: number[] | null;
   operadores: OperadorDTO[];
+  googleInfoSpots: Array<google.maps.places.PlaceResult & CurrentOpening>;
 }
 
 const ListaSpots = (props: ListaSpotsProps) => {
-  const { futbolines, selectedLugar, onSelect, userCoords, operadores } = props;
+  const {
+    futbolines,
+    selectedLugar,
+    onSelect,
+    userCoords,
+    operadores,
+    googleInfoSpots,
+  } = props;
 
   const user = useGetLoggedInUserClient();
 
@@ -49,6 +60,9 @@ const ListaSpots = (props: ListaSpotsProps) => {
           >
             <TarjetaLugar
               spot={f}
+              googleInfo={googleInfoSpots.find(
+                (s) => s.place_id === f.googlePlaceId
+              )}
               selected={f.googlePlaceId === selectedLugar?.googlePlaceId}
               onSelect={onSelect}
               distanciaMessage={

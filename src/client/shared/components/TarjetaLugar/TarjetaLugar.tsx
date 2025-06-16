@@ -2,17 +2,17 @@
 
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { OperadorDTO } from "@/server/models/User/OperadorDTO";
-import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
+import { faHand, faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { StorageClient } from "../../client/StorageClient";
 import { ImagenFutbolinLogoMap } from "../../constants/FutbolinesLogoImageMap";
+import { ImagenCuadrada } from "../ImagenCuadrada";
 import { BotoneraCompartir } from "./components/BotoneraCompartir";
 import { BotonReclamarComoOperador } from "./components/BotonReclamarComoOperador";
 import { MainInfo } from "./components/MainInfo";
-import { ImagenCuadrada } from "../ImagenCuadrada";
-import { StorageClient } from "../../client/StorageClient";
 
 export interface TarjetaLugarProps {
   spot: SpotDTO;
@@ -20,29 +20,37 @@ export interface TarjetaLugarProps {
   onSelect?: (l: SpotDTO | null) => void;
   distanciaMessage: string | null;
   puedeReclamarloComoOperador?: boolean;
-  operador: OperadorDTO|null|undefined
+  operador: OperadorDTO | null | undefined;
+  googleInfo?: (google.maps.places.PlaceResult & CurrentOpening) | undefined;
 }
+
+export type CurrentOpening = {
+  current_opening_hours: {
+    open_now: boolean;
+  };
+};
 
 export const TarjetaLugar = (props: TarjetaLugarProps) => {
   const {
+    googleInfo,
     spot: spotProp,
     selected,
     onSelect,
     distanciaMessage,
     puedeReclamarloComoOperador = false,
-    operador
+    operador,
   } = props;
 
   const [spot, setSpot] = useState<SpotDTO>(spotProp);
 
-  const [logoOperador, setLogoOperador] = useState<string>('');
+  const [logoOperador, setLogoOperador] = useState<string>("");
 
   useEffect(() => {
     const getImageUrl = async () => {
-      if(!operador || !operador.logo) return;
+      if (!operador || !operador.logo) return;
       const res = await StorageClient.getImageUrl(operador?.logo);
       setLogoOperador(res);
-    }
+    };
     getImageUrl();
   }, [operador?.logo, operador]);
 
@@ -75,6 +83,12 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
         height={200}
         className="w-40 absolute -top-10 -left-2 z-1 -rotate-12 opacity-5 pointer-events-none"
       />
+      {googleInfo && googleInfo.current_opening_hours.open_now && (
+        <div className="flex items-center gap-1 rounded text-xs text-primary w-min p-0.5">
+          <FontAwesomeIcon icon={faHand} className="mr-1" />
+          Abierto
+        </div>
+      )}
       <div onClick={handleClickSpot} className="relative">
         <MainInfo spot={spot} isOpen={!!selected} />
         <div className="w-full flex justify-between items-center mt-2">
@@ -92,19 +106,22 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
           </Link>
         </div>
 
-        {operador && 
-          <Link href={`/operador/${operador.id}`} className="flex items-center gap-2 ml-auto z-2 text-neutral-400 p-0.5 underline">
-            <ImagenCuadrada 
+        {operador && (
+          <Link
+            href={`/operador/${operador.id}`}
+            className="flex items-center gap-2 ml-auto z-2 text-neutral-400 p-0.5 underline"
+          >
+            <ImagenCuadrada
               size="sm"
               src={logoOperador}
               alt="Logo de la empresa"
             />
             {operador.nombreComercial}
           </Link>
-        }
+        )}
 
         {puedeReclamarloComoOperador && spot.idOperador !== operador?.id && (
-          <BotonReclamarComoOperador spot={spot} onUpdate={setSpot}/>
+          <BotonReclamarComoOperador spot={spot} onUpdate={setSpot} />
         )}
       </div>
     </div>

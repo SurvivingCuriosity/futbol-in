@@ -15,7 +15,7 @@ export const PreviewFiltros = (props: PreviewFiltrosProps) => {
   if (!filtros) return null;
 
   return (
-    <div className="flex items-center gap-2 ml-2">
+    <div className="flex items-center gap-2 ml-2 pb-0.5 overflow-x-auto">
       {filtros?.soloVerificados === true && (
         <ItemPreviewFiltro
           label="Solo verificados"
@@ -24,11 +24,22 @@ export const PreviewFiltros = (props: PreviewFiltrosProps) => {
           }}
         />
       )}
+      {filtros?.soloBaresAbiertos === true && (
+        <ItemPreviewFiltro
+          label="Abierto ahora"
+          onDelete={() => {
+            onFiltrosChange({ ...filtros, soloBaresAbiertos: false });
+          }}
+        />
+      )}
       {filtros?.tipoFutbolin !== TipoFutbolin.CUALQUIERA && (
         <ItemPreviewFiltro
-          label={filtros?.tipoFutbolin || ''}
+          label={filtros?.tipoFutbolin || ""}
           onDelete={() => {
-            onFiltrosChange({ ...filtros, tipoFutbolin: TipoFutbolin.CUALQUIERA });
+            onFiltrosChange({
+              ...filtros,
+              tipoFutbolin: TipoFutbolin.CUALQUIERA,
+            });
           }}
         />
       )}
@@ -44,9 +55,12 @@ export const ItemPreviewFiltro = ({
   onDelete: () => void;
 }) => {
   return (
-    <div className="p-1 px-2 pl-3 rounded-xl bg-neutral-800 text-neutral-300 flex items-center gap-2 text-sm">
+    <div className="p-0.5 px-2 pl-3 rounded-xl bg-neutral-800 text-neutral-300 flex items-center shrink-0 gap-2 text-sm">
       <p>{label}</p>
-      <button onClick={onDelete} className="hover:bg-neutral-700 size-5 flex rounded-full items-center justify-center">
+      <button
+        onClick={onDelete}
+        className="hover:bg-neutral-700 size-5 flex rounded-full items-center justify-center"
+      >
         <FontAwesomeIcon icon={faXmark} />
       </button>
     </div>

@@ -33,6 +33,7 @@ export const MapaGlobalPage = ({ spots }: { spots: SpotDTO[] }) => {
         {selectedMarker !== null && (
           <div className="absolute bottom-2 z-5 mx-auto shadow w-full p-1 flex items-center justify-center">
             <TarjetaLugar
+              googleInfo={undefined}
               spot={selectedMarker}
               selected={true}
               onSelect={() => {}}

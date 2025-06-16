@@ -29,7 +29,6 @@ export class SpotService {
     return this.mapToDTO(spot);
   }
 
-  
   static async createSpot(
     spot: Omit<SpotDTO, "id" | "votes">
   ): Promise<SpotDTO> {

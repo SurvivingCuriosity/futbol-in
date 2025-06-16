@@ -35,11 +35,7 @@ export const ButtonFiltros = (props: ButtonFiltrosProps) => {
         onClick={() => setOpenFiltros(true)}
         className="flex items-center gap-2 text-primary p-1 px-2 rounded-lg hover:bg-neutral-900"
       >
-        <FontAwesomeIcon
-          icon={faFilter}
-          width={24}
-          height={24}
-        />
+        <FontAwesomeIcon icon={faFilter} width={24} height={24} />
         <span className="hidden md:block">Filtros</span>
       </button>
     </>
@@ -49,6 +45,7 @@ export const ButtonFiltros = (props: ButtonFiltrosProps) => {
 export interface Filtros {
   tipoFutbolin: TipoFutbolin;
   soloVerificados: boolean;
+  soloBaresAbiertos: boolean;
 }
 
 export interface FiltrosPageProps {
@@ -62,6 +59,7 @@ export const Filtros = (props: FiltrosPageProps) => {
   const DEFAULT_FILTROS: Filtros = {
     tipoFutbolin: TipoFutbolin.CUALQUIERA,
     soloVerificados: false,
+    soloBaresAbiertos: false,
   };
 
   const [filtros, setFiltros] = useState<Filtros>(
@@ -88,13 +86,23 @@ export const Filtros = (props: FiltrosPageProps) => {
         }
         label="Solo futbolines verificados"
       />
-      <div className="flex items-center gap-2 justify-between mt-8">
+      <Switch
+        checked={filtros?.soloBaresAbiertos ?? false}
+        onChange={(v) =>
+          setFiltros((prev) => ({ ...prev, soloBaresAbiertos: v }))
+        }
+        label="Solo bares abiertos"
+      />
+      <div className="flex flex-col sm:flex-row items-center gap-2 justify-between mt-8">
         <Button
-          onClick={()=>onFiltrosChange(null)}
+          onClick={() => onFiltrosChange(null)}
           variant="outline"
           label="Resetear filtros"
         />
-        <Button onClick={()=>onFiltrosChange(filtros)} label="Aplicar filtros" />
+        <Button
+          onClick={() => onFiltrosChange(filtros)}
+          label="Aplicar filtros"
+        />
       </div>
     </div>
   );
