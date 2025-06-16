@@ -2,12 +2,14 @@ import { useEffect, useRef } from "react";
 
 interface AdvancedMarkerProps {
   map: google.maps.Map | null;
-  position: google.maps.LatLngLiteral;
+  position: google.maps.LatLngLiteral|null;
+  show?: boolean;
 }
 
 export function MarcadorUsuario({
   map,
-  position,
+  position = null,
+  show = false
 }: AdvancedMarkerProps) {
   const markerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(
     null
@@ -18,7 +20,10 @@ export function MarcadorUsuario({
 
     // Creamos el contenido del marcador como un elemento HTML
     const markerView = document.createElement("div");
-    const wrapperTop = `<div class="rounded-full size-10 p-0.5 flex items-center justify-center">`;
+    const wrapperTop = 
+      show ? `<div class="rounded-full size-10 p-0.5 flex items-center justify-center">`
+      : `<div class="hidden">`
+
     const wrapperBottom = `</div>`;
     markerView.innerHTML =
       wrapperTop +

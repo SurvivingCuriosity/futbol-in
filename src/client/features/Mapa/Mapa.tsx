@@ -88,10 +88,10 @@ export function Mapa(props: MapaProps) {
         restriction: restrictToSpain
           ? {
               latLngBounds: {
-                north: 46.0, // antes 43.79
-                south: 33.0, // antes 36.0
-                west: -10.5, // antes -9.3
-                east: 6.5, // antes 4.3
+                north: 46.0,
+                south: 33.0,
+                west: -10.5,
+                east: 6.5,
               },
               strictBounds: false,
             }
@@ -105,7 +105,7 @@ export function Mapa(props: MapaProps) {
         return (
           <MarcadorFutbolin
             key={m.googlePlaceId + index}
-            map={map} // le pasamos el map que tenemos en el estado
+            map={map}
             position={{ lat, lng }}
             tipoFutbolin={m.tipoFutbolin}
             onClick={() => onSelectMarker(m)}
@@ -113,7 +113,7 @@ export function Mapa(props: MapaProps) {
         );
       })}
 
-      {userLocation && <MarcadorUsuario map={map} position={userLocation} />}
+      <MarcadorUsuario map={map} position={userLocation} show={!!userLocation} />
     </GoogleMap>
   );
 }
