@@ -1,4 +1,5 @@
-// hooks/useUserLocation.ts
+"use client"
+
 import { useEffect, useState } from "react";
 
 export interface LatLngLiteral {
