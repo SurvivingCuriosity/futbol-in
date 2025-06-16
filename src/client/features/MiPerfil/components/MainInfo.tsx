@@ -1,14 +1,15 @@
 import { ChipPosicionJugador } from "@/client/shared/components/ChipPosicionJugador";
 import { useUser } from "@/client/shared/context/UserContext";
+import { esOperador } from "@/core/helpers/esOperador";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
-import { ImagenPerfil } from "./ImagenPerfil";
-import { MarcaVerificado } from "./MarcaVerificado";
-import { esOperador } from "@/core/helpers/esOperador";
 import { BotonPerfilOperador } from "./BotonPerfilOperador";
+import { ImagenPerfil } from "./ImagenPerfil";
+import { MarcadorPuntuacion } from "./MarcadorPuntuacion";
+import { MarcaVerificado } from "./MarcaVerificado";
 
 export const MainInfo = ({ user }: { user: UserDTO }) => {
   const router = useRouter();
@@ -18,8 +19,8 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
   return (
     <>
       <div className="flex flex-col mx-auto items-start md:gap-4 w-full min-w-xs max-w-lg border-b border-primary">
-        <MarcaVerificado user={user} />
-        <div className="flex items-center gap-2 mb-2">
+        <div className="mt-9 relative flex items-center w-full gap-2 mb-2">
+          <MarcaVerificado user={user} />
           <ImagenPerfil imagenUrl={imageUrl} />
           <div>
             <p className="font-bold text-3xl text-primary">{user.name}</p>
@@ -65,6 +66,7 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
         </span>
         {esOperador(user) && <BotonPerfilOperador user={user} />}
       </span>
+      <MarcadorPuntuacion />
     </>
   );
 };

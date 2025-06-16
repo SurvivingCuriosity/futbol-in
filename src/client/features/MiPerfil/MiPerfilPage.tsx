@@ -1,17 +1,17 @@
 "use client";
 
 import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { Button } from "futbol-in-ui";
 import { signOut } from "next-auth/react";
+import { useState } from "react";
+import { CompletarPerfil } from "./CompletarPerfil/CompletarPerfil";
+import { HamburguerMenu } from "./components/HamburguerMenu/HamburguerMenu";
 import { Logros } from "./components/Logros";
 import { MainInfo } from "./components/MainInfo";
 import { MisEquipos } from "./components/MisEquipos";
-import { CompletarPerfil } from "./CompletarPerfil/CompletarPerfil";
-import { useState } from "react";
-import { HamburguerMenu } from "./components/HamburguerMenu/HamburguerMenu";
 import { MisFutbolines } from "./components/MisFutbolines";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 
 export interface MiPerfilPageProps {
   user: UserDTO;
@@ -29,6 +29,7 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
       <HamburguerMenu user={user} />
 
       <MainInfo user={user} />
+      
 
       <CompletarPerfil user={user} onUpdateUser={setUser} />
 
