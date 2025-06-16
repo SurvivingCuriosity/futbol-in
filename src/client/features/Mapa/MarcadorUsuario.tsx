@@ -52,3 +52,10 @@ export function MarcadorUsuario({
 
   return null;
 }
+
+MarcadorUsuario.getHTML = (tipoFutbolin: string) => {
+  const wrapper = document.createElement("div");
+  wrapper.className = "rounded-full size-10 p-0.5 flex items-center justify-center";
+  wrapper.innerHTML = `<img src="/iconos/${tipoFutbolin}.svg" width="22" height="22" />`;
+  return wrapper;
+};

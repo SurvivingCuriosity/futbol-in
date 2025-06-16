@@ -71,3 +71,18 @@ export function MarcadorFutbolin({
 
   return null;
 }
+
+MarcadorFutbolin.getHTML = (tipoFutbolin: TipoFutbolin): HTMLElement => {
+  // 1) Nodo raíz
+  const wrapper = document.createElement("div");
+  wrapper.className =
+    "bg-neutral-900 rounded-full size-10 p-0.5 flex items-center justify-center";
+  wrapper.style.cursor = "pointer";
+
+  // 2) HTML interno según el tipo
+  wrapper.innerHTML =
+    htmlContentMap[tipoFutbolin] ??
+    `<img alt="Logo genérico" src="/futbolin-logo.svg" width="22" height="22" />`;
+
+  return wrapper;
+}
