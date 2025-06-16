@@ -83,7 +83,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
         height={200}
         className="w-40 absolute -top-10 -left-2 z-1 -rotate-12 opacity-5 pointer-events-none"
       />
-      {googleInfo && googleInfo.current_opening_hours.open_now && (
+      {googleInfo && googleInfo?.current_opening_hours?.open_now === true && (
         <div className="flex items-center gap-1 rounded text-xs text-primary w-min p-0.5">
           <FontAwesomeIcon icon={faHand} className="mr-1" />
           Abierto

@@ -65,7 +65,7 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
   const abiertosAhora = useMemo(() => {
     return new Set(
       googleInfoSpots
-        .filter((s) => s.current_opening_hours?.open_now)
+        .filter((s) => s?.current_opening_hours?.open_now === true)
         .map((s) => s.place_id)
     );
   }, [googleInfoSpots]);
