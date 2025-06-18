@@ -15,12 +15,11 @@ export const MisEquipos = ({ equipos }: { equipos: EquipoDTO[] }) => {
   };
 
   return (
-    <div className="grow p-3 bg-neutral-900 rounded-lg flex flex-col justify-between">
-      <p className="mb-2 text-xl text-primary font-bold">Mis equipos</p>
+    <div className="grow bg-neutral-900 rounded-lg flex flex-col justify-between">
       {equipos.length === 0 ? (
         <p className="text-center p-8 text-neutral-600">No tienes ningún equipo</p>
       ) : (
-        <ul className="my-2 flex gap-2 overflow-x-auto w-full">
+        <ul className="mb-3 flex gap-2 overflow-x-auto w-full">
           {equipos.map((e) => (
             <TarjetaEquipo
               equipo={e}

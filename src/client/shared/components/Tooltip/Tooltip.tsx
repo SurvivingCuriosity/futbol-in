@@ -15,7 +15,7 @@ export const Tooltip = ({
     <>
       <a data-tooltip-id={id} className="relative">
         {children}
-        <FontAwesomeIcon icon={faInfoCircle} width={20} height={20} className="text-xs absolute -top-2 -right-2 text-neutral-500" />
+        <FontAwesomeIcon icon={faInfoCircle} width={20} height={20} className="text-xs absolute -top-1.5 -right-2 text-neutral-500" />
       </a>
       <ReactTooltip
         id={id}

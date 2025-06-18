@@ -8,7 +8,6 @@ import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { BotonPerfilOperador } from "./BotonPerfilOperador";
 import { ImagenPerfil } from "./ImagenPerfil";
-import { MarcadorPuntuacion } from "./MarcadorPuntuacion";
 import { MarcaVerificado } from "./MarcaVerificado";
 
 export const MainInfo = ({ user }: { user: UserDTO }) => {
@@ -17,9 +16,9 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
   const { imageUrl } = useUser();
 
   return (
-    <>
-      <div className="flex flex-col mx-auto items-start md:gap-4 w-full min-w-xs max-w-lg border-b border-primary">
-        <div className="mt-9 relative flex items-center w-full gap-2 mb-2">
+    <div className="space-y-2 mb-12">
+      <div className="flex flex-col mx-auto items-start md:gap-4 w-full min-w-xs max-w-lg md:border-b border-primary">
+        <div className="relative flex items-center w-full gap-2 mb-2">
           <MarcaVerificado user={user} />
           <ImagenPerfil imagenUrl={imageUrl} />
           <div>
@@ -35,7 +34,7 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
           </div>
         </div>
 
-        <div className="flex flex-row my-4 items-center gap-2 justify-between w-full">
+        <div className="flex flex-row md:mb-4 items-center gap-2 justify-between w-full">
           {user.ciudad && (
             <div className="flex items-center gap-2 text-neutral-300">
               <FontAwesomeIcon icon={faLocationDot} />
@@ -57,16 +56,16 @@ export const MainInfo = ({ user }: { user: UserDTO }) => {
             size="sm"
             onClick={() => router.push("/perfil/editar?from=perfil")}
           />
-          <Button
+          {/* <Button
             label="Ajustes"
             size="sm"
             variant="neutral-outline"
             onClick={() => router.push("/ajustes?from=perfil")}
-          />
+          /> */}
         </span>
         {esOperador(user) && <BotonPerfilOperador user={user} />}
       </span>
-      <MarcadorPuntuacion />
-    </>
+
+    </div>
   );
 };
