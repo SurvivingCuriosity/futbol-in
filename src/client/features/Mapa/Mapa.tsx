@@ -121,7 +121,9 @@ const googleMarkers = useMemo(() => {
       position: { lat: spot.coordinates[1], lng: spot.coordinates[0] },
       content: MarcadorFutbolin.getHTML(spot.tipoFutbolin),
     });
-    marker.addListener("click", () => onSelectMarker(spot));
+    marker.addListener("click", () => {
+      onSelectMarker(spot)
+    });
     return marker;
   });
 }, [isLoaded, markers, onSelectMarker]);

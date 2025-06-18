@@ -79,7 +79,8 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
   );
 
   const handleSelectSpot = useCallback(
-    () => (spot: SpotDTO | null) => {
+    (spot: SpotDTO | null) => {
+      console.log("handleSelectSpot", spot);
       setSelectedMarker(spot);
     },
     []
@@ -151,7 +152,9 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
           <Mapa
             markers={spotsFiltrados}
             selectedMarker={selectedMarker}
-            onSelectMarker={handleSelectSpot}
+            onSelectMarker={(spot)=>{
+              handleSelectSpot(spot)
+            }}
             userLocation={currentCoords}
             initialCenter={coords}
           />
