@@ -2,7 +2,10 @@
 
 import { SpotDTO } from "@/server/models/Spot/SpotDTO";
 import { OperadorDTO } from "@/server/models/User/OperadorDTO";
-import { faHand, faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHand,
+  faLocationCrosshairs,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
@@ -66,8 +69,9 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
   const logo = ImagenFutbolinLogoMap[spot.tipoFutbolin];
 
   return (
-    <div
-      className={`group relative p-2 md:p-3 border border-neutral-700 bg-neutral-900 rounded-lg select-none w-full md:min-w-[400px] overflow-hidden`}
+    <Link
+      href={`/spots/detalle/${spot.id}`}
+      className={`block group relative p-2 md:p-3 border border-neutral-700 bg-neutral-900 rounded-lg select-none w-full md:min-w-[400px] overflow-hidden`}
     >
       <span className="absolute top-1 right-1 z-3 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
         <BotoneraCompartir
@@ -98,12 +102,6 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
               <p>{distanciaMessage}</p>
             </span>
           )}
-          <Link
-            href={`/spots/detalle/${spot.id}`}
-            className="ml-auto z-2 text-neutral-400 p-0.5"
-          >
-            Más detalles
-          </Link>
         </div>
 
         {operador && (
@@ -124,6 +122,6 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
           <BotonReclamarComoOperador spot={spot} onUpdate={setSpot} />
         )}
       </div>
-    </div>
+    </Link>
   );
 };
