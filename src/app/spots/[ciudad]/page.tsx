@@ -3,6 +3,7 @@ import { decodeCiudad } from "@/core/helpers/encodeCiudad";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { SpotService } from "@/server/services/Spots/SpotsService";
 import { UserService } from "@/server/services/User/UserService";
+import Link from "next/link";
 
 export const revalidate = 3600;
 
@@ -46,8 +47,24 @@ export default async function Page({
 
   const spots = await SpotService.findInCiudad(ciudadParaBusqueda);
 
+  if (spots.length === 0) {
+    return (
+      <div className="p-10 max-w-md mx-auto flex flex-col items-stretch h-full">
+        <p className="text-center text-neutral-400 mb-8 text-2xl">
+          Ups... parece que aún no hay futbolines en esta ciudad
+        </p>
+        <Link
+          className="bg-primary text-neutral-900 px-4 p-2 text-lg rounded-2xl w-fit mx-auto"
+          href={`/agregar-spot?ciudad=${ciudad}`}
+        >
+          {`Añade el primero`}
+        </Link>
+      </div>
+    );
+  }
+
   const googleInfoSpots = await GoogleMapsService.getPlaceDetailsFromPlaceIds(
-    spots.map((s) => s.googlePlaceId)
+    spots.map((s) => s.googlePlaceId) || []
   );
 
   const coords = await GoogleMapsService.getCoordinatesFromCiudad(

@@ -80,7 +80,6 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
 
   const handleSelectSpot = useCallback(
     (spot: SpotDTO | null) => {
-      console.log("handleSelectSpot", spot);
       setSelectedMarker(spot);
     },
     []
