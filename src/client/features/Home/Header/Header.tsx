@@ -3,7 +3,6 @@ import { useUser } from "@/client/shared/context/UserContext";
 import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
 import { UserDTO } from "@/server/models/User/UserDTO";
 import { BotonNotificaciones } from "../Notificaciones/BotonNotificaciones";
-import { HeaderLocation } from "./HeaderLocation";
 
 export const Header = ({
   tieneNotificaciones,
@@ -39,7 +38,6 @@ export const Header = ({
           notificaciones={notificaciones}
         />
       </div>
-     <HeaderLocation user={user}/>
     </header>
   );
 };

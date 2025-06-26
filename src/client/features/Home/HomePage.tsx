@@ -15,6 +15,7 @@ import {
 } from "@/client/shared/services/LocalStorage/LStorage";
 import { ListaCompeticionesHome } from "./CompeticionesHome/ListaCompeticionesHome";
 import { CompeticionBaseDTO } from "@/server/models/Competicion/CompeticionBase/CompeticionBaseDTO";
+import { HeaderLocation } from "./Header/HeaderLocation";
 
 const HomePage = ({
   user,
@@ -56,14 +57,21 @@ const HomePage = ({
 
   return (
     <div>
+      {user && ciudadDone && (
+        <div className={`pt-7 md:pt-0`}>
+          <div className="fixed top-0 left-0 w-full md:relative md:pb-3">
+            <HeaderLocation user={user} />
+          </div>
+        </div>
+      )}
       <Header
         user={user}
         tieneNotificaciones={tieneNotificaciones}
         notificaciones={notificaciones}
       />
       {!ciudadDone && (
-        <div className="flex flex-col gap-2">
-          <p className="text-primary">Completa tu ciudad</p>
+        <div className="flex flex-col gap-2 bg-primary-800/20 p-4 rounded-2xl mb-8">
+          <p className="text-primary">¿Dónde te encuentras ahora?</p>
           <CompletarCiudad onSubmit={handleUpdateCiudadActual} />
         </div>
       )}

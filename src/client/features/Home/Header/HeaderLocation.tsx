@@ -42,17 +42,17 @@ export const HeaderLocation = ({
   if (!user.ciudadActual) return null;
 
   return (
-    <div className="flex justify-between w-full">
-      <div className="flex items-center gap-2">
-        <FontAwesomeIcon icon={faLocationDot} />
+    <div className="flex justify-between w-full px-2 p-1.5 bg-neutral-400/80 text-neutral-900">
+      <div className="flex items-center gap-1">
+        <FontAwesomeIcon icon={faLocationDot} className="text-sm"/>
         <p className="text-sm leading-3">{user.ciudadActual?.split(",")[0]}</p>
-        <p className="text-neutral-500 text-xs">
+        <p className="text-neutral-600 text-xs">
           {`(${user.ciudadActual?.split(",")[1]?.trim()})`}
         </p>
       </div>
       <button
         onClick={() => setShowWindow(true)}
-        className="text-xs text-neutral-500 underline"
+        className="text-xs text-neutral-900 underline"
       >
         Cambiar
       </button>
