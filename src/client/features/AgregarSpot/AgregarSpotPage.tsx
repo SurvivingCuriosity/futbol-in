@@ -194,7 +194,7 @@ const AgregarSpotPage = () => {
             value={comentarios}
             onChange={(e) => setComentarios(e.target.value)}
             className="w-full h-24 max-h-48 min-h-16 p-2 border border-neutral-700 rounded-lg text-sm"
-            placeholder="Puedes indicar aquí el bar en el que se encuentra el futbolín si no lo encontraste en el buscador. También cualquier otra información que consideres relevante para el resto de usuarios."
+            placeholder="Puedes indicar aquí el bar en el que se encuentra el futbolín si no lo encontraste en el buscador. También cualquier otra información que consideres relevante para el resto de usuarios (barras ligeras, estado del futbolín etc.)"
           />
         </FormField>
 
