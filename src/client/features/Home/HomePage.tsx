@@ -70,7 +70,7 @@ const HomePage = ({
         notificaciones={notificaciones}
       />
       {!ciudadDone && (
-        <div className="flex flex-col gap-2 bg-primary-800/20 p-4 rounded-2xl mb-8">
+        <div className="flex flex-col gap-2 bg-neutral-900 p-4 rounded-2xl mb-4">
           <p className="text-primary">¿Dónde te encuentras ahora?</p>
           <CompletarCiudad onSubmit={handleUpdateCiudadActual} />
         </div>
