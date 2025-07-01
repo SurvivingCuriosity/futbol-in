@@ -16,6 +16,7 @@ import { ImagenCuadrada } from "../ImagenCuadrada";
 import { BotoneraCompartir } from "./components/BotoneraCompartir";
 import { BotonReclamarComoOperador } from "./components/BotonReclamarComoOperador";
 import { MainInfo } from "./components/MainInfo";
+import { useRouter } from "next/navigation";
 
 export interface TarjetaLugarProps {
   spot: SpotDTO;
@@ -43,6 +44,8 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
     puedeReclamarloComoOperador = false,
     operador,
   } = props;
+
+  const router = useRouter()
 
   const [spot, setSpot] = useState<SpotDTO>(spotProp);
 
@@ -105,8 +108,8 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
         </div>
 
         {operador && (
-          <Link
-            href={`/operador/${operador.id}`}
+          <button
+            onClick={()=>router.push(`/operadores/${operador.id}`)}
             className="flex items-center gap-2 ml-auto z-2 text-neutral-400 p-0.5 underline"
           >
             <ImagenCuadrada
@@ -115,7 +118,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
               alt="Logo de la empresa"
             />
             {operador.nombreComercial}
-          </Link>
+          </button>
         )}
 
         {puedeReclamarloComoOperador && spot.idOperador !== operador?.id && (
