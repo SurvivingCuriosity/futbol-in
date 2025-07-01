@@ -44,7 +44,9 @@ export const SpotsVacio = () => {
 
   return (
     <div className="w-full">
-      <SearchInputRedirect />
+      <div className="sticky top-0 z-3 py-2 bg-neutral-950">
+        <SearchInputRedirect />
+      </div>
       <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full mt-4">
         {ciudades.map((ciudad) => (
           <Link
