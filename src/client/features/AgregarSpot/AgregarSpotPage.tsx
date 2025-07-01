@@ -180,7 +180,7 @@ const AgregarSpotPage = () => {
             />
           </FormField>
           <FormField>
-            <FormLabel>Distrubucion *</FormLabel>
+            <FormLabel>Distribucion *</FormLabel>
             <SelectorDistribucionFutbolin
               onSelect={setDistribucion}
               value={distribucion}
