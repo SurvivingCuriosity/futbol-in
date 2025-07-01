@@ -16,7 +16,7 @@ export const BuscarBtn = () => {
   return (
     <Link
       href={"/spots"}
-      className={`flex items-center justify-center tour-buscar p-2 ${isActive('/spots/') ? "text-primary" : "text-white"}`}
+      className={`tour-buscar flex items-center justify-center p-2 ${isActive('/spots/') ? "text-primary" : "text-white"}`}
       aria-label={"Spots"}
       prefetch
     >
