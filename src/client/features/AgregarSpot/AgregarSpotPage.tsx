@@ -93,8 +93,8 @@ const AgregarSpotPage = () => {
       setLoading(false);
     } catch (error) {
       const errores = getErrorsClient(error);
-      if(errores && 'futbolin' in errores){
-        toast.error(errores['futbolin'])
+      if (errores && "futbolin" in errores) {
+        toast.error(errores["futbolin"]);
       }
       setErrors(getErrorsClient(error));
       setLoading(false);
