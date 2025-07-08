@@ -50,6 +50,8 @@ export function Mapa({
     libraries: markerLibrary,
   });
 
+  const memoCenter = useMemo(() => initialCenter, []);
+
   /* -------------------------------------------------------------------- */
   /* 2. Estado: mapa y clúster                                            */
   /* -------------------------------------------------------------------- */
@@ -170,14 +172,14 @@ const googleMarkers = useMemo(() => {
   /* -------------------------------------------------------------------- */
   if (loadError) return <div>Error al cargar el mapa</div>;
   if (!isLoaded) return <div>Cargando mapa...</div>;
-  if (!initialCenter) return <div>Navegando...</div>;
+  if (!initialCenter || !memoCenter) return <div>Navegando...</div>;
 
   return (
     <GoogleMap
       onLoad={(m) => setMap(m)}
       onUnmount={() => setMap(null)}
       mapContainerStyle={{ width: "100%", height: "100%", zIndex: 1 }}
-      center={initialCenter}
+      center={memoCenter}
       options={{
         disableDefaultUI: true,
         gestureHandling: "greedy",
