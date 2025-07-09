@@ -16,3 +16,16 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "futbolin.app" }],
+        permanent: true,
+        destination: "https://futbolin.app/:path*",
+      },
+    ];
+  },
+};
