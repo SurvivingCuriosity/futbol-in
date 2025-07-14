@@ -1,10 +1,9 @@
+import { AuthProvider, UserRole, UserStatus } from "futbol-in-core/enum";
+import { UserDTO } from "futbol-in-core/types";
 import { DefaultUser } from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
 
-import { UserRole } from "@/core/enum/User/Role";
-import { UserStatus } from "@/core/enum/User/Status";
-import { AuthProvider } from "@/core/enum/User/AuthProvider";
-import { UserDTO } from "@/server/models/User/UserDTO";
+
 
 /**
  * Para modificar/añadir campos en la interfaz "User" de NextAuth

@@ -1,4 +1,4 @@
-import { CompeticionBaseDTO } from "@/server/models/Competicion/CompeticionBase/CompeticionBaseDTO";
+import { CompeticionBaseDTO } from "futbol-in-core/types";
 
 export type JoinCompeticionRequest = { idCompeticion: string; idEquipo: string };
 

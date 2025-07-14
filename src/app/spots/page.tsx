@@ -1,5 +1,5 @@
 import { SpotsVacio } from "@/client/features/Spots/SpotsVacio";
-import { encodeCiudad } from "@/core/helpers/encodeCiudad";
+import { encodeCiudad } from "futbol-in-core/helpers";
 import { authOptions } from "@/server/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

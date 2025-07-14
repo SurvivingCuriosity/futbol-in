@@ -1,5 +1,5 @@
 import { ListaFutbolinesGod } from "@/client/features/God/ListaFutbolinesGod";
-import { esGod } from "@/core/helpers/esGod";
+import { esGod } from "futbol-in-core/helpers";
 import { authOptions } from "@/server/lib/authOptions";
 import { SpotService } from "@/server/services/Spots/SpotsService";
 import { getServerSession } from "next-auth";

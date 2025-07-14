@@ -1,4 +1,4 @@
-import { UserStatus } from "@/core/enum/User/Status";
+import { UserStatus } from "futbol-in-core/enum";
 import { errorResponse } from "@/server/lib/httpResponse";
 import { RegistrationService } from "@/server/services/Auth/RegistrationService";
 import { UserService } from "@/server/services/User/UserService";

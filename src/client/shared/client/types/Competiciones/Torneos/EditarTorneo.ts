@@ -1,4 +1,4 @@
-import { TorneoDTO } from "@/server/models/Competicion/Torneos/TorneoDTO";
+import { TorneoDTO } from "futbol-in-core/types";
 
 export type  EditarTorneoRequest = {idCompeticion:string, data:Partial<TorneoDTO>}
 

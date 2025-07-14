@@ -1,5 +1,5 @@
 import { ListaUsuariosGod } from "@/client/features/God/ListaUsuariosGod";
-import { esGod } from "@/core/helpers/esGod";
+import { esGod } from "futbol-in-core/helpers";
 import { authOptions } from "@/server/lib/authOptions";
 import { UserService } from "@/server/services/User/UserService";
 import { getServerSession } from "next-auth";

@@ -1,7 +1,7 @@
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { EquipoDTO } from "futbol-in-core/types";
 import { EquipoService } from "../Equipo/EquipoService";
 import { UserService } from "../User/UserService";
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
+import { EstadoJugador } from "futbol-in-core/enum";
 
 export class NotificacionesService {
     

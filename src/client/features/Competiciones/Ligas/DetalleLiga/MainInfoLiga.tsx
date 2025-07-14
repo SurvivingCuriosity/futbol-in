@@ -1,4 +1,4 @@
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { LigaDTO } from "futbol-in-core/types";
 import {
   faFutbol,
   faGamepad,
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { use } from "react";
 import { DetalleLigaContext } from "./DetalleLigaContext";
 import { BotonArrancarCompeticion } from "../../common/BotonArrancarCompeticion";
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
+import { EstadoCompeticion } from "futbol-in-core/enum";
 import Link from "next/link";
 
 export const MainInfoLiga = ({ competicion }: { competicion: LigaDTO }) => {

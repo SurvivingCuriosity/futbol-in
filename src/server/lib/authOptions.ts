@@ -1,11 +1,9 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { AuthProvider } from "../../core/enum/User/AuthProvider";
-import { UserStatus } from "../../core/enum/User/Status";
 import { UserService } from "../../server/services/User/UserService";
 import connectDb from "./db";
-import { UserRole } from "../../core/enum/User/Role";
+import { AuthProvider, UserRole, UserStatus } from "futbol-in-core/enum";
 
 export const authOptions: NextAuthOptions = {
   session: {

@@ -1,4 +1,4 @@
-import { TypedRequest } from "@/core/types/Request/TypedRequest";
+import { TypedRequest } from "futbol-in-core/types";
 import { errorResponse, successResponse } from "@/server/lib/httpResponse";
 import { UserService } from "@/server/services/User/UserService";
 import { validateLoggedInUser } from "@/server/validations/shared/validateLoggedInUser";

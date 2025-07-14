@@ -1,8 +1,8 @@
 import { RegisterForm } from "@/client/features/Auth/Register/RegisterForm";
-import { UserStatus } from "@/core/enum/User/Status";
 import { authOptions } from "@/server/lib/authOptions";
 import { verifyRegistrationToken } from "@/server/lib/authToken";
 import { UserService } from "@/server/services/User/UserService";
+import { UserStatus } from "futbol-in-core/enum";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

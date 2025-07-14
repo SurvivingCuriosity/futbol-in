@@ -5,10 +5,10 @@ import {
   TarjetaLugar,
 } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
 import { useUserLocation } from "@/client/shared/services/UserLocation/useUserLocation";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
-import { ICoords } from "@/core/types/Spot/Coords";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
+import { TipoFutbolin } from "futbol-in-core/enum";
+import { ICoords } from "futbol-in-core/types";
+import { SpotDTO } from "futbol-in-core/types";
+import { OperadorDTO } from "futbol-in-core/types";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
 import { InlinePicker } from "futbol-in-ui";
 import Link from "next/link";

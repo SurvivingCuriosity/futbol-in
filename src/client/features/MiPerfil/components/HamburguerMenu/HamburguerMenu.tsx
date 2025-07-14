@@ -1,6 +1,6 @@
-import { esGod } from "@/core/helpers/esGod";
-import { cuentaOperadorIniciada, esOperador } from "@/core/helpers/esOperador";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { esGod } from "futbol-in-core/helpers";
+import { cuentaOperadorIniciada, esOperador } from "futbol-in-core/helpers";
+import { UserDTO } from "futbol-in-core/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

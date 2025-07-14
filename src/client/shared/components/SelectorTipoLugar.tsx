@@ -1,4 +1,4 @@
-import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
+import { TipoLugar } from "futbol-in-core/enum";
 import { CustomSelect } from "futbol-in-ui";
 
 export interface SelectorTipoLugarProps {

@@ -1,7 +1,7 @@
 import {
   CambiarEmailResponse
 } from "@/client/shared/client/types/User/CambiarEmail";
-import { UserStatus } from "@/core/enum/User/Status";
+import { UserStatus } from "futbol-in-core/enum";
 import { authOptions } from "@/server/lib/authOptions";
 import connectDb from "@/server/lib/db";
 import { errorResponse, successResponse } from "@/server/lib/httpResponse";

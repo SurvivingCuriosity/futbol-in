@@ -1,7 +1,7 @@
 import { EquiposClient } from "@/client/shared/client/EquiposClient";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { EstadoJugador } from "futbol-in-core/enum";
+import { EquipoDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import { signOut } from "next-auth/react";
 import React, { useState } from "react";

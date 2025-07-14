@@ -1,5 +1,5 @@
 import { MiPerfilPage } from "@/client/features/MiPerfil/MiPerfilPage";
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
+import { EstadoJugador } from "futbol-in-core/enum";
 import { authOptions } from "@/server/lib/authOptions";
 import { IUserDocument } from "@/server/models/User/User.model";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";

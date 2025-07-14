@@ -1,4 +1,4 @@
-import { TipoEnfrentamiento } from "@/core/enum/Competicion/TipoEnfrentamiento";
+import { TipoEnfrentamiento } from "futbol-in-core/enum";
 import { ConfigEnfrentamiento } from "../FormSteps/Enfrentamientos/FormEnfrentamientos";
 
 export interface ConfiguracionLiga {

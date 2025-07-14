@@ -1,11 +1,10 @@
-import { LOGROS_DISPONIBLES } from "@/core/constants/LogrosDisponibles";
-import { TipoLogroEnum } from "@/core/enum/Logros/TipoLogroEnum";
-import { ILogro } from "@/core/types/Logros/Logro";
+import { TipoLogroEnum } from "futbol-in-core/enum";
+import { Logro, LOGROS_DISPONIBLES } from "futbol-in-core/constants";
 import { useState } from "react";
 
 export const useComprobarSiObtieneLogro = (tipoLogro: TipoLogroEnum) => {
   const [nuevoLogro, setNuevoLogro] = useState<{
-    logro: ILogro;
+    logro: Logro;
     value: number;
   } | null>(null);
 

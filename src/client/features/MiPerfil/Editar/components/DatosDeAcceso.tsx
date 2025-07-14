@@ -1,5 +1,5 @@
 import { Colapsable } from "@/packages/components/Colapsable";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import { useState } from "react";
 import { CambiarContrasena } from "./CambiarContrasena";

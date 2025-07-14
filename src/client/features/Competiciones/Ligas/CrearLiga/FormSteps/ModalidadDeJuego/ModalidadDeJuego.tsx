@@ -1,8 +1,8 @@
 "use client";
 
 import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { ModalidadJuego } from "futbol-in-core/enum";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { Button } from "futbol-in-ui";
 import { useState } from "react";

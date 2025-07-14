@@ -1,7 +1,7 @@
 "use client";
 
-import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { INotificaciones } from "futbol-in-core/types";
+import { UserDTO } from "futbol-in-core/types";
 import { Steps } from "intro.js-react";
 import { useState } from "react";
 import { CompletarCiudad } from "../MiPerfil/CompletarPerfil/steps/CompletarCiudadActual";
@@ -14,7 +14,7 @@ import {
   LStorageKeys,
 } from "@/client/shared/services/LocalStorage/LStorage";
 import { ListaCompeticionesHome } from "./CompeticionesHome/ListaCompeticionesHome";
-import { CompeticionBaseDTO } from "@/server/models/Competicion/CompeticionBase/CompeticionBaseDTO";
+import { CompeticionBaseDTO } from "futbol-in-core/types";
 import { HeaderLocation } from "./Header/HeaderLocation";
 
 const HomePage = ({

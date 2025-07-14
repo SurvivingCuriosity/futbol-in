@@ -1,5 +1,6 @@
-import { LOGROS_DISPONIBLES } from "@/core/constants/LogrosDisponibles";
+import { LOGROS_DISPONIBLES } from "futbol-in-core/constants";
 import { MedallaIcon } from "../MiPerfil/components/MedallaIcon";
+import { LogrosIconMap } from "@/client/shared/constants/LogrosIconMap";
 
 export const LogrosPage = () => {
 
@@ -28,7 +29,7 @@ export const LogrosPage = () => {
                 <div key={step} className="w-fit mx-auto flex flex-col items-center">
                   <MedallaIcon
                     level={index + 1}
-                    icon={logro.icon}
+                    icon={LogrosIconMap[logro.icon]}
                     conseguida={step >= logro.steps[0]}
                     showConseguidaIcon={false}
                   />

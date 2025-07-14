@@ -1,4 +1,4 @@
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { EquipoDTO } from "futbol-in-core/types";
 import { BaseClient } from "./BaseClient";
 import { CrearEquipoRequest, CrearEquipoResponse } from "./types/Equipos/CrearEquipo";
 import { ResponderInvitacionRequest, ResponderInvitacionResponse } from "./types/Equipos/ResponderInvitacion";

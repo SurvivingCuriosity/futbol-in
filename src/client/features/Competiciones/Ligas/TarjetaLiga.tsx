@@ -2,10 +2,7 @@
 
 import { LigasClient } from "@/client/shared/client/LigasClient";
 import { iconTipoDeCompeticionMap } from "@/client/shared/constants/IconTipoDeCompeticionMap";
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { LigaDTO } from "futbol-in-core/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,6 +12,7 @@ import { BotonInscribirmeACompeticion } from "../common/BotonInscribirmeACompeti
 import { ChipEstadoCompeticion } from "../common/ChipEstadoCompeticion";
 import { ChipEstadoInscripcion } from "../common/ChipInscripcion";
 import { ListaLigasContext } from "./ListaLigas/ListaLigasContext";
+import { EstadoCompeticion, TipoCompeticion, TipoInscripcion } from "futbol-in-core/enum";
 
 export const TarjetaLiga = ({ liga }: { liga: LigaDTO }) => {
   const router = useRouter();

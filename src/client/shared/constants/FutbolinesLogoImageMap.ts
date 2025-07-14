@@ -1,6 +1,6 @@
 
 
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { TipoFutbolin } from "futbol-in-core/enum";
 
 export const ImagenFutbolinLogoMap: Record<TipoFutbolin, string> = {
   [TipoFutbolin.TSUNAMI]: '/logos/tsunami.png',

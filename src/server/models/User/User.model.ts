@@ -1,7 +1,4 @@
-import { Posicion } from "@/core/enum/Posicion/Posicion";
-import { AuthProvider } from "@/core/enum/User/AuthProvider";
-import { UserRole } from "@/core/enum/User/Role";
-import { UserStatus } from "@/core/enum/User/Status";
+import { AuthProvider, Posicion, UserRole, UserStatus } from "futbol-in-core/enum";
 import { Document, Schema, Types, model, models } from "mongoose";
 
 export interface IUserDocument extends Document {

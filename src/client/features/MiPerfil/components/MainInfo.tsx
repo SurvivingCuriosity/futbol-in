@@ -1,7 +1,7 @@
 import { ChipPosicionJugador } from "@/client/shared/components/ChipPosicionJugador";
 import { useUser } from "@/client/shared/context/UserContext";
-import { esOperador } from "@/core/helpers/esOperador";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { esOperador } from "futbol-in-core/helpers";
+import { UserDTO } from "futbol-in-core/types";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";

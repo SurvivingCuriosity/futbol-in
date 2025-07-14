@@ -1,6 +1,7 @@
 import { Schema, Types } from "mongoose";
-import { ConfigEnfrentamientoSchema, IConfigEnfrentamiento } from '../../Enfrentamiento/ConfigEnfrentamientos.model';
+import { ConfigEnfrentamientoSchema } from '../../Enfrentamiento/ConfigEnfrentamientos.model';
 import { CompeticionBase, ICompeticionBase } from "../CompeticionBase/Competicion.model";
+import { IConfigEnfrentamiento } from "futbol-in-core/types";
 
 export interface ILiga extends ICompeticionBase {
   idaYVuelta: boolean;

@@ -2,8 +2,8 @@ import {
   EditarLigaRequest,
   EditarLigaResponse,
 } from "@/client/shared/client/types/Competiciones/Ligas/EditarLiga";
-import { puedeCrearTorneos } from "@/core/helpers/puedeCrearTorneos";
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { puedeCrearTorneos } from "futbol-in-core/helpers";
+import { LigaDTO } from "futbol-in-core/types";
 import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 import { UserService } from "@/server/services/User/UserService";
 import { editarLigaSchema } from "@/server/validations/competiciones/ligas/editarLigaValidation";

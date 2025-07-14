@@ -1,6 +1,6 @@
 import HomePageContainer from "@/client/features/Home/HomePageContainer";
 import { LandingPage } from "@/client/features/Landing/LandingPage";
-import { UserStatus } from "@/core/enum/User/Status";
+import { UserStatus } from "futbol-in-core/enum";
 import { authOptions } from "@/server/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

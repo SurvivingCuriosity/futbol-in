@@ -1,4 +1,4 @@
-import { bgClass, darkBgClass } from "@/core/constants/ColoresMedallas";
+import { bgClass, darkBgClass } from "futbol-in-core/constants";
 
 export interface ProgressProps {
   value: number;

@@ -1,10 +1,11 @@
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { EstadoCompeticion } from "futbol-in-core/enum";
+import { ModalidadJuego } from "futbol-in-core/enum";
+import { TipoInscripcion } from "futbol-in-core/enum";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import mongoose, { Document, Model, Schema, Types } from "mongoose";
-import { EquipoCompeticionSchema, IEquipoCompeticion } from '../../Equipo/EquipoCompeticion.model';
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { EquipoCompeticionSchema } from '../../Equipo/EquipoCompeticion.model';
+import { TipoCompeticion } from "futbol-in-core/enum";
+import { IEquipoCompeticion } from "futbol-in-core/types";
 
 export interface ICompeticionBase extends Document {
   _id: Types.ObjectId;

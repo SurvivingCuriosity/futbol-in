@@ -1,9 +1,9 @@
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
+import { EstadoJugador } from "futbol-in-core/enum";
 import connectDb from "@/server/lib/db";
 import { Equipo, IEquipoDocument } from "@/server/models/Equipo/Equipo.model";
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
 import { Types } from 'mongoose';
 import { revalidatePath } from "next/cache";
+import { EquipoDTO } from "futbol-in-core/types";
 
 export class EquipoService {
   static async crearEquipo(

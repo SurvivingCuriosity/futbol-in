@@ -1,15 +1,6 @@
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
-import { Schema, Types } from "mongoose";
-
-export interface EquipoCompeticionDTO {
-  id: string;
-  estado: EstadoEquipoCompeticion;
-}
-
-export interface IEquipoCompeticion {
-  id: Types.ObjectId;
-  estado: EstadoEquipoCompeticion;
-}
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
+import { IEquipoCompeticion } from "futbol-in-core/types";
+import { Schema } from "mongoose";
 
 export const EquipoCompeticionSchema = new Schema<IEquipoCompeticion>(
   {

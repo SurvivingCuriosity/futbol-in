@@ -1,9 +1,8 @@
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
-import { TorneoDTO } from "@/server/models/Competicion/Torneos/TorneoDTO";
+import { TorneoDTO } from "futbol-in-core/types";
 import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { ConfiguracionTorneo } from "../types/ConfiguracionTorneo";
 import { ConfiguracionTorneoClasificatoria } from "../types/ConfiguracionTorneoClasificatoria";
+import { ModalidadJuego, TipoFutbolin } from "futbol-in-core/enum";
 
 export interface CrearTorneoContextType {
   activeStep: number;

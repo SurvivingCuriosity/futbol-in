@@ -1,8 +1,8 @@
 import { SpotsClient } from "@/client/shared/client/SpotsClient";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
-import { esUsuarioVerificado } from "@/core/helpers/esUsuarioVerificado";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { esUsuarioVerificado } from "futbol-in-core/helpers";
+import { SpotDTO } from "futbol-in-core/types";
+import { UserDTO } from "futbol-in-core/types";
 import {
   faCheckCircle,
   faFaceFrown,

@@ -1,11 +1,11 @@
-import { AuthProvider } from "@/core/enum/User/AuthProvider";
-import { UserRole } from "@/core/enum/User/Role";
-import { UserStatus } from "@/core/enum/User/Status";
+import { AuthProvider } from "futbol-in-core/enum";
+import { UserRole } from "futbol-in-core/enum";
+import { UserStatus } from "futbol-in-core/enum";
 import connectDb from "@/server/lib/db";
 import { IOperadorDocument, Operador } from "@/server/models/User/Operador.model";
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
+import { OperadorDTO } from "futbol-in-core/types";
 import { IUserDocument, User } from "@/server/models/User/User.model";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import bcrypt from "bcryptjs";
 import { Types } from "mongoose";
 

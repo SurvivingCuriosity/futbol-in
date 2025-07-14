@@ -1,16 +1,14 @@
 import { Colapsable } from "@/packages/components/Colapsable";
 import { Progress } from "@/packages/components/Progress";
-import { ILogro } from "@/core/types/Logros/Logro";
+import { ILogro } from "futbol-in-core/types";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { MedallaIcon } from "./MedallaIcon";
 import { getLevel } from "@/server/services/Logros/GetLevel";
 import { getProgress } from "@/server/services/Logros/GetProgress";
-import {
-  borderClass,
-  textColorClass,
-} from "@/core/constants/ColoresMedallas";
+import { borderClass, textColorClass } from "futbol-in-core/constants";
+import { LogrosIconMap } from "@/client/shared/constants/LogrosIconMap";
 
 export interface ProgresoLogroProps {
   logro: ILogro;
@@ -36,7 +34,7 @@ export const ProgresoLogro = (props: ProgresoLogroProps) => {
             } transition-all duration-200`}
           >
             <MedallaIcon
-              icon={logro.icon}
+              icon={LogrosIconMap[logro.icon]}
               level={getLevel(value, logro.steps)}
               conseguida={value >= logro.steps[0]}
               showConseguidaIcon={false}
@@ -76,7 +74,7 @@ export const ProgresoLogro = (props: ProgresoLogroProps) => {
                 key={step + index}
                 conseguida={value >= step}
                 level={index + 1}
-                icon={logro.icon}
+                icon={LogrosIconMap[logro.icon]}
               />
             ))}
           </ul>

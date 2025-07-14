@@ -1,7 +1,6 @@
 "use client";
 
-import { LOGROS_DISPONIBLES } from "@/core/constants/LogrosDisponibles";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -10,6 +9,8 @@ import { ProgresoLogro } from "./ProgresoLogro";
 import { MedallaIcon } from "./MedallaIcon";
 import { getLevel } from "@/server/services/Logros/GetLevel";
 import { Tooltip } from "@/client/shared/components/Tooltip/Tooltip";
+import { LOGROS_DISPONIBLES } from "futbol-in-core/constants";
+import { LogrosIconMap } from "@/client/shared/constants/LogrosIconMap";
 
 export const Logros = ({ user }: { user: UserDTO }) => {
   const futbolinesAgregados = user.stats.lugaresAgregados;
@@ -45,7 +46,7 @@ export const Logros = ({ user }: { user: UserDTO }) => {
               )}
             >
               <MedallaIcon
-                icon={LOGROS_DISPONIBLES[0].icon}
+                icon={LogrosIconMap[LOGROS_DISPONIBLES[0].icon]}
                 level={getLevel(
                   futbolinesAgregados,
                   LOGROS_DISPONIBLES[0].steps
@@ -61,7 +62,7 @@ export const Logros = ({ user }: { user: UserDTO }) => {
               content={LOGROS_DISPONIBLES[1].stepDescription(futbolinesVotados)}
             >
               <MedallaIcon
-                icon={LOGROS_DISPONIBLES[1].icon}
+                icon={LogrosIconMap[LOGROS_DISPONIBLES[1].icon]}
                 level={getLevel(futbolinesVotados, LOGROS_DISPONIBLES[1].steps)}
                 conseguida={futbolinesVotados >= LOGROS_DISPONIBLES[1].steps[0]}
                 showConseguidaIcon={false}
@@ -74,7 +75,7 @@ export const Logros = ({ user }: { user: UserDTO }) => {
               )}
             >
               <MedallaIcon
-                icon={LOGROS_DISPONIBLES[2].icon}
+                icon={LogrosIconMap[LOGROS_DISPONIBLES[2].icon]}
                 level={getLevel(
                   futbolinesVerificados,
                   LOGROS_DISPONIBLES[2].steps

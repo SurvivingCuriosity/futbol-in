@@ -1,5 +1,5 @@
 // app/api/register/redirect-google/route.ts
-import { UserStatus } from "@/core/enum/User/Status";
+import { UserStatus } from "futbol-in-core/enum";
 import { authOptions } from "@/server/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";

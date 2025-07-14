@@ -1,4 +1,4 @@
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
+import { TipoInscripcion } from "futbol-in-core/enum";
 
 export interface ConfiguracionBasica {
   nombre: string;

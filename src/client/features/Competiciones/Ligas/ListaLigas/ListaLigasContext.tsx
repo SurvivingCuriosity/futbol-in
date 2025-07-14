@@ -1,8 +1,8 @@
 "use client";
 
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { LigaDTO } from "futbol-in-core/types";
+import { EquipoDTO } from "futbol-in-core/types";
+import { UserDTO } from "futbol-in-core/types";
 import { createContext } from "react";
 
 export interface ListaLigasContext {

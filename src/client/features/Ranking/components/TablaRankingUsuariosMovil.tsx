@@ -1,7 +1,7 @@
 "use client";
 
+import { UsuarioEnRanking } from "futbol-in-core/types";
 import Link from "next/link";
-import { UsuarioEnRanking } from "./TablaRankingUsuarios";
 
 export default function TablaRankingUsuariosMovil({
   users,

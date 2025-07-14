@@ -1,7 +1,7 @@
 import { ImagenCuadrada } from "@/client/shared/components/ImagenCuadrada";
 import { useUser } from "@/client/shared/context/UserContext";
-import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { INotificaciones } from "futbol-in-core/types";
+import { UserDTO } from "futbol-in-core/types";
 import { BotonNotificaciones } from "../Notificaciones/BotonNotificaciones";
 
 export const Header = ({

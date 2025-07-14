@@ -2,7 +2,7 @@ import { Switch } from "@/packages/components/Switch";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
 import { Window } from "@/packages/components/Window";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";

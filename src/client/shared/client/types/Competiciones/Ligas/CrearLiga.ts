@@ -1,4 +1,4 @@
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { LigaDTO } from "futbol-in-core/types";
 
 export type  CrearLigaRequest = Omit<LigaDTO, 'id' | 'createdByUserId' | 'estadoCompeticion'>
 

@@ -1,4 +1,4 @@
-import { PartidoDTO } from "@/server/models/Partido/Partido.model";
+import { PartidoDTO } from "futbol-in-core/types";
 
 export interface CompletarPartidosRequest {
     idLiga: string;

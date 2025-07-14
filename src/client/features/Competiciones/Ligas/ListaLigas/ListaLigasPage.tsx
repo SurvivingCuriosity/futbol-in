@@ -1,11 +1,11 @@
 "use client";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { TipoCompeticion } from "futbol-in-core/enum";
 import {
   puedeCrearTorneos,
-} from "@/core/helpers/puedeCrearTorneos";
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+} from "futbol-in-core/helpers";
+import { LigaDTO } from "futbol-in-core/types";
 import { use, useState } from "react";
 import LinkCrearCompeticion from "../../common/LinkCrearCompeticion";
 import ListaLigas from "./ListaLigas";

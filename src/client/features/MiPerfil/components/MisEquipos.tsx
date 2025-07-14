@@ -1,4 +1,4 @@
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { EquipoDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { TarjetaEquipo } from "./TarjetaEquipo";

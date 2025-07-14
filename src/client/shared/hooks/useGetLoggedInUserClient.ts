@@ -1,4 +1,4 @@
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { useSession } from "next-auth/react";
 
 export const useGetLoggedInUserClient = (): UserDTO | undefined => {

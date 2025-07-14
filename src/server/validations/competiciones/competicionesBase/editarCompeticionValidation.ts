@@ -1,11 +1,12 @@
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import {
+  EstadoCompeticion,
+  EstadoEquipoCompeticion,
+  ModalidadJuego,
+  TipoFutbolin,
+  TipoInscripcion,
+} from "futbol-in-core/enum";
 import { z } from "zod";
 import { objectIdSchema } from "../torneos/agregarTorneoValidation";
-
 
 export const competicionSchema = z.object({
   id: objectIdSchema.optional(),
@@ -36,8 +37,9 @@ export const competicionSchema = z.object({
 
 export const editarCompeticionSchema = z.object({
   idCompeticion: objectIdSchema, // ID obligatorio
-  data: competicionSchema,   // data parcial
+  data: competicionSchema, // data parcial
 });
 
-
-export type ActualizarCompeticionInput = z.infer<typeof editarCompeticionSchema>;
+export type ActualizarCompeticionInput = z.infer<
+  typeof editarCompeticionSchema
+>;

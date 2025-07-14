@@ -1,7 +1,7 @@
 import { ImagenFutbolinMap } from "@/client/shared/constants/FutbolinesImageMap";
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
-import { TipoFutbolinNombre } from "@/core/enum/Futbolin/TipoFutbolin";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { TipoFutbolinNombre } from "futbol-in-core/enum";
+import { SpotDTO } from "futbol-in-core/types";
 import {
   faLocationDot,
   faStore

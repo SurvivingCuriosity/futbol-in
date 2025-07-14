@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { successResponse, errorResponse } from "@/server/lib/httpResponse";
 import { UserService } from "@/server/services/User/UserService";
-import { UsuarioEnRanking } from "@/client/features/Ranking/components/TablaRankingUsuarios";
+import { UsuarioEnRanking } from "futbol-in-core/types";
 
 export async function GET(req: NextRequest) {
   try {

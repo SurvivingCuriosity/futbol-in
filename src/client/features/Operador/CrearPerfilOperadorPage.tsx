@@ -5,9 +5,9 @@ import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutboli
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
+import { OperadorDTO } from "futbol-in-core/types";
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, TextInput } from "futbol-in-ui";

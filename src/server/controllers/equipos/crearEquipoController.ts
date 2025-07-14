@@ -2,8 +2,8 @@ import {
   CrearEquipoRequest,
   CrearEquipoResponse,
 } from "@/client/shared/client/types/Equipos/CrearEquipo";
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { EstadoJugador } from "futbol-in-core/enum";
+import { EquipoDTO } from "futbol-in-core/types";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";
 import { UserService } from "@/server/services/User/UserService";
 import { crearEquipoSchema } from "@/server/validations/equipos/crearEquipoValidation";

@@ -1,8 +1,7 @@
 import { StorageClient } from "@/client/shared/client/StorageClient";
 import { ChipPosicionJugador } from "@/client/shared/components/ChipPosicionJugador";
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
-import { Posicion } from "@/core/enum/Posicion/Posicion";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { EstadoJugador, Posicion } from "futbol-in-core/enum";
+import { UserDTO } from "futbol-in-core/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 

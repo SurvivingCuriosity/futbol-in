@@ -1,8 +1,8 @@
 import ConfirmEmailForm from "@/client/features/Auth/Register/ConfirmEmailForm";
-import { UserStatus } from "@/core/enum/User/Status";
 import { verifyRegistrationToken } from "@/server/lib/authToken";
 import { requireRegistrationStep } from "@/server/lib/registrationGuard";
 import { UserService } from "@/server/services/User/UserService";
+import { UserStatus } from "futbol-in-core/enum";
 import { cookies } from "next/headers";
 
 const ConfirmEmailPage = async () => {

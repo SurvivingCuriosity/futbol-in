@@ -1,4 +1,4 @@
-import { ErrorData } from "@/core/types/Error/Error";
+import { ErrorData } from "futbol-in-core/types";
 
 export const getErrorMessageClient = (err: unknown, field: string) => {
   if (isFetchError(err)) {

@@ -1,6 +1,6 @@
-import allRegions from "@/core/constants/Municipios/municipios.json";
-import { Province, Region, Town } from "@/core/constants/Municipios/types";
+
 import { successResponse } from "@/server/lib/httpResponse";
+import { municipios, Province, Region, Town } from "futbol-in-core/constants";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
   const results: {label:string}[] = [];
 
-  allRegions.forEach((region: Region) => {
+  municipios.forEach((region: Region) => {
     region.provinces.forEach((province: Province) => {
       province.towns.forEach((town: Town) => {
         // Normalizamos el municipio para comparar sin acentos

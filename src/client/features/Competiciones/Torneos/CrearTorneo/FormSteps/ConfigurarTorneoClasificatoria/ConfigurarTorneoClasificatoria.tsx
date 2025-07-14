@@ -2,7 +2,7 @@ import { ConfigEnfrentamiento, FormEnfrentamientos } from "@/client/features/Com
 import { InputGolesParaGanar } from "@/client/features/Competiciones/common/Enfrentamientos/InputGolesParaGanar";
 import { InputPartidosPorEnfrentamiento } from "@/client/features/Competiciones/common/Enfrentamientos/InputPartidosPorEnfrentamiento";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
-import { TipoEnfrentamiento } from "@/core/enum/Competicion/TipoEnfrentamiento";
+import { TipoEnfrentamiento } from "futbol-in-core/enum";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { Button, InlinePicker } from "futbol-in-ui";
 import { useState } from "react";

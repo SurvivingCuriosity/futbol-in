@@ -1,4 +1,4 @@
-import { UserStatus } from "@/core/enum/User/Status";
+import { UserStatus } from "futbol-in-core/enum";
 import { handleError } from "@/packages/utils/getErrorMessage";
 import { RegistrationService } from "@/server/services/Auth/RegistrationService";
 import { crearEmailSchema } from "@/server/validations/register/emailValidation";

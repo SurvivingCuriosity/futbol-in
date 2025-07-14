@@ -1,5 +1,5 @@
 import InitAccountForm from "@/client/features/Auth/Register/InitAccountForm";
-import { UserStatus } from "@/core/enum/User/Status";
+import { UserStatus } from "futbol-in-core/enum";
 import { requireRegistrationStep } from "@/server/lib/registrationGuard";
 
 const InitAccountPage = async () => {

@@ -1,5 +1,5 @@
 "use client";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { fetchUsers } from "@/server/services/User/searchUsers";
 import { AsyncSelectProps } from "futbol-in-ui";
 import dynamic from "next/dynamic";

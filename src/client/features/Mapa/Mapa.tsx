@@ -1,6 +1,6 @@
 "use client";
 
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
 import {
   MarkerClusterer,
   SuperClusterAlgorithm,

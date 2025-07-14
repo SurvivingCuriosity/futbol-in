@@ -1,6 +1,6 @@
 "use client"
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
+import { OperadorDTO } from "futbol-in-core/types";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";

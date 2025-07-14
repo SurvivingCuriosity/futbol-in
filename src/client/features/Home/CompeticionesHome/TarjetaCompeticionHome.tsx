@@ -1,12 +1,12 @@
 "use client";
 
-import { iconTipoDeCompeticionMap } from "@/client/shared/constants/IconTipoDeCompeticionMap";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
-import { CompeticionBaseDTO } from "@/server/models/Competicion/CompeticionBase/CompeticionBaseDTO";
+import { TipoCompeticion } from "futbol-in-core/enum";
+import { CompeticionBaseDTO } from "futbol-in-core/types";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
+import { iconTipoDeCompeticionMap } from "@/client/shared/constants/IconTipoDeCompeticionMap";
 
 export const TarjetaCompeticionHome = ({
   competicion,
@@ -43,7 +43,7 @@ export const TarjetaCompeticionHome = ({
       <FontAwesomeIcon
         icon={
           iconTipoDeCompeticionMap[
-            competicion.tipoCompeticion || TipoCompeticion.LIGA
+            competicion.tipoCompeticion
           ]
         }
         className="absolute -top-1 -right-1 text-5xl text-neutral-400 opacity-50 -rotate-12"

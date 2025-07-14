@@ -5,8 +5,8 @@ import {
   TarjetaLugar,
 } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
+import { SpotDTO } from "futbol-in-core/types";
+import { OperadorDTO } from "futbol-in-core/types";
 
 export interface ListaSpotsProps {
   futbolines: SpotDTO[];

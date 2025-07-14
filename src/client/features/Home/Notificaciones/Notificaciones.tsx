@@ -1,4 +1,4 @@
-import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
+import { INotificaciones } from "futbol-in-core/types";
 import React from "react";
 import { NotificacionEquipoPendiente } from "./NotificacionEquipoPendiente";
 

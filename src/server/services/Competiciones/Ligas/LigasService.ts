@@ -1,12 +1,11 @@
 import { EliminarLigaResponse } from "@/client/shared/client/types/Competiciones/Ligas/EliminarLiga";
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
+import { TipoCompeticion } from "futbol-in-core/enum";
+import { TipoInscripcion } from "futbol-in-core/enum";
 import connectDb from "@/server/lib/db";
 import { ILiga, Liga } from "@/server/models/Competicion/Ligas/Liga.model";
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { EnfrentamientoDTO, LigaDTO } from "futbol-in-core/types";
 import Enfrentamiento, {
-  EnfrentamientoDTO,
   IEnfrentamiento,
 } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
 import "@/server/models/Partido/Partido.model";

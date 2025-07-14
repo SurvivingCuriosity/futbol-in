@@ -1,4 +1,3 @@
-import { Posicion } from "@/core/enum/Posicion/Posicion";
 import {
   faGun,
   faHandPeace,
@@ -7,6 +6,7 @@ import {
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Posicion } from "futbol-in-core/enum";
 
 export const ChipPosicionJugador = ({
   posicion,

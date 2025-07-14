@@ -1,9 +1,9 @@
-import TablaRankingUsuarios, { UsuarioEnRanking } from "@/client/features/Ranking/components/TablaRankingUsuarios";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { UserDTO } from "@/server/models/User/UserDTO";
 import { UserService } from "@/server/services/User/UserService";
 import TarjetaUsuarioTopRanking from "./components/TarjetaUsuarioTopRanking";
 import TablaRankingUsuariosMovil from "./components/TablaRankingUsuariosMovil";
+import { UserDTO, UsuarioEnRanking } from "futbol-in-core/types";
+import TablaRankingUsuarios from "./components/TablaRankingUsuarios";
 
 export default async function RankingPage() {
   

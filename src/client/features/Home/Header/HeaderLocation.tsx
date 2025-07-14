@@ -3,7 +3,7 @@
 import { UserClient } from "@/client/shared/client/UserClient";
 import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicipios";
 import { Window } from "@/packages/components/Window";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";

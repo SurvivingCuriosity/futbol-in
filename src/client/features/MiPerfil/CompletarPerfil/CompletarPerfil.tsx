@@ -1,12 +1,12 @@
 import { UserClient } from "@/client/shared/client/UserClient";
-import { Posicion } from "@/core/enum/Posicion/Posicion";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { useEffect, useState } from "react";
 import { CompletarNombre } from "./steps/CompletarNombre";
 import { CompletarPosicion } from "./steps/CompletarPosicion";
 import { CompletarTelefono } from "./steps/CompletarTelefono";
 import { TarjetaCompletarPerfil } from "./TarjetaCompletarPerfil";
 import { haCompletadoElPerfil } from "./utils/haCompletadoElPerfil";
+import { Posicion } from "futbol-in-core/enum";
 
 export const CompletarPerfil = ({
   user,

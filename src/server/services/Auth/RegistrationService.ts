@@ -1,5 +1,5 @@
-import { AuthProvider } from "@/core/enum/User/AuthProvider";
-import { UserStatus } from "@/core/enum/User/Status";
+import { AuthProvider } from "futbol-in-core/enum";
+import { UserStatus } from "futbol-in-core/enum";
 import { generateRegistrationToken, verifyRegistrationToken } from "@/server/lib/authToken";
 import { IUserDocument } from "@/server/models/User/User.model";
 import bcrypt from "bcryptjs";

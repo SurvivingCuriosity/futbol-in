@@ -2,10 +2,10 @@
 
 import { TarjetaEquipo } from "@/client/features/MiPerfil/components/TarjetaEquipo";
 import { LigasClient } from "@/client/shared/client/LigasClient";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { EquipoCompeticionDTO } from "@/server/models/Equipo/EquipoCompeticion.model";
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { TipoCompeticion } from "futbol-in-core/enum";
+import { TipoInscripcion } from "futbol-in-core/enum";
+import { EquipoCompeticionDTO } from "futbol-in-core/types";
+import { EquipoDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

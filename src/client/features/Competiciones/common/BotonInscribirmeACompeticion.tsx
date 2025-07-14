@@ -1,6 +1,6 @@
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
+import { EstadoCompeticion } from "futbol-in-core/enum";
+import { TipoCompeticion } from "futbol-in-core/enum";
+import { TipoInscripcion } from "futbol-in-core/enum";
 import Link from "next/link";
 
 export const BotonInscribirmeACompeticion = ({

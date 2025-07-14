@@ -1,8 +1,8 @@
 import React from "react";
 import HomePage from "./HomePage";
 import { NotificacionesService } from "@/server/services/Notificaciones/NotificacionesService";
-import { UserDTO } from "@/server/models/User/UserDTO";
-import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
+import { UserDTO } from "futbol-in-core/types";
+import { INotificaciones } from "futbol-in-core/types";
 import { signOut } from "next-auth/react";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 

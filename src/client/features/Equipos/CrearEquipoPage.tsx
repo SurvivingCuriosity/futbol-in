@@ -5,7 +5,7 @@ import { ImagenEditable } from "@/client/shared/components/ImagenEditable";
 import SearchInputUser, { UserOption } from "@/client/shared/components/SearchInputUser";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
+import { EstadoJugador } from "futbol-in-core/enum";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { getErrorMessage } from "@/packages/utils/getErrorMessage";
 import { Button, TextInput } from "futbol-in-ui";

@@ -2,8 +2,8 @@
 
 import { StorageClient } from "@/client/shared/client/StorageClient";
 import { ImagenCuadrada } from "@/client/shared/components/ImagenCuadrada";
-import { esUsuarioVerificado } from "@/core/helpers/esUsuarioVerificado";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { esUsuarioVerificado } from "futbol-in-core/helpers";
+import { UserDTO } from "futbol-in-core/types";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";

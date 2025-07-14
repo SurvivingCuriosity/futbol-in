@@ -1,8 +1,7 @@
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { LigaDTO } from "futbol-in-core/types";
 import { ConfiguracionLiga } from "../types/ConfiguracionLiga";
 import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
+import { ModalidadJuego, TipoFutbolin } from "futbol-in-core/enum";
 
 export interface CrearLigaContextType {
   activeStep: number;

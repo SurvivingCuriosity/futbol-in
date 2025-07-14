@@ -1,4 +1,4 @@
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
+import { OperadorDTO } from "futbol-in-core/types";
 
 export type CrearPerfilOperadorRequest = Omit<OperadorDTO,'id'>;
 

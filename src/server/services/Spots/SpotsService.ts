@@ -1,8 +1,7 @@
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
-import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
+import { TipoFutbolin, TipoLugar } from "futbol-in-core/enum";
 import connectDb from "@/server/lib/db";
 import Spot, { ISpot } from "@/server/models/Spot/Spot.model";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { ObjectId, Types } from "mongoose";
 import { ZodError } from "zod";

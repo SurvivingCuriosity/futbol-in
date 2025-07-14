@@ -2,7 +2,7 @@ import {
   CrearPerfilOperadorRequest,
   CrearPerfilOperadorResponse,
 } from "@/client/shared/client/types/User/CrearPerfilOperador";
-import { esOperador } from "@/core/helpers/esOperador";
+import { esOperador } from "futbol-in-core/helpers";
 import { UserService } from "@/server/services/User/UserService";
 import { validateLoggedInUser } from "@/server/validations/shared/validateLoggedInUser";
 import { crearPerfilOperadorSchema } from "@/server/validations/user/crearPerfilOperadorValidation";

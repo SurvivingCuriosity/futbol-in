@@ -1,9 +1,6 @@
 import { iconTipoDeCompeticionMap } from "@/client/shared/constants/IconTipoDeCompeticionMap";
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { authOptions } from "@/server/lib/authOptions";
-import { TorneoDTO } from "@/server/models/Competicion/Torneos/TorneoDTO";
+import { TorneoDTO } from "futbol-in-core/types";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
@@ -11,6 +8,7 @@ import Link from "next/link";
 import { BotonInscribirmeACompeticion } from "../common/BotonInscribirmeACompeticion";
 import { ChipEstadoCompeticion } from "../common/ChipEstadoCompeticion";
 import { ChipEstadoInscripcion } from "../common/ChipInscripcion";
+import { EstadoCompeticion, TipoCompeticion, TipoInscripcion } from "futbol-in-core/enum";
 
 export const TarjetaTorneo = async ({
   competicion,

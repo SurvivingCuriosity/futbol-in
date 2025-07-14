@@ -1,6 +1,6 @@
 "use client";
 
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import React, {
   createContext,
   ReactNode,

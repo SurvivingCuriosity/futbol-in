@@ -2,7 +2,7 @@
 
 import { LigasClient } from "@/client/shared/client/LigasClient";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { LigaDTO } from "futbol-in-core/types";
 import { Button, TextInput } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";

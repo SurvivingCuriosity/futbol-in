@@ -3,8 +3,8 @@
 import { UserClient } from "@/client/shared/client/UserClient";
 import { ChipPosicionJugador } from "@/client/shared/components/ChipPosicionJugador";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
-import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { EquipoConEstadoDTO } from "futbol-in-core/types";
+import { UserDTO } from "futbol-in-core/types";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";

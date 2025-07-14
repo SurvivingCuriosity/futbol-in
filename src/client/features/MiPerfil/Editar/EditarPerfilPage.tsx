@@ -3,15 +3,15 @@ import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicip
 import { useUser } from "@/client/shared/context/UserContext";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { TextInput } from "futbol-in-ui";
 import { useEffect, useState } from "react";
 import { CambiarImagenPerfil } from "./components/CambiarImagenPerfil";
 import { DatosDeAcceso } from "./components/DatosDeAcceso";
-import { Posicion } from "@/core/enum/Posicion/Posicion";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import { Posicion } from "futbol-in-core/enum";
 
 const opciones = [
   { id: 0, value: Posicion.DELANTERO },

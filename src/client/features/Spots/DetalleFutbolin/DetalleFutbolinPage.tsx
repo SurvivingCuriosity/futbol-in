@@ -9,10 +9,10 @@ import { ImagenFutbolinMapNoDeg } from "@/client/shared/constants/FutbolinesImag
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { TipoFutbolinNombre } from "@/core/enum/Futbolin/TipoFutbolin";
-import { esUsuarioVerificado } from "@/core/helpers/esUsuarioVerificado";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { TipoFutbolinNombre } from "futbol-in-core/enum";
+import { esUsuarioVerificado } from "futbol-in-core/helpers";
+import { SpotDTO } from "futbol-in-core/types";
+import { UserDTO } from "futbol-in-core/types";
 import { faLocationDot, faStore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "futbol-in-ui";

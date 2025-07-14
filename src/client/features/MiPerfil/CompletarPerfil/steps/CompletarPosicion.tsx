@@ -1,4 +1,4 @@
-import { Posicion } from "@/core/enum/Posicion/Posicion";
+import { Posicion } from "futbol-in-core/enum";
 import { Button } from "futbol-in-ui";
 import { useState } from "react";
 

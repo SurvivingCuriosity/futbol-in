@@ -1,5 +1,5 @@
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { z } from "zod";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
 
 
 export const updateOperadorSchema = z.object({

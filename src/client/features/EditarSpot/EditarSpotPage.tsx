@@ -9,12 +9,10 @@ import SearchInputMunicipios from "@/client/shared/components/SearchInputMunicip
 import SelectorDistribucionFutbolin from "@/client/shared/components/SelectorDistribucionFutbolin";
 import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
-import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
-import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
-import { IMapItem } from "@/core/types/MapItem/IMapItem";
+import { IMapItem } from "futbol-in-core/types";
 import { FormField, FormLabel } from "@/packages/components/FormField";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
+import { DistribucionFutbolin, TipoFutbolin, TipoLugar } from "futbol-in-core/enum";
 import { Button } from "futbol-in-ui";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";

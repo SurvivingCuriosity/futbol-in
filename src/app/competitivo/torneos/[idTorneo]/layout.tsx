@@ -3,8 +3,6 @@ import { BotonInscribirmeACompeticion } from "@/client/features/Competiciones/co
 import { ChipEstadoInscripcion } from "@/client/features/Competiciones/common/ChipInscripcion";
 import { NavTorneos } from "@/client/features/Competiciones/Torneos/components/NavTorneos";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { TorneosService } from "@/server/services/Competiciones/Torneos/TorneosService";
@@ -12,6 +10,7 @@ import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsServic
 import { UserService } from "@/server/services/User/UserService";
 import { faLocationDot, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { EstadoCompeticion, TipoCompeticion } from "futbol-in-core/enum";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";

@@ -1,5 +1,5 @@
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
+import { EstadoJugador } from "futbol-in-core/enum";
 import { Document, Schema, Types, model, models } from "mongoose";
 
 interface IJugador {

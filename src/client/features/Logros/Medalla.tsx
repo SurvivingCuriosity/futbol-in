@@ -1,6 +1,6 @@
-import { borderClass, darkBgClass, levelClass, textColorClass } from "@/core/constants/ColoresMedallas";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { borderClass, darkBgClass, levelClass, textColorClass } from "futbol-in-core/constants";
 
 export interface MedallaProps {
   level: number;

@@ -1,5 +1,5 @@
 "use client";
-import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
+import { DistribucionFutbolin } from "futbol-in-core/enum";
 import { CustomSelect } from "futbol-in-ui";
 import { memo } from "react";
 

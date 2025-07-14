@@ -1,8 +1,5 @@
+import { AuthProvider, Posicion, UserRole, UserStatus } from "futbol-in-core/enum";
 import { z } from "zod";
-import { Posicion } from "@/core/enum/Posicion/Posicion";
-import { AuthProvider } from "@/core/enum/User/AuthProvider";
-import { UserRole } from "@/core/enum/User/Role";
-import { UserStatus } from "@/core/enum/User/Status";
 
 export const updateUserSchema = z.object({
   // Campos básicos de usuario

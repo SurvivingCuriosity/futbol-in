@@ -1,19 +1,10 @@
 "use client";
 
+import { UsuarioEnRanking } from "futbol-in-core/types";
 import Link from "next/link";
 import { DataTable } from "../../../shared/components/Table/Table";
 import { Column } from "../../../shared/components/Table/types";
 import { TarjetaStats } from "./TarjetaStats";
-
-export interface UsuarioEnRanking {
-  id: string;
-  posicion: number;
-  usuario: string;
-  spotsCreados: number;
-  spotsVotados: number;
-  spotsVerificados: number;
-  puntuacion: number;
-}
 
 const columns: Column<UsuarioEnRanking>[] = [
   {

@@ -2,7 +2,7 @@
 
 import { useUser } from "@/client/shared/context/UserContext";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { EquipoDTO } from "futbol-in-core/types";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";

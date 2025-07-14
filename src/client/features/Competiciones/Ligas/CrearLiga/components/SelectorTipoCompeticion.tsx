@@ -1,6 +1,6 @@
 "use client"
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { TipoCompeticion } from "futbol-in-core/enum";
 import { CustomSelect } from "futbol-in-ui";
 
 export interface SelectorTipoCompeticionProps {

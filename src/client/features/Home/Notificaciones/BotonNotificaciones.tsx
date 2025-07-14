@@ -3,7 +3,7 @@ import { faBell, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { Notificaciones } from "./Notificaciones";
-import { INotificaciones } from "@/core/types/Notificaciones/INotificaciones";
+import { INotificaciones } from "futbol-in-core/types";
 
 export const BotonNotificaciones = ({
   tieneNotificaciones,

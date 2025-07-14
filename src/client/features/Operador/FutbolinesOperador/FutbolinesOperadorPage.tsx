@@ -2,7 +2,7 @@
 
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";

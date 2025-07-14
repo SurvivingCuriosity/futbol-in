@@ -1,5 +1,5 @@
 import { EditarSpotRequest, EditarSpotResponse } from "@/client/shared/client/types/Spots/EditarSpot";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
 import { SpotService } from "@/server/services/Spots/SpotsService";
 import { UserService } from "@/server/services/User/UserService";
 import { validateLoggedInUser } from "@/server/validations/shared/validateLoggedInUser";

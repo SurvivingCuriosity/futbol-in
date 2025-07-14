@@ -1,4 +1,4 @@
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { TipoCompeticion } from "futbol-in-core/enum";
 import Link from "next/link";
 
 const LinkCrearCompeticion = ({tipoCompeticion}:{tipoCompeticion:TipoCompeticion}) => {

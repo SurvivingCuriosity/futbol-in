@@ -1,8 +1,6 @@
 "use client";
 
-import { EnfrentamientoDTO } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
-import { PartidoDTO } from "@/server/models/Partido/Partido.model";
+import { EnfrentamientoDTO, EquipoDTO, PartidoDTO } from "futbol-in-core/types";
 import { faCheck, faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { use, useState } from "react";

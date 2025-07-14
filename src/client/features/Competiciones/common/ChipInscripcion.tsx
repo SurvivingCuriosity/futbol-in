@@ -1,6 +1,6 @@
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { EquipoCompeticionDTO } from "@/server/models/Equipo/EquipoCompeticion.model";
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
+import { TipoInscripcion } from "futbol-in-core/enum";
+import { EquipoCompeticionDTO } from "futbol-in-core/types";
 import { faCheck, faHourglass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

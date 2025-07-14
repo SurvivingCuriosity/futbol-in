@@ -10,13 +10,10 @@ import SelectorDistribucionFutbolin from "@/client/shared/components/SelectorDis
 import SelectorTipoFutbolin from "@/client/shared/components/SelectorTipoFutbolin";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
 import { useComprobarSiObtieneLogro } from "@/client/shared/hooks/useComprobarSiObtieneLogro";
-import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
-import { TipoLogroEnum } from "@/core/enum/Logros/TipoLogroEnum";
-import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
-import { decodeCiudad } from "@/core/helpers/encodeCiudad";
-import { IMapItem } from "@/core/types/MapItem/IMapItem";
+import { decodeCiudad } from "futbol-in-core/helpers";
+import { IMapItem } from "futbol-in-core/types";
 import { FormField, FormLabel } from "@/packages/components/FormField";
+import { DistribucionFutbolin, TipoFutbolin, TipoLogroEnum, TipoLugar } from "futbol-in-core/enum";
 import { Button } from "futbol-in-ui";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";

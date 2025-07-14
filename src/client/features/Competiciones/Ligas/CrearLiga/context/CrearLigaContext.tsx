@@ -1,12 +1,10 @@
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { ModalidadJuego, TipoFutbolin, TipoInscripcion } from "futbol-in-core/enum";
 import React, { createContext, useState } from "react";
 import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { ConfigEnfrentamiento } from "../FormSteps/Enfrentamientos/FormEnfrentamientos";
 import { ConfiguracionLiga } from "../types/ConfiguracionLiga";
 import { CompeticionEnCreacion, CrearLigaContextType } from "./ContextType";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { TipoCompeticion } from "futbol-in-core/enum";
 
 const CrearLigaContext = createContext<CrearLigaContextType>(
   null as unknown as CrearLigaContextType

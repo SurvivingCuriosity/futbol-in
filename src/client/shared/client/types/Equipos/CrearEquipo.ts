@@ -1,4 +1,4 @@
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { EquipoDTO } from "futbol-in-core/types";
 
 export type CrearEquipoRequest = Omit<EquipoDTO, 'id'| 'createdByUserId'>
 

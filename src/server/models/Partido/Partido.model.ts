@@ -1,16 +1,5 @@
 import mongoose, { Model, Schema } from "mongoose";
 
-export interface PartidoDTO {
-  id: string;
-  enfrentamiento: string;
-  equipoA: string;
-  equipoB: string;
-  golesEquipoA: number;
-  golesEquipoB: number;
-  finalizado: boolean;
-  ganador: string | null;
-}
-
 export interface IPartido extends mongoose.Document {
   enfrentamiento: mongoose.Types.ObjectId;
   equipoA: mongoose.Types.ObjectId;

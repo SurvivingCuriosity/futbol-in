@@ -1,5 +1,5 @@
-import { MODALIDADES_JUEGO } from "@/core/constants/Competicion/DescripcionModalidadJuego";
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
+import { ModalidadJuego } from "futbol-in-core/enum";
+import { MODALIDADES_JUEGO } from "futbol-in-core/constants";
 
 export const TarjetaModalidadDeJuego = ({
   modalidadDeJuego,

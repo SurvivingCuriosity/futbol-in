@@ -1,14 +1,14 @@
 "use client";
 
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { useSearchParams } from "next/navigation";
 
 import { MainInfo } from "./components/MainInfo";
 import { Logros } from "../MiPerfil/components/Logros";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
 import { MisFutbolines } from "../MiPerfil/components/MisFutbolines";
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
+import { OperadorDTO } from "futbol-in-core/types";
 
 export interface MiPerfilPageProps {
   user: UserDTO;

@@ -1,6 +1,6 @@
 import imagen_fondo from "@/client/shared/assets/img/background.jpg";
 import { AppLogo } from "@/client/shared/components/AppLogo";
-import { UserStatus } from "@/core/enum/User/Status";
+import { UserStatus } from "futbol-in-core/enum";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";

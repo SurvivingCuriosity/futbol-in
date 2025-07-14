@@ -1,11 +1,11 @@
 import { ConfirmarInscripcionPage } from "@/client/features/Competiciones/common/ConfirmarInscripcion/ConfirmarInscripcionPage";
 import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";
 import { UserService } from "@/server/services/User/UserService";
+import { TipoCompeticion } from "futbol-in-core/enum";
 import { getServerSession, Session } from "next-auth";
 import { redirect } from "next/navigation";
 

@@ -1,12 +1,12 @@
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
+import { TipoInscripcion } from "futbol-in-core/enum";
 import connectDb from "@/server/lib/db";
 import {
   CompeticionBase,
   ICompeticionBase,
 } from "@/server/models/Competicion/CompeticionBase/Competicion.model";
-import { CompeticionBaseDTO } from "@/server/models/Competicion/CompeticionBase/CompeticionBaseDTO";
-import { EquipoCompeticionDTO } from "@/server/models/Equipo/EquipoCompeticion.model";
+import { CompeticionBaseDTO } from "futbol-in-core/types";
+import { EquipoCompeticionDTO } from "futbol-in-core/types";
 import { Types } from "mongoose";
 import { EquipoService } from "../Equipo/EquipoService";
 import { UserService } from "../User/UserService";

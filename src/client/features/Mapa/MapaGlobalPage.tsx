@@ -1,6 +1,6 @@
 "use client";
 
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
 import React, { useState } from "react";
 import { Mapa } from "./Mapa";
 import { TarjetaLugar } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";

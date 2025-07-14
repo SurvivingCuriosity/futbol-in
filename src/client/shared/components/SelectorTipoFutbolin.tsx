@@ -1,5 +1,5 @@
 "use client";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { CustomSelectProps, OptionType } from "futbol-in-ui";
 import dynamic from "next/dynamic";
 import { memo } from "react";

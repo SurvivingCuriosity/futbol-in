@@ -1,6 +1,6 @@
 import { ConfirmarInscripcionPage } from "@/client/features/Competiciones/common/ConfirmarInscripcion/ConfirmarInscripcionPage";
 import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { TipoCompeticion } from "futbol-in-core/enum";
 import { authOptions } from "@/server/lib/authOptions";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { TorneosService } from "@/server/services/Competiciones/Torneos/TorneosService";

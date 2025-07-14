@@ -1,8 +1,8 @@
-import { LOGROS_DISPONIBLES } from "@/core/constants/LogrosDisponibles";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { getLevel } from "@/server/services/Logros/GetLevel";
 import { MedallaIcon } from "./MedallaIcon";
-import { textColorClass } from "@/core/constants/ColoresMedallas";
+import { LOGROS_DISPONIBLES, textColorClass } from "futbol-in-core/constants";
+import { LogrosIconMap } from "@/client/shared/constants/LogrosIconMap";
 
 export const Logros = ({ user }: { user: UserDTO }) => {
   const futbolinesAgregados = user.stats.lugaresAgregados;
@@ -14,7 +14,7 @@ export const Logros = ({ user }: { user: UserDTO }) => {
       <p className="text-primary font-bold text-2xl mb-4">Logros:</p>
       <div className="flex flex-row items-center">
         <MedallaIcon
-          icon={LOGROS_DISPONIBLES[0].icon}
+          icon={LogrosIconMap[LOGROS_DISPONIBLES[0].icon]}
           level={getLevel(futbolinesAgregados, LOGROS_DISPONIBLES[0].steps)}
           conseguida={futbolinesAgregados >= LOGROS_DISPONIBLES[0].steps[0]}
           showConseguidaIcon={false}
@@ -31,7 +31,7 @@ export const Logros = ({ user }: { user: UserDTO }) => {
       </div>
       <div className="flex flex-row items-center">
         <MedallaIcon
-          icon={LOGROS_DISPONIBLES[1].icon}
+          icon={LogrosIconMap[LOGROS_DISPONIBLES[1].icon]}
           level={getLevel(futbolinesVotados, LOGROS_DISPONIBLES[1].steps)}
           conseguida={futbolinesVotados >= LOGROS_DISPONIBLES[1].steps[1]}
           showConseguidaIcon={false}
@@ -48,7 +48,7 @@ export const Logros = ({ user }: { user: UserDTO }) => {
       </div>
       <div className="flex flex-row items-center">
         <MedallaIcon
-          icon={LOGROS_DISPONIBLES[2].icon}
+          icon={LogrosIconMap[LOGROS_DISPONIBLES[2].icon]}
           level={getLevel(futbolinesVerificados, LOGROS_DISPONIBLES[2].steps)}
           conseguida={futbolinesVerificados >= LOGROS_DISPONIBLES[2].steps[2]}
           showConseguidaIcon={false}

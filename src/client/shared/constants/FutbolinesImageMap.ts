@@ -12,7 +12,7 @@ import presas from '@/client/shared/assets/img/futbolines/presas_evo.jpg'
 import presasevo from '@/client/shared/assets/img/futbolines/presas_evo.jpg'
 import desconocido from '@/client/shared/assets/img/futbolines/desconocido.avif'
 
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { StaticImageData } from "next/image";
 
 export const ImagenFutbolinMap: Record<TipoFutbolin, StaticImageData> = {

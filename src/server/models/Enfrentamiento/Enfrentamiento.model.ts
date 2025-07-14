@@ -1,15 +1,6 @@
 import mongoose, { Model, Schema, Types } from "mongoose";
-import { IPartido, PartidoDTO } from "../Partido/Partido.model";
+import { IPartido } from "../Partido/Partido.model";
 
-export interface EnfrentamientoDTO {
-  id: string;
-  competicion: string;
-  equipoA: string;
-  equipoB: string;
-  partidos: PartidoDTO[];
-  ganador: string|null;
-  jugado: boolean;
-}
 
 export interface IEnfrentamiento {
   id: string;

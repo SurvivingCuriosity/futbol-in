@@ -1,5 +1,5 @@
 import { SpotsCiudadPage } from "@/client/features/Spots/SpotsCiudadPage";
-import { decodeCiudad } from "@/core/helpers/encodeCiudad";
+import { decodeCiudad } from "futbol-in-core/helpers";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { SpotService } from "@/server/services/Spots/SpotsService";
 import { UserService } from "@/server/services/User/UserService";

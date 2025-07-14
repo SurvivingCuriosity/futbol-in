@@ -1,7 +1,6 @@
 import { DataTable } from "@/client/shared/components/Table/Table";
 import { Column } from "@/client/shared/components/Table/types";
-import { EnfrentamientoDTO } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
-import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO";
+import { EnfrentamientoDTO, EquipoConEstadoDTO } from "futbol-in-core/types";
 import { getGolesAFavor, getGolesEnContra, getPartidosGanados, getPartidosJugados, getPartidosPerdidos } from "./helpers";
 
 export const TablaClasificacionLiga = ({

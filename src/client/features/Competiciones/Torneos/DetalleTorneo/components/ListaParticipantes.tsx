@@ -1,4 +1,4 @@
-import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO"
+import { EquipoConEstadoDTO } from "futbol-in-core/types"
 import { TarjetaEquipoTorneo } from "./TarjetaEquipoTorneo"
 
 export const ListaParticipantes = ({equipos, isOwner, idCompeticion}:{equipos:EquipoConEstadoDTO[], isOwner:boolean, idCompeticion:string}) => {

@@ -1,4 +1,4 @@
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { ImagenPerfil } from "./ImagenPerfil";
 import { MarcaVerificado } from "./MarcaVerificado";
 import { ChipPosicionJugador } from "@/client/shared/components/ChipPosicionJugador";

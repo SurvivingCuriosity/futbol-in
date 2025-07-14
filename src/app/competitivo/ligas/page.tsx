@@ -1,6 +1,6 @@
 import { ListaLigasProvider } from "@/client/features/Competiciones/Ligas/ListaLigas/ListaLigasContext";
 import { ListaLigasPage } from "@/client/features/Competiciones/Ligas/ListaLigas/ListaLigasPage";
-import { decodeCiudad } from "@/core/helpers/encodeCiudad";
+import { decodeCiudad } from "futbol-in-core/helpers";
 import { authOptions } from "@/server/lib/authOptions";
 import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";

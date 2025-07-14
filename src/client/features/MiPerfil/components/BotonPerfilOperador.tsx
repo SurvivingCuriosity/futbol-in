@@ -1,4 +1,4 @@
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import { useRouter } from "next/navigation";
 

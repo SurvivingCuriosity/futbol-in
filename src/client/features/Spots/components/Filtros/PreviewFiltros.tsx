@@ -2,7 +2,7 @@ import React from "react";
 import { Filtros } from "./Filtros";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { TipoFutbolin } from "futbol-in-core/enum";
 
 export interface PreviewFiltrosProps {
   filtros: Filtros | null;

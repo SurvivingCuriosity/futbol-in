@@ -1,8 +1,8 @@
 "use client";
 
-import { EquipoDTO } from "@/server/models/Equipo/EquipoDTO";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { EquipoDTO } from "futbol-in-core/types";
+import { SpotDTO } from "futbol-in-core/types";
+import { UserDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import { signOut } from "next-auth/react";
 import { useState } from "react";

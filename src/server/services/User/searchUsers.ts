@@ -1,5 +1,5 @@
 import { UserOption } from "@/client/shared/components/SearchInputUser";
-import { UserDTO } from "@/server/models/User/UserDTO";
+import { UserDTO } from "futbol-in-core/types";
 
 export async function fetchUsers(
   inputValue: string | number

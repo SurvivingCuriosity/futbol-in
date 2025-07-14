@@ -1,6 +1,6 @@
 "use client";
 import { SpotsClient } from "@/client/shared/client/SpotsClient";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
 import { TextInput } from "futbol-in-ui";
 import { useEffect, useState } from "react";
 

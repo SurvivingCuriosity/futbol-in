@@ -29,6 +29,7 @@
     "bcryptjs": "^2.4.3",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
+    "futbol-in-core": "^1.0.15",
     "futbol-in-ui": "^0.0.28",
     "intro.js": "^7.2.0",
     "intro.js-react": "^1.0.0",

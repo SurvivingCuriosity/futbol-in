@@ -2,8 +2,8 @@ import {
   AgregarSpotRequest,
   AgregarSpotResponse,
 } from "@/client/shared/client/types/Spots/AgregarSpot";
-import { UserRole } from "@/core/enum/User/Role";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { UserRole } from "futbol-in-core/enum";
+import { SpotDTO } from "futbol-in-core/types";
 import { SpotService } from "@/server/services/Spots/SpotsService";
 import { UserService } from "@/server/services/User/UserService";
 import { validateLoggedInUser } from "@/server/validations/shared/validateLoggedInUser";

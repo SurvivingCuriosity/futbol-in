@@ -1,4 +1,4 @@
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
+import { EstadoCompeticion } from "futbol-in-core/enum";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

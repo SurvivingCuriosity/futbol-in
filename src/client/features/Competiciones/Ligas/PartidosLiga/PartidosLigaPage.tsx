@@ -1,5 +1,5 @@
 "use client";
-import { EnfrentamientoDTO } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
+import { EnfrentamientoDTO } from "futbol-in-core/types";
 import { TextInput } from "futbol-in-ui";
 import { use, useState } from "react";
 import { DetalleLigaContext } from "../DetalleLiga/DetalleLigaContext";

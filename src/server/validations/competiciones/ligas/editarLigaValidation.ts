@@ -1,8 +1,8 @@
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { EstadoCompeticion } from "futbol-in-core/enum";
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
+import { ModalidadJuego } from "futbol-in-core/enum";
+import { TipoInscripcion } from "futbol-in-core/enum";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { z } from "zod";
 import { ConfigEnfrentamientoZod, objectIdSchema } from "./agregarLigaValidation";
 

@@ -1,6 +1,4 @@
-import { DistribucionFutbolin } from "@/core/enum/Futbolin/DistribucionFutbolin";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
-import { TipoLugar } from "@/core/enum/Lugares/TipoLugar";
+import { DistribucionFutbolin, TipoFutbolin, TipoLugar } from "futbol-in-core/enum"
 import mongoose, { Document, Model, ObjectId, Schema, Types } from "mongoose";
 
 export interface ISpot extends Document {

@@ -1,7 +1,7 @@
 import { iconTipoDeCompeticionMap } from "@/client/shared/constants/IconTipoDeCompeticionMap";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
 import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TipoCompeticion } from "futbol-in-core/enum";
 import Link from "next/link";
 
 const page = () => {

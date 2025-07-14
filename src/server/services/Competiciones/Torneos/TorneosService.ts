@@ -1,10 +1,10 @@
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
+import { TipoCompeticion } from "futbol-in-core/enum";
 import connectDb from "@/server/lib/db";
 import {
   ITorneo,
   Torneo,
 } from "@/server/models/Competicion/Torneos/Torneo.model";
-import { TorneoDTO } from "@/server/models/Competicion/Torneos/TorneoDTO";
+import { TorneoDTO } from "futbol-in-core/types";
 
 export class TorneosService {
   static async crearTorneo(

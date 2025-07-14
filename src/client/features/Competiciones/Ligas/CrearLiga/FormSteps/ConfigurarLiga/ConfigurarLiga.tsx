@@ -1,6 +1,6 @@
 import { LigasClient } from "@/client/shared/client/LigasClient";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
-import { TipoEnfrentamiento } from "@/core/enum/Competicion/TipoEnfrentamiento";
+import { TipoEnfrentamiento } from "futbol-in-core/enum";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { Button, InlinePicker } from "futbol-in-ui";
 import { useRouter } from "next/navigation";

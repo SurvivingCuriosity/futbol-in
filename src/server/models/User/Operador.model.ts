@@ -1,4 +1,4 @@
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { Document, Schema, Types, model, models } from "mongoose";
 
 export interface IOperadorDocument extends Document {

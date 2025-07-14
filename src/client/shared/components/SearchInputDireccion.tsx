@@ -1,5 +1,5 @@
 "use client";
-import { IMapItem } from "@/core/types/MapItem/IMapItem";
+import { IMapItem } from "futbol-in-core/types";
 import { fetchDirecciones } from "@/server/services/Places/fetchDirecciones";
 import { getCoordinatesFromPlaceId } from "@/server/services/Places/getCoordinatesFromPlaceId";
 import { CustomAsyncSelect } from "futbol-in-ui";

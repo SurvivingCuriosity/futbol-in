@@ -1,5 +1,5 @@
 // shared/lib/registrationGuard.ts
-import { UserStatus } from "@/core/enum/User/Status";
+import { UserStatus } from "futbol-in-core/enum";
 import { verifyRegistrationToken } from "@/server/lib/authToken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

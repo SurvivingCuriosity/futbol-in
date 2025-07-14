@@ -1,4 +1,4 @@
-import { OperadorDTO } from "@/server/models/User/OperadorDTO";
+import { OperadorDTO } from "futbol-in-core/types";
 import { useEffect, useState } from "react";
 import { UserClient } from "../client/UserClient";
 

@@ -1,4 +1,4 @@
-import { EstadoJugador } from "@/core/enum/Equipos/EstadoJugador";
+import { EstadoJugador } from "futbol-in-core/enum";
 
 export interface ResponderInvitacionRequest {
   idEquipo: string;

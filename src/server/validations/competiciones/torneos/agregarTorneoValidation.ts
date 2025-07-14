@@ -1,8 +1,8 @@
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
-import { ModalidadJuego } from "@/core/enum/Competicion/ModalidadJuego";
-import { TipoCompeticion } from "@/core/enum/Competicion/TipoCompeticion";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
-import { TipoFutbolin } from "@/core/enum/Futbolin/TipoFutbolin";
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
+import { ModalidadJuego } from "futbol-in-core/enum";
+import { TipoCompeticion } from "futbol-in-core/enum";
+import { TipoInscripcion } from "futbol-in-core/enum";
+import { TipoFutbolin } from "futbol-in-core/enum";
 import { z } from "zod";
 
 export const objectIdSchema = z

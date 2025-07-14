@@ -1,6 +1,6 @@
 import { EditarTorneoRequest, EditarTorneoResponse } from "@/client/shared/client/types/Competiciones/Torneos/EditarTorneo";
-import { puedeCrearTorneos } from "@/core/helpers/puedeCrearTorneos";
-import { TorneoDTO } from "@/server/models/Competicion/Torneos/TorneoDTO";
+import { puedeCrearTorneos } from "futbol-in-core/helpers";
+import { TorneoDTO } from "futbol-in-core/types";
 import { TorneosService } from "@/server/services/Competiciones/Torneos/TorneosService";
 import { UserService } from "@/server/services/User/UserService";
 import { actualizarTorneoSchema } from "@/server/validations/competiciones/torneos/editarTorneoValidation";

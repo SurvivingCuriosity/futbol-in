@@ -1,12 +1,12 @@
 "use client"
 import SearchInputBar, { PlaceOption } from "@/client/shared/components/SearchInputBar";
 import { TarjetaMensaje } from "@/client/shared/components/TarjetaMensaje";
-import { TipoInscripcion } from "@/core/enum/Competicion/TipoInscripcion";
 import { FormField, FormLabel } from "@/packages/components/FormField";
 import { Button, InlinePicker, TextInput } from "futbol-in-ui";
 import { use, useState } from "react";
 import { ConfiguracionBasica } from "../../../common/types/ConfiguracionBasica";
 import { CrearTorneoContext } from "../context/CrearTorneoContext";
+import { TipoInscripcion } from "futbol-in-core/enum";
 export const DatosBasicosTorneo = ({
   onCompleted,
 }: {

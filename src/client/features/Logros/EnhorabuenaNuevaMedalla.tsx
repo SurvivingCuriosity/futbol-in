@@ -1,15 +1,16 @@
 import { Window } from "@/packages/components/Window";
-import { ILogro } from "@/core/types/Logros/Logro";
 import Link from "next/link";
 
 import { getLevel } from "@/server/services/Logros/GetLevel";
+import { Logro } from "futbol-in-core/constants";
 import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
 import { MedallaIcon } from "../MiPerfil/components/MedallaIcon";
+import { LogrosIconMap } from "@/client/shared/constants/LogrosIconMap";
 
 export interface EnhorabuenaNuevaMedallaProps {
   nuevoLogro: {
-    logro: ILogro;
+    logro: Logro;
     value: number;
   };
 }
@@ -37,7 +38,7 @@ export const EnhorabuenaNuevaMedalla = (
         <div className="scale-125 m-10 mx-auto flex flex-col items-center justify-center w-fit p-4 rounded-xl z-20">
           <MedallaIcon
             conseguida={true}
-            icon={nuevoLogro.logro.icon}
+            icon={LogrosIconMap[nuevoLogro.logro.icon]}  
             level={getLevel(nuevoLogro.value, nuevoLogro.logro.steps)}
             showConseguidaIcon={false}
             size="xl"

@@ -1,7 +1,7 @@
 "use client";
 
 import { CompeticionesClient } from "@/client/shared/client/CompeticionesClient";
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
 import { Button } from "futbol-in-ui";
 import { toast } from "react-toastify";
 

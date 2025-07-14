@@ -1,6 +1,8 @@
-import { EnfrentamientoDTO } from "@/server/models/Enfrentamiento/Enfrentamiento.model";
-import { EquipoConEstadoDTO } from "@/server/models/Equipo/EquipoDTO";
-import { PartidoDTO } from "@/server/models/Partido/Partido.model";
+import {
+  EnfrentamientoDTO,
+  EquipoConEstadoDTO,
+  PartidoDTO,
+} from "futbol-in-core/types";
 
 export const getPartidosDeEquipo = (
   equipo: EquipoConEstadoDTO,
@@ -25,17 +27,17 @@ export const getPartidosJugados = (
   enfrentamientos: EnfrentamientoDTO[]
 ): number => {
   const enfrentamientosEquipo = getPartidosDeEquipo(equipo, enfrentamientos);
-  console.log('Enfrentmiantos del equipo', enfrentamientosEquipo)
-  
+  console.log("Enfrentmiantos del equipo", enfrentamientosEquipo);
+
   const enfrentamientosTerminados = getPartidosTerminados(
     enfrentamientosEquipo
   );
-  console.log('Enfrentmiantos terminados', enfrentamientosTerminados)
+  console.log("Enfrentmiantos terminados", enfrentamientosTerminados);
 
   return enfrentamientosTerminados.length;
 };
 
-export const  getPartidosGanados = (
+export const getPartidosGanados = (
   equipo: EquipoConEstadoDTO,
   enfrentamientos: EnfrentamientoDTO[]
 ): number => {
@@ -45,7 +47,8 @@ export const  getPartidosGanados = (
     enfrentamientosEquipo
   );
 
-  return enfrentamientosTerminados.filter(e => e.ganador === equipo.id).length;
+  return enfrentamientosTerminados.filter((e) => e.ganador === equipo.id)
+    .length;
 };
 
 export const getPartidosPerdidos = (
@@ -56,9 +59,9 @@ export const getPartidosPerdidos = (
   const enfrentamientosTerminados = getPartidosTerminados(
     enfrentamientosEquipo
   );
-  return enfrentamientosTerminados.filter(e => e.ganador !== equipo.id).length;
+  return enfrentamientosTerminados.filter((e) => e.ganador !== equipo.id)
+    .length;
 };
-
 
 export const getGolesAFavor = (
   equipo: EquipoConEstadoDTO,

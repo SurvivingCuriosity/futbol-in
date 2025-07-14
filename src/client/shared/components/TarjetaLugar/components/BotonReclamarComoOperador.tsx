@@ -1,5 +1,5 @@
 import { UserClient } from "@/client/shared/client/UserClient";
-import { SpotDTO } from "@/server/models/Spot/SpotDTO";
+import { SpotDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import { useState } from "react";
 import { toast } from "react-toastify";

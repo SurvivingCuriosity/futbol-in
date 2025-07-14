@@ -1,7 +1,7 @@
 import { CrearLigaRequest, CrearLigaResponse } from "@/client/shared/client/types/Competiciones/Ligas/CrearLiga";
-import { EstadoCompeticion } from "@/core/enum/Competicion/EstadoCompeticion";
-import { puedeCrearTorneos } from "@/core/helpers/puedeCrearTorneos";
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { EstadoCompeticion } from "futbol-in-core/enum";
+import { puedeCrearTorneos } from "futbol-in-core/helpers";
+import { LigaDTO } from "futbol-in-core/types";
 import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 import { UserService } from "@/server/services/User/UserService";
 import { crearLigaSchema } from "@/server/validations/competiciones/ligas/agregarLigaValidation";

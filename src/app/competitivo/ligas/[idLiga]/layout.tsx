@@ -2,9 +2,8 @@ import { ChipEstadoInscripcion } from "@/client/features/Competiciones/common/Ch
 import { DetalleLigaProvider } from "@/client/features/Competiciones/Ligas/DetalleLiga/DetalleLigaContext";
 import { NavLigas } from "@/client/features/Competiciones/Ligas/NavLigas";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { EstadoEquipoCompeticion } from "@/core/enum/Competicion/EstadoEquipoCompeticion";
 import { authOptions } from "@/server/lib/authOptions";
-import { LigaDTO } from "@/server/models/Competicion/Ligas/LigaDTO";
+import { LigaDTO } from "futbol-in-core/types";
 import { CompeticionesService } from "@/server/services/Competiciones/CompeticionesService";
 import { LigasService } from "@/server/services/Competiciones/Ligas/LigasService";
 import { EquipoService } from "@/server/services/Equipo/EquipoService";
@@ -12,6 +11,7 @@ import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsServic
 import { UserService } from "@/server/services/User/UserService";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { EstadoEquipoCompeticion } from "futbol-in-core/enum";
 import { Types } from "mongoose";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
