@@ -1,56 +1,52 @@
-import { NextRequest, NextResponse } from "next/server";
 import { OAuth2Client } from "google-auth-library";
-import { encode } from "next-auth/jwt";
-import { authOptions } from "@/server/lib/authOptions";
+import { SignJWT } from "jose";
+import { NextRequest, NextResponse } from "next/server";
 import { UserService } from "@/server/services/User/UserService";
 import { UserRole, UserStatus, AuthProvider } from "futbol-in-core/enum";
+import { errorResponse } from "@/server/lib/httpResponse";
 
-const client = new OAuth2Client(process.env.GOOGLE_MOBILE_CLIENT_ID);
+/** 30 días en segundos */
+const EXP = 60 * 60 * 24 * 30;
+const client = new OAuth2Client(process.env.GOOGLE_MOBILE_CLIENT_ID!);
 
+/* POST /api/mobile/auth/google */
 export async function POST(req: NextRequest) {
   try {
-    /* 1. Recibimos el id_token que nos envía la app */
     const { idToken } = (await req.json()) as { idToken?: string };
+    if (!idToken) return errorResponse("idToken requerido", 400);
 
-    if (!idToken) {
-      return NextResponse.json({ error: "idToken requerido" }, { status: 400 });
-    }
-
-    /* 2. Verificamos la firma y obtenemos payload */
+    /* 1. Verificar token de Google */
     const ticket = await client.verifyIdToken({
       idToken,
       audience: process.env.GOOGLE_MOBILE_CLIENT_ID,
     });
-    const payload = ticket.getPayload();
+    const google = ticket.getPayload();
+    if (!google?.email) return errorResponse("Token inválido", 401);
 
-    if (!payload?.email) {
-      return NextResponse.json({ error: "Token inválido" }, { status: 401 });
-    }
+    /* 2. Buscar o crear usuario */
+    let user = await UserService.findByEmail(google.email);
+    if (!user) user = await UserService.createGoogleUser(google.email);
 
-    /* 3. Buscar o crear usuario como ya haces en el callback signIn */
-    let user = await UserService.findByEmail(payload.email);
-    if (!user) {
-      user = await UserService.createGoogleUser(payload.email);
-    }
-
-    /* 4. Firmar nuestro JWT interno */
-    const jwtPayload = {
+    /* 3. Payload */
+    const payload = {
       id: user._id.toString(),
-      status: user.status as UserStatus,
-      role: user.role || [UserRole.USER],
       email: user.email,
       name: user.name,
+      role: user.role || [UserRole.USER],
+      status: user.status as UserStatus,
       provider: AuthProvider.GOOGLE,
-      imagen: user.imagen || payload.picture || "",
+      imagen: user.imagen || google.picture || "",
     };
 
-    const token = await encode({
-      token: jwtPayload,
-      secret: process.env.NEXTAUTH_SECRET!,
-      maxAge: authOptions.session?.maxAge ?? 60 * 60 * 24 * 30,
-    });
+    /* 4. Firmar HS256 */
+    const secret = new TextEncoder().encode(process.env.JWT_MOBILE_SECRET!);
+    const token = await new SignJWT(payload)
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime(EXP)
+      .sign(secret);
 
-    return NextResponse.json({ token });
+    return NextResponse.json({ token, user: payload });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: "Error interno" }, { status: 500 });

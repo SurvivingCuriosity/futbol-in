@@ -1,13 +1,16 @@
-import { authOptions } from "@/server/lib/authOptions";
-import { errorResponse } from "@/server/lib/httpResponse";
+import { SignJWT } from "jose";
+import { NextRequest, NextResponse } from "next/server";
 import { UserService } from "@/server/services/User/UserService";
 import { UserRole, UserStatus } from "futbol-in-core/enum";
-import { encode } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
+import { errorResponse } from "@/server/lib/httpResponse";
 
+/** 30 días en segundos */
+const EXP = 60 * 60 * 24 * 30;
+
+/* POST /api/mobile/auth/login */
 export async function POST(req: NextRequest) {
   try {
-    /* 1. Leer body JSON */
+    /* 1. Body */
     const { email, password } = (await req.json()) as {
       email?: string;
       password?: string;
@@ -17,41 +20,41 @@ export async function POST(req: NextRequest) {
       return errorResponse("Email y password son obligatorios", 400);
     }
 
-    /* 2. Validar credenciales reaprovechando tu UserService */
+    /* 2. Validaciones */
     const user = await UserService.findByEmail(email);
-    const isOk =
-      user &&
-      (await UserService.validatePassword(password, user.password || ""));
+    const valid =
+      user && (await UserService.validatePassword(password, user.password || ""));
 
-    if (!isOk) {
+    if (!valid) {
       return errorResponse("Credenciales inválidas", 401);
     }
 
-    /* 3. Construir el payload con los mismos campos que grabas en el callback jwt */
-    const tokenPayload = {
+    /* 3. Payload común */
+    const payload = {
       id: user._id.toString(),
-      status: user.status as UserStatus,
-      role: user.role || [UserRole.USER],
       email: user.email,
       name: user.name,
+      role: user.role || [UserRole.USER],
+      status: user.status as UserStatus,
       provider: user.provider,
       imagen: user.imagen || "",
     };
 
-    /* 4. Firmar el JWT exactamente igual que NextAuth */
-    const jwt = await encode({
-      token: tokenPayload,
-      secret: process.env.NEXTAUTH_SECRET!,
-      maxAge: authOptions.session?.maxAge ?? 60 * 60 * 24 * 30, // 30 días (ajústalo si quieres)
-    });
+    /* 4. Firmar HS256 */
+    const secret = new TextEncoder().encode(process.env.JWT_MOBILE_SECRET!);
+    const token = await new SignJWT(payload)
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime(EXP)
+      .sign(secret);
 
-    /* 5. Devolver JSON cómodo de consumir en RN */
-    return NextResponse.json({ token: jwt });
+    /* 5. Devolver token + payload */
+    return NextResponse.json({ token, user: payload });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: "Error interno" }, { status: 500 });
   }
 }
 
-/* Queremos que cada llamada calcule fresh data, no ISR */
+/* Siempre fresh */
 export const dynamic = "force-dynamic";
