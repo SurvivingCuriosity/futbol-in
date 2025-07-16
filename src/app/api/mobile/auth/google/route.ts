@@ -1,33 +1,65 @@
+import { NextRequest, NextResponse } from "next/server";
 import { OAuth2Client } from "google-auth-library";
 import { SignJWT } from "jose";
-import { NextRequest, NextResponse } from "next/server";
 import { UserService } from "@/server/services/User/UserService";
 import { UserRole, UserStatus, AuthProvider } from "futbol-in-core/enum";
 import { errorResponse } from "@/server/lib/httpResponse";
 
-/** 30 días en segundos */
+/* 30 días */
 const EXP = 60 * 60 * 24 * 30;
-const client = new OAuth2Client(process.env.GOOGLE_MOBILE_CLIENT_ID!);
+const clientId = process.env.GOOGLE_MOBILE_CLIENT_ID!;
+const jwtSecret = new TextEncoder().encode(process.env.JWT_MOBILE_SECRET!);
+const googleClient = new OAuth2Client(clientId);
 
-/* POST /api/mobile/auth/google */
+/** POST /api/mobile/auth/google */
 export async function POST(req: NextRequest) {
   try {
-    const { idToken } = (await req.json()) as { idToken?: string };
-    if (!idToken) return errorResponse("idToken requerido", 400);
+    /* ---------- 1. Body del cliente ---------- */
+    const { code, codeVerifier, redirectUri } = (await req.json()) as {
+      code?: string;
+      codeVerifier?: string;
+      redirectUri?: string;
+    };
 
-    /* 1. Verificar token de Google */
-    const ticket = await client.verifyIdToken({
-      idToken,
-      audience: process.env.GOOGLE_MOBILE_CLIENT_ID,
+    if (!code || !codeVerifier || !redirectUri) {
+      return errorResponse("code, codeVerifier y redirectUri requeridos", 400);
+    }
+
+    /* ---------- 2. code -> tokens (PKCE) ---------- */
+    const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        client_id: clientId,
+        code,
+        code_verifier: codeVerifier,
+        redirect_uri: redirectUri,
+        grant_type: "authorization_code",
+      }),
     });
-    const google = ticket.getPayload();
-    if (!google?.email) return errorResponse("Token inválido", 401);
 
-    /* 2. Buscar o crear usuario */
-    let user = await UserService.findByEmail(google.email);
-    if (!user) user = await UserService.createGoogleUser(google.email);
+    if (!tokenRes.ok) {
+      const err = await tokenRes.json();
+      console.error("Google token error", err);
+      return errorResponse("Intercambio code falló", 400);
+    }
 
-    /* 3. Payload */
+    const { id_token: idToken } = (await tokenRes.json()) as {
+      id_token: string;
+    };
+
+    /* ---------- 3. Verificar ID Token ---------- */
+    const ticket = await googleClient.verifyIdToken({
+      idToken,
+      audience: clientId,
+    });
+    const g = ticket.getPayload();
+    if (!g?.email) return errorResponse("Token inválido", 401);
+
+    /* ---------- 4. Usuario en tu BD ---------- */
+    let user = await UserService.findByEmail(g.email);
+    if (!user) user = await UserService.createGoogleUser(g.email);
+
     const payload = {
       id: user._id.toString(),
       email: user.email,
@@ -35,21 +67,20 @@ export async function POST(req: NextRequest) {
       role: user.role || [UserRole.USER],
       status: user.status as UserStatus,
       provider: AuthProvider.GOOGLE,
-      imagen: user.imagen || google.picture || "",
+      imagen: user.imagen || g.picture || "",
     };
 
-    /* 4. Firmar HS256 */
-    const secret = new TextEncoder().encode(process.env.JWT_MOBILE_SECRET!);
+    /* ---------- 5. JWT HS256 propio ---------- */
     const token = await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
       .setExpirationTime(EXP)
-      .sign(secret);
+      .sign(jwtSecret);
 
     return NextResponse.json({ token, user: payload });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: "Error interno" }, { status: 500 });
+  } catch (e) {
+    console.error(e);
+    return errorResponse("Error interno", 500);
   }
 }
 
