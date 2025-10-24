@@ -5,7 +5,6 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const placeId = searchParams.get("placeId");
 
-
   if (!placeId) {
     return errorResponse("placeId es requerido", 400);
   }

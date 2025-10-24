@@ -17,7 +17,7 @@ export const TopNav = () => {
   const session = useSession();
 
   const items = [
-    { label: "Buscar", href: `/spots`, icon: faMagnifyingGlass },
+    { label: "Buscar", href: `/ciudades`, icon: faMagnifyingGlass },
     { label: "Agregar", href: "/agregar-spot", icon: faCirclePlus },
     { label: "Competitivo", href: "/competitivo", icon: faTrophy },
   ];

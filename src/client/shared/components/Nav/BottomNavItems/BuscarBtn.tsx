@@ -7,15 +7,15 @@ export const BuscarBtn = () => {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
-    if (href === "/spots") {
-      return pathname === "/spots";
+    if (href === "/ciudades") {
+      return pathname === "/ciudades";
     }
     return pathname.startsWith(href);
   };
 
   return (
     <Link
-      href={"/spots"}
+      href={"/ciudades"}
       className={`tour-buscar flex items-center justify-center p-2 ${isActive('/spots/') ? "text-primary" : "text-white"}`}
       aria-label={"Spots"}
       prefetch

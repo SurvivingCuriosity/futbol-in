@@ -117,7 +117,8 @@ export class GoogleMapsService {
       const data = await res.json();
 
       if (data.status !== "OK") {
-        throw new Error(`No se pudo obtener el lugar ${id}: ${data.status}`);
+        // throw new Error(`No se pudo obtener el lugar ${id}: ${data.status}`);
+        console.error(`No se pudo obtener el lugar ${id}: ${data.status}`);
       }
 
       return data.result;

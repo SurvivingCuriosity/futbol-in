@@ -61,7 +61,7 @@ const ListaSpots = (props: ListaSpotsProps) => {
             <TarjetaLugar
               spot={f}
               googleInfo={googleInfoSpots.find(
-                (s) => s.place_id === f.googlePlaceId
+                (s) => s?.place_id === f?.googlePlaceId
               )}
               selected={f.googlePlaceId === selectedLugar?.googlePlaceId}
               onSelect={onSelect}

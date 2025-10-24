@@ -21,6 +21,7 @@ export async function POST(request: Request) {
     return RegistrationService.createRegistrationResponse(idUsuario, UserStatus.MUST_CONFIRM_EMAIL);
 
   } catch (error: unknown) {
+    console.error(error);
     return handleError(error);
   }
 }

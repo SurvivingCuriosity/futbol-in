@@ -4,11 +4,9 @@ if (!process.env.GCP_CREDENTIALS) {
   throw new Error("Falta la variable de entorno GCP_CREDENTIALS_BASE64");
 }
 
-// Decodificamos la variable de entorno BASE64
 const decoded = Buffer.from(process.env.GCP_CREDENTIALS, "base64").toString("utf8");
 const credentials = JSON.parse(decoded);
 
-// Creamos el cliente de Google Cloud Storage sin keyFilename
 const storage = new Storage({
   projectId: credentials.project_id,
   credentials: {

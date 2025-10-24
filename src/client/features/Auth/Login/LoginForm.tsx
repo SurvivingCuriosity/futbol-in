@@ -41,7 +41,11 @@ export const LoginForm = () => {
       >
         <FormField>
           <FormLabel>Correo electrónico</FormLabel>
-          <TextInput onChangeText={setEmail} placeholder="futbolin@example.com" />
+          <TextInput 
+          onChangeText={setEmail} 
+          placeholder="futbolin@example.com" 
+          
+          />
         </FormField>
 
         <FormField>

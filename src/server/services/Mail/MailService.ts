@@ -1,25 +1,20 @@
-import sgMail from "@sendgrid/mail";
+import nodemailer from "nodemailer";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+export const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT || 587),
+  secure: process.env.SMTP_PORT === "465", // true solo si 465
+  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+});
 
-export class MailService {
-  static async sendVerificationEmail(
-    email: string,
-    verificationCode: string
-  ): Promise<void> {
-    const msg = {
-      to: email,
-      from: { email: "contacto@futbolin.app", name: "Futbol-in" },
-      subject: "Verificación de Email",
-      text: `Tu código de verificación es: ${verificationCode}`,
-      html: `<p>Tu código de verificación es: <strong>${verificationCode}</strong></p>`,
-    };
-
-    try {
-      await sgMail.send(msg);
-    } catch (error) {
-      console.error("Error enviando email", error);
-      throw error;
-    }
-  }
+export async function sendVerifyEmail(to:string, code:string) {
+  const info = await transporter.sendMail({
+    from: `${process.env.APP_NAME} <${process.env.FROM_EMAIL}>`,
+    to,
+    subject: "Verifica tu correo",
+    text: `Tu código es: ${code}`,
+    html: `<p>Tu código es: <b>${code}</b></p>`,
+  });
+  return info.messageId;
 }
+

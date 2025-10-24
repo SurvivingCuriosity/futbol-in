@@ -1,5 +1,6 @@
+"use client";
+
 import Typewriter from "@/client/features/Landing/components/TypeWriter";
-import googlePlayBadge from "@/client/shared/assets/img/googleplay.svg";
 import { AppLogo } from "@/client/shared/components/AppLogo";
 import { LoginRegister } from "@/client/shared/components/Nav/components/LoginRegister";
 import {
@@ -9,10 +10,14 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
+import {
+  DistribucionFutbolin,
+  TipoFutbolin,
+  TipoLugar,
+} from "futbol-in-core/enum";
 import Link from "next/link";
+import { Mapa } from "../Mapa/Mapa";
 import { Footer } from "./components/Footer";
-import { SearchInputRedirect } from "./components/SearchInputRedirect";
 export const LandingPage = async () => {
   const sampleStaticRoutes = [
     { label: "Futbolines en Salamanca", href: `/spots/Salamanca_Salamanca` },
@@ -27,37 +32,72 @@ export const LandingPage = async () => {
           <LoginRegister />
         </div>
 
-        <div className="mt-12 md:mt-20 max-w-3xl flex gap-4 flex-col items-stretch justify-center w-full relative">
-          <Image
-            src={googlePlayBadge}
-            alt="Logo de Google Play"
-            width={150}
-            height={10}
-            className="mx-auto w-30 absolute -top-10 left-0"
-          />
-          <h1
-            style={{ fontSize: "clamp(2.5em, 10vw, 4.5em)", lineHeight: "1em" }}
-            className="mb-4 font-extrabold text-balance text-white tracking-tight"
-          >
-            Futbolines{" "}
-            <span className="text-primary">
-              <Typewriter />{" "}
-            </span>
-            cerca de ti
-          </h1>
+        <div className="border border-red-500 mt-12 md:mt-20 max-w-screen-lg flex gap-4 items-stretch justify-center w-full relative">
+          <div>
+            <h1
+              style={{
+                fontSize: "clamp(2.5em, 10vw, 4.5em)",
+                lineHeight: "1em",
+              }}
+              className="mb-4 font-extrabold text-balance text-white tracking-tight"
+            >
+              Futbolines{" "}
+              <span className="text-primary">
+                <Typewriter />{" "}
+              </span>
+              cerca de ti
+            </h1>
+            <p className="text-lg text-neutral-300">
+              Usa tu ubicación o introduce una ciudad para encontrar futbolines.
+              Filtra por marca, cercanía etc.
+            </p>
+          </div>
 
-          <p className="text-neutral-400">
-            Usa tu ubicación o introduce una ciudad para encontrar futbolines.
-            Filtra por marca, cercanía etc.
-          </p>
-
-          <SearchInputRedirect />
-
-          <a href="#detalles" className="text-neutral-400 mx-auto my-5">
-            <FontAwesomeIcon icon={faChevronDown} width={24} height={24} />
-            Saber más
-          </a>
+          <div className="relative">
+            {/* <div className="absolute top-0 left-0">
+              <SearchInputRedirect />
+            </div> */}
+            <Mapa
+              markers={[
+                {
+                  id: "1",
+                  addedByUserId: "1",
+                  coordinates: [-122.4324, 37.72825],
+                  googlePlaceId: "ChIJa8s-tqOuEmsRUcIaWtf4MzE",
+                  tipoFutbolin: TipoFutbolin.TSUNAMI,
+                  ciudad: "Salamanca, Castilla y León, España",
+                  comentarios: "",
+                  direccion: "Av. de la Independencia, s/n",
+                  nombre: "Salamanca Futbol Club",
+                  distribucion: DistribucionFutbolin.F4,
+                  idOperador: null,
+                  tipoLugar: TipoLugar.FUBTOLIN,
+                  verificado: {
+                    correcto: true,
+                    fechaVerificacion: new Date(),
+                    idUser: "null",
+                  },
+                  votes: {
+                    down: [],
+                    up: [],
+                  },
+                },
+              ]}
+              onSelectMarker={() => {}}
+              selectedMarker={null}
+              userLocation={null}
+              initialCenter={{
+                lat: 40.963,
+                lng: -5.6612,
+              }}
+              zoom={14}
+            />
+          </div>
         </div>
+        <a href="#detalles" className="text-neutral-400 mx-auto my-5">
+          <FontAwesomeIcon icon={faChevronDown} width={24} height={24} />
+          Saber más
+        </a>
 
         <div
           id="detalles"

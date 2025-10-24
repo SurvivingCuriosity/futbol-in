@@ -4,8 +4,8 @@ import { generateRegistrationToken, verifyRegistrationToken } from "@/server/lib
 import { IUserDocument } from "@/server/models/User/User.model";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
-import { MailService } from "../Mail/MailService";
 import { UserService } from "../User/UserService";
+import { sendVerifyEmail } from "../Mail/MailService";
 
 export class RegistrationService {
   
@@ -82,7 +82,7 @@ export class RegistrationService {
       await user.save()
     }
 
-    await MailService.sendVerificationEmail(email, verificationCode);
+    await sendVerifyEmail(email, verificationCode);
 
     return user._id.toString()
   }
