@@ -84,6 +84,7 @@ const AgregarSpotPage = () => {
         tipoFutbolin,
         comentarios,
         distribucion,
+        idOperador: null
       });
       toast.success("¡Agregado correctamente!");
       comprobarSiGanaMedalla(res.spotsCreados);

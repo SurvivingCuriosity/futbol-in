@@ -44,7 +44,7 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
       </div>
       
         <SeccionPerfil titulo="Mi futbolines">
-          <MisFutbolines futbolines={futbolines} operador={null} />
+          <MisFutbolines futbolines={futbolines} />
         </SeccionPerfil>
 
       <span className="md:hidden">

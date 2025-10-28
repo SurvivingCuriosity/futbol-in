@@ -29,6 +29,7 @@ export const MapaGlobalPage = ({ spots }: { spots: SpotDTO[] }) => {
           initialCenter={spainCenter}
           zoom={5.4}
           restrictToSpain={true}
+          focusCoords={null}
         />
         {selectedMarker !== null && (
           <div className="absolute bottom-2 z-5 mx-auto shadow w-full p-1 flex items-center justify-center">

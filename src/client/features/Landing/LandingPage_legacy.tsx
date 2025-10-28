@@ -81,6 +81,7 @@ export const LandingPage = () => {
               onSelectMarker={() => {}}
               selectedMarker={null}
               userLocation={null}
+              focusCoords={null}
               initialCenter={{
                 lat: 40.963,
                 lng: -5.6612,

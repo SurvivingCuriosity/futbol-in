@@ -2,11 +2,8 @@ import { NavLayout } from "@/client/shared/layouts/NavLayout";
 import SessionWrapper from "@/client/shared/components/Providers/SessionWrapper";
 import type { Metadata } from "next";
 import { Slide, ToastContainer } from "react-toastify";
-// @ts-expect-error TODO FIX THIS
 import "@/client/shared/assets/styles/toast.css";
-// @ts-expect-error TODO FIX THIS
 import "../globals.css";
-// @ts-expect-error TODO FIX THIS
 import 'intro.js/introjs.css';
 import { UserProvider } from "@/client/shared/context/UserContext";
 import { Poppins } from "next/font/google";
