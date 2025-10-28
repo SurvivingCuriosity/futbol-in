@@ -22,7 +22,7 @@ export const ListaFutbolinesGod = ({
         );
       })
     );
-  }, [q]);
+  }, [q, futbolines]);
 
   const handleDeleteFutbolin = async (id: string) => {
     await SpotsClient.borrarSpot(id);

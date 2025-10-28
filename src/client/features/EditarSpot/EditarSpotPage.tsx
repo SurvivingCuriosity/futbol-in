@@ -102,7 +102,7 @@ export const EditarSpotPage = ({ futbolin }: { futbolin: SpotDTO }) => {
         cambiaDistribucion ||
         cambiaComentarios
     );
-  }, [ciudad, direccionOBar, tipoFutbolin, distribucion, comentarios]);
+  }, [futbolin, ciudad, direccionOBar, tipoFutbolin, distribucion, comentarios]);
 
   return (
     <div className="max-w-xl mx-auto w-full md:p-4 md:border border-neutral-700 rounded-lg flex flex-col gap-2">

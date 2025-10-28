@@ -1,14 +1,13 @@
 import { ImagenFutbolinMap } from "@/client/shared/constants/FutbolinesImageMap";
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
-import { TipoFutbolinNombre } from "futbol-in-core/enum";
-import { SpotDTO } from "futbol-in-core/types";
 import {
   faLocationDot,
   faStore
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TipoFutbolinNombre } from "futbol-in-core/enum";
+import { SpotDTO } from "futbol-in-core/types";
 import Image from "next/image";
-import { MarcaVerificado } from "./MarcaVerificado";
 
 export const MainInfo = ({
   spot,

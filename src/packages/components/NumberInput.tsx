@@ -18,7 +18,7 @@ export const NumberInput = (props: NumberInputProps) => {
         if (onChange) {
             onChange(value)
         }
-    }, [value]);
+    }, [value, onChange]);
 
     const handleAddOne = (e?: React.MouseEvent<HTMLButtonElement>) => {
         if (e) e.preventDefault();
