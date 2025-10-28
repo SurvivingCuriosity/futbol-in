@@ -76,6 +76,7 @@ export function DataTable<T extends object>({
         text-neutral-400
         border-neutral-800
         border
+        bg-neutral-950/90
       "
     >
       <thead>

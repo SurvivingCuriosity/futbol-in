@@ -7,7 +7,6 @@ import React from "react";
 interface CityLayoutProps {
   params: Promise<{
     ciudad: string;
-    placeId: string;
   }>;
   children: React.ReactNode;
 }
@@ -25,7 +24,7 @@ const layout = async (props: CityLayoutProps) => {
         <h1 className="text-xl lg:text-3xl leading-5 font-bold text-primary tracking-tighter">
           Futbolines en {ciudadLabel}
         </h1>
-        <Link href={`/spots/global?from=${`/spots/${ciudad}`}`} className="text-neutral-500 hover:text-primary">
+        <Link href={`/ciudades/global?from=${`/ciudades/${ciudad}`}`} className="text-neutral-500 hover:text-primary">
           <FontAwesomeIcon icon={faGlobe} className="mr-1" />
         </Link>
       </div>

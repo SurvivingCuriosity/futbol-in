@@ -1,13 +1,10 @@
 import { TarjetaLugar } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
 import { SpotDTO } from "futbol-in-core/types";
-import { OperadorDTO } from "futbol-in-core/types";
 
 export const MisFutbolines = ({
   futbolines,
-  operador,
 }: {
   futbolines: SpotDTO[];
-  operador: OperadorDTO | null | undefined;
 }) => {
   return (
     <>
@@ -25,7 +22,6 @@ export const MisFutbolines = ({
               <TarjetaLugar
                 spot={e}
                 distanciaMessage={""}
-                operador={operador}
               />
             </span>
           ))}

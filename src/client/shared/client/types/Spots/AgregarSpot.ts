@@ -2,7 +2,7 @@ import { SpotDTO } from "futbol-in-core/types";
 
 export type AgregarSpotRequest = Omit<
   SpotDTO,
-  "id" | "verificado" | "votes" | "addedByUserId" | 'idOperador'
+  "id" | "verificado" | "votes" | "addedByUserId"
 >;
 
 export interface AgregarSpotResponse {

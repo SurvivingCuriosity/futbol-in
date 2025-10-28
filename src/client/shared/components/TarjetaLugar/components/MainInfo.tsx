@@ -45,12 +45,12 @@ export const MainInfo = ({
               <FontAwesomeIcon className="w-6" icon={faLocationDot} />
               <p className={`${isOpen ? "" : "truncate"}`}>{spot.direccion}</p>
             </div>
-            {spot.verificado && (
+            {/* {spot.verificado && (
               <MarcaVerificado
                 fecha={new Date(spot.verificado.fechaVerificacion)}
                 correcto={spot.verificado.correcto}
               />
-            )}
+            )} */}
           </div>
         </div>
         <Image

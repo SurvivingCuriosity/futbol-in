@@ -1,8 +1,7 @@
 import { SpotsCiudadPage } from "@/client/features/Spots/SpotsCiudadPage";
-import { decodeCiudad } from "futbol-in-core/helpers";
 import { GoogleMapsService } from "@/server/services/GoogleMaps/GoogleMapsService";
 import { SpotService } from "@/server/services/Spots/SpotsService";
-import { UserService } from "@/server/services/User/UserService";
+import { decodeCiudad } from "futbol-in-core/helpers";
 import Link from "next/link";
 
 export const revalidate = 3600;
@@ -71,13 +70,7 @@ export default async function Page({
     ciudadParaBusqueda
   );
 
-  const idsOperadoresSet = new Set(spots.map((s) => s.idOperador));
-  const idsOperadores: string[] = [...idsOperadoresSet].filter(
-    (id): id is string => id !== null
-  );
 
-  const operadores = await UserService.getPerfilesOperadores(idsOperadores);
-  const operadoresMapeados = operadores.map(UserService.mapOperadorToDTO);
 
   return (
     <SpotsCiudadPage
@@ -85,7 +78,6 @@ export default async function Page({
       googleInfoSpots={googleInfoSpots}
       coords={coords}
       ciudad={ciudad}
-      operadores={operadoresMapeados}
     />
   );
 }

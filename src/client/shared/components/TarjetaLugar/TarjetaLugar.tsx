@@ -1,30 +1,23 @@
 "use client";
 
-import { SpotDTO } from "futbol-in-core/types";
-import { OperadorDTO } from "futbol-in-core/types";
 import {
   faHand,
   faLocationCrosshairs,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SpotDTO } from "futbol-in-core/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { StorageClient } from "../../client/StorageClient";
 import { ImagenFutbolinLogoMap } from "../../constants/FutbolinesLogoImageMap";
-import { ImagenCuadrada } from "../ImagenCuadrada";
 import { BotoneraCompartir } from "./components/BotoneraCompartir";
-import { BotonReclamarComoOperador } from "./components/BotonReclamarComoOperador";
 import { MainInfo } from "./components/MainInfo";
-import { useRouter } from "next/navigation";
 
 export interface TarjetaLugarProps {
   spot: SpotDTO;
   selected?: boolean;
   onSelect?: (l: SpotDTO | null) => void;
   distanciaMessage: string | null;
-  puedeReclamarloComoOperador?: boolean;
-  operador: OperadorDTO | null | undefined;
   googleInfo?: (google.maps.places.PlaceResult & CurrentOpening) | undefined;
 }
 
@@ -41,24 +34,9 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
     selected,
     onSelect,
     distanciaMessage,
-    puedeReclamarloComoOperador = false,
-    operador,
   } = props;
 
-  const router = useRouter()
-
   const [spot, setSpot] = useState<SpotDTO>(spotProp);
-
-  const [logoOperador, setLogoOperador] = useState<string>("");
-
-  useEffect(() => {
-    const getImageUrl = async () => {
-      if (!operador || !operador.logo) return;
-      const res = await StorageClient.getImageUrl(operador?.logo);
-      setLogoOperador(res);
-    };
-    getImageUrl();
-  }, [operador?.logo, operador]);
 
   useEffect(() => {
     setSpot(spotProp);
@@ -73,7 +51,7 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
 
   return (
     <Link
-      href={`/spots/detalle/${spot.id}`}
+      href={`/futbolines/${spot.id}`}
       className={`block group relative p-2 md:p-3 border border-neutral-700 bg-neutral-900 rounded-lg select-none w-full md:min-w-[400px] overflow-hidden`}
     >
       <span className="absolute top-1 right-1 z-3 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
@@ -106,24 +84,6 @@ export const TarjetaLugar = (props: TarjetaLugarProps) => {
             </span>
           )}
         </div>
-
-        {operador && (
-          <button
-            onClick={()=>router.push(`/operadores/${operador.id}`)}
-            className="flex items-center gap-2 ml-auto z-2 text-neutral-400 p-0.5 underline"
-          >
-            <ImagenCuadrada
-              size="sm"
-              src={logoOperador}
-              alt="Logo de la empresa"
-            />
-            {operador.nombreComercial}
-          </button>
-        )}
-
-        {puedeReclamarloComoOperador && spot.idOperador !== operador?.id && (
-          <BotonReclamarComoOperador spot={spot} onUpdate={setSpot} />
-        )}
       </div>
     </Link>
   );

@@ -1,25 +1,20 @@
 "use client";
 
 import { BotoneraCompartir } from "@/client/shared/components/TarjetaLugar/components/BotoneraCompartir";
-import { BotonesLikeDislike } from "@/client/shared/components/TarjetaLugar/components/BotonesLikeDislike";
 import { Comentarios } from "@/client/shared/components/TarjetaLugar/components/Comentarios";
 import { IndicadorCobertura } from "@/client/shared/components/TarjetaLugar/components/IndicadorCobertura";
-import { MarcaVerificado } from "@/client/shared/components/TarjetaLugar/components/MarcaVerificado";
 import { ImagenFutbolinMapNoDeg } from "@/client/shared/constants/FutbolinesImageMap";
 import { ImagenFutbolinLogoMap } from "@/client/shared/constants/FutbolinesLogoImageMap";
 import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
-import { TipoFutbolinNombre } from "futbol-in-core/enum";
-import { esUsuarioVerificado } from "futbol-in-core/helpers";
-import { SpotDTO } from "futbol-in-core/types";
-import { UserDTO } from "futbol-in-core/types";
 import { faLocationDot, faStore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TipoFutbolinNombre } from "futbol-in-core/enum";
+import { SpotDTO, UserDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export const DetalleFutbolinPage = ({
   futbolin,
@@ -33,14 +28,13 @@ export const DetalleFutbolinPage = ({
   const user = useGetLoggedInUserClient();
   const agregadoPorUsuario = futbolin.addedByUserId === user?.id;
   const router = useRouter();
-  const [innerSpot, setInnerSpot] = useState<SpotDTO>(futbolin);
 
   const handleEditarFutbolin = () => {
-    router.push(`/spots/detalle/${futbolin.id}/editar`);
+    router.push(`/futbolines/${futbolin.id}/editar`);
   };
 
   return (
-    <GoBackLayout href="/spots" label="Futbolines">
+    <GoBackLayout href="/mapa" label="Futbolines">
       <div
         className={`flex flex-col justify-between w-full h-full duration-300 max-w-2xl mx-auto`}
       >
@@ -55,28 +49,28 @@ export const DetalleFutbolinPage = ({
                 className="w-14"
               />
               <p className="text-4xl font-bold">
-                {TipoFutbolinNombre[innerSpot.tipoFutbolin]}
+                {TipoFutbolinNombre[futbolin.tipoFutbolin]}
               </p>
             </div>
             <div className="space-y-1 my-2">
               <div className="flex items-center gap-1 text-neutral-300">
                 <FontAwesomeIcon className="w-6" icon={faStore} />
-                <p>{innerSpot.nombre}</p>
+                <p>{futbolin.nombre}</p>
               </div>
               <div className="flex items-center gap-1 text-neutral-300">
                 <FontAwesomeIcon className="w-6" icon={faLocationDot} />
-                <p>{innerSpot.ciudad}</p>
+                <p>{futbolin.ciudad}</p>
               </div>
             </div>
             <div className="flex flex-row items-center gap-2 justify-between mb-2">
               <BotoneraCompartir
-                googlePlaceId={innerSpot.googlePlaceId}
-                idSpot={innerSpot.id}
+                googlePlaceId={futbolin.googlePlaceId}
+                idSpot={futbolin.id}
               />
-              {innerSpot.verificado === null && (
+              {futbolin.verificado === null && (
                 <IndicadorCobertura
-                  downVotes={innerSpot.votes.down.length}
-                  upVotes={innerSpot.votes.up.length}
+                  downVotes={futbolin.votes.down.length}
+                  upVotes={futbolin.votes.up.length}
                 />
               )}
             </div>
@@ -100,27 +94,27 @@ export const DetalleFutbolinPage = ({
           )}
         </p>
 
-        <div className="rounded-lg w-full flex justify-between z-2">
+        {/* <div className="rounded-lg w-full flex justify-between z-2">
           <div className="w-full relative">
             <div className="mt-2 ml-1 space-y-1 relative">
-              {innerSpot.verificado && (
+              {futbolin.verificado && (
                 <MarcaVerificado
-                  fecha={new Date(innerSpot.verificado.fechaVerificacion)}
-                  correcto={innerSpot.verificado.correcto}
+                  fecha={new Date(futbolin.verificado.fechaVerificacion)}
+                  correcto={futbolin.verificado.correcto}
                 />
               )}
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <Comentarios comentarios={innerSpot.comentarios} />
-
+        <Comentarios comentarios={futbolin.comentarios} />
+{/* 
         <BotonesLikeDislike
-          spot={innerSpot}
-          onChangeSpotCallback={setInnerSpot}
+          spot={futbolin}
+          onChangeSpotCallback={setfutbolin}
           agregadoPorUsuario={agregadoPorUsuario}
-        />
-        {(agregadoPorUsuario || esUsuarioVerificado(user as UserDTO)) && (
+        /> */}
+        {agregadoPorUsuario && (
           <Button onClick={handleEditarFutbolin} label="Editar" />
         )}
       </div>

@@ -1,21 +1,19 @@
-import { AuthProvider } from "futbol-in-core/enum";
-import { UserRole } from "futbol-in-core/enum";
-import { UserStatus } from "futbol-in-core/enum";
 import connectDb from "@/server/lib/db";
-import { IOperadorDocument, Operador } from "@/server/models/User/Operador.model";
-import { OperadorDTO } from "futbol-in-core/types";
 import { IUserDocument, User } from "@/server/models/User/User.model";
-import { UserDTO } from "futbol-in-core/types";
 import bcrypt from "bcryptjs";
+import { AuthProvider, UserRole, UserStatus } from "futbol-in-core/enum";
+import { UserDTO } from "futbol-in-core/types";
 import { Types } from "mongoose";
 
 export class UserService {
-  static async getAll(): Promise<Array<UserDTO&{code:string|undefined}>> {
+  static async getAll(): Promise<
+    Array<UserDTO & { code: string | undefined }>
+  > {
     await connectDb();
     const users = await User.find({}).lean<IUserDocument[]>();
     return users.map((user) => ({
       ...this.mapToDTO(user),
-      code: user.verificationCode
+      code: user.verificationCode,
     }));
   }
 
@@ -73,42 +71,6 @@ export class UserService {
     return user.save();
   }
 
-  static async createPerfilOperador(data:{
-    operador: Omit<OperadorDTO,'id'>,
-    idUsuario: string
-  }): Promise<IOperadorDocument> {
-    await connectDb();
-    const operadorCreado = new Operador(data.operador);
-    const user = await User.findById(data.idUsuario)
-
-    if(!user){
-      throw new Error('No se encontró al usuario en la base de datos')
-    }
-
-    user.idOperador = operadorCreado.id;
-    await user.save()
-    return await operadorCreado.save();
-  }
-
-  static async getPerfilOperador(idOperador:string|null): Promise<IOperadorDocument|null> {
-    if(!idOperador) return null
-    await connectDb();
-    const operador = await Operador.findById(idOperador);
-    if(!operador){
-      throw new Error('No se encontró al operador en la base de datos')
-    }
-    return operador;
-  }
-
-  static async getPerfilesOperadores(idsOperador:string[]): Promise<IOperadorDocument[]> {
-    await connectDb();
-    const operador = await Operador.find({ _id: { $in: idsOperador } });
-    if(!operador){
-      throw new Error('No se encontró al operador en la base de datos')
-    }
-    return operador;
-  }
-
   static async updateUser(
     userId: string,
     updateData: Partial<UserDTO>
@@ -119,18 +81,6 @@ export class UserService {
       runValidators: true,
     });
     return updatedUser;
-  }
-
-  static async updateOperador(
-    operadorId: string,
-    updateData: Partial<UserDTO>
-  ): Promise<IOperadorDocument | null> {
-    await connectDb();
-    const updatedOperador = await Operador.findByIdAndUpdate(operadorId, updateData, {
-      new: true,
-      runValidators: true,
-    });
-    return updatedOperador;
   }
 
   static async validatePassword(
@@ -172,24 +122,6 @@ export class UserService {
     );
   }
 
-  static mapOperadorToDTO(operador: IOperadorDocument): OperadorDTO {
-    return {
-      id: operador._id.toString(),
-      nombreComercial: operador.nombreComercial,
-      ciudad: operador.ciudad,
-      bio: operador.bio,
-      enlaces: operador.enlaces,
-      telefonos: operador.telefonos.map(t => ({
-        numero: t.numero,
-        persona: t.persona
-      })),
-      usuarios: operador.usuarios.map((u) => u.toString()),
-      futbolines: operador.futbolines,
-      fondo: operador.fondo,
-      logo: operador.logo,
-    }
-  }
-
   static mapToDTO(user: IUserDocument): UserDTO {
     return {
       id: user._id.toString(),
@@ -211,7 +143,7 @@ export class UserService {
       telefono: user.telefono,
       posicion: user.posicion,
       ciudad: user.ciudad,
-      ciudadActual: user.ciudadActual
+      ciudadActual: user.ciudadActual,
     };
   }
 }

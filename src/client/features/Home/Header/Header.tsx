@@ -1,16 +1,10 @@
 import { ImagenCuadrada } from "@/client/shared/components/ImagenCuadrada";
 import { useUser } from "@/client/shared/context/UserContext";
-import { INotificaciones } from "futbol-in-core/types";
 import { UserDTO } from "futbol-in-core/types";
-import { BotonNotificaciones } from "../Notificaciones/BotonNotificaciones";
 
 export const Header = ({
-  tieneNotificaciones,
-  notificaciones,
   user
 }: {
-  tieneNotificaciones: boolean;
-  notificaciones: INotificaciones;
   user:UserDTO|undefined
 }) => {
 
@@ -33,10 +27,6 @@ export const Header = ({
             </p>
           </div>
         </div>
-        <BotonNotificaciones
-          tieneNotificaciones={tieneNotificaciones}
-          notificaciones={notificaciones}
-        />
       </div>
     </header>
   );

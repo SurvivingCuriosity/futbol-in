@@ -30,7 +30,7 @@ export default function TarjetaUsuarioTopRanking({
   }, [user?.imagen]);
 
   const handleNavigateToUser = () => {
-    router.push(`/user/${user.name}?from=competitivo/ranking`);
+    router.push(`/user/${user.name}?from=competitivo`);
   };
 
   return (

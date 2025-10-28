@@ -50,7 +50,7 @@ export const SpotsVacio = () => {
       <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full mt-4">
         {ciudades.map((ciudad) => (
           <Link
-            href={`/spots/${ciudad.href}`}
+            href={`/ciudades/${ciudad.href}`}
             key={ciudad.id}
             className="rounded-xl h-40 max-w-90 relative flex flex-col items-center justify-center gap-4 w-full overflow-hidden"
           >

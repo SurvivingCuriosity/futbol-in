@@ -7,13 +7,13 @@ import { TarjetaLugar } from "@/client/shared/components/TarjetaLugar/TarjetaLug
 import { GoBackLayout } from "@/client/shared/layouts/GoBackLayout";
 import { useSearchParams } from "next/navigation";
 
-const spainCenter = { lat: 40.4166, lng: -3.7 };
+export const spainCenter = { lat: 40.416775, lng: -3.70379 };
 
 export const MapaGlobalPage = ({ spots }: { spots: SpotDTO[] }) => {
   const [selectedMarker, setSelectedMarker] = useState<SpotDTO | null>(null);
 
-    const params = useSearchParams()
-    const from = params.get('from')
+  const params = useSearchParams();
+  const from = params.get("from");
 
   return (
     <GoBackLayout href={from ?? "/"}>
@@ -38,7 +38,6 @@ export const MapaGlobalPage = ({ spots }: { spots: SpotDTO[] }) => {
               selected={true}
               onSelect={() => {}}
               distanciaMessage={null}
-              operador={null}
             />
           </div>
         )}

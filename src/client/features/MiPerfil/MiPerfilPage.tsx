@@ -1,28 +1,22 @@
 "use client";
 
-import { EquipoDTO } from "futbol-in-core/types";
-import { SpotDTO } from "futbol-in-core/types";
-import { UserDTO } from "futbol-in-core/types";
+import { SpotDTO, UserDTO } from "futbol-in-core/types";
 import { Button } from "futbol-in-ui";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { CompletarPerfil } from "./CompletarPerfil/CompletarPerfil";
 import { HamburguerMenu } from "./components/HamburguerMenu/HamburguerMenu";
-import { Logros } from "./components/Logros";
 import { MainInfo } from "./components/MainInfo";
-import { MisEquipos } from "./components/MisEquipos";
 import { MisFutbolines } from "./components/MisFutbolines";
 import { SeccionPerfil } from "./components/SeccionPerfil";
-import { MarcadorPuntuacion } from "./components/MarcadorPuntuacion";
 
 export interface MiPerfilPageProps {
   user: UserDTO;
-  equipos: EquipoDTO[];
   futbolines: SpotDTO[];
 }
 
 export const MiPerfilPage = (props: MiPerfilPageProps) => {
-  const { user: userProp, equipos, futbolines } = props;
+  const { user: userProp, futbolines } = props;
 
   const [user, setUser] = useState(userProp);
 
@@ -32,20 +26,20 @@ export const MiPerfilPage = (props: MiPerfilPageProps) => {
 
       <MainInfo user={user} />
 
-      <MarcadorPuntuacion />
+      {/* <MarcadorPuntuacion /> */}
 
       <CompletarPerfil user={user} onUpdateUser={setUser} />
 
       <div className="flex flex-col gap-4 lg:flex-row">
         
 
-        <SeccionPerfil titulo="Logros">
+        {/* <SeccionPerfil titulo="Logros">
           <Logros user={user} />
         </SeccionPerfil>
 
         <SeccionPerfil titulo="Mis equipos">
           <MisEquipos equipos={equipos} />
-        </SeccionPerfil>
+        </SeccionPerfil> */}
 
       </div>
       

@@ -1,33 +1,20 @@
 "use client";
 
-import { INotificaciones } from "futbol-in-core/types";
-import { UserDTO } from "futbol-in-core/types";
-import { Steps } from "intro.js-react";
-import { useState } from "react";
-import { CompletarCiudad } from "../MiPerfil/CompletarPerfil/steps/CompletarCiudadActual";
-import { Header } from "./Header/Header";
-import { steps } from "./intro/steps";
 import { UserClient } from "@/client/shared/client/UserClient";
-import { useSession } from "next-auth/react";
 import {
   LStorage,
   LStorageKeys,
 } from "@/client/shared/services/LocalStorage/LStorage";
-import { ListaCompeticionesHome } from "./CompeticionesHome/ListaCompeticionesHome";
-import { CompeticionBaseDTO } from "futbol-in-core/types";
+import { UserDTO } from "futbol-in-core/types";
+import { Steps } from "intro.js-react";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { CompletarCiudad } from "../MiPerfil/CompletarPerfil/steps/CompletarCiudadActual";
+import { Header } from "./Header/Header";
 import { HeaderLocation } from "./Header/HeaderLocation";
+import { steps } from "./intro/steps";
 
-const HomePage = ({
-  user,
-  tieneNotificaciones,
-  notificaciones,
-  competiciones,
-}: {
-  user: UserDTO | undefined;
-  tieneNotificaciones: boolean;
-  notificaciones: INotificaciones;
-  competiciones: CompeticionBaseDTO[];
-}) => {
+const HomePage = ({ user }: { user: UserDTO | undefined }) => {
   const { update } = useSession();
 
   const [ciudadDone, setCiudadDone] = useState(user?.ciudadActual !== null);
@@ -64,11 +51,7 @@ const HomePage = ({
           </div>
         </div>
       )}
-      <Header
-        user={user}
-        tieneNotificaciones={tieneNotificaciones}
-        notificaciones={notificaciones}
-      />
+      <Header user={user} />
       {!ciudadDone && (
         <div className="flex flex-col gap-2 bg-neutral-900 p-4 rounded-2xl mb-4">
           <p className="text-primary">¿Dónde te encuentras ahora?</p>
@@ -76,13 +59,9 @@ const HomePage = ({
         </div>
       )}
 
-      {competiciones.length > 0 ? (
-        <ListaCompeticionesHome competiciones={competiciones} />
-      ) : (
-        <p className="texto p-10 text-center text-neutral-400">
-          Aún no hay nada por aquí 🫣
-        </p>
-      )}
+      <p className="texto p-10 text-center text-neutral-400">
+        Aún no hay nada por aquí 🫣
+      </p>
 
       <Steps
         enabled={stepsEnabled}

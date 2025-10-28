@@ -4,48 +4,19 @@ import {
   CurrentOpening,
   TarjetaLugar,
 } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
-import { useGetLoggedInUserClient } from "@/client/shared/hooks/useGetLoggedInUserClient";
 import { SpotDTO } from "futbol-in-core/types";
-import { OperadorDTO } from "futbol-in-core/types";
 
 export interface ListaSpotsProps {
   futbolines: SpotDTO[];
   selectedLugar: SpotDTO | null;
   onSelect: (lugar: SpotDTO | null) => void;
   userCoords: number[] | null;
-  operadores: OperadorDTO[];
   googleInfoSpots: Array<google.maps.places.PlaceResult & CurrentOpening>;
 }
 
 const ListaSpots = (props: ListaSpotsProps) => {
-  const {
-    futbolines,
-    selectedLugar,
-    onSelect,
-    userCoords,
-    operadores,
-    googleInfoSpots,
-  } = props;
-
-  const user = useGetLoggedInUserClient();
-
-  const operadorUser = operadores.find((o) => o.id === user?.idOperador);
-
-  const puedeReclamarloComoOperador = (f: SpotDTO): boolean => {
-    if (!operadorUser) return false;
-
-    const yaLoGestiona = f.idOperador === operadorUser.id;
-
-    if (yaLoGestiona) return false;
-
-    const trabajaElTipoDeFutbolin = operadorUser.futbolines.includes(
-      f.tipoFutbolin
-    );
-    const provinciaDelOperador = operadorUser.ciudad.split(",")[1].trim();
-    const provinciaDelSpot = f.ciudad.split(",")[1].trim();
-
-    return trabajaElTipoDeFutbolin && provinciaDelOperador === provinciaDelSpot;
-  };
+  const { futbolines, selectedLugar, onSelect, userCoords, googleInfoSpots } =
+    props;
 
   return (
     <>
@@ -68,8 +39,6 @@ const ListaSpots = (props: ListaSpotsProps) => {
               distanciaMessage={
                 userCoords ? getDistanciaEntre(userCoords, f.coordinates) : null
               }
-              puedeReclamarloComoOperador={puedeReclamarloComoOperador(f)}
-              operador={operadores.find((o) => o.id === f.idOperador)}
             />
           </div>
         ))}

@@ -5,11 +5,9 @@ import {
   TarjetaLugar,
 } from "@/client/shared/components/TarjetaLugar/TarjetaLugar";
 import { useUserLocation } from "@/client/shared/services/UserLocation/useUserLocation";
-import { TipoFutbolin } from "futbol-in-core/enum";
-import { ICoords } from "futbol-in-core/types";
-import { SpotDTO } from "futbol-in-core/types";
-import { OperadorDTO } from "futbol-in-core/types";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
+import { TipoFutbolin } from "futbol-in-core/enum";
+import { ICoords, SpotDTO } from "futbol-in-core/types";
 import { InlinePicker } from "futbol-in-ui";
 import Link from "next/link";
 import { useCallback, useMemo, useState } from "react";
@@ -22,12 +20,11 @@ export interface SpotsCiudadPageProps {
   spots: SpotDTO[];
   coords: ICoords;
   ciudad: string;
-  operadores: OperadorDTO[];
   googleInfoSpots: Array<google.maps.places.PlaceResult & CurrentOpening>;
 }
 
 export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
-  const { spots, coords, ciudad, operadores, googleInfoSpots } = props;
+  const { spots, coords, ciudad, googleInfoSpots } = props;
 
   const userLocation = useUserLocation();
 
@@ -78,12 +75,9 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
     [spots, filtros, abiertosAhora]
   );
 
-  const handleSelectSpot = useCallback(
-    (spot: SpotDTO | null) => {
-      setSelectedMarker(spot);
-    },
-    []
-  );
+  const handleSelectSpot = useCallback((spot: SpotDTO | null) => {
+    setSelectedMarker(spot);
+  }, []);
 
   if (spots.length === 0) {
     return (
@@ -136,7 +130,6 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
             googleInfoSpots={googleInfoSpots}
             selectedLugar={selectedMarker}
             onSelect={handleSelectSpot}
-            operadores={operadores}
             userCoords={
               currentCoords ? [currentCoords.lng, currentCoords.lat] : null
             }
@@ -151,8 +144,8 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
           <Mapa
             markers={spotsFiltrados}
             selectedMarker={selectedMarker}
-            onSelectMarker={(spot)=>{
-              handleSelectSpot(spot)
+            onSelectMarker={(spot) => {
+              handleSelectSpot(spot);
             }}
             userLocation={currentCoords}
             initialCenter={coords}
@@ -166,9 +159,6 @@ export const SpotsCiudadPage = (props: SpotsCiudadPageProps) => {
                 spot={selectedMarker}
                 selected={true}
                 onSelect={() => {}}
-                operador={operadores.find(
-                  (o) => o.id === selectedMarker.idOperador
-                )}
                 distanciaMessage={
                   currentCoords
                     ? getDistanciaEntre(

@@ -8,7 +8,7 @@ export const SearchInputRedirect = () => {
 
     const ciudadFormateada = encodeCiudad(ciudad)
 
-    redirect(`/spots/${ciudadFormateada}`);
+    redirect(`/ciudades/${ciudadFormateada}`);
   };
   return <SearchInputMunicipios onSelect={handleSelect} />;
 };

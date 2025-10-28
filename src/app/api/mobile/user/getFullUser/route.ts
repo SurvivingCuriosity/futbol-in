@@ -1,11 +1,9 @@
+import { errorResponse, successResponse } from "@/server/lib/httpResponse";
 import { NextRequest } from "next/server";
-import { successResponse, errorResponse } from "@/server/lib/httpResponse";
 
-import { UserService } from "@/server/services/User/UserService";
-import { EquipoService } from "@/server/services/Equipo/EquipoService";
 import { SpotService } from "@/server/services/Spots/SpotsService";
+import { UserService } from "@/server/services/User/UserService";
 
-import { EstadoJugador } from "futbol-in-core/enum";
 import { IUserDocument } from "@/server/models/User/User.model";
 
 import { bucket } from "@/server/lib/googleStorage";
@@ -26,13 +24,6 @@ export async function GET(req: NextRequest) {
     if (!fullUser) {
       return errorResponse("Usuario no encontrado", 404);
     }
-
-    /* 3. Equipos donde el usuario está ACEPTADO */
-    const equipos = await EquipoService.findManyById(fullUser.equipos);
-    const equiposAceptados = equipos.filter((equipo) => {
-      const jugador = equipo.jugadores.find((j) => j.usuario === fullUser.id);
-      return jugador?.estado === EstadoJugador.ACEPTADO;
-    });
 
     /* 4. Futbolines creados por el usuario */
     const futbolines = await SpotService.getSpotsDeUsuario(fullUser.id);
@@ -55,7 +46,6 @@ export async function GET(req: NextRequest) {
     /* 6. Serializamos datos y respondemos */
     return successResponse({
       user: UserService.mapToDTO(fullUser as IUserDocument),
-      equipos: equiposAceptados,
       imagen: imageUrl, // 🆕 la ruta firmada (o null)
       futbolines,
     });

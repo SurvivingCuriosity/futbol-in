@@ -21,7 +21,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: "Lista de futbolines",
         short_name: "Listado",
         description: "Obtén un listado de futbolines cercanos en tu ciudad",
-        url: "/futbolines",
+        url: "/mapa",
         icons: [
           {
             src: "/futbolin-logo.svg",

@@ -5,6 +5,7 @@ import { BuscarBtn } from "./BottomNavItems/BuscarBtn";
 import { HomeBtn } from "./BottomNavItems/HomeBtn";
 import { PerfilBtn } from "./BottomNavItems/PerfilBtn";
 import { RankingBtn } from "./BottomNavItems/RankingBtn";
+
 export const BottomNav = () => {
 
   return (

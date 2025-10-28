@@ -23,7 +23,7 @@ const columns: Column<UsuarioEnRanking>[] = [
     sortable: true,
     cell: ({ row }) => {
       // JSX personalizado en la celda
-      return <strong className="text-primary">#{row.posicion || 0}</strong>;
+      return <strong className="text-primary p-1 text-sm">#{row.posicion || 0}</strong>;
     },
   },
   {
@@ -33,7 +33,7 @@ const columns: Column<UsuarioEnRanking>[] = [
     sortable: false,
     cell: ({ row }) => {
       // JSX personalizado en la celda
-      return <Link className="underline" href={`/user/${row.usuario}?from=competitivo/ranking`}>{row.usuario}</Link>;
+      return <Link className="underline" href={`/user/${row.usuario}?from=competitivo`}>{row.usuario}</Link>;
     },
   },
   {
@@ -57,50 +57,6 @@ const columns: Column<UsuarioEnRanking>[] = [
         <TarjetaStats value={row.spotsCreados} kind="agregados" />
       );
     },
-  },
-  {
-    key: "spotsVotados",
-    header: (sortState) => (
-      <span>
-        Spots votados
-        {sortState.columnKey === "age" && (
-          <span className="ml-1">
-            {sortState.direction === "asc" ? "▲" : "▼"}
-          </span>
-        )}
-      </span>
-    ),
-    accessor: (row) => row.spotsVotados,
-    sortable: true,
-    sortFn: (a, b) => a.spotsVotados - b.spotsVotados, // Ejemplo de sortFn personalizado
-    cell: ({ row }) => {
-      // JSX personalizado en la celda
-      return (
-        <TarjetaStats value={row.spotsVotados} kind="votados" />
-      );
-    },
-  },
-  {
-    key: "spotsVerificados",
-    header: (sortState) => (
-      <span>
-        Spots verificados
-        {sortState.columnKey === "age" && (
-          <span className="ml-1">
-            {sortState.direction === "asc" ? "▲" : "▼"}
-          </span>
-        )}
-      </span>
-    ),
-    accessor: (row) => row.spotsVerificados,
-    sortable: true,
-    sortFn: (a, b) => a.spotsVerificados - b.spotsVerificados, // Ejemplo de sortFn personalizado
-    cell: ({ row }) => {
-        // JSX personalizado en la celda
-        return (
-          <TarjetaStats value={row.spotsVerificados} kind="verificados" />
-        );
-      },
   },
   {
     key: "puntuacion",

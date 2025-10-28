@@ -8,12 +8,8 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import TurnstileWidget from "../TurnstileWidget";
 
 export const RegisterForm = () => {
-
-  const [cfToken, setCfToken] = useState("");
-
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -31,7 +27,7 @@ export const RegisterForm = () => {
       }
     } catch (error: unknown) {
       setLoading(false);
-      setError(getErrorMessageClient(error, 'email'));
+      setError(getErrorMessageClient(error, "email"));
     }
   };
 
@@ -43,7 +39,6 @@ export const RegisterForm = () => {
           handleClickRegister();
         }}
       >
-        
         <FormField>
           <FormLabel>Correo electrónico</FormLabel>
           <TextInput
@@ -64,7 +59,6 @@ export const RegisterForm = () => {
             disabled={loading}
           />
         </FormField>
-        <TurnstileWidget onToken={setCfToken} />
       </form>
 
       <p className="my-8 text-center text-xs text-neutral-400">

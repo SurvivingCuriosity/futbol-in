@@ -101,7 +101,7 @@ const AgregarSpotPage = () => {
   return (
     <>
       {nuevoLogro && <EnhorabuenaNuevaMedalla nuevoLogro={nuevoLogro} />}
-      <div className="max-w-xl mx-auto w-full md:p-4 md:border border-neutral-700 rounded-lg flex flex-col gap-2">
+      <div className="max-w-xl mx-auto w-full md:p-4 md:border border-neutral-700 bg-neutral-950/80 rounded-lg flex flex-col gap-2">
         <h1 className="text-2xl font-extrabold tracking-tight text-primary">
           Agregar un nuevo futbolín
         </h1>

@@ -24,14 +24,6 @@ export default async function Page({ params }: PageProps) {
 
   const user = UserService.mapToDTO(userDoc);
   const spots = await SpotService.getSpotsDeUsuario(user.id);
-  const operador =
-    (await UserService.getPerfilOperador(user.idOperador)) || null;
 
-  return (
-    <PerfilPage
-      user={user}
-      spots={spots}
-      operador={operador ? UserService.mapOperadorToDTO(operador) : null}
-    />
-  );
+  return <PerfilPage user={user} spots={spots} />;
 }

@@ -15,7 +15,7 @@ const page = async () => {
 
   const ciudadFormateada = encodeCiudad(session?.user?.ciudadActual)
 
-  redirect(`/spots/${ciudadFormateada}`);
+  redirect(`/ciudades/${ciudadFormateada}`);
 
 };
 

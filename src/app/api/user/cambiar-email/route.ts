@@ -1,12 +1,10 @@
-import {
-  CambiarEmailResponse
-} from "@/client/shared/client/types/User/CambiarEmail";
-import { UserStatus } from "futbol-in-core/enum";
+import { CambiarEmailResponse } from "@/client/shared/client/types/User/CambiarEmail";
 import { authOptions } from "@/server/lib/authOptions";
 import connectDb from "@/server/lib/db";
 import { errorResponse, successResponse } from "@/server/lib/httpResponse";
-import { MailService } from "@/server/services/Mail/MailService";
+import { sendVerifyEmail } from "@/server/services/Mail/MailService";
 import { UserService } from "@/server/services/User/UserService";
+import { UserStatus } from "futbol-in-core/enum";
 import { getServerSession } from "next-auth";
 
 export async function PUT(req: Request) {
@@ -59,7 +57,7 @@ export async function PUT(req: Request) {
     user.verificationCodeExpires = expirationDate;
     await user.save();
 
-    await MailService.sendVerificationEmail(nuevoEmail, verificationCode);
+    await sendVerifyEmail(nuevoEmail, verificationCode);
 
     const response: CambiarEmailResponse = {
       success: true,
